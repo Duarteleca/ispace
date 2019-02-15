@@ -1,0 +1,1 @@
+Tamanho da imagem logo deve ter de altura:55px
