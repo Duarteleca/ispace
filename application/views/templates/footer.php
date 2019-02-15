@@ -1,7 +1,7 @@
 <!-- inicio do footer -->
 <!-- fundo da pagina, deve ter o scripts necessarios para as paginas todas -->
 <footer>
-                <div class="bg-primary ">
+                <div class="bg-primary footer">
                         <div class="container">
                             <div class="row m-space">
                                 <div class="col-md-6 col-xs-12">
