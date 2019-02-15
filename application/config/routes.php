@@ -51,10 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Pages_c/view';
 $route['Salas']= 'Publico_c/mostra_salas';
-<<<<<<< HEAD
-=======
 $route['home']= 'Publico_c/index';
->>>>>>> duarte
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 // $route['(:any)'] = 'Pages/view/$1';
