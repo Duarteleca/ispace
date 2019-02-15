@@ -1,8 +1,10 @@
-<div class="container">
-    <div class = "row">
+<div class="container texto">
+ 
 
     <br><br><br>
-    <h2 id="teste1"> Aqui apresentamos a lista de todas as salas do nosso estabelecimento </h2>
+
+    <!-- <h2 >Salas que podem ser requisitadas no nosso estabelecimento </h2> -->
+
         <!-- <div class="form-group col-md-12"> -->
                   
         <?php 
@@ -11,12 +13,13 @@
 
 
 
-
-                        <img height="200" width="350" src="<?php echo base_url($row['imagem'])?>"><br>
-                        <?php echo $row['tipo_sala'] ?><br>
+                        <img height="300" width="500" src="<?php echo base_url($row['imagem'])?>"><br>
+                        <span>
+                        Tipo de sala: <?php echo $row['tipo_sala'] ?><br>
                         
-                        <?php echo $row['nome_sala'] ?><br>
-                        <?php echo $row['capacidade'] ?><br>
+                        Nome da Sala: <?php echo $row['nome_sala'] ?><br>
+                        Capacidade: <?php echo $row['capacidade'] ?>
+                    </span>
                     
                    
                        
@@ -26,5 +29,5 @@
                 <?php } ?>
             
        
-</div>
+
 </div>

@@ -1,12 +1,14 @@
 
 
-#teste1{
+.texto{
     color:rgb(79, 127, 155);
     font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    /* size:100px; */
     
 }
 
-#imagemsala{
+/* #imagemsala{
     width: 100px;
 
 }
@@ -23,4 +25,4 @@
     font-size: 20px;
     background-color: rgb(222, 221, 223);
     border: 5px solid white;
-}
+} */
