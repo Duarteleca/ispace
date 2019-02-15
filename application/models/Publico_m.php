@@ -11,7 +11,7 @@ class Publico_m extends CI_Model
     public function busca_salas($slug = false)
     {
         if ($slug === false) {
-            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade"');
+            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             $this->db->from('sala');
             $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
             $query = $this->db->get();

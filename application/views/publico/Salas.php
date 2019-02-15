@@ -1,34 +1,30 @@
 <div class="container">
+    <div class = "row">
 
     <br><br><br>
-    <h2> Aqui apresentamos a lista de todas as salas do nosso estabelecimento </h2>
-    <table name="tabelacarros"  id="tabelacarros" class="table table-bordered table-condensed" >
-        <thead>
-            <tr id="titulotabela">
-                <th>Salas</th>
-            
-            </tr>
-        </thead>
-
-
-        <tbody>
-                  <?php 
+    <h2 id="teste1"> Aqui apresentamos a lista de todas as salas do nosso estabelecimento </h2>
+        <!-- <div class="form-group col-md-12"> -->
+                  
+        <?php 
                     foreach ($sala as $row){?>
-
-                 
-    <tr>
+                <div class="form-group col-md-6">
 
 
 
-    
-                        <td><?php echo $row['tipo_sala'] ?><br>
-                        <?php echo $row['nome_sala'] ?><br>
-                        <?php echo $row['capacidade'] ?></td>
+
+                        <img height="200" width="350" src="<?php echo base_url($row['imagem'])?>"><br>
+                        <?php echo $row['tipo_sala'] ?><br>
                         
-                        </tr>
-                <?php } ?>
+                        <?php echo $row['nome_sala'] ?><br>
+                        <?php echo $row['capacidade'] ?><br>
+                    
+                   
+                       
 
-              
-        </tbody>
-    </table>
+               
+                </div>
+                <?php } ?>
+            
+       
+</div>
 </div>

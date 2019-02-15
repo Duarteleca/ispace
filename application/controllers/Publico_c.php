@@ -24,6 +24,7 @@ class Publico_c extends CI_Controller {
     {
 			parent::__construct();
 			$this->load->model('Publico_m');
+			$this->load->helper('url_helper');
           
 
 	}
