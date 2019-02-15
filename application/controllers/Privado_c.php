@@ -30,4 +30,36 @@ class Welcome extends CI_Controller {
 		$this->load->view('templates/header');
 		$this->load->view('templates/footer');
 	}
+
+	  // Validação de login
+	  public function validacao_login()
+	  { 
+		  $this->load->model("Privado_m");
+		  $username = $this->input->post("username");
+		  $password = $this->input->post("password");
+
+		  $array_user = $this->Carro_m->motrar_Utilizadores($username);
+		  
+		  $passdatabase = $array_user[0]['password'];
+		  $userdatabase = $array_user[0]['username'];
+
+	 
+		  // // se o user existe
+		  if($userdatabase == $username) {
+			  $this->session->set_userdata("usuario_logado",$array_user);
+		   
+			  $this->session->set_flashdata("sucesso", "Login com sucesso!");
+		  }else{
+			  $this->session->set_flashdata("erro", "User ou senha inválida!");
+
+		  }
+		  redirect('home', 'refresh');
+
+
+		  
+	  }
+
+
+
+
 }

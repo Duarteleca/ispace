@@ -1,75 +1,49 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Utilizador_m extends CI_Model 
+class Publico_m extends CI_Model 
 {
 
-    public function Verify_User($email){
-        $this->db->where("email",$email);
-        $email_bd=$this->db->get("utilizador")->row_array();
-        return $email_bd;
-
+    
+    public function __construct() {
+        parent::__construct();
     }
 
-    public function save($utilizador){
-        
-        return $this->db->insert("utilizador", $utilizador);
-    
-    }
-
-    public function login_user($email,$password){
-        $this->db->where("email",$email);
-        $this->db->where("pw",$password);
-        $utilizador=$this->db->get("utilizador")->row_array();
-        return $utilizador;
-    }
-
-
-    
-public function select_user($email_base)
-{
-
-    $this->db->select('id,nome,email,contato,pw');
-    $this->db->from('utilizador');
-    $query = $this->db->get();
-    $query = $this->db->get_where('utilizador', array('email' => $email_base));
-    
-    return $query->row_array();
-}
-
-
-public function update_user($id)
+    public function busca_salas($slug = false)
     {
-        $update_user= array(
-            "nome" =>$this->input->post("nome"),
-            "contato" =>$this->input->post("contato")
-        );
-
+        if ($slug === false) {
+            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
+            $this->db->from('sala');
+            $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+        else{
+            echo 'erro';
+            // $this->db->select('automovel.id "id",automovel.disponibilidade,automovel.matricula,cor.nome "cor",modelo.nome "modelo",fabricante.nome "fabricante"');
+            // $this->db->from('automovel');
+            // $this->db->join('modelo', 'modelo.id = automovel.modelo_id');
+            // $this->db->join('cor', 'cor.id = automovel.cor_id');
+            // $this->db->join('fabricante', 'fabricante.id = modelo.fabricante_id');
+            // $this->db->like('fabricante.nome',$slug);
+            // // se quisermos multiplas procuras colocamos or_like.
+            // $this->db->or_like('modelo.nome',$slug);
+            // $this->db->or_like('cor.nome',$slug);
+            // $this->db->or_like('automovel.matricula',$slug);
+            // $query = $this->db->get();
+            // return $query->result_array();
        
-            $this->db->where('id', $id);
-            return $this->db->update('utilizador',  $update_user);
-           
+        }
     }
 
-    public function update_user_email($id)
-    {
-        
+      // Mostrar Utilizadores
+      function motrar_Utilizadores($username)
+      {
+          $this->db->where('username',$username);
+          $dadosuser = $this->db->get("utilizador");
+          return $dadosuser->result_array();
+      }
 
-        $update_user_email= array(
-            "nome" =>$this->input->post("nome"),
-            "contato" =>$this->input->post("contato"),
-            "pw" =>md5($this->input->post("password"))
-        );
 
-        $this->db->where('id', $id);
-        return $this->db->update('utilizador',  $update_user_email);
-           
-    }
-
-    public function verify_update($password){
-        $this->db->where("pw",$password);
-        $utilizador=$this->db->get("utilizador")->row_array();
-        return $utilizador;
-    }
 
     
 }
