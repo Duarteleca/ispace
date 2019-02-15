@@ -9,8 +9,14 @@
  
     
     <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/4/flatly/bootstrap.min.css" />
+<<<<<<< HEAD
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css">
          
+=======
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+         <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
+>>>>>>> duarte
    
 
 
@@ -30,16 +36,14 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Inicial <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<?php echo base_url('home')?>">Inicial <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Salas</a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="#">Equipamento</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('Salas')?>">Pricing</a>
+        <a class="nav-link" href="<?php echo base_url('Salas')?>">Salas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Login</a>
