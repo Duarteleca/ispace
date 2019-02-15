@@ -12,13 +12,6 @@
 
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
    
-  
- 
-    
-
-
-
-
 
 
 
@@ -44,7 +37,7 @@
         <a class="nav-link" href="#">Features</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" href="<?php echo base_url('Salas')?>">Pricing</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>

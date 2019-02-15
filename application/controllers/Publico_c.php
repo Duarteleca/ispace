@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Publico_c extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,9 +18,35 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+
+	public function __construct()
+    {
+			parent::__construct();
+			$this->load->model('Publico_m');
+          
+
+	}
+	
+
+
 	public function index()
 	{
 		$this->load->view('templates/header');
 		$this->load->view('templates/footer');
+	}
+
+
+
+	public function mostra_salas()
+	{
+		
+		$data['sala'] = $this->Publico_m->busca_salas();
+		// Drop list dis fabricantes,modelos,cores
+		
+
+		$this->load->view('templates/header');
+		$this->load->view('publico/salas',$data);
+		// $this->load->view('templates/footer');
 	}
 }
