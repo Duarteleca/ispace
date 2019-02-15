@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fewfewfewefwef
 vdvdfvdfvdfvdf
 wefwefwefwfe
@@ -8,3 +9,6 @@ echo 'teste2 marco'; fwfewfewefwfewe
 ?>
 
 
+=======
+5555
+>>>>>>> ee757d568f9ce818fa84777dabd3a5cd827ce3f6
