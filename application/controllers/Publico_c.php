@@ -25,12 +25,9 @@ class Publico_c extends CI_Controller {
 			parent::__construct();
 			$this->load->model('Publico_m');
 			$this->load->helper('url_helper');
-<<<<<<< HEAD
-=======
 			$this->load->library("pagination");
           
 
->>>>>>> 3d3c83a437d0fd8e879d9d1d27f1a03a7cee00a6
 	}
 	
 
