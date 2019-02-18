@@ -2,18 +2,17 @@
  
 
     <br><br><br>
-
     <div class="form-group col-md-6">
 
-<?php echo form_open('Publico_c/mostra_salas') ?>
+<?php echo form_open('Publico_c/mostra_equipamento') ?>
 
 
     <select style="color:black" name="search_sala" class="form-control">
         <option value="" selected>Tipo de sala</option>
 
         <?php
-foreach($salas as $rows){
-echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
+foreach($equipamento as $rows){
+echo "<option value=".$rows['nome'].">".$rows['nome'] ."</option>";
 }
 ?>
     </select>
@@ -32,17 +31,17 @@ echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
                   
         <?php 
                     foreach ($sala as $row){?>
-                <div class="col-md-12  conteudo">
+                <div class="col-md-6  conteudo">
 
 
-                    <div class="col-md-8 ">
+                    <div class="col-md-9 ">
                         <img height="100%" width="100%" src="<?php echo base_url($row['imagem'])?>"><br>
                     </div>
-                    <div class="col-md-4 texto ">
+                    <div class="col-md-3 texto_equipamento ">
                       
-                        Tipo de sala: <?php echo $row['tipo_sala'] ?><br>
-                        Nome da Sala: <?php echo $row['nome_sala'] ?><br>
-                        Capacidade: <?php echo $row['capacidade'] ?>
+                        Nome: <?php echo $row['nome'] ?><br>
+                        Quantidade: <?php echo $row['quantidade'] ?><br>
+                        
                    
                     </div>
                     
@@ -52,8 +51,6 @@ echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
                
                 </div>
                 <?php } ?>
-                <div class="form-group col-md-12 text-center">
-                    <?php echo $links; ?>
             
        
 

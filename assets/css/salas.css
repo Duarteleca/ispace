@@ -1,12 +1,29 @@
 
 
-.texto{
+.mostrasalas{
     color:rgb(79, 127, 155);
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+    
+    
     /* size:100px; */
     
 }
+
+.conteudo {
+    /* border: 5px solid gray; */
+    border-radius: 20px;
+    margin-bottom: 1em !important;
+    padding: 1em 1em;
+    
+
+  }
+.texto{
+    padding-top: 15%;
+    font-size: 1.5em;
+}
+
+
 
 /* #imagemsala{
     width: 100px;

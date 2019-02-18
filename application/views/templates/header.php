@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/4/flatly/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ 
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
    
 
@@ -19,6 +23,7 @@
 
 <!-- menu de inicio-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<<<<<<< HEAD
   <div class="container">
 
     <!-- log do site -->
@@ -47,6 +52,32 @@
                 <!-- Colocar o log in à direita -->
                   <ul class="navbar-nav mr-auto navbar-right" >
                         <li class=""><a>
+=======
+<div class="container">
+  <a class="navbar-brand" href="#"><img alt="brand" src="<?php echo base_url('assets/img/logo.png') ?>"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url('home')?>">Inicial <span class="sr-only">(current)</span></a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('Equipamento')?>">Equipamento</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('Salas')?>">Salas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+    </ul>
+    
+  </div>
+>>>>>>> duarte
 
                           <!-- Se o utilizador tiver com a conta iniciada, mostra o username ao lado direito -->
                           <!-- usando o session->userdata -->
