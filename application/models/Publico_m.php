@@ -43,6 +43,14 @@ class Publico_m extends CI_Model
                $dadosuser = $this->db->get("utilizador");
                return $dadosuser->result_array();
            }
-    
-    
+
+            // Insere o registo na tabela utilizador
+            public function inserir_Registo($data)
+            {
+                var_dump($data);
+                $this->db->insert('utilizador', $data);
+        
+            }
+
+           
 }
