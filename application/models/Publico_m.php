@@ -36,4 +36,13 @@ class Publico_m extends CI_Model
     }
 
     
+           // Mostrar Utilizadores
+           function motrar_Utilizadores($username)
+           {
+               $this->db->where('username',$username);
+               $dadosuser = $this->db->get("utilizador");
+               return $dadosuser->result_array();
+           }
+    
+    
 }

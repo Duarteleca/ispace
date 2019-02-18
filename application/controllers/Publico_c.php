@@ -51,4 +51,38 @@ class Publico_c extends CI_Controller {
 		$this->load->view('publico/salas',$data);
 		// $this->load->view('templates/footer');
 	}
+
+
+	  // Validação de login
+	  public function validacao_login()
+	  { 
+		  $this->load->model("Publico_m");
+		  $username = $this->input->post("username");
+		  $password = $this->input->post("password");
+
+		  $array_user = $this->Publico_m->motrar_Utilizadores($username);
+		  
+		  $passdatabase = $array_user[0]['password'];
+		  $userdatabase = $array_user[0]['username'];
+
+	 
+		  // // se o user existe
+		  if($userdatabase == $username) {
+			  $this->session->set_userdata("usuario_logado",$array_user);
+		   
+			  $this->session->set_flashdata("sucesso", "Login com sucesso!");
+		  }else{
+			  $this->session->set_flashdata("erro", "User ou senha inválida!");
+
+		  }
+		  redirect('home', 'refresh');  
+	  }
+
+	  // Funão de logout, faz uset do user, e manda mensagem, que é mostrada no header
+	  public function logout()
+	  {
+		  $this->session->unset_userdata("usuario_logado");
+		  $this->session->set_flashdata("sucesso","Logout com sucesso!");
+		  redirect('home', 'refresh');
+	  }
 }
