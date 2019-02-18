@@ -25,8 +25,6 @@ class Publico_c extends CI_Controller {
 			parent::__construct();
 			$this->load->model('Publico_m');
 			$this->load->helper('url_helper');
-          
-
 	}
 	
 
@@ -38,7 +36,109 @@ class Publico_c extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function Contacto_form()
+	{
+		$this->load->view('templates/header');
+		$this->load->view('publico/Contacto');
+		$this->load->view('templates/footer');
+	}
 
+
+	public function registar_user()
+	{
+
+
+		// Valido os campos com o from validation
+
+
+		// Valida o Nome
+		$this->form_validation->set_rules('name', 'Nome', 'required',
+		array(
+					'required'      => 'Não preencheu %s.',
+			)
+		);
+
+		// Valida o Ultimo nome
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[utilizador.username]',
+		array(
+				   'required'      => 'Não preencheu %s.',
+				   'is_unique'     => 'Este %s já existe.'
+		   )
+	    );
+
+	   // Valida o Email
+	    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilizador.email]',
+	    array(
+				  'required'      => 'Não preencheu %s.',
+				  'is_unique'     => 'Este %s já existe.'
+		  )
+	  	);
+
+		// Valida a Password
+		$this->form_validation->set_rules('password', 'Password','required',
+			array('required' => 'Você tem de preencher campo %s.')
+			);
+
+		// Confirma a Password
+		$this->form_validation->set_rules('confirm', 'Password de Confirmação','required|matches[password]',
+			array(
+				'required'      => 'Não preencheu %s.',
+				'matches'     => 'A %s não coincide.'
+				)
+		);
+
+		
+
+		// Guarda os valores inseridos no registo
+		$nome = $this->input->post("name");
+		$username = $this->input->post("username");
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+		$confirm = $this->input->post("confirm");
+
+
+			// Se o form validation nao tiver erros.
+			if ($this->form_validation->run() == TRUE) {
+				
+				
+				$password = password_hash($password,PASSWORD_DEFAULT);
+
+
+				$data = array (
+						'nome' => $nome,
+						'username' => $username,
+						'email' => $email,
+						'password' => $password
+				);
+				
+
+				var_dump($data);
+				$this->Publico_m->inserir_Registo($data);
+				$this->session->set_flashdata("Registo_sucess", "Registado/a com sucesso!");
+				$this->load->view('templates/Header');
+				$this->load->view('publico/Registo', $data);
+				$this->load->view('templates/Footer');
+
+				redirect('home', 'refresh');
+
+				
+				
+
+			} else {
+				$data['erros'] = array('mensagens' => validation_errors());
+				
+				$this->load->view('templates/Header');
+				$this->load->view('publico/Registo', $data);
+				$this->load->view('templates/Footer');
+				
+				
+
+					}
+				}
+		 
+				
+
+	
 
 	public function mostra_salas()
 	{

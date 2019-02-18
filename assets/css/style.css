@@ -5,7 +5,10 @@
 
 
 @import url("footer.css");
-
+@import url("header.css");
 @import url("salas.css");
+@import url("registo.css");
+@import url("contacto.css");
+
 
 

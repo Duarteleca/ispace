@@ -1,4 +1,4 @@
-<div class="container">
+
 <div id="carousel-example-generic" class="carousel slide " data-ride="carousel" role="carousel" style="width:100%;" >
         <!-- Indicators -->
        
@@ -7,7 +7,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner  " role="listbox">
             <div  class="item active ">
-            <img src="<?php echo base_url('assets/img/corrousel/1.jpg') ?>"  style="width:100%;">
+            <img src="<?php echo base_url('assets/img/corrousel/1.jpg') ?>"  style="width:100%; height:70%">
             </div>
 
             <div class="item">
@@ -18,6 +18,9 @@
             </div>
             <div class="item">
             <img src="<?php echo base_url('assets/img/corrousel/4.jpg') ?>"  style="width:100%;">
+            </div>
+            <div class="item">
+            <img src="<?php echo base_url('assets/img/corrousel/5.jpg') ?>"  style="width:100%;">
             </div>
         </div>
 
@@ -31,6 +34,4 @@
 
         </a>
     </div>
-
-</div>
 </div>
