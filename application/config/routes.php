@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Pages_c/view';
 $route['Salas']= 'Publico_c/mostra_salas';
+$route['Equipamento']= 'Publico_c/mostra_equipamento';
 $route['home']= 'Publico_c/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
