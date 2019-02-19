@@ -13,25 +13,12 @@
             <?php endif;                
         ?>
      
-
-
-        
-                <?php echo form_open('Publico_c/Contacto') ?>
+                <?php echo form_open('Publico_c/Recuperar_pass') ?>
                     <fieldset>
-                        <legend class="text-center header">Contacte-nos!</legend>
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
-                            <div class="col-md-8">
-                                <input  name="assunto" type="text" placeholder="Assunto" class="form-control">
-                            </div>
-                        </div>
+                        <legend class="text-center header">Recuperar Pass</legend>
+                      
 
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                            <div class="col-md-8">
-                                <input id="name" name="name" type="text" placeholder="Nome" class="form-control">
-                            </div>
-                        </div>
+                   
                      
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
@@ -42,12 +29,7 @@
                    
                         <!-- Message body -->
                 
-                            <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-pen-nib bigicon"></i></span>
-                            <div class="col-md-8">
-                                <textarea class="form-control" id="message" name="message" placeholder="Introduza sua mensagem aqui..." rows="5"></textarea>
-                            </div>
-                            </div>
+                          
 
         
                         <div class="form-group">

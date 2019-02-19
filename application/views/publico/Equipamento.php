@@ -2,13 +2,13 @@
  
 
     <br><br><br>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
 
 <?php echo form_open('Publico_c/mostra_equipamento') ?>
 
 
     <select style="color:black" name="search_sala" class="form-control">
-        <option value="" selected>Tipo de sala</option>
+        <option value="" selected>Tipo de Equipamento</option>
 
         <?php
 foreach($equipamento as $rows){
@@ -19,7 +19,7 @@ echo "<option value=".$rows['nome'].">".$rows['nome'] ."</option>";
 </div>
 
 
-<div class="form-group col-md-6 ">
+<div class="form-group col-md-12 ">
 <input type="submit" class="btn btn-info" name="submit" value="Pesquisa">
 </div>
 <br>
@@ -28,30 +28,42 @@ echo "<option value=".$rows['nome'].">".$rows['nome'] ."</option>";
     <!-- <h2 >Salas que podem ser requisitadas no nosso estabelecimento </h2> -->
 
         <!-- <div class="form-group col-md-12"> -->
+
+
+        <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Quantidade</th>  
+            </tr>
+        </thead>
+        <tbody>
+        <?php    
+                foreach ($sala as $row){?>
+            <tr>
                   
-        <?php 
-                    foreach ($sala as $row){?>
-                <div class="col-md-6  conteudo">
-
-
-                    <div class="col-md-9 ">
-                        <img height="100%" width="100%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"><br>
-                    </div>
-                    <div class="col-md-3 texto_equipamento ">
+            <td>   <img height="100%" width="70%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"><br></td>
+                   
+                  
                       
-                        Nome: <?php echo $row['nome'] ?><br>
-                        Quantidade: <?php echo $row['quantidade'] ?><br>
+
+             <td class="texto "><?php echo $row['nome'] ?><br></td>
+             <td class="texto "><?php echo $row['quantidade'] ?><br></td>
                         
                    
-                    </div>
-                    
-                   
-                       
-
-               
-                </div>
-                <?php } ?>
+             </tr>
+            <?php } ?>
             
-       
-
-</div>
+           
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Name</th>
+                <th>Name</th>
+                <th>Name</th>
+               
+            </tr>
+        </tfoot>
+    </table>

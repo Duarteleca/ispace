@@ -7,11 +7,9 @@ class Publico_m extends CI_Model
     public function __construct() {
         parent::__construct();
     }
-    public function Contar_salas() {
- 
-        return $this->db->count_all("tipologia");
-        
+   
   
+<<<<<<< HEAD
     }
 
 
@@ -25,6 +23,8 @@ class Publico_m extends CI_Model
     }
 
     // Mostra lista todas as salas que existem   
+=======
+>>>>>>> ae969f73ea190d67bf1ae25725a1073e86cf1a77
     public function selecionarSala()
         {
                
@@ -36,14 +36,14 @@ class Publico_m extends CI_Model
     
     
 
-    public function busca_salas($limit, $start,$sala="")
+    public function busca_salas($salas)
     {
-        $this->db->limit($limit, $start);
+       
             $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             $this->db->from('sala');
             $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
-            if($sala != ""){
-                $this->db->like('sala.tipo_sala', $sala);  
+            if($salas != ""){
+                $this->db->like('sala.tipo_sala', $salas);  
             }
             $query = $this->db->get();
             return $query->result_array();
@@ -62,9 +62,9 @@ class Publico_m extends CI_Model
         }
 
 
-    public function busca_equipamento($limit, $start,$equipamento="")
+    public function busca_equipamento($equipamento)
     {
-        $this->db->limit($limit, $start);
+      
             $this->db->select('imagem,nome,quantidade');
             $this->db->from('equipamento');
             if($equipamento != ""){
@@ -83,6 +83,40 @@ class Publico_m extends CI_Model
                 var_dump($data);
                 $this->db->insert('utilizador', $data);
         
+            }
+
+
+            public function GuardarContato($contato){
+        
+                return $this->db->insert("contato", $contato);
+            
+            }
+
+            function randomPassword() {
+                $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+                $pass = array(); //remember to declare $pass as an array
+                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+                for ($i = 0; $i < 8; $i++) {
+                    $n = rand(0, $alphaLength);
+                    $pass[] = $alphabet[$n];
+                }
+                return implode($pass); //turn the array into a string
+            }
+
+
+          public function recupera_pass($email,$password_hash){
+
+            $data = array(
+            
+                'password' => $password_hash
+               
+            );
+
+            $this->db->where('email', $email);
+            return $this->db->update('utilizador', $data);
+
+        // fazer update da pass
+                        
             }
 
            

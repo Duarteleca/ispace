@@ -39,12 +39,126 @@ class Publico_c extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function Contacto_form()
+
+
+	public function Recuperar_pass(){
+		$email=$this->input->post("email");
+		if($this->input->post('submit')){
+
+		$this->load->model("Publico_m");
+		
+		$password=$this->Publico_m->randomPassword();
+		$password_hash = password_hash($password, PASSWORD_DEFAULT);
+		$this->Publico_m->recupera_pass($email,$password_hash);
+
+
+
+		$data['error'] = 'Enviado com Sucesso';
+		//Load email library
+$this->load->library('email');
+
+//SMTP & mail configuration
+$config = array(
+    'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://smtp.googlemail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'rentacar.bravavalley@gmail.com',
+    'smtp_pass' => '1a2s3d4f5g',
+    'mailtype'  => 'html',
+    'charset'   => 'utf-8'
+);
+$this->email->initialize($config);
+$this->email->set_mailtype("html");
+$this->email->set_newline("\r\n");
+
+//Email content
+$htmlContent = '<p> De: '.$password_hash.'<p>';
+
+
+
+$this->email->to('duarteleca@hotmail.com');
+$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
+$this->email->subject($email);
+$this->email->message($htmlContent);
+
+//Send email
+$this->email->send();
+
+$this->load->view('templates/header');
+		$this->load->view('publico/Recuperar',$data);
+		$this->load->view('templates/footer');
+
+
+		}else{
+			$this->load->view('templates/header');
+		$this->load->view('publico/Recuperar');
+		$this->load->view('templates/footer');
+		}
+
+		
+	}
+
+
+	public function Contacto()
 	{
+
+	
+			 $name=$this->input->post("name");
+			$email=$this->input->post("email");
+			$mensagem=$this->input->post("message");
+			$assunto=$this->input->post("assunto");
+			
+		
+
+	if($this->input->post('submit')){
+		$data['error'] = 'Enviado com Sucesso'; 
+		// $this->load->model("Publico_m");
+		// $this->Publico_m->GuardarContato($contato);
+		
+
+
+		//Load email library
+$this->load->library('email');
+
+//SMTP & mail configuration
+$config = array(
+    'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://smtp.googlemail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'rentacar.bravavalley@gmail.com',
+    'smtp_pass' => '1a2s3d4f5g',
+    'mailtype'  => 'html',
+    'charset'   => 'utf-8'
+);
+$this->email->initialize($config);
+$this->email->set_mailtype("html");
+$this->email->set_newline("\r\n");
+
+//Email content
+$htmlContent = '<p> De: '.$email.'<p>';
+$htmlContent .= '<p> Nome: '.$name.'</p>';
+$htmlContent .= '<p> Mensagem: '.$mensagem.'</p>';
+
+
+$this->email->to('duarteleca@hotmail.com');
+$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
+$this->email->subject($assunto);
+$this->email->message($htmlContent);
+
+//Send email
+$this->email->send();
+
+
+
+		$this->load->view('templates/header');
+		$this->load->view('publico/Contacto',$data);
+		$this->load->view('templates/footer');
+	}else{
 		$this->load->view('templates/header');
 		$this->load->view('publico/Contacto');
 		$this->load->view('templates/footer');
 	}
+}
 
 
 	public function registar_user()
@@ -146,51 +260,13 @@ class Publico_c extends CI_Controller {
 
 	public function mostra_salas()
 	{
+		$salas=$this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
+		$data["sala"] = $this->Publico_m->busca_salas($salas);
 		
-		
-		$config = array();
- 
-        $config["base_url"] = base_url() . "Publico_c/mostra_salas";
-       $config["total_rows"] = $this->Publico_m->Contar_salas();
- 
-       $config["per_page"] = 10;
- 
-       $config["uri_segment"] = 3;
-    	//    $config["num_links"] = 5; 
-    	$config['full_tag_open'] = "<ul class='pagination'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>";
-        $config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
-		
-		$this->pagination->initialize($config);
- 
-		   $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		   
-
-		   if($this->input->post('submit')){
-			$sala=$this->input->post('search_sala');
 			
-			 
-			 
-			// $data['results']=$this->Frota_m->searchFrota($fabricante);
-			$data["sala"] = $this->Publico_m->busca_salas($config["per_page"], $page,$sala);
-	  	$data["links"] = $this->pagination->create_links();
-			}else{
-				$data["sala"] = $this->Publico_m->busca_salas($config["per_page"], $page);
-	  	$data["links"] = $this->pagination->create_links();
-				
-			}
+
+			
 	   	
 
 		$this->load->view('templates/header');
@@ -200,38 +276,8 @@ class Publico_c extends CI_Controller {
 
 	public function mostra_equipamento()
 	{
-		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
-		
-		
-		$config = array();
- 
-        $config["base_url"] = base_url() . "Publico_c/mostra_equipamento";
-       $config["total_rows"] = $this->Publico_m->Contar_salas();
- 
-       $config["per_page"] = 10;
- 
-       $config["uri_segment"] = 3;
-    	//    $config["num_links"] = 5; 
-    	$config['full_tag_open'] = "<ul class='pagination'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>";
-        $config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
-		
-		$this->pagination->initialize($config);
- 
-		   $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		   
 
+<<<<<<< HEAD
 		   if($this->input->post('submit')){
 			$equipamento=$this->input->post('search_sala');
 			
@@ -246,6 +292,13 @@ class Publico_c extends CI_Controller {
 				
 			}
 	   	
+=======
+
+		$equipamento=$this->input->post('search_sala');
+		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
+		$data["sala"] = $this->Publico_m->busca_equipamento($equipamento);
+	
+>>>>>>> ae969f73ea190d67bf1ae25725a1073e86cf1a77
 		$this->load->view('templates/header');
 		$this->load->view('publico/equipamento',$data);
 		
@@ -287,4 +340,7 @@ class Publico_c extends CI_Controller {
 		  $this->session->set_flashdata("sucesso","Logout com sucesso!");
 		  redirect('home', 'refresh');
 	  }
+
+	
+
 }
