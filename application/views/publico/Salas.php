@@ -36,7 +36,7 @@ echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
 
 
                     <div class="col-md-8 ">
-                        <img height="100%" width="100%" src="<?php echo base_url($row['imagem'])?>"><br>
+                        <img height="100%" width="100%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"><br>
                     </div>
                     <div class="col-md-4 texto ">
                       
