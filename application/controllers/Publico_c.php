@@ -246,13 +246,6 @@ class Publico_c extends CI_Controller {
 				
 			}
 	   	
-
-		
-		
-	
-		
-		
-
 		$this->load->view('templates/header');
 		$this->load->view('publico/equipamento',$data);
 		
@@ -266,14 +259,14 @@ class Publico_c extends CI_Controller {
 		  $username = $this->input->post("username");
 		  $password = $this->input->post("password");
 
-		  $array_user = $this->Publico_m->motrar_Utilizadores($username);
+		  $array_user = $this->Publico_m->mostrar_Utilizadores($username);
 		  
 		  $passdatabase = $array_user[0]['password'];
 		  $userdatabase = $array_user[0]['username'];
-
+		 
 	 
 		  // // se o user existe
-		  if($userdatabase == $username) {
+		  if($userdatabase == $username && password_verify($password,$passdatabase)) {
 			  $this->session->set_userdata("usuario_logado",$array_user);
 		   
 			  $this->session->set_flashdata("sucesso", "Login com sucesso!");
@@ -281,7 +274,10 @@ class Publico_c extends CI_Controller {
 			  $this->session->set_flashdata("erro", "User ou senha inválida!");
 
 		  }
-		  redirect('home', 'refresh');  
+		  redirect('home', 'refresh');
+
+
+		  
 	  }
 
 	  // Funão de logout, faz uset do user, e manda mensagem, que é mostrada no header

@@ -14,6 +14,17 @@ class Publico_m extends CI_Model
   
     }
 
+
+    // Mostrar Utilizadores
+    function mostrar_Utilizadores($username)
+    {
+        $this->db->where('username',$username);
+        $dadosuser = $this->db->get("utilizador");
+        return $dadosuser->result_array();
+        var_dump($dadosuser);
+    }
+
+    // Mostra lista todas as salas que existem   
     public function selecionarSala()
         {
                
@@ -40,6 +51,7 @@ class Publico_m extends CI_Model
       
     }
 
+    // Seleciona todos os equipamentos que existem
     public function selecionarEquipamento()
         {
                
@@ -64,13 +76,6 @@ class Publico_m extends CI_Model
     }
 
     
-           // Mostrar Utilizadores
-           function motrar_Utilizadores($username)
-           {
-               $this->db->where('username',$username);
-               $dadosuser = $this->db->get("utilizador");
-               return $dadosuser->result_array();
-           }
 
             // Insere o registo na tabela utilizador
             public function inserir_Registo($data)

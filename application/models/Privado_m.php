@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Publico_m extends CI_Model 
+class Privado_m extends CI_Model 
 {
 
     
@@ -11,7 +11,7 @@ class Publico_m extends CI_Model
     public function busca_salas($slug = false)
     {
         if ($slug === false) {
-            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
+            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             $this->db->from('sala');
             $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
             $query = $this->db->get();
@@ -36,6 +36,31 @@ class Publico_m extends CI_Model
     }
 
 
+    
+
+
+     // Mostra todos os dados das salas
+     function mostrar_Sala($tiposala)
+     {
+        $this->db->where('tipo_sala',$tiposala);
+        $inserir_sala = $this->db->get("sala");
+        return $inserir_sala->result_array();
+     }
+    
+
+    // Insere o registo na tabela utilizador
+    public function inserir_Casa($data)
+    {
+        $this->db->insert('tipologia', $data);
+
+    }
+
+    // Elimina a sala selecionada
+    public function eliminar_Sala($id_sala)
+    {
+        $this->db->where('id',$id_sala);
+        $this->db->delete('tipologia');
+    }
 
     
 }

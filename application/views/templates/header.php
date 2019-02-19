@@ -14,6 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
  
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
         
@@ -25,10 +26,19 @@
 
 <!-- menu de inicio-->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-<?php if($this->session->flashdata("sucesso")) :?>
+
+
+    <?php if($this->session->flashdata("sucesso")) :?>
     <!-- Mensagem de Sucesso quando dá login -->
     <p class ="alert alert-success"> <?= $this->session->flashdata("sucesso")   ?>  </p>
     <?php endif ?>
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if($this->session->flashdata("erro")) :?>
+    <p class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>
+    <?php endif ?>
+
+
+
   <div class="container">
 
     
@@ -50,7 +60,7 @@
                   <?php 
                       if($this->session->userdata("usuario_logado")[0]['tipo'] == 1) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>">Salas</a>
+                            <a class="nav-link" href="<?php echo base_url('Sala_admin')?>">Salas</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>">Equipamentos</a>
@@ -117,7 +127,7 @@
                                                 <input class="btn btn-primary" type="submit" name="submit" value="login" /> 
                                                 <br>
                                                 <a href="<?php echo base_url('Registo')?>">Registar</a>
-                                          </form>
+                                            <?php echo form_close() ?>
                                       </div>     
                                   </li>
                               </li>
@@ -140,7 +150,4 @@
 </nav>
 <!-- fim do Navigation -->
 
-    <!-- Mensagem de err quando não consegue dar login -->
-    <?php if($this->session->flashdata("erro")) :?>
-    <p class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>
-    <?php endif ?>
+    
