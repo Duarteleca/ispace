@@ -51,6 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Pages_c/view';
 $route['Salas']= 'Publico_c/mostra_salas';
+
+$route['Sala_admin']= 'Privado_c/mostra_salas';
+$route['Inserir_sala']= 'Privado_c/inserir_sala';
 $route['Registo']= 'Publico_c/registar_user';
 $route['Contacto']= 'Publico_c/Contacto_form';
 $route['Equipamento']= 'Publico_c/mostra_equipamento';
