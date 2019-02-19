@@ -25,12 +25,17 @@
 
 <!-- menu de inicio-->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<?php if($this->session->flashdata("sucesso")) :?>
+    <!-- Mensagem de Sucesso quando dá login -->
+    <p class ="alert alert-success"> <?= $this->session->flashdata("sucesso")   ?>  </p>
+    <?php endif ?>
   <div class="container">
 
     
 
     <!-- log do site -->
     <div class="navbar-header">
+    
         <a href="<?php echo base_url('home')?>">
               <img alt="brand" src="<?php echo base_url('assets/img/logo.png') ?>">
         </a>
@@ -42,6 +47,22 @@
               <!-- Menu da nav bar -->
               <div class="collapse navbar-collapse" id="navbarColor01">
                   <ul class="navbar-nav mr-auto">
+                  <?php 
+                      if($this->session->userdata("usuario_logado")[0]['tipo'] == 1) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>">Salas</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>">Equipamentos</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>">Requisições</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>">Users</a>
+                          </li>
+                      <?php }else {  ?>
+
                           <li class="nav-item active">
                             <a class="nav-link" href="<?php echo base_url('home')?>">Inicial <span class="sr-only">(current)</span></a>
                           </li>
@@ -51,10 +72,17 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>">Salas</a>
                           </li>
+                          
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Contacto')?>">Contacto</a>
+                            <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
+                           
                           </li>
+                      <?php } ?>
+                          <!-- Se o utilizador for de tipo 1, ou seja admin, motra o menu seguinte -->
+                         
                   </ul>
+
+
 
                 <!-- Colocar o log in à direita -->
                   <ul class="navbar-nav mr-auto navbar-right" >
@@ -107,13 +135,11 @@
                           
                 </div>  
   </div>
+  
+ 
 </nav>
 <!-- fim do Navigation -->
 
- <?php if($this->session->flashdata("sucesso")) :?>
-    <!-- Mensagem de Sucesso quando dá login -->
-    <p class ="alert alert-success"> <?= $this->session->flashdata("sucesso")   ?>  </p>
-    <?php endif ?>
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if($this->session->flashdata("erro")) :?>
     <p class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>

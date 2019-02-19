@@ -112,6 +112,7 @@ class Publico_c extends CI_Controller {
 						'username' => $username,
 						'email' => $email,
 						'password' => $password
+						
 				);
 				
 
