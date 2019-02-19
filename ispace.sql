@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Fev-2019 às 17:53
--- Versão do servidor: 10.1.33-MariaDB
+-- Generation Time: Feb 19, 2019 at 10:21 AM
+-- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,20 +25,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `equipamento`
+-- Table structure for table `contato`
+--
+
+CREATE TABLE `contato` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(64) NOT NULL,
+  `e-mail` varchar(64) NOT NULL,
+  `mensagem` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipamento`
 --
 
 CREATE TABLE `equipamento` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `quantidade` varchar(45) NOT NULL,
-  `disponibilidade` varchar(45) NOT NULL
+  `disponibilidade` varchar(45) NOT NULL,
+  `imagem` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `equipamento`
+--
+
+INSERT INTO `equipamento` (`id`, `nome`, `quantidade`, `disponibilidade`, `imagem`) VALUES
+(1, 'TV', '10', '1', 'assets/img/equipamento/tv.jpg'),
+(2, 'Extensão de Tomada', '20', '1', 'assets/img/equipamento/triplas.jpg'),
+(3, 'Portatil', '20', '1', 'assets/img/equipamento/portatil.jpg'),
+(4, 'Projetor', '20', '1', 'assets/img/equipamento/projetor.jpg'),
+(5, 'Cadeira', '60', '1', 'assets/img/equipamento/cadeira.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `requesicao_has_equipamento`
+-- Table structure for table `requesicao_has_equipamento`
 --
 
 CREATE TABLE `requesicao_has_equipamento` (
@@ -49,7 +74,7 @@ CREATE TABLE `requesicao_has_equipamento` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `requisicao`
+-- Table structure for table `requisicao`
 --
 
 CREATE TABLE `requisicao` (
@@ -65,7 +90,7 @@ CREATE TABLE `requisicao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sala`
+-- Table structure for table `sala`
 --
 
 CREATE TABLE `sala` (
@@ -74,7 +99,7 @@ CREATE TABLE `sala` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `sala`
+-- Dumping data for table `sala`
 --
 
 INSERT INTO `sala` (`id`, `tipo_sala`) VALUES
@@ -86,7 +111,7 @@ INSERT INTO `sala` (`id`, `tipo_sala`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipologia`
+-- Table structure for table `tipologia`
 --
 
 CREATE TABLE `tipologia` (
@@ -99,20 +124,22 @@ CREATE TABLE `tipologia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tipologia`
+-- Dumping data for table `tipologia`
 --
 
 INSERT INTO `tipologia` (`id`, `capacidade`, `disponibilidade`, `sala_id`, `nome`, `imagem`) VALUES
-(5, 25, 1, 1, 'Sala A', 'assets/img/reuniao.jpg'),
-(6, 30, 1, 2, 'Sala B', 'assets/img/lazer.jpg'),
-(7, 50, 1, 3, 'Sala C', 'assets/img/formacao.jpg'),
-(8, 20, 1, 4, 'Sala D', 'assets/img/conferencia.jpg'),
-(9, 33, 1, 2, 'Sala F', '');
+(5, 25, 1, 1, 'Sala A', 'assets/img/salas/conferencia.jpg'),
+(6, 30, 1, 2, 'Sala B', 'assets/img/salas/conferencia.jpg'),
+(7, 50, 1, 3, 'Sala C', 'assets/img/salas/conferencia.jpg'),
+(8, 20, 1, 4, 'Sala D', 'assets/img/salas/conferencia.jpg'),
+(12, 20, 1, 4, 'Sala F', 'assets/img/salas/conferencia.jpg'),
+(13, 20, 1, 4, 'Sala G', 'assets/img/salas/conferencia.jpg'),
+(14, 20, 1, 4, 'Sala H', 'assets/img/salas/conferencia.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `utilizador`
+-- Table structure for table `utilizador`
 --
 
 CREATE TABLE `utilizador` (
@@ -121,12 +148,26 @@ CREATE TABLE `utilizador` (
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `tipo` int(11) NOT NULL
+  `tipo` int(11) NOT NULL,
+  `imagem` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `utilizador`
+--
+
+INSERT INTO `utilizador` (`id`, `nome`, `username`, `email`, `password`, `tipo`, `imagem`) VALUES
+(1, 'admin', 'admin', 'admin@ispace.com', '1234', 1, '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `contato`
+--
+ALTER TABLE `contato`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `equipamento`
@@ -173,10 +214,16 @@ ALTER TABLE `utilizador`
 --
 
 --
+-- AUTO_INCREMENT for table `contato`
+--
+ALTER TABLE `contato`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `equipamento`
 --
 ALTER TABLE `equipamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `requisicao`
@@ -194,34 +241,34 @@ ALTER TABLE `sala`
 -- AUTO_INCREMENT for table `tipologia`
 --
 ALTER TABLE `tipologia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `utilizador`
 --
 ALTER TABLE `utilizador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `requesicao_has_equipamento`
+-- Constraints for table `requesicao_has_equipamento`
 --
 ALTER TABLE `requesicao_has_equipamento`
   ADD CONSTRAINT `fk_requesicao_has_equipamento_equipamento` FOREIGN KEY (`equipamento_id`) REFERENCES `equipamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_requesicao_has_equipamento_requisicao1` FOREIGN KEY (`requisicao_id`) REFERENCES `requisicao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `requisicao`
+-- Constraints for table `requisicao`
 --
 ALTER TABLE `requisicao`
   ADD CONSTRAINT `fk_requisicao_sala1` FOREIGN KEY (`sala_id1`) REFERENCES `sala` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_requisicao_utilizador1` FOREIGN KEY (`utilizador_id`) REFERENCES `utilizador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `tipologia`
+-- Constraints for table `tipologia`
 --
 ALTER TABLE `tipologia`
   ADD CONSTRAINT `fk_tipologia_sala1` FOREIGN KEY (`sala_id`) REFERENCES `sala` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
