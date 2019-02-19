@@ -15,7 +15,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+ 
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
+
+ <script>
+  $(document).ready(function() {
+    $('#example').DataTable(
+        {
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
+        searching: false,
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+        });
+    } );
+  </script>
+
         
 
 
@@ -117,6 +136,8 @@
                                                 <input class="btn btn-primary" type="submit" name="submit" value="login" /> 
                                                 <br>
                                                 <a href="<?php echo base_url('Registo')?>">Registar</a>
+                                                <br>
+                                                <a href="<?php echo base_url('Recuperar')?>">Recuperar Pass</a>
                                           </form>
                                       </div>     
                                   </li>

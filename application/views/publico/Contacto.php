@@ -16,9 +16,15 @@
 
 
         
-                <?php echo form_open('Publico_c/Contacto_form') ?>
+                <?php echo form_open('Publico_c/Contacto') ?>
                     <fieldset>
                         <legend class="text-center header">Contacte-nos!</legend>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input  name="assunto" type="text" placeholder="Assunto" class="form-control">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
@@ -37,19 +43,22 @@
                         <!-- Message body -->
                 
                             <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-comment-alt bigicon"></i></span>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-pen-nib bigicon"></i></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="message" name="message" placeholder="Introduza sua mensagem aqui..." rows="5"></textarea>
                             </div>
                             </div>
 
         
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            <input type="submit" class="btn btn-primary" name="submit" value="Enviar">
                             </div>
                         </div>
                     </fieldset>
+                    <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
+
+      
                 <?php echo form_close() ?>
             </div>
         </div>

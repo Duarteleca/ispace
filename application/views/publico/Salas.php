@@ -3,7 +3,7 @@
 
     <br><br><br>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
 
 <?php echo form_open('Publico_c/mostra_salas') ?>
 
@@ -20,7 +20,7 @@ echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
 </div>
 
 
-<div class="form-group col-md-6 ">
+<div class="form-group col-md-12 ">
 <input type="submit" class="btn btn-info" name="submit" value="Pesquisa">
 </div>
 <br>
@@ -30,31 +30,50 @@ echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
 
         <!-- <div class="form-group col-md-12"> -->
                   
-        <?php 
-                    foreach ($sala as $row){?>
-                <div class="col-md-12  conteudo">
-
-
-                    <div class="col-md-8 ">
-                        <img height="100%" width="100%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"><br>
-                    </div>
-                    <div class="col-md-4 texto ">
-                      
-                        Tipo de sala: <?php echo $row['tipo_sala'] ?><br>
-                        Nome da Sala: <?php echo $row['nome_sala'] ?><br>
-                        Capacidade: <?php echo $row['capacidade'] ?>
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Tipo de sala</th>
+                <th>Nome da sala</th>
+                <th>Capacidade</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <?php    
+                foreach ($sala as $row){?>
+            <tr>
+                 <td><img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
+                 <td class="texto ">   <?php echo $row['tipo_sala'] ?></td>
+                 <td class="texto ">   <?php echo $row['nome_sala'] ?></td>
+                 <td class="texto ">    <?php echo $row['capacidade'] ?></td>
                    
-                    </div>
+                  
                     
                    
                        
 
                
-                </div>
-                <?php } ?>
-                <div class="form-group col-md-12 text-center">
-                    <?php echo $links; ?>
-            
-       
+               
+                
 
-</div>
+
+                
+               
+            </tr>
+            <?php } ?>
+            
+           
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Name</th>
+                <th>Name</th>
+                <th>Name</th>
+               
+            </tr>
+        </tfoot>
+    </table>
+
