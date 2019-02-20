@@ -145,14 +145,12 @@
                                                 <br>
                                                 <input class="btn btn-primary" type="submit" name="submit" value="login" /> 
                                                 <br>
-                                                <a href="<?php echo base_url('Registo')?>">Registar</a>
-<<<<<<< HEAD
                                             <?php echo form_close() ?>
-=======
+                                                <a href="<?php echo base_url('Registo')?>">Registar</a>
+                                            
                                                 <br>
                                                 <a href="<?php echo base_url('Recuperar')?>">Recuperar Pass</a>
                                           </form>
->>>>>>> ae969f73ea190d67bf1ae25725a1073e86cf1a77
                                       </div>     
                                   </li>
                               </li>
