@@ -82,7 +82,7 @@
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
+                            <a class="nav-link" href="<?php echo base_url('Equipamento_admin')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
