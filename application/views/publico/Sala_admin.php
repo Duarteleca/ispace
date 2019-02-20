@@ -1,3 +1,8 @@
+
+<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+    redirect(base_url('home'));
+}
+?>
 <div class="container">
 
     <br><br><br>

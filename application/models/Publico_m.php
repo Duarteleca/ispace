@@ -98,6 +98,15 @@ class Publico_m extends CI_Model
             }
 
 
+            public function Verificar($email){
+                
+                $this->db->where('email', $email);
+                $verifica=$this->db->get("utilizador")->row_array();
+                return $verifica;
+    
+            }
+
+
           public function recupera_pass($email,$password_hash){
 
             $data = array(

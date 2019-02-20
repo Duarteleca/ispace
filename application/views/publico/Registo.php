@@ -2,20 +2,10 @@
     <div class="row">
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">
-
-
-
                 <!-- Mensagem de err quando não consegue dar login -->
-                <?php if(isset($erros['mensagens'])) :?>
-                
+                <?php if(isset($erros['mensagens'])) :?>  
             <?php echo $erros['mensagens'];  ?>
-            
-            <?php endif;                
-        ?>
-     
-
-
-        
+            <?php endif;  ?>
                 <?php echo form_open('Publico_c/registar_user') ?>
                     <fieldset>
                         <legend class="text-center header">Registe-se!</legend>
@@ -52,8 +42,6 @@
                                 <input id="Confirm" name="confirm" type="password" placeholder="Confirmar Password" class="form-control">
                             </div>
                         </div>
-
-        
                         <div class="form-group">
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>

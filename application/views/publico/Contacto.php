@@ -22,21 +22,21 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
                             <div class="col-md-8">
-                                <input  name="assunto" type="text" placeholder="Assunto" class="form-control">
+                                <input  name="assunto" type="text"  placeholder="Assunto" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="name" name="name" type="text" placeholder="Nome" class="form-control">
+                                <input id="name" name="name" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" placeholder="Nome" class="form-control">
                             </div>
                         </div>
                      
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="email" name="email" type="text" placeholder="Endereço de Email" class="form-control">
+                                <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>" placeholder="Endereço de Email" class="form-control">
                             </div>
                         </div>
                    
