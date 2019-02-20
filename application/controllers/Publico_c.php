@@ -50,48 +50,6 @@ class Publico_c extends CI_Controller {
 				$password_hash = password_hash($password, PASSWORD_DEFAULT);
 				$this->Publico_m->recupera_pass($email,$password_hash);
 		
-<<<<<<< HEAD
-		$password=$this->Publico_m->randomPassword();
-		$password_hash = password_hash($password, PASSWORD_DEFAULT);
-		$this->Publico_m->recupera_pass($email,$password_hash);
-
-
-
-		$data['error'] = 'Enviado com Sucesso';
-		//Load email library
-		$this->load->library('email');
-
-		//SMTP & mail configuration
-		$config = array(
-			'protocol'  => 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_port' => 465,
-			'smtp_user' => 'rentacar.bravavalley@gmail.com',
-			'smtp_pass' => '1a2s3d4f5g',
-			'mailtype'  => 'html',
-			'charset'   => 'utf-8'
-		);
-		$this->email->initialize($config);
-		$this->email->set_mailtype("html");
-		$this->email->set_newline("\r\n");
-
-		//Email content
-		$htmlContent = '<p> De: '.$password_hash.'<p>';
-
-
-
-		$this->email->to('duarteleca@hotmail.com');
-		$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
-		$this->email->subject($email);
-		$this->email->message($htmlContent);
-
-		//Send email
-		$this->email->send();
-
-		$this->load->view('templates/header');
-		$this->load->view('publico/Recuperar',$data);
-		$this->load->view('templates/footer');
-=======
 				$data['error'] = 'Enviado com Sucesso';
 				//Load email library
 				$this->load->library('email');
@@ -130,7 +88,6 @@ class Publico_c extends CI_Controller {
 				$this->load->view('publico/Recuperar',$data);
 				$this->load->view('templates/footer');
 			}else{
->>>>>>> d872a49cca4c716dbf1f33550f69efbdd9d93fe3
 
 				$data['error'] = 'E-mail não existe na base de dados';
 				$this->load->view('templates/header');
@@ -162,7 +119,6 @@ class Publico_c extends CI_Controller {
 		// $this->load->model("Publico_m");
 		// $this->Publico_m->GuardarContato($contato);
 		
-<<<<<<< HEAD
 
 
 			//Load email library
@@ -197,35 +153,6 @@ class Publico_c extends CI_Controller {
 	$this->email->send();
 
 
-=======
-		//Load email library
-		$this->load->library('email');
-
-		//SMTP & mail configuration
-		$config = array(
-			'protocol'  => 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_port' => 465,
-			'smtp_user' => 'rentacar.bravavalley@gmail.com',
-			'smtp_pass' => '1a2s3d4f5g',
-			'mailtype'  => 'html',
-			'charset'   => 'utf-8'
-		);
-		$this->email->initialize($config);
-		$this->email->set_mailtype("html");
-		$this->email->set_newline("\r\n");
-		//Email content
-		$htmlContent = '<p> De: '.$email.'<p>';
-		$htmlContent .= '<p> Nome: '.$name.'</p>';
-		$htmlContent .= '<p> Mensagem: '.$mensagem.'</p>';
-
-		$this->email->to('duarteleca@hotmail.com');
-		$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
-		$this->email->subject($assunto);
-		$this->email->message($htmlContent);
-		//Send email
-		$this->email->send();
->>>>>>> d872a49cca4c716dbf1f33550f69efbdd9d93fe3
 
 			$this->load->view('templates/header');
 			$this->load->view('publico/Contacto',$data);
@@ -293,6 +220,22 @@ class Publico_c extends CI_Controller {
 
 			// Se o form validation nao tiver erros.
 			if ($this->form_validation->run() == TRUE) {
+
+				$config['upload_path']          = './assets/img/utilizadores';
+				$config['allowed_types']        = 'jpg|png';
+				$config['max_size']             = 100;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+		
+				
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('postimage');		
+			
+				$post_image = $_FILES['postimage']['name'];
+				
+				$endereco ='assets/img/utilizadores/';
+				
+				$imagem = $endereco.$post_image;
 				
 				
 				$password = password_hash($password,PASSWORD_DEFAULT);
@@ -302,7 +245,8 @@ class Publico_c extends CI_Controller {
 						'nome' => $nome,
 						'username' => $username,
 						'email' => $email,
-						'password' => $password
+						'password' => $password,
+						'imagem' => $imagem
 						
 				);
 				

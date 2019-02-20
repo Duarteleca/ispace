@@ -6,7 +6,7 @@
                 <?php if(isset($erros['mensagens'])) :?>  
             <?php echo $erros['mensagens'];  ?>
             <?php endif;  ?>
-                <?php echo form_open('Publico_c/registar_user') ?>
+                <?php echo form_open_multipart('Publico_c/registar_user') ?>
                     <fieldset>
                         <legend class="text-center header">Registe-se!</legend>
 
@@ -41,6 +41,12 @@
                             <div class="col-md-8">
                                 <input id="Confirm" name="confirm" type="password" placeholder="Confirmar Password" class="form-control">
                             </div>
+                        </div>
+                        <div class="form-group"><i class="">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                                <div class="col-md-8">
+                                    <input type="file" name="postimage" id="fileToUpload">
+                                </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">

@@ -91,7 +91,6 @@
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
                       <?php }else  {  ?>
-
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
@@ -99,13 +98,13 @@
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Realizar Requisição</a>
-                          </li>
-                          <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fa fa-user fa-lg"></i>Perfil</a>
                           </li>
                       <?php } ?>
                           <!-- Se o utilizador for de tipo 1, ou seja admin, motra o menu seguinte -->
@@ -124,7 +123,7 @@
                                 <?php
                                         if($this->session->userdata("usuario_logado")){                                     
                                             echo '  
-                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username'].'</a></li>';
+                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username']?> <img height="40px" width="40px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>"> <?php '</a></li>';
                                         }
                                 ?>
                             </a>
@@ -163,7 +162,7 @@
                           <!-- Se tiver sessão inciada, mostra o logout, se não, esconde -->
                           <?php if($this->session->userdata("usuario_logado")==true) { ?> 
                             <!-- Butão de logout, com hred, para ir para o controlador e executar a função logout -->
-                            <li><a  class="nav-link" id="logout" href="<?php echo site_url().'Publico_c/logout';?>" ><span  class="glyphicon glyphicon-user"></span> logout</a></li>
+                            <li><a  class="nav-link" id="logout" href="<?php echo site_url().'Publico_c/logout';?>" >Logout</a></li>
                               
                             <?php } ?>  
                           
