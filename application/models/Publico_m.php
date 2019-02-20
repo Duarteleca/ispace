@@ -9,8 +9,7 @@ class Publico_m extends CI_Model
     }
    
   
-<<<<<<< HEAD
-    }
+    
 
 
     // Mostrar Utilizadores
@@ -23,8 +22,6 @@ class Publico_m extends CI_Model
     }
 
     // Mostra lista todas as salas que existem   
-=======
->>>>>>> ae969f73ea190d67bf1ae25725a1073e86cf1a77
     public function selecionarSala()
         {
                

@@ -82,7 +82,7 @@ $this->email->subject($email);
 $this->email->message($htmlContent);
 
 //Send email
-$this->email->send();
+// $this->email->send();
 
 $this->load->view('templates/header');
 		$this->load->view('publico/Recuperar',$data);
@@ -277,28 +277,11 @@ $this->email->send();
 	public function mostra_equipamento()
 	{
 
-<<<<<<< HEAD
-		   if($this->input->post('submit')){
-			$equipamento=$this->input->post('search_sala');
-			
-			 
-			 
-			// $data['results']=$this->Frota_m->searchFrota($fabricante);
-			$data["sala"] = $this->Publico_m->busca_equipamento($config["per_page"], $page,$equipamento);
-	  	$data["links"] = $this->pagination->create_links();
-			}else{
-				$data["sala"] = $this->Publico_m->busca_equipamento($config["per_page"], $page);
-	  	$data["links"] = $this->pagination->create_links();
-				
-			}
-	   	
-=======
 
 		$equipamento=$this->input->post('search_sala');
 		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
 		$data["sala"] = $this->Publico_m->busca_equipamento($equipamento);
 	
->>>>>>> ae969f73ea190d67bf1ae25725a1073e86cf1a77
 		$this->load->view('templates/header');
 		$this->load->view('publico/equipamento',$data);
 		

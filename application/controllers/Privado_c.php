@@ -134,21 +134,14 @@ class Privado_c extends CI_Controller {
 					);
 
 
-
-
-
-
 					// Guarda os valores inseridos no registo
 					$capacidade = $this->input->post("capacidade");
 					$nome_sala = $this->input->post("nome_sala");
-					$imagem = $this->input->post("imagem");
+					// $imagem = $this->input->post("imagem");
 					$disponibilidade = $this->input->post("disponibilidade");
 					
 
-
-
-
-					$data['salas']=$this->Privado_m->busca_salas();
+					$this->Privado_m->busca_salas();
 					$this->load->view('templates/header');
 					$this->load->view('publico/Sala_admin',$data);
 					$this->load->view('templates/footer');

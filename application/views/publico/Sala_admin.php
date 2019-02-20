@@ -16,6 +16,7 @@
         <thead>
             <tr id="titulotabela">
             
+            <th>id</th>
                 <th>Tipo de Sala</th>
                 <th>Capacidade</th>
                 <th>Nome</th>
@@ -33,6 +34,7 @@
                   <?php $id_tiposala = $row['tipoid'] ?>
       
             <tr>        
+            <td><?php echo $row['tipoid'] ?></td>
                         <td><?php echo $row['tipo_sala'] ?></td>
                         <td><?php echo $row['capacidade'] ?></td>
                         <td><?php echo $row['nome_sala'] ?></td>
