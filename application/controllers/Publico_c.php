@@ -55,36 +55,36 @@ class Publico_c extends CI_Controller {
 
 		$data['error'] = 'Enviado com Sucesso';
 		//Load email library
-$this->load->library('email');
+		$this->load->library('email');
 
-//SMTP & mail configuration
-$config = array(
-    'protocol'  => 'smtp',
-    'smtp_host' => 'ssl://smtp.googlemail.com',
-    'smtp_port' => 465,
-    'smtp_user' => 'rentacar.bravavalley@gmail.com',
-    'smtp_pass' => '1a2s3d4f5g',
-    'mailtype'  => 'html',
-    'charset'   => 'utf-8'
-);
-$this->email->initialize($config);
-$this->email->set_mailtype("html");
-$this->email->set_newline("\r\n");
+		//SMTP & mail configuration
+		$config = array(
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'rentacar.bravavalley@gmail.com',
+			'smtp_pass' => '1a2s3d4f5g',
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8'
+		);
+		$this->email->initialize($config);
+		$this->email->set_mailtype("html");
+		$this->email->set_newline("\r\n");
 
-//Email content
-$htmlContent = '<p> De: '.$password_hash.'<p>';
+		//Email content
+		$htmlContent = '<p> De: '.$password_hash.'<p>';
 
 
 
-$this->email->to('duarteleca@hotmail.com');
-$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
-$this->email->subject($email);
-$this->email->message($htmlContent);
+		$this->email->to('duarteleca@hotmail.com');
+		$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
+		$this->email->subject($email);
+		$this->email->message($htmlContent);
 
-//Send email
-$this->email->send();
+		//Send email
+		$this->email->send();
 
-$this->load->view('templates/header');
+		$this->load->view('templates/header');
 		$this->load->view('publico/Recuperar',$data);
 		$this->load->view('templates/footer');
 
@@ -117,50 +117,50 @@ $this->load->view('templates/header');
 		
 
 
-		//Load email library
-$this->load->library('email');
+			//Load email library
+	$this->load->library('email');
 
-//SMTP & mail configuration
-$config = array(
-    'protocol'  => 'smtp',
-    'smtp_host' => 'ssl://smtp.googlemail.com',
-    'smtp_port' => 465,
-    'smtp_user' => 'rentacar.bravavalley@gmail.com',
-    'smtp_pass' => '1a2s3d4f5g',
-    'mailtype'  => 'html',
-    'charset'   => 'utf-8'
-);
-$this->email->initialize($config);
-$this->email->set_mailtype("html");
-$this->email->set_newline("\r\n");
+	//SMTP & mail configuration
+	$config = array(
+		'protocol'  => 'smtp',
+		'smtp_host' => 'ssl://smtp.googlemail.com',
+		'smtp_port' => 465,
+		'smtp_user' => 'rentacar.bravavalley@gmail.com',
+		'smtp_pass' => '1a2s3d4f5g',
+		'mailtype'  => 'html',
+		'charset'   => 'utf-8'
+	);
+	$this->email->initialize($config);
+	$this->email->set_mailtype("html");
+	$this->email->set_newline("\r\n");
 
-//Email content
-$htmlContent = '<p> De: '.$email.'<p>';
-$htmlContent .= '<p> Nome: '.$name.'</p>';
-$htmlContent .= '<p> Mensagem: '.$mensagem.'</p>';
-
-
-$this->email->to('duarteleca@hotmail.com');
-$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
-$this->email->subject($assunto);
-$this->email->message($htmlContent);
-
-//Send email
-$this->email->send();
+	//Email content
+	$htmlContent = '<p> De: '.$email.'<p>';
+	$htmlContent .= '<p> Nome: '.$name.'</p>';
+	$htmlContent .= '<p> Mensagem: '.$mensagem.'</p>';
 
 
+	$this->email->to('duarteleca@hotmail.com');
+	$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
+	$this->email->subject($assunto);
+	$this->email->message($htmlContent);
 
-		$this->load->view('templates/header');
-		$this->load->view('publico/Contacto',$data);
-		$this->load->view('templates/footer');
-	}else{
-		$this->load->view('templates/header');
-		$this->load->view('publico/Contacto');
-		$this->load->view('templates/footer');
+	//Send email
+	$this->email->send();
+
+
+
+			$this->load->view('templates/header');
+			$this->load->view('publico/Contacto',$data);
+			$this->load->view('templates/footer');
+		}else{
+			$this->load->view('templates/header');
+			$this->load->view('publico/Contacto');
+			$this->load->view('templates/footer');
+		}
 	}
-}
 
-
+	// Regita um usuário
 	public function registar_user()
 	{
 
@@ -257,23 +257,20 @@ $this->email->send();
 				
 
 	
-
+	// Mostra salas
 	public function mostra_salas()
 	{
 		$salas=$this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
 		$data["sala"] = $this->Publico_m->busca_salas($salas);
 		
-			
-
-			
-	   	
-
 		$this->load->view('templates/header');
 		$this->load->view('publico/salas',$data);
 		
 	}
 
+
+	// Mostrar equipamentos
 	public function mostra_equipamento()
 	{
 
@@ -297,23 +294,25 @@ $this->email->send();
 
 		  $array_user = $this->Publico_m->mostrar_Utilizadores($username);
 		  
-		  $passdatabase = $array_user[0]['password'];
-		  $userdatabase = $array_user[0]['username'];
-		 
+		  
+		//  Se o array chegar vario, ou sej anão encontrou nada, dá erro
+		  if(empty($array_user)){
+			$this->session->set_flashdata("erro", "User ou senha inválida!");
+			redirect(base_url("/home"));
+		  }
+		  else{
+			$passdatabase = $array_user[0]['password'];
+			$userdatabase = $array_user[0]['username'];
+		  }
 	 
-		  // // se o user existe
+		  //  se o user existe
 		  if($userdatabase == $username && password_verify($password,$passdatabase)) {
 			  $this->session->set_userdata("usuario_logado",$array_user);
 		   
 			  $this->session->set_flashdata("sucesso", "Login com sucesso!");
-		  }else{
-			  $this->session->set_flashdata("erro", "User ou senha inválida!");
-
+			  redirect(base_url("/home"));
 		  }
 		  redirect('home', 'refresh');
-
-
-		  
 	  }
 
 	  // Funão de logout, faz uset do user, e manda mensagem, que é mostrada no header

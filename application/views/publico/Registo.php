@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="password" name="password" type="text" placeholder="Password" class="form-control">
+                                <input id="password" name="password" type="password" placeholder="Password" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
