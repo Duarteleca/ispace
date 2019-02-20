@@ -7,9 +7,6 @@ class Publico_m extends CI_Model
     public function __construct() {
         parent::__construct();
     }
-   
-  
-    
 
 
     // Mostrar Utilizadores
@@ -98,6 +95,15 @@ class Publico_m extends CI_Model
                     $pass[] = $alphabet[$n];
                 }
                 return implode($pass); //turn the array into a string
+            }
+
+
+            public function Verificar($email){
+                
+                $this->db->where('email', $email);
+                $verifica=$this->db->get("utilizador")->row_array();
+                return $verifica;
+    
             }
 
 

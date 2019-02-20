@@ -39,17 +39,17 @@ class Privado_m extends CI_Model
     
 
 
-     // Mostra todos os dados das salas
+     // Mostra todos os dados das salas onde o tipo de sala é igual ao que foi inserido
      function mostrar_Sala($tiposala)
      {
         $this->db->where('tipo_sala',$tiposala);
         $inserir_sala = $this->db->get("sala");
         return $inserir_sala->result_array();
      }
-    
+
 
     // Insere o registo na tabela utilizador
-    public function inserir_Casa($data)
+    public function inserir_Sala($data)
     {
         $this->db->insert('tipologia', $data);
 
@@ -62,5 +62,32 @@ class Privado_m extends CI_Model
         $this->db->delete('tipologia');
     }
 
+    // Edita sala
+    public function atualiza_Sala($inputs,$id_tiposala)
+    {
+    $this->db->where('id', $id_tiposala);
+    $this->db->update('tipologia', $inputs);
+    }
     
+    
+	// function FileUpload($data){
+	// 	$this->db->insert('Table Name',$data);
+	
+    // }
+
+
+    // Seleciona todos os equipamentos que existem
+    public function selecionarEquipamento()
+        { 
+            $query=$this->db->get('Equipamento');
+            return $query->result_array();         
+        }
+
+     // Insere um novo equipamento
+     public function inserir_Equipamento($data)
+     {
+         $this->db->insert('equipamento', $data);
+ 
+     }
+ 
 }
