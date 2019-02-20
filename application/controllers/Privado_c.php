@@ -361,6 +361,16 @@ class Privado_c extends CI_Controller {
 		}
 			
 	}
+
+	public function perfil()
+	{
+		
+		$data['salas']=$this->Privado_m->busca_salas();
+		$this->load->view('templates/header');
+		$this->load->view('privado/perfil',$data);
+		$this->load->view('templates/footer');
+		
+	}
 	
 
 }

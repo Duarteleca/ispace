@@ -17,14 +17,14 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
                             <div class="col-md-8">
-                                <input  name="assunto" type="text"  placeholder="Assunto" class="form-control">
+                                <input  name="assunto" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="name" name="name" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" placeholder="Nome" class="form-control">
+                                <input id="name" name="name" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" placeholder="username" class="form-control">
                             </div>
                         </div>
                      
@@ -37,12 +37,24 @@
                    
                         <!-- Message body -->
                 
-                            <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-pen-nib bigicon"></i></span>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="message" name="message" placeholder="Introduza sua mensagem aqui..." rows="5"></textarea>
+                                <input id="password" name="password" type="password" placeholder="Password" class="form-control">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <div class="col-md-8">
+                                <input id="Confirm" name="confirm" type="password" placeholder="Confirmar Password" class="form-control">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <div class="col-md-8">
+                                <input id="Confirm" name="confirm" type="password" placeholder="Password confirmação" class="form-control">
+                            </div>
+                        </div>
 
         
                         <div class="form-group">

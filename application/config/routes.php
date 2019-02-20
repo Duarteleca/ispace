@@ -54,6 +54,7 @@ $route['Salas']= 'Publico_c/mostra_salas';
 
 $route['Sala_admin']= 'Privado_c/mostra_salas';
 $route['Inserir_sala']= 'Privado_c/inserir_sala';
+$route['Perfil']= 'Privado_c/perfil';
 
 
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
