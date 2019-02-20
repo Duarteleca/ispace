@@ -49,7 +49,7 @@ class Privado_m extends CI_Model
 
 
     // Insere o registo na tabela utilizador
-    public function inserir_Casa($data)
+    public function inserir_Sala($data)
     {
         $this->db->insert('tipologia', $data);
 
@@ -82,4 +82,12 @@ class Privado_m extends CI_Model
             $query=$this->db->get('Equipamento');
             return $query->result_array();         
         }
+
+     // Insere um novo equipamento
+     public function inserir_Equipamento($data)
+     {
+         $this->db->insert('equipamento', $data);
+ 
+     }
+ 
 }

@@ -25,7 +25,7 @@
         <?php endif;                
         ?>
 
-    <table name="tabelacarros"  id="example" class="table table-bordered table-condensed" >
+    <table name="tabelasalas"  id="example" class="table table-bordered table-condensed" >
         <thead>
             <tr id="titulotabela">
                 <th>Tipo de Sala</th>
