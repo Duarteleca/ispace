@@ -177,8 +177,6 @@ class Privado_c extends CI_Controller {
 									'nome' => $nome_sala,
 								
 									);
-									
-									
 
 				$this->Privado_m->atualiza_Sala($inputs,$id_tiposala);
 				$this->session->set_flashdata("Sala_sucesso", "Sala editada com sucesso!");
@@ -221,10 +219,7 @@ class Privado_c extends CI_Controller {
 
 			redirect('Sala_admin', 'refresh');
 							
-		
 			}
-
-			
 			
 			}
 			else
@@ -291,7 +286,7 @@ class Privado_c extends CI_Controller {
 			)
 		);
 
-		$this->form_validation->set_rules('quantidade', 'Capaciadade','required',
+		$this->form_validation->set_rules('quantidade', 'Quantidade','required',
 		array(
 			'required' => 'Você tem de preencher campo %s.')
 		);
@@ -302,7 +297,7 @@ class Privado_c extends CI_Controller {
 		);
 
 
-		// Guarda os valores inseridos no registo
+		// Guarda os valores inseridos dos inputs
 		$nome_Equipamento = $this->input->post("nome_Equipamento");
 		$quantidade = $this->input->post("quantidade");
 		$disponibilidade = $this->input->post("disponibilidade");
@@ -315,30 +310,27 @@ class Privado_c extends CI_Controller {
 		// Configurações da imagem que foi upload
 		$config['upload_path']          = './assets/img/equipamento';
 		$config['allowed_types']        = 'jpg|png';
-		$config['max_size']             = 100;
+		$config['max_size']             = 1000;
 		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
+		$config['max_height']           = 1500;
 
 		
 		$this->load->library('upload', $config);
-		$this->upload->do_upload('postimage');		
-	
-		$post_image = $_FILES['postimage']['name'];
+		$this->upload->do_upload('postimage2');		
+			
+		$post_image = $_FILES['postimage2']['name'];
 		
 		$endereco ='assets/img/equipamento/';
 		
 		$imagem = $endereco.$post_image;
 			
-			// Busca o id do tipo de sala que foi inserido
-			$array_sala = $this->Privado_m->mostrar_Sala($tiposala);
-			$id_sala = $array_sala[0]['id'];
+			
 
 
 			$data = array (
-					'capacidade' => $capaciadade,
+					'nome' => $nome_Equipamento,
+					'quantidade' => $quantidade,
 					'disponibilidade' => $disponibilidade,
-					'nome' => $nomesala,
-					'sala_id' => $id_sala,
 					'imagem' => $imagem
 					
 			);
@@ -362,5 +354,19 @@ class Privado_c extends CI_Controller {
 			
 	}
 	
+	// Eliminar Equipamento
+
+	public function Apaga_Equipamento()
+	{
+
+		$id_sala = $this->input->post('id_tiposala');
+		$this->Privado_m->eliminar_Sala($id_sala);
+
+			// Carrego as views
+		$this->load->view('templates/Header');
+		// $this->load->view('publico/Home');
+		$this->load->view('templates/Footer');
+		redirect('Sala_admin', 'refresh');
+	}
 
 }
