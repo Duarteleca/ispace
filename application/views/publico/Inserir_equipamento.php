@@ -33,7 +33,7 @@
                                                         <div class="form-group"><i class="">
                                                                 <span class="col-md-1 text-center"><i class=""></i></span>
                                                                     <div class="col-md-8">
-                                                                        <input type="file" name="postimage" id="fileToUpload">
+                                                                        <input type="file" name="postimage2" id="fileToUpload">
                                                                     </div>
                                                         </div>
 
