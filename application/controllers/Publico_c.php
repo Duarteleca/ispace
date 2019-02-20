@@ -26,12 +26,8 @@ class Publico_c extends CI_Controller {
 			$this->load->model('Publico_m');
 			$this->load->helper('url_helper');
 			$this->load->library("pagination");
-          
-
 	}
 	
-
-
 	public function index()
 	{
 		$this->load->view('templates/header');
@@ -41,12 +37,20 @@ class Publico_c extends CI_Controller {
 
 
 
-	public function Recuperar_pass(){
-		$email=$this->input->post("email");
-		if($this->input->post('submit')){
-
-		$this->load->model("Publico_m");
+	public function Recuperar_pass()
+	{
 		
+		if($this->input->post('submit')){
+			$email=$this->input->post("email");
+			$this->load->model("Publico_m");
+			$verifica=$this->Publico_m->Verificar($email);
+
+			if($verifica){
+				$password=$this->Publico_m->randomPassword();
+				$password_hash = password_hash($password, PASSWORD_DEFAULT);
+				$this->Publico_m->recupera_pass($email,$password_hash);
+		
+<<<<<<< HEAD
 		$password=$this->Publico_m->randomPassword();
 		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		$this->Publico_m->recupera_pass($email,$password_hash);
@@ -87,12 +91,57 @@ class Publico_c extends CI_Controller {
 		$this->load->view('templates/header');
 		$this->load->view('publico/Recuperar',$data);
 		$this->load->view('templates/footer');
+=======
+				$data['error'] = 'Enviado com Sucesso';
+				//Load email library
+				$this->load->library('email');
+				
+				//SMTP & mail configuration
+				$config = array(
+					'protocol'  => 'smtp',
+					'smtp_host' => 'ssl://smtp.googlemail.com',
+					'smtp_port' => 465,
+					'smtp_user' => 'rentacar.bravavalley@gmail.com',
+					'smtp_pass' => '1a2s3d4f5g',
+					'mailtype'  => 'html',
+					'charset'   => 'utf-8'
+				);
+				$this->email->initialize($config);
+				$this->email->set_mailtype("html");
+				$this->email->set_newline("\r\n");
+				
+				//Email content
+				$htmlContent = '<h1> Recuperação de Password</h1>';
+				$htmlContent .= '<p> Sua password foi alterada.<p>';
+				$htmlContent .= '<p> Nova pass: '.$password.'<p>';
 
+				// e-mail do utilizador, o e-mail tem de existir para receber a pass.
+				$this->email->to($email);
+				
+				// $this->email->to('duarteleca@hotmail.com'); 
+				$this->email->from('recuperapass@ispace.com','iSpaces');
+				$this->email->subject('Nova pass');
+				$this->email->message($htmlContent);
+				
+				//Send email
+				$this->email->send();
+		
+				$this->load->view('templates/header');
+				$this->load->view('publico/Recuperar',$data);
+				$this->load->view('templates/footer');
+			}else{
+>>>>>>> d872a49cca4c716dbf1f33550f69efbdd9d93fe3
+
+				$data['error'] = 'E-mail não existe na base de dados';
+				$this->load->view('templates/header');
+				$this->load->view('publico/Recuperar',$data);
+				$this->load->view('templates/footer');
+			}
 
 		}else{
 			$this->load->view('templates/header');
-		$this->load->view('publico/Recuperar');
-		$this->load->view('templates/footer');
+			$this->load->view('publico/Recuperar');
+			$this->load->view('templates/footer');
 		}
 
 		
@@ -103,18 +152,17 @@ class Publico_c extends CI_Controller {
 	{
 
 	
-			 $name=$this->input->post("name");
-			$email=$this->input->post("email");
-			$mensagem=$this->input->post("message");
-			$assunto=$this->input->post("assunto");
+		$name=$this->input->post("name");
+		$email=$this->input->post("email");
+		$mensagem=$this->input->post("message");
+		$assunto=$this->input->post("assunto");
 			
-		
-
 	if($this->input->post('submit')){
 		$data['error'] = 'Enviado com Sucesso'; 
 		// $this->load->model("Publico_m");
 		// $this->Publico_m->GuardarContato($contato);
 		
+<<<<<<< HEAD
 
 
 			//Load email library
@@ -149,6 +197,35 @@ class Publico_c extends CI_Controller {
 	$this->email->send();
 
 
+=======
+		//Load email library
+		$this->load->library('email');
+
+		//SMTP & mail configuration
+		$config = array(
+			'protocol'  => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'rentacar.bravavalley@gmail.com',
+			'smtp_pass' => '1a2s3d4f5g',
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8'
+		);
+		$this->email->initialize($config);
+		$this->email->set_mailtype("html");
+		$this->email->set_newline("\r\n");
+		//Email content
+		$htmlContent = '<p> De: '.$email.'<p>';
+		$htmlContent .= '<p> Nome: '.$name.'</p>';
+		$htmlContent .= '<p> Mensagem: '.$mensagem.'</p>';
+
+		$this->email->to('duarteleca@hotmail.com');
+		$this->email->from('rentacar.bravavalley@gmail.com','iSpace');
+		$this->email->subject($assunto);
+		$this->email->message($htmlContent);
+		//Send email
+		$this->email->send();
+>>>>>>> d872a49cca4c716dbf1f33550f69efbdd9d93fe3
 
 			$this->load->view('templates/header');
 			$this->load->view('publico/Contacto',$data);
@@ -266,6 +343,7 @@ class Publico_c extends CI_Controller {
 		
 		$this->load->view('templates/header');
 		$this->load->view('publico/salas',$data);
+		$this->load->view('templates/Footer');
 		
 	}
 
@@ -281,6 +359,7 @@ class Publico_c extends CI_Controller {
 	
 		$this->load->view('templates/header');
 		$this->load->view('publico/equipamento',$data);
+		$this->load->view('templates/Footer');
 		
 	}
 

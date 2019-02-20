@@ -6,12 +6,7 @@
 
 
                 <!-- Mensagem de err quando não consegue dar login -->
-                <?php if(isset($erros['mensagens'])) :?>
                 
-            <?php echo $erros['mensagens'];  ?>
-            
-            <?php endif;                
-        ?>
      
                 <?php echo form_open('Publico_c/Recuperar_pass') ?>
                     <fieldset>
