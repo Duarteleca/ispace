@@ -354,15 +354,15 @@ class Privado_c extends CI_Controller {
 			
 	}
 
-	public function perfil()
-	{
+	// public function perfil()
+	// {
 		
-		$data['salas']=$this->Privado_m->busca_salas();
-		$this->load->view('templates/header');
-		$this->load->view('privado/perfil',$data);
-		$this->load->view('templates/footer');
+	// 	$data['salas']=$this->Privado_m->busca_salas();
+	// 	$this->load->view('templates/header');
+	// 	$this->load->view('privado/perfil',$data);
+	// 	$this->load->view('templates/footer');
 		
-	}
+	// }
 	
 	// Eliminar Equipamento
 
@@ -377,6 +377,222 @@ class Privado_c extends CI_Controller {
 		// $this->load->view('publico/Home');
 		$this->load->view('templates/Footer');
 		redirect('Sala_admin', 'refresh');
+	}
+// atualizar perfil do utilizador
+// Irá verificar se fez alterações na pass e foto, faz alteração atraves do e-mail
+	public function atualizar_perfil()
+	{
+
+		// Valido os campos com o from validation
+
+		// Valida o Nome
+		$this->form_validation->set_rules('nome', 'Nome', 'required',
+		array(
+					'required'      => 'Não preencheu %s.',
+			)
+		);
+
+		// Valida o Ultimo nome
+		// $this->form_validation->set_rules('username', 'Username', 'required|is_unique[utilizador.username]',
+		// array(
+		// 		   'required'      => 'Não preencheu %s.',
+		// 		   'is_unique'     => 'Este %s já existe.'
+		//    )
+	    // );
+
+	//    // Valida o Email
+	//     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilizador.email]',
+	//     array(
+	// 			  'required'      => 'Não preencheu %s.',
+	// 			  'is_unique'     => 'Este %s já existe.'
+	// 	  )
+	//   	);
+
+		// Valida a Password
+		// $this->form_validation->set_rules('password', 'Password');
+
+		// // Confirma a Password
+		// $this->form_validation->set_rules('confirm', 'Password de Confirmação','matches[password]');
+
+		
+		// Guarda os valores inseridos na pagina
+		$nome = $this->input->post("nome");
+		// $username = $this->input->post("username");
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+		// $confirm = $this->input->post("confirm");
+
+
+			// Se o form validation nao tiver erros.
+			if ($this->form_validation->run() == TRUE) {
+
+				$config['upload_path']          = './assets/img/utilizadores';
+				$config['allowed_types']        = 'jpg|png';
+				$config['max_size']             = 100;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+		
+				
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('postimage');		
+			
+				$post_image = $_FILES['postimage']['name'];
+// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
+
+			if(empty($password)){
+				if($post_image == null)
+				{
+					
+	
+					$data = array (
+							'nome' => $nome,
+							// 'username' => $username,
+							// 'email' => $email,
+							// 'password' => $password,
+							// 'imagem' => $imagem
+							
+					);
+					var_dump($data);
+					$this->Privado_m->atualiza_utilizador($data,$email);
+					$data['error'] = 'Alteração do nome'; 
+					$this->load->view('templates/header');
+					$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+	
+	
+ 
+				}else{
+					$endereco ='assets/img/utilizadores/';
+					$imagem = $endereco.$post_image;
+		
+	
+					$data = array (
+						'nome' => $nome,
+						// 'username' => $username,
+						// 'email' => $email,
+						// 'password' => $password,
+						'imagem' => $imagem
+						
+				);
+				var_dump($data);
+				$this->Privado_m->atualiza_utilizador($data,$email);
+				$data['error'] = 'Alteração do nome e foto'; 
+				$this->load->view('templates/header');
+				$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+	
+	
+				}
+
+
+			}else{
+
+				if($post_image == null)
+				{
+				$passwords = password_hash($password,PASSWORD_DEFAULT);
+
+				$data = array (
+						'nome' => $nome,
+						// 'username' => $username,
+						// 'email' => $email,
+						'password' => $passwords,
+						// 'imagem' => $imagem
+						
+				);
+				var_dump($data);
+				var_dump($password);
+				$this->Privado_m->atualiza_utilizador($data,$email);
+				$data['error'] = 'Alteração de nome com pass'; 
+				$this->load->view('templates/header');
+				$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+
+
+
+			}else{
+				$endereco ='assets/img/utilizadores/';
+				$imagem = $endereco.$post_image;
+				$passwords = password_hash($password,PASSWORD_DEFAULT);
+
+				$data = array (
+					'nome' => $nome,
+					// 'username' => $username,
+					// 'email' => $email,
+					'password' => $passwords,
+					'imagem' => $imagem
+					
+			);
+			var_dump($data);
+			var_dump($password);
+			$this->Privado_m->atualiza_utilizador($data,$email);
+			$data['error'] = 'Alteração do nome e foto com pass'; 
+			$this->load->view('templates/header');
+			$this->load->view('privado/perfil',$data);
+			$this->load->view('templates/footer');
+
+
+			}
+
+			}
+				
+			} else {
+				
+				$data['erros'] = array('mensagens' => validation_errors());
+				
+				$this->load->view('templates/Header');
+				$this->load->view('privado/perfil',$data);
+				$this->load->view('templates/Footer');
+				
+				
+
+					}
+				}
+	
+
+	public function users()
+	{
+
+		$this->form_validation->set_rules('username', 'Username','required',
+			array(
+				'required'      => 'Não preencheu %s.')
+				
+			);
+
+			if ($this->form_validation->run() == TRUE) {
+
+				$tipo = $this->input->post("tipo_user");
+				$id_user = $this->input->post('id_user');
+				$data = array (
+					'tipo' => $tipo
+				);
+				
+				$this->Privado_m->atualiza_tipo($id_user,$data);
+				$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+				$data['error']="editado como sucesso";
+				$this->load->view('templates/header');
+				$this->load->view('privado/users',$data);
+				$this->load->view('templates/footer');
+			}else{
+
+				$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+				$this->load->view('templates/header');
+				$this->load->view('privado/users',$data);
+				$this->load->view('templates/footer');
+			}		
+	}
+
+	public function apaga_utilizador()
+	{
+
+		$id_user= $this->input->post('id_user');
+		$this->Privado_m->Eliminar_User($id_user);
+
+			// Carrego as views
+			$data['error']="eliminado como sucesso";
+			$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+			$this->load->view('templates/header');
+			$this->load->view('privado/users',$data);
+			$this->load->view('templates/footer');
 	}
 
 
