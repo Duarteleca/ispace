@@ -90,13 +90,15 @@ class Privado_m extends CI_Model
  
      }
 
-<<<<<<< HEAD
      // Edita equipamento
     public function atualiza_Equipamento($inputs,$id_equipamento)
     {
     $this->db->where('id', $id_equipamento);
     $this->db->update('equipamento', $inputs);
-=======
+
+    }
+
+    // Atualiza utilizador
      public function atualiza_utilizador($data,$email)
     {
         $this->db->where('email', $email);
@@ -122,7 +124,12 @@ class Privado_m extends CI_Model
     {
         $this->db->where('id',$id_user);
         $this->db->delete('utilizador');
->>>>>>> duarte
     }
- 
+    
+
+    // Insere uma nova requisição
+    public function faz_Requisicao($data)
+    {
+        $this->db->insert('requisicao', $data);
+    }
 }

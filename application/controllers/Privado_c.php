@@ -354,16 +354,6 @@ class Privado_c extends CI_Controller {
 			
 	}
 
-	// public function perfil()
-	// {
-		
-	// 	$data['salas']=$this->Privado_m->busca_salas();
-	// 	$this->load->view('templates/header');
-	// 	$this->load->view('privado/perfil',$data);
-	// 	$this->load->view('templates/footer');
-		
-	// }
-	
 	// Eliminar Equipamento
 
 	public function Apaga_Equipamento()
@@ -378,8 +368,10 @@ class Privado_c extends CI_Controller {
 		$this->load->view('templates/Footer');
 		redirect('Sala_admin', 'refresh');
 	}
-// atualizar perfil do utilizador
-// Irá verificar se fez alterações na pass e foto, faz alteração atraves do e-mail
+
+
+	// Atualiza perfil do utilizador
+	// Irá verificar se fez alterações na pass e foto, faz alteração atraves do e-mail
 	public function atualizar_perfil()
 	{
 
@@ -400,13 +392,13 @@ class Privado_c extends CI_Controller {
 		//    )
 	    // );
 
-	//    // Valida o Email
-	//     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilizador.email]',
-	//     array(
-	// 			  'required'      => 'Não preencheu %s.',
-	// 			  'is_unique'     => 'Este %s já existe.'
-	// 	  )
-	//   	);
+		//    // Valida o Email
+		//     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[utilizador.email]',
+		//     array(
+		// 			  'required'      => 'Não preencheu %s.',
+		// 			  'is_unique'     => 'Este %s já existe.'
+		// 	  )
+		//   	);
 
 		// Valida a Password
 		// $this->form_validation->set_rules('password', 'Password');
@@ -437,7 +429,9 @@ class Privado_c extends CI_Controller {
 				$this->upload->do_upload('postimage');		
 			
 				$post_image = $_FILES['postimage']['name'];
-// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
+
+
+			// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
 
 			if(empty($password)){
 				if($post_image == null)
@@ -522,8 +516,13 @@ class Privado_c extends CI_Controller {
 					'imagem' => $imagem
 					
 			);
+
+			
 			var_dump($data);
 			var_dump($password);
+
+
+
 			$this->Privado_m->atualiza_utilizador($data,$email);
 			$data['error'] = 'Alteração do nome e foto com pass'; 
 			$this->load->view('templates/header');
@@ -729,5 +728,47 @@ class Privado_c extends CI_Controller {
 			
 		}
 
+		// Fazer requisição
+
+		public function requisitar_Sala()
+		{
+			
+			// Guarda os valores inseridos 
+			$id_user = $this->input->post("id_user");
+			// $nome_user = $this->input->post("id_equipamento");
+			$id_sala= $this->input->post("id_sala");
+			$data_inicio = $this->input->post("data_inicio");
+			$data_fim = $this->input->post("disponibilidade");
+			$hora_inicio = $this->input->post("data_fim");
+			$hora_fim = $this->input->post("hora_fim");
+
+
+			$data = array(
+				'data_inicio' => $data_inicio,
+				'data_fim' => $data_fim ,
+				'hora_inicio' => $hora_inicio,
+				'hora_fim' => $hora_fim,
+				'utilizador_id' => $id_user,
+				'sala_id' => $id_sala
+				);
+						
+						
+
+			$this->Privado_m->faz_Requisicao($data);
+			$this->session->set_flashdata("Equipamento_sucesso", "Equipamento editado com sucesso!");
+	
+
+			redirect('Equipamento_admin', 'refresh');
+			
+
+
+
+
+			
+			$this->load->view('templates/header');
+			$this->load->view('publico/Salas');
+			$this->load->view('templates/footer');
+			
+		}
 
 }
