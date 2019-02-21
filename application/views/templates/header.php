@@ -88,7 +88,7 @@
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
                       <?php }else  {  ?>
                           <li class="nav-item">

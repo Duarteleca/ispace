@@ -93,7 +93,12 @@
 
                                     <div class="form-group">
                                             <label for="exampleInputEmail1">Disponibilidade</label>
-                                            <input class="form-control " type="text" name="disponibilidade" id="disponibilidade" value ="<?php echo $row['disponibilidade'] ?> ">
+                                            <select style="color:black" name="disponibilidade" placeholder="disponibilidade" class="form-control" > 
+                                                            <option value="<?php echo $row['disponibilidade'] ?>" selected><?php if( $row['disponibilidade'] == 0){echo "Indisponivel";}else{echo "Disponivel";}?></option>
+                                                           
+                                                            <option value="0">Indisponivel</option> 
+                                                            <option value="1">Disponivel</option>     
+                                                        </select>
                                         </div>
 
                                             <div class="form-group">

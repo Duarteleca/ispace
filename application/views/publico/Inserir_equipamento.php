@@ -26,7 +26,11 @@
                                             <div class="form-group"><i class="">
                                                 <span class="col-md-1 text-center"><i class=""></i></span>
                                                     <div class="col-md-8">
-                                                        <input id="disponibilidade" name="disponibilidade" type="text" placeholder="disponibilidade" class="form-control">
+                                                        <select style="color:black" name="disponibilidade" placeholder="disponibilidade" class="form-control" > 
+                                                            <option disabled value="">Disponibilidade:</option> 
+                                                            <option value="0">Indisponivel</option> 
+                                                            <option value="1">Disponivel</option>     
+                                                        </select>
                                                     </div>
                                             </div>
 
