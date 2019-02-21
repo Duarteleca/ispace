@@ -119,7 +119,7 @@ class Privado_c extends CI_Controller {
 	public function editar_Sala()
 		{
 
-			// Valida a Password
+			// Validações
 			$this->form_validation->set_rules('capacidade', 'Capacidade','required',
 			array(
 				'required'      => 'Não preencheu %s.')
@@ -368,5 +368,140 @@ class Privado_c extends CI_Controller {
 		$this->load->view('templates/Footer');
 		redirect('Sala_admin', 'refresh');
 	}
+
+
+	// Editar Equipamento
+	public function editar_Equipamento()
+		{
+
+			// Validações
+			$this->form_validation->set_rules('nome', 'Nome','required',
+			array(
+				'required'      => 'Não preencheu %s.')
+				
+			);
+			$this->form_validation->set_rules('quantidade', 'Quantidade','required',
+			array(
+				'required'      => 'Não preencheu %s.')
+				
+			);
+
+			$this->form_validation->set_rules('disponibilidade', 'Disponibilidade','required',
+			array(
+				'required'      => 'Não preencheu %s.')
+				
+			);
+
+
+
+			// Se o form validation nao tiver erros.
+			if ($this->form_validation->run() == TRUE) {
+		
+			// Configurações da imagem que foi upload
+			$config['upload_path']          = './assets/img/equipamento';
+			$config['allowed_types']        = 'jpg|png';
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 1500;
+
+			
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('postimage');		
+		
+			$post_image = $_FILES['postimage']['name'];
+
+			
+			// Se ao editar, não inserir uma nova imagem, faz o editar, sem fazer upload, caso contrario faz com imagem
+
+			if($post_image == null)
+
+			
+			{
+
+				// Guarda os valores inseridos no registo
+				$nome= $this->input->post("nome");
+				$quantidade = $this->input->post("quantidade");
+				$disponibilidade = $this->input->post("disponibilidade");
+				$id_equipamento = $this->input->post("id_equipamento");
+								
+
+				$inputs = array(
+								'nome' => $nome,
+								'quantidade' => $quantidade ,
+								'disponibilidade' => $disponibilidade
+								);
+
+				$this->Privado_m->atualiza_Equipamento($inputs,$id_equipamento);
+				$this->session->set_flashdata("Sala_sucesso", "Sala editada com sucesso!");
+				
+
+
+				redirect('Equipamento_admin', 'refresh');
+			}
+			else
+			{
+
+
+			$endereco ='assets/img/equipamento/';
+			$imagem = $endereco.$post_image;
+			
+
+			// Guarda os valores inseridos no registo
+			$nome= $this->input->post("nome");
+			$quantidade = $this->input->post("quantidade");
+			$disponibilidade = $this->input->post("disponibilidade");
+			$id_equipamento = $this->input->post("id_equipamento");
+						
+
+					$inputs = array(
+						'nome' => $nome,
+						'quantidade' => $quantidade ,
+						'disponibilidade' => $disponibilidade,
+						'imagem' => $imagem
+						);
+								
+								
+
+			$this->Privado_m->atualiza_Equipamento($inputs,$id_equipamento);
+			$this->session->set_flashdata("Equipamento_sucesso", "Equipamento editado com sucesso!");
+			
+
+			redirect('Equipamento_admin', 'refresh');
+							
+			}
+			
+			}
+			else
+			{
+
+				// Como é uma tabela, tenho de chamar esta função, para mostrar a tabela
+				$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+				
+
+
+				
+				$data['erros'] = array('mensagens' => validation_errors());
+		
+				$this->load->view('templates/Header');
+				$this->load->view('publico/Equipamento_admin', $data);
+				$this->load->view('templates/Footer');
+				
+		
+			}
+			
+		}
+// -----------------------------Requisição---------------------------------
+
+		// Mostra requisição
+		public function fazer_requisicao()
+		{
+			
+			// $data['salas']=$this->Privado_m->busca_salas();
+			$this->load->view('templates/header');
+			$this->load->view('publico/Fazer_requisicao');
+			$this->load->view('templates/footer');
+			
+		}
+
 
 }
