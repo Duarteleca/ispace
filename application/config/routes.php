@@ -59,7 +59,12 @@ $route['Perfil']= 'Privado_c/perfil';
 
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
 $route['Inserir_equipamento']= 'Privado_c/inserir_equipamento';
+$route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
 
+
+
+
+$route['Requisicao']= 'Publico_c/mostra_salas_requisicao';
 
 $route['Registo']= 'Publico_c/registar_user';
 $route['Contacto']= 'Publico_c/Contacto';

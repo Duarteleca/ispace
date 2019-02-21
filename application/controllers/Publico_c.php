@@ -291,6 +291,18 @@ class Publico_c extends CI_Controller {
 		
 	}
 
+	// Mostrar Salas requisiçoes
+	public function mostra_salas_requisicao()
+	{
+		$salas=$this->input->post('search_sala');
+		$data['salas']=$this->Publico_m->selecionarSala();
+		$data["sala"] = $this->Publico_m->busca_salas($salas);
+		
+		$this->load->view('templates/header');
+		$this->load->view('publico/Requisicao',$data);
+		$this->load->view('templates/Footer');
+		
+	}
 
 	// Mostrar equipamentos
 	public function mostra_equipamento()

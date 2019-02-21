@@ -71,17 +71,17 @@
 
                 <div class="modal-body">
                         <div class="form-group">
-                                <input class="form-control " type="text" name="id_tiposala" id="id_tiposala" value =" <?php echo $id_equipamento; ?>">
+                                <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value =" <?php echo $id_equipamento; ?>">
                         </div>
                 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nome</label>
-                                <input  class="form-control " type="text" name="capacidade" id="capacidade" value =" <?php echo $row['nome'] ?> ">
+                                <input  class="form-control " type="text" name="nome" id="nome" value =" <?php echo $row['nome'] ?> ">
                             </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Quantidade</label>
-                                    <input  class="form-control " type="text" name="nome_sala" id="nome_sala" value =" <?php echo $row['quantidade'] ?>">
+                                    <input  class="form-control " type="text" name="quantidade" id="quantidade" value =" <?php echo $row['quantidade'] ?>">
                                 </div>
 
                                     <div class="form-group">

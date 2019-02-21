@@ -89,5 +89,12 @@ class Privado_m extends CI_Model
          $this->db->insert('equipamento', $data);
  
      }
+
+     // Edita equipamento
+    public function atualiza_Equipamento($inputs,$id_equipamento)
+    {
+    $this->db->where('id', $id_equipamento);
+    $this->db->update('equipamento', $inputs);
+    }
  
 }
