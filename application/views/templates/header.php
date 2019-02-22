@@ -14,7 +14,109 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <script>
+   
+   $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable:true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    // events: 'load.php',
+    selectable:true,
+    selectHelper:true,
+    select: function(start, end, allDay)
+    {
+     var title = prompt("Enter Event Title");
+     if(title)
+     {
+      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+      $.ajax({
+      //  url:"insert.php",
+      //  type:"POST",
+       data:{title:title, start:start, end:end},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Added Successfully");
+       }
+      })
+     }
+    },
+    editable:true,
+    eventResize:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      // url:"update.php",
+      // type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function(){
+       calendar.fullCalendar('refetchEvents');
+       alert('Event Update');
+      }
+     })
+    },
+
+    eventDrop:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      // url:"update.php",
+      // type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function()
+      {
+       calendar.fullCalendar('refetchEvents');
+       alert("Event Updated");
+      }
+     });
+    },
+
+    eventClick:function(event)
+    {
+     if(confirm("Are you sure you want to remove it?"))
+     {
+      var id = event.id;
+      $.ajax({
+      //  url:"delete.php",
+      //  type:"POST",
+       data:{id:id},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Event Removed");
+       }
+      })
+     }
+    },
+
+   });
+  });
+   
+  </script>
+
+
+
+
  
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
 
@@ -64,19 +166,14 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i> Salas</a>
-                            
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamento</a>
                           </li>
-                          
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
-                           
                           </li>
-                        
-                      <?php }else if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
-
+                      <?php }else if(($this->session->userdata("usuario_logado")[0]['tipo'] == 1) || ($this->session->userdata("usuario_logado")[0]['tipo'] == 2) )  {  ?>
                       <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
@@ -86,12 +183,17 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
                           </li>
+                          <?php  if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('Privado_c/users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
+                          <?php } ?>   
                       <?php }else  {  ?>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salasre')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas_re</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
