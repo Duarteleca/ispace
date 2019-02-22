@@ -738,8 +738,8 @@ class Privado_c extends CI_Controller {
 			// $nome_user = $this->input->post("id_equipamento");
 			$id_sala= $this->input->post("id_sala");
 			$data_inicio = $this->input->post("data_inicio");
-			$data_fim = $this->input->post("disponibilidade");
-			$hora_inicio = $this->input->post("data_fim");
+			$data_fim = $this->input->post("data_fim");
+			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
 
 
@@ -758,17 +758,130 @@ class Privado_c extends CI_Controller {
 			$this->session->set_flashdata("Equipamento_sucesso", "Equipamento editado com sucesso!");
 	
 
-			redirect('Equipamento_admin', 'refresh');
+			redirect('Salas', 'refresh');
 			
 
-
-
-
-			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Salas');
 			$this->load->view('templates/footer');
 			
 		}
+
+
+
+
+		// Mostrar Salas requisitadas pelo utilizador
+		public function mostra_salas_requisicao()
+		{
+			$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
+			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
+			
+			
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicao',$data);
+			$this->load->view('templates/Footer');
+			
+		}
+
+
+		
+
+		// Mostrar equipamentos
+	public function mostra_equipamento_requisitar()
+	
+	{
+
+		$id = $this->uri->segment(2);
+            
+		if (empty($id))
+		{
+			show_404();
+		}
+		
+
+
+		$data['equipamento']=$this->Privado_m->selecionarEquipamento();
+		// $data["sala"] = $this->Privado_m->busca_equipamento($equipamento);
+	
+		$this->load->view('templates/header');
+		$this->load->view('publico/Equipamento_requisito',$data);
+		$this->load->view('templates/Footer');
+		
+	}
+
+
+	
+	// Fazer requisição
+
+	public function adicionar_Equipamento_Requisito222()
+	{
+		$id_equipamento = $this->input->post("checkname");
+		$numero = $this->input->post("numero");
+
+		
+		$numero = $this->input->post("aaa");
+
+		// if($this->input->post("sub")){
+		// 	$quantidade = $this->input->post("aa");
+		// 	var_dump($quantidade);
+		// }else{
+		// 	echo "sadas";
+		// }
+
+		// $id_fabricante = $array_fabricante[0]['id'];
+		// Guarda os valores inseridos 
+		
+		// var_dump($id_equipamento);
+		var_dump($numero);
+		
+
+		// $data = array(
+		// 	'equipamento_id' => $id_equipamento,
+		// 	'quantidade' => $quantidade
+		// 	);
+					
+					
+
+		// $this->Privado_m->adiciona_Equipamento_Requisicao($data);
+		
+		
+
+		// $this->load->view('templates/header');
+		// $this->load->view('publico/home');
+		// $this->load->view('templates/footer');
+		
+	}
+
+
+		// Fazer requisição
+
+	public function adicionar_Equipamento_Requisito()
+
+	{
+		if(isset($_POST["item_name"]))
+			{
+				// Id da reserva
+			$order_id = uniqid();
+			for($count = 0; $count < count($_POST["item_unit"]); $count++)
+			{  
+			
+			$data = array(
+				'requisicao_id'   => $order_id,
+				'quantidade' => $_POST["item_quantity"][$count], 
+				'equipamento_id'  => $_POST["item_unit"][$count]
+			
+			);
+
+			$this->Privado_m->adiciona_Equipamento_Requisicao($data);
+		}
+		$result = $statement->fetchAll();
+			if(isset($result))
+			{
+			echo 'ok';
+			}
+		}
+	}
+
+
 
 }

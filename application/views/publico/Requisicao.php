@@ -17,19 +17,31 @@
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Foto</th>
-                <th>Tipo de sala</th>
-                <th>Nome da sala</th>
-                <th>Capacidade</th>
+                <th>Data inicio</th>
+                <th>Data fim</th>
+                <th>Hora inicio</th>
+                <th>Hora fim</th>
+                <th>Utilizador id</th>
+                <th>Sala id</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sala as $row){?>
+            <?php foreach ($salas_requisitas as $row){?>
+            
+            <?php $id_user = $row['utilizador_id'];  ?>
+      
+           
+            
                 <tr>
-                    <td><img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
-                    <td class="texto ">   <?php echo $row['tipo_sala'] ?></td>
-                    <td class="texto ">   <?php echo $row['nome_sala'] ?></td>
-                    <td class="texto ">    <?php echo $row['capacidade'] ?></td>   
+                    <td class="texto ">   <?php echo $row['data_inicio'] ?></td>
+                    <td class="texto ">   <?php echo $row['data_fim'] ?></td>
+                    <td class="texto ">   <?php echo $row['hora_inicio'] ?></td>
+                    <td class="texto ">   <?php echo $row['hora_fim'] ?></td>
+                    <td class="texto ">   <?php echo $row['utilizador_id'] ?></td>
+                    <td class="texto ">    <?php echo $row['sala_id'] ?></td>
+
+                    <td class="texto "><a  href="<?php echo base_url('Privado_c/mostra_equipamento_requisitar/'.$row['id'])?>"><button id="" class="btn btn-info" data-title="Insert">Adicionar Equipamento</button></a></td>
                 </tr>
             <?php } ?>
         </tbody>

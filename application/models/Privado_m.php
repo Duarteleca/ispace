@@ -11,9 +11,10 @@ class Privado_m extends CI_Model
     public function busca_salas($slug = false)
     {
         if ($slug === false) {
-            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
+            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem",requisicao.data_inico,requisicao.data_fim,requisicao.hora_inico,requisicao.hora_fim,requisicao.utilizador_id,requisicao.sala_id');
             $this->db->from('sala');
             $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
+            $this->db->join('requisicao', 'requisicao.id = sala.id');
             $query = $this->db->get();
             return $query->result_array();
         }
@@ -132,4 +133,23 @@ class Privado_m extends CI_Model
     {
         $this->db->insert('requisicao', $data);
     }
-}
+
+    // Pesquisa as salas requisitadas por id do user
+    public function selecionar_salas_requisitadas($user_id_salas)
+    {
+       
+         $this->db->where('utilizador_id',$user_id_salas);
+         $inforeq = $this->db->get('requisicao');
+         return $inforeq->result_array();
+     }
+
+     
+ 
+     // Insere uma nova requisição
+    public function adiciona_Equipamento_Requisicao($data)
+    {
+        $this->db->insert('requisicao_has_equipamento', $data);
+    }
+
+
+    }
