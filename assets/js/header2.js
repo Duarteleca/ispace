@@ -6,9 +6,15 @@ $("#menu-toggle").click(function(e) {
 
 
 
-$( function() {
+$(function() {
     $( "#datepicker" ).datepicker();
 } );
 
+$(function() {
+    $( "#datepicker2" ).datepicker();
+} );
 
 
+$(function() {
+    $('#timepicker').timepicker();
+} );

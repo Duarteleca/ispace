@@ -1,5 +1,4 @@
 
-
 <div class="container mostrasalas">
 <br><br><br>
 
@@ -30,8 +29,6 @@
                 <th>Tipo de sala</th>
                 <th>Nome da sala</th>
                 <th>Capacidade</th>
-                
-                
             </tr>
         </thead>
         <tbody>
@@ -77,11 +74,17 @@
 <div class="modal fade"  id="myModalrequisitar<?php echo $id_sala;?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
-                <?php echo form_open_multipart('Privado_c/editar_Equipamento') ?>
+                <?php echo form_open_multipart('Privado_c/requisitar_Sala') ?>
                           <div class="modal-header">
                             <h4 class="modal-title custom_align" id="Heading">Requisitar Sala</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>    
                           </div>
+                          
+                          <div class="modal-body">
+                        <div class="form-group">
+                                <input class="form-control " type="text" name="id_user" id="id_user" value="<?php echo $this->session->userdata("usuario_logado")[0]['id'] ?>">
+                        </div>
+
 
                 <div class="modal-body">
                         <div class="form-group">
@@ -109,28 +112,33 @@
 
                                                             }
                                                         ?>">
-                                            </div>
+                                            <!-- </div>
 
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Dia Incio</label>
                                                             <input type="text" id="datepicker">
                                                             <label for="exampleInputEmail1">Dia Fim</label>
-                                                            <input type="text" id="datepicker">
-                                                        </div>
+                                                            <input type="text" id="datepicker2">
+                                                        </div> -->
+                                                        
 
 
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Hora Fim</label>
-                                                            <input disabled class="form-control " type="text" name="capacidade" id="capacidade" value ="<?php echo $row['capacidade'] ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Equipamentos</label>
-                                                            <input disabled class="form-control " type="text" name="capacidade" id="capacidade" value ="<?php echo $row['capacidade'] ?>">
+                                                        <div id="calendariomain" class="form-group">
+                                                            <label for="exampleInputEmail1">Dia Incio</label>
+                                                            <input id="calendario" type= "date" name="data_inicio" value="<?php echo date('Y-m-d'); ?>"  max="">
+                                                            <label for="exampleInputEmail1">Dia Fim</label>
+                                                            <input id="calendario" type= "date" name="data_fim" value="<?php echo date('Y-m-d'); ?>" min="2019-01-01" max="">
                                                         </div> 
 
-                                                        
-                                                                
-                                                               
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Hora Incio</label>
+                                                            <input class="form-control " type="text" placeholder="00:00 PM" name="hora_inicio" id="capacidade" value ="">
+                                                            <label for="exampleInputEmail1">Hora Fim</label>
+                                                            <input class="form-control " type="text" placeholder="00:00 AM" name="hora_fim" id="capacidade" value ="">
+                                                        </div> 
+
+
+      
                                                     <div class="modal-footer ">
                                                         <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
                                                     </div>
@@ -150,3 +158,4 @@
     </table>
     <?php }  ?>
 </div>
+

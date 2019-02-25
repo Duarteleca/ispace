@@ -83,7 +83,13 @@
 
   <script src="<?php echo base_url('assets/js/header2.js')?>"></script>
 
+<<<<<<< HEAD
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+=======
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+>>>>>>> 83d4cbbc034274f33ccf3f4b32bf5c208baf44ce
