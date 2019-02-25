@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> 'mysql:host=localhost; dbname=ispace; charset=utf8',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'mysql',
+	 'password' => 'mysql',
 	// 'password' => '',
 	'database' => 'ispace',
 	'dbdriver' => 'pdo',

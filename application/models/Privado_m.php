@@ -90,13 +90,46 @@ class Privado_m extends CI_Model
  
      }
 
+     // Edita equipamento
+    public function atualiza_Equipamento($inputs,$id_equipamento)
+    {
+    $this->db->where('id', $id_equipamento);
+    $this->db->update('equipamento', $inputs);
 
-     
+    }
 
+    // Atualiza utilizador
      public function atualiza_utilizador($data,$email)
     {
         $this->db->where('email', $email);
         return $this->db->update('utilizador', $data);
     }
- 
+
+
+    public function Selecionar_Utilizadores()
+    { 
+            $query=$this->db->get('utilizador');
+            return $query->result_array();         
+    }
+
+    
+    public function atualiza_tipo($id_user,$data)
+    {
+        $this->db->where('id', $id_user);
+        return $this->db->update('utilizador', $data);
+    }
+
+
+    public function Eliminar_User($id_user)
+    {
+        $this->db->where('id',$id_user);
+        $this->db->delete('utilizador');
+    }
+    
+
+    // Insere uma nova requisição
+    public function faz_Requisicao($data)
+    {
+        $this->db->insert('requisicao', $data);
+    }
 }

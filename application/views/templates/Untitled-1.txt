@@ -1,0 +1,81 @@
+
+<div class="container ">
+    <div class="row ">
+
+ 
+ 
+ <?php echo validation_errors(); ?>
+  
+ <?php echo form_open('Date_c/editar/'.$row['id']); ?>
+ 
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nome Sala</label>
+                                    <input disabled class="form-control " type="text" name="nome_sala" id="nome_sala" value ="<?php echo $row['nome'] ?>">
+                                </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Capacidade</label>
+                                        <input disabled class="form-control " type="text" name="capacidade" id="capacidade" value ="<?php echo $row['capacidade'] ?>">
+                                    </div>
+
+                                        <div class="form-group">
+                                                <label for="exampleInputEmail1">Disponibilidade</label>
+                                                <input disabled class="form-control " type="text" name="disponibilidade" id="disponibilidade" 
+                                                value ="<?php
+                                                            if($row['disponibilidade']==1){
+                                                            echo "Disponível";
+                                                            }
+                                                            else{
+                                                            echo "Indisponível";
+
+                                                            }
+                                                        ?>">
+                                            </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Dia Incio</label>
+                                                            <input type="text" name="datetimes" />
+                                                            <label for="exampleInputEmail1">Dia Fim</label>
+                                                            <input type="text" id="datepicker">
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Hora Fim</label>
+                                                            <input disabled class="form-control " type="text" name="capacidade" id="capacidade" value ="<?php echo $row['capacidade'] ?>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Equipamentos</label>
+                                                            <input disabled class="form-control " type="text" name="capacidade" id="capacidade" value ="<?php echo $row['capacidade'] ?>">
+                                                        </div>
+    </div>
+        <div class="form-group col-md-6">
+             <input type="submit" name="submit" value="Editar" class="btn btn-primary" />
+             </div>
+ </form>
+
+</div>
+</div>
+
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
+<script>
+$ ('input[name="datetimes"]').daterangepicker(
+    {
+    timePicker: true,
+    minDate: moment(),
+    startDate: moment().startOf('hour'),
+    endDate: moment().startOf('hour').add(32, 'hour'),
+    locale: {
+      format: 'M/DD hh:mm A'
+    }
+  }
+);
+
+</script>

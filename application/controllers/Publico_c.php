@@ -283,6 +283,7 @@ class Publico_c extends CI_Controller {
 	{
 		$salas=$this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
+		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
 		$data["sala"] = $this->Publico_m->busca_salas($salas);
 		
 		$this->load->view('templates/header');
@@ -291,6 +292,18 @@ class Publico_c extends CI_Controller {
 		
 	}
 
+	// Mostrar Salas requisiçoes
+	public function mostra_salas_requisicao()
+	{
+		$salas=$this->input->post('search_sala');
+		$data['salas']=$this->Publico_m->selecionarSala();
+		$data["sala"] = $this->Publico_m->busca_salas($salas);
+		
+		$this->load->view('templates/header');
+		$this->load->view('publico/Requisicao',$data);
+		$this->load->view('templates/Footer');
+		
+	}
 
 	// Mostrar equipamentos
 	public function mostra_equipamento()
@@ -346,6 +359,22 @@ class Publico_c extends CI_Controller {
 		  redirect('home', 'refresh');
 	  }
 
+	  public function requisitar_Equipamento(){
+
+		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
+
+	  }
 	
+
+	  public function mostras_equipamentos()
+	{
+
+		$data['equipamentos']=$this->Publico_m->selecionarEquipamento();
+		print_r($data);
+		$this->load->view('templates/header');
+		$this->load->view('publico/Salas',$data);
+		$this->load->view('templates/Footer');
+		
+	}
 
 }

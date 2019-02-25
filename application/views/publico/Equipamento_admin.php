@@ -55,6 +55,7 @@
                         <td>                 
                             <!-- Butões para abrir o modal -->  
                             <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" href="#myModaleditar<?php echo $id_equipamento;?>" ><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger btn-xs"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_equipamento;?>" ><span class="fas fa-trash-alt"></span></button>
                             
                             </td>        
                         
@@ -70,22 +71,27 @@
 
                 <div class="modal-body">
                         <div class="form-group">
-                                <input class="form-control " type="text" name="id_tiposala" id="id_tiposala" value =" <?php echo $id_equipamento; ?>">
+                                <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value =" <?php echo $id_equipamento; ?>">
                         </div>
                 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nome</label>
-                                <input  class="form-control " type="text" name="capacidade" id="capacidade" value =" <?php echo $row['nome'] ?> ">
+                                <input  class="form-control " type="text" name="nome" id="nome" value =" <?php echo $row['nome'] ?> ">
                             </div>
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Quantidade</label>
-                                    <input  class="form-control " type="text" name="nome_sala" id="nome_sala" value =" <?php echo $row['quantidade'] ?>">
+                                    <input  class="form-control " type="text" name="quantidade" id="quantidade" value =" <?php echo $row['quantidade'] ?>">
                                 </div>
 
                                     <div class="form-group">
                                             <label for="exampleInputEmail1">Disponibilidade</label>
-                                            <input class="form-control " type="text" name="disponibilidade" id="disponibilidade" value ="<?php echo $row['disponibilidade'] ?> ">
+                                            <select style="color:black" name="disponibilidade" placeholder="disponibilidade" class="form-control" > 
+                                                            <option value="<?php echo $row['disponibilidade'] ?>" selected><?php if( $row['disponibilidade'] == 0){echo "Indisponivel";}else{echo "Disponivel";}?></option>
+                                                           
+                                                            <option value="0">Indisponivel</option> 
+                                                            <option value="1">Disponivel</option>     
+                                                        </select>
                                         </div>
 
                                             <div class="form-group">
@@ -103,6 +109,34 @@
             </div>
           </div>
                             
+                         <!-- Modal Eliminar -->
+                <div id="myModaleliminar<?php echo $id_equipamento;?>" class="modal fade">
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+
+                            <?php echo form_open('Privado_c/Apaga_Equipamento') ?>
+
+                                <div class="modal-header">
+                                    <div class="icon-box">
+                                        <i class="material-icons">&#xE5CD;</i>
+                                    </div>				
+                                        <h4 class="modal-title">Tem a certeza?</h4>	
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                        <div class="form-group">
+                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value =" <?php echo $id_equipamento; ?>">
+                                        </div>
+                                            <div class="modal-body">
+                                                <p>Quer mesmo apagar este equipamento? Este processo não pode ser revertido.</p>
+                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                            <?php echo form_close() ?>
+                        </div>
+                    </div>
+                </div> 
 
                         <?php }  ?>
     

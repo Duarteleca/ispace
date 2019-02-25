@@ -11,27 +11,27 @@
             <?php echo $erros['mensagens'];  ?>
             
             <?php endif;?>
-                <?php echo form_open_multipart('Privado_c/perfil') ?>
+                <?php echo form_open_multipart('Privado_c/atualizar_perfil') ?>
                     <fieldset>
-                        <legend class="text-center header">Editar Perfil</legend>
+                        <legend class="text-center header">Alterar Perfil</legend>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
                             <div class="col-md-8">
-                                <input  name="name" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
+                                <input  name="nome" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" placeholder="username" class="form-control">
+                                <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" readonly placeholder="username" class="form-control">
                             </div>
                         </div>
                      
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>" placeholder="Endereço de Email" class="form-control">
+                                <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>" readonly placeholder="Endereço de Email" class="form-control">
                             </div>
                         </div>
                    
@@ -40,45 +40,61 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="password" name="password" type="text" placeholder="Password" class="form-control">
+                                <input id="password" name="password" type="password" placeholder="Nova Password" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                             <div class="col-md-8">
-                                <input id="Confirm" name="confirmar" type="text" placeholder="Confirmar Password" class="form-control">
+                                <input id="confirm" name="confirm" type="password" placeholder="Repetir Nova Password" class="form-control">
                             </div>
                         </div>
-                        
+                        <div class="form-group"><i class="">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                                <div class="col-md-8">
+                                    <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
+                                    <input type="file" name="postimage" id="fileToUpload">
+                                </div>
+                        </div>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                             <div class="col-md-8">
-                                <img height="100px" width="100px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
-                                <input type="file" name="postimage" id="fileToUpload">
+                            <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmação de Password" class="form-control">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-                            <div class="col-md-8">
-                                <input id="Confirm" name="confirm_altera" type="password" placeholder="Password confirmação" class="form-control">
-                            </div>
-                        </div>
-
-
-                        
         
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Enviar">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Alterar">
                             </div>
                         </div>
                     </fieldset>
                     <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
-
+                    <?php if($this->session->flashdata("Registo_sucess")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
+    <?php endif ?>
       
                 <?php echo form_close() ?>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Password diferente");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+</script>

@@ -14,11 +14,144 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
- 
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      
+       
+
+
+
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
+ 
+
+
+
+<script type="text/javascript">
+$('.date-picker').datepicker();
+
+ var date_last_clicked = null;
+
+$('#calendar').fullCalendar({
+
+    editable:true,
+    eventOverlap:false,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+   
+    selectable:true,
+    selectHelper:true,
+    eventSources: [
+    {
+        events: function(start, end, timezone, callback) {
+            $.ajax({
+                url: '<?php echo base_url() ?>Date_c/get_events',
+                dataType: 'json',
+                data: {                
+                    start: start.unix(),
+                    end: end.unix()
+                },
+                success: function(msg) {
+                    var events = msg.events;
+                    callback(events);
+                    
+                }
+            });
+       }
+    },
+    ],
+    dayClick: function(date, jsEvent, view) {
+        date_last_clicked = $(this);
+        // $(this).css('background-color', '#bed7f3');
+        $('#addModal input[name=start_date]').val(moment(date).format('YYYY-MM-DD'));
+        $('#addModal').modal();
+    },
+    eventClick: function(event, jsEvent, view) {
+        if(event.id==2) {
+
+        }else{
+
+          $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+}},
+ 
+        eventDrop:function(event)
+    {
+        
+        if(event.id==2) {
+
+}else{
+        $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+    }},
+
+     eventResize:function(event)
+    {
+        $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+    },
+
+
+
+        eventMouseover: function(calEvent, jsEvent, view){
+            if(event.id==2) {
+
+                }else{
+        var tooltip = '<div class="event-tooltip">' + calEvent.description +'<br>'+ 'data de inicio: '+ calEvent.start.format('YYYY-MM-DD') + '</div>';
+        $("body").append(tooltip);
+
+        $(this).mouseover(function(e) {
+            $(this).css('z-index', 10000);
+            $('.event-tooltip').fadeIn('500');
+            $('.event-tooltip').fadeTo('10', 1.9);
+        }).mousemove(function(e) {
+            $('.event-tooltip').css('top', e.pageY + 10);
+            $('.event-tooltip').css('left', e.pageX + 20);
+        });
+    }},
+
+ eventMouseout: function(calEvent, jsEvent) {
+    if(event.id==2) {
+
+}else{
+        $(this).css('z-index', 8);
+        $('.event-tooltip').remove();
+    }},
+
+});
+
+
+</script>
+
+
 
 
 </head>
@@ -65,10 +198,11 @@
                             <a class="nav-link" href="<?php echo base_url('home')?>"> <i class="fab fa-font-awesome-flag fa-lg"></i> Inicial <span class="sr-only">(current)</span></a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamento</a>
+                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i> Salas</a>
+                            
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i> Salas</a>
+                            <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamento</a>
                           </li>
                           
                           <li class="nav-item">
@@ -88,17 +222,20 @@
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
                       <?php }else  {  ?>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Salasre')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas_re</a>
+                          </li>
+                          <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
+                            <a class="nav-link" href="<?php echo base_url('Requisicao')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
@@ -123,7 +260,7 @@
                                 <?php
                                         if($this->session->userdata("usuario_logado")){                                     
                                             echo '  
-                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username']?> <img height="40px" width="40px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>"> <?php '</a></li>';
+                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username']?> <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>"> <?php '</a></li>';
                                         }
                                 ?>
                             </a>
@@ -144,8 +281,8 @@
                                                 <input class="form-control login" type="password" name="password" placeholder="Password.."/>
                                                 <br>
                                                 <input class="btn btn-primary" type="submit" name="submit" value="login" /> 
-                                                <?php echo form_close() ?>
                                                 <br>
+                                            <?php echo form_close() ?>
                                                 <a href="<?php echo base_url('Registo')?>">Registar</a>
                                             
                                                 <br>
