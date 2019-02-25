@@ -14,112 +14,144 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      
+       
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-  <script>
-   
-   $(document).ready(function() {
-   var calendar = $('#calendar').fullCalendar({
+         <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
+ 
+
+
+
+<script type="text/javascript">
+$('.date-picker').datepicker();
+
+ var date_last_clicked = null;
+
+$('#calendar').fullCalendar({
+
     editable:true,
+    eventOverlap:false,
     header:{
      left:'prev,next today',
      center:'title',
      right:'month,agendaWeek,agendaDay'
     },
-    // events: 'load.php',
+   
     selectable:true,
     selectHelper:true,
-    select: function(start, end, allDay)
+    eventSources: [
     {
-     var title = prompt("Enter Event Title");
-     if(title)
-     {
-      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-      $.ajax({
-      //  url:"insert.php",
-      //  type:"POST",
-       data:{title:title, start:start, end:end},
-       success:function()
-       {
-        calendar.fullCalendar('refetchEvents');
-        alert("Added Successfully");
+        events: function(start, end, timezone, callback) {
+            $.ajax({
+                url: '<?php echo base_url() ?>Date_c/get_events',
+                dataType: 'json',
+                data: {                
+                    start: start.unix(),
+                    end: end.unix()
+                },
+                success: function(msg) {
+                    var events = msg.events;
+                    callback(events);
+                    
+                }
+            });
        }
-      })
-     }
     },
-    editable:true,
-    eventResize:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      // url:"update.php",
-      // type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function(){
-       calendar.fullCalendar('refetchEvents');
-       alert('Event Update');
-      }
-     })
+    ],
+    dayClick: function(date, jsEvent, view) {
+        date_last_clicked = $(this);
+        // $(this).css('background-color', '#bed7f3');
+        $('#addModal input[name=start_date]').val(moment(date).format('YYYY-MM-DD'));
+        $('#addModal').modal();
     },
+    eventClick: function(event, jsEvent, view) {
+        if(event.id==2) {
 
-    eventDrop:function(event)
-    {
-     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-     var title = event.title;
-     var id = event.id;
-     $.ajax({
-      // url:"update.php",
-      // type:"POST",
-      data:{title:title, start:start, end:end, id:id},
-      success:function()
-      {
-       calendar.fullCalendar('refetchEvents');
-       alert("Event Updated");
-      }
-     });
-    },
+        }else{
 
-    eventClick:function(event)
-    {
-     if(confirm("Are you sure you want to remove it?"))
-     {
-      var id = event.id;
-      $.ajax({
-      //  url:"delete.php",
-      //  type:"POST",
-       data:{id:id},
-       success:function()
-       {
-        calendar.fullCalendar('refetchEvents');
-        alert("Event Removed");
-       }
-      })
-     }
-    },
-
-   });
-  });
-   
-  </script>
-
-
-
-
+          $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+}},
  
-         <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
-         
+        eventDrop:function(event)
+    {
+        
+        if(event.id==2) {
+
+}else{
+        $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+    }},
+
+     eventResize:function(event)
+    {
+        $('#name').val(event.title);
+          $('#description').val(event.description);
+          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
+          if(event.end) {
+            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
+          } else {
+            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
+          }
+          $('#event_id').val(event.id);
+          $('#editModal').modal();
+    },
+
+
+
+        eventMouseover: function(calEvent, jsEvent, view){
+            if(event.id==2) {
+
+                }else{
+        var tooltip = '<div class="event-tooltip">' + calEvent.description +'<br>'+ 'data de inicio: '+ calEvent.start.format('YYYY-MM-DD') + '</div>';
+        $("body").append(tooltip);
+
+        $(this).mouseover(function(e) {
+            $(this).css('z-index', 10000);
+            $('.event-tooltip').fadeIn('500');
+            $('.event-tooltip').fadeTo('10', 1.9);
+        }).mousemove(function(e) {
+            $('.event-tooltip').css('top', e.pageY + 10);
+            $('.event-tooltip').css('left', e.pageX + 20);
+        });
+    }},
+
+ eventMouseout: function(calEvent, jsEvent) {
+    if(event.id==2) {
+
+}else{
+        $(this).css('z-index', 8);
+        $('.event-tooltip').remove();
+    }},
+
+});
+
+
+</script>
+
+
 
 
 </head>
@@ -167,14 +199,19 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i> Salas</a>
+                            
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamento</a>
                           </li>
+                          
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
+                           
                           </li>
-                      <?php }else if(($this->session->userdata("usuario_logado")[0]['tipo'] == 1) || ($this->session->userdata("usuario_logado")[0]['tipo'] == 2) )  {  ?>
+                        
+                      <?php }else if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
+
                       <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
@@ -184,11 +221,9 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
                           </li>
-                          <?php  if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Privado_c/users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
-                          <?php } ?>   
                       <?php }else  {  ?>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>

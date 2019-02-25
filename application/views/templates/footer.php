@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
 					
-					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="<?php echo base_url('home')?>" target="_blank">iSpaces</a></p>
+					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
 				</div>
 				</hr>
 			</div>	
@@ -63,7 +63,7 @@
 </html>
 
 
-<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -83,13 +83,6 @@
 
   <script src="<?php echo base_url('assets/js/header2.js')?>"></script>
 
-<<<<<<< HEAD
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-=======
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
->>>>>>> 83d4cbbc034274f33ccf3f4b32bf5c208baf44ce

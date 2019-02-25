@@ -69,7 +69,7 @@
                     <td class="texto ">   <?php echo $row['tipo_sala'] ?></td>
                     <td class="texto ">   <?php echo $row['nome_sala'] ?></td>
                     <td class="texto ">    <?php echo $row['capacidade'] ?></td>
-                    <td class="texto ">  <a href="<?php echo base_url('Date_c/editar/'.$row['tipoid']); ?>"> <button class="btn btn-success">Requisitar</button></a></td>
+                    <td class="texto ">  <a href="<?php echo base_url('calendar/index/'.$row['tipoid']); ?>"> <button class="btn btn-success">Requisitar</button></a></td>
                     
 
 

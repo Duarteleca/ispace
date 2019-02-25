@@ -52,9 +52,8 @@
                             <?php
                                 if($row['tipo']==1){
                                   echo "Admin";
-                                }else if($row['tipo']==2){
-                                    echo "Admin temporario";
-                                  }else{
+                                }
+                                else{
                                   echo "Utilizador";
 
                                 }
@@ -62,11 +61,11 @@
                         </td>
                         <td>   
                         <?php
-                                if($row['tipo']==1){ }else{?>           
+                                if($row['id']==3){ }else{?>           
                             <!-- Butões para abrir o modal -->  
                             <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" href="#myModaleditar<?php echo $id_utilizador;?>" ><span class="fas fa-edit"></span></button>
                             
-                            <?php if($row['tipo']==2){ }else{?>  
+                            <?php if($row['tipo']==1){ }else{?>  
                             <button class="btn btn-danger btn-xs"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_utilizador;?>" ><span class="fas fa-trash-alt"></span></button>
                            <?php }}?>
                             </td>        
@@ -110,7 +109,7 @@
                                     <select style="color:black" name="tipo_user" required class="form-control" > 
                                         <option value="<?php echo $row['tipo'] ; ?>" selected ><?php if( $row['tipo'] == 0){echo "Utilizador";}else{echo "Adminstrador";}?></option> 
                                         <option value="0">Utilizador</option> 
-                                        <option value="2">Administrador</option>     
+                                        <option value="1">Administrador</option>     
                                     </select>
 
                                 </div>

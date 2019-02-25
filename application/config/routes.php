@@ -55,15 +55,15 @@ $route['Salas']= 'Publico_c/mostra_salas';
 $route['Sala_admin']= 'Privado_c/mostra_salas';
 $route['Inserir_sala']= 'Privado_c/inserir_sala';
 $route['Perfil']= 'Privado_c/atualizar_perfil';
-// $route['Users']= 'Privado_c/users';
+$route['Users']= 'Privado_c/users';
 
 
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
 $route['Inserir_equipamento']= 'Privado_c/inserir_equipamento';
 
-
-$route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
 $route['Salasre']= 'Date_c/salar';
+$route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
+
 
 
 
