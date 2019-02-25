@@ -11,20 +11,20 @@
             <?php echo $erros['mensagens'];  ?>
             
             <?php endif;?>
-                <?php echo form_open('Privado_c/perfil') ?>
+                <?php echo form_open_multipart('Privado_c/perfil') ?>
                     <fieldset>
-                        <legend class="text-center header">Contacte-nos!</legend>
+                        <legend class="text-center header">Editar Perfil</legend>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
                             <div class="col-md-8">
-                                <input  name="assunto" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
+                                <input  name="name" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="name" name="name" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" placeholder="username" class="form-control">
+                                <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" placeholder="username" class="form-control">
                             </div>
                         </div>
                      
@@ -40,22 +40,33 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+                                <input id="password" name="password" type="text" placeholder="Password" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                             <div class="col-md-8">
-                                <input id="Confirm" name="confirm" type="password" placeholder="Confirmar Password" class="form-control">
+                                <input id="Confirm" name="confirmar" type="text" placeholder="Confirmar Password" class="form-control">
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                             <div class="col-md-8">
-                                <input id="Confirm" name="confirm" type="password" placeholder="Password confirmação" class="form-control">
+                                <img height="100px" width="100px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
+                                <input type="file" name="postimage" id="fileToUpload">
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <div class="col-md-8">
+                                <input id="Confirm" name="confirm_altera" type="password" placeholder="Password confirmação" class="form-control">
+                            </div>
+                        </div>
+
+
+                        
         
                         <div class="form-group">
                             <div class="col-md-12 text-center">

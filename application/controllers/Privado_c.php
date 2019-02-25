@@ -364,12 +364,116 @@ class Privado_c extends CI_Controller {
 
 	public function perfil()
 	{
+
+
+
+		// Valido os campos com o from validation
+
+
+		// Valida o Nome
+		$this->form_validation->set_rules('name', 'Nome', 'required',
+		array(
+					'required'      => 'Não preencheu %s.',
+			)
+		);
+
+		// Valida o Ultimo nome
 		
-		$data['salas']=$this->Privado_m->busca_salas();
-		$this->load->view('templates/header');
-		$this->load->view('privado/perfil',$data);
-		$this->load->view('templates/footer');
+
+	   // Valida o Email
+	    $this->form_validation->set_rules('email', 'Email', 'required|valid_email',
+	    array(
+				  'required'      => 'Não preencheu %s.',
+				
+		  )
+	  	);
+
+	
+
+		$this->form_validation->set_rules('confirm_altera', 'Password de alt','required',
+			array('required' => 'Você tem de preencher campo %s.')
+			);
+
 		
+
+		// Guarda os valores inseridos no registo
+		$nome = $this->input->post("name");
+		$username = $this->input->post("username");
+		$email = $this->input->post("email");
+		$password = $this->input->post("password");
+		$confirm = $this->input->post("confirm");
+		$confirm_altera = $this->input->post("confirm_altera");
+
+
+			// Se o form validation nao tiver erros.
+			if ($this->form_validation->run() == TRUE) {
+			$pass_base=$this->session->userdata("usuario_logado")[0]['password'];
+				if(password_verify($confirm_altera,$pass_base)){
+
+				$config['upload_path']          = './assets/img/utilizadores';
+				$config['allowed_types']        = 'jpg|png';
+				$config['max_size']             = 100;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+		
+				
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('postimage');		
+			
+				$post_image = $_FILES['postimage']['name'];
+				
+				$endereco ='assets/img/utilizadores/';
+				
+				$imagem = $endereco.$post_image;
+				
+				
+				$password = password_hash($password,PASSWORD_DEFAULT);
+
+
+				$data = array (
+						'nome' => $nome,
+						'username' => $username,
+						'email' => $email,
+						// 'password' => $password,
+						// 'imagem' => $imagem
+						
+				);
+				
+
+				var_dump($data);
+
+				$this->load->model("Privado_m");
+				$this->Privado_m->atualiza_utilizador($data,$email);
+				$data['error'] = 'Enviado com Sucesso';
+				
+				$this->load->view('templates/header');
+				$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+
+				}else{
+
+					$data['error'] = 'pass errada';
+
+					$this->load->view('templates/header');
+				$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+
+				}
+
+				
+
+				
+				
+
+			} else {
+				$data['erros'] = array('mensagens' => validation_errors());
+				
+				$this->load->view('templates/header');
+				$this->load->view('privado/perfil',$data);
+					$this->load->view('templates/footer');
+				
+
+			}	
 	}
 	
 

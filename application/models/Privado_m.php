@@ -89,5 +89,14 @@ class Privado_m extends CI_Model
          $this->db->insert('equipamento', $data);
  
      }
+
+
+     
+
+     public function atualiza_utilizador($data,$email)
+    {
+        $this->db->where('email', $email);
+        return $this->db->update('utilizador', $data);
+    }
  
 }
