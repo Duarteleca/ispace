@@ -66,7 +66,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
  <script>
   $(document).ready(function() {

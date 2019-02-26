@@ -112,14 +112,27 @@
 
                                                             }
                                                         ?>">
-                                            <!-- </div>
+                                            </div>
 
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Dia Incio</label>
-                                                            <input type="text" id="datepicker">
-                                                            <label for="exampleInputEmail1">Dia Fim</label>
-                                                            <input type="text" id="datepicker2">
-                                                        </div> -->
+                                                            <label for="from">De: </label>
+                                                            <input type="text" id="from" name="from">
+                                                            <label for="to"> até </label>
+                                                            <input type="text" id="to" name="to">
+                                                            
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                        <span>
+                                                        <label for="from">Hora de inicio: <input type="text" id="timepicker"  width="100"/> Hora de Fim: <input type="text" id="timepicker1"  width="100" /></label>
+                                                        
+                                                            <label for="to">  </label>
+                                                            
+                                                            </span>
+
+                                                        </div>
+
+
                                                         
 
 
@@ -158,4 +171,38 @@
     </table>
     <?php }  ?>
 </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    
+    <script>
+        $('#timepicker').timepicker();
+        $('#timepicker1').timepicker();
+    </script>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    var dateToday = new Date();
+var dates = $("#from, #to").datepicker({
+    defaultDate: "today",
+    changeMonth: true,
+    numberOfMonths: 2,
+    minDate: dateToday,
+    onSelect: function(selectedDate) {
+        var option = this.id == "from" ? "minDate" : "maxDate",
+            instance = $(this).data("datepicker"),
+            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+        dates.not(this).datepicker("option", option, date);
+    }
+});
+  });
+</script>
 
