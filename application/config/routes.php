@@ -71,7 +71,7 @@ $route['Requisicao']= 'Privado_c/mostra_salas_requisicao';
 $route['Equipamento_requisito']= 'Privado_c/mostra_equipamento_requisitar/$1';
 
 $route['adicionar_Equipamento_Requisito']= 'Privado_c/adicionar_Equipamento_Requisito';
-
+$route['Requisicoes_admin']= 'Privado_c/mostra_Requisicoes_admin';
 
 
 
