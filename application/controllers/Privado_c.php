@@ -443,7 +443,7 @@ class Privado_c extends CI_Controller {
 							// 'imagem' => $imagem
 							
 					);
-					var_dump($data);
+		
 					$this->Privado_m->atualiza_utilizador($data,$email);
 					$data['error'] = 'Alteração do nome'; 
 					$this->load->view('templates/header');
@@ -465,7 +465,6 @@ class Privado_c extends CI_Controller {
 						'imagem' => $imagem
 						
 				);
-				var_dump($data);
 				$this->Privado_m->atualiza_utilizador($data,$email);
 				$data['error'] = 'Alteração do nome e foto'; 
 				$this->load->view('templates/header');
@@ -490,8 +489,6 @@ class Privado_c extends CI_Controller {
 						// 'imagem' => $imagem
 						
 				);
-				var_dump($data);
-				var_dump($password);
 				$this->Privado_m->atualiza_utilizador($data,$email);
 				$data['error'] = 'Alteração de nome com pass'; 
 				$this->load->view('templates/header');
@@ -514,9 +511,6 @@ class Privado_c extends CI_Controller {
 					
 			);
 
-			
-			var_dump($data);
-			var_dump($password);
 
 
 
@@ -770,7 +764,6 @@ class Privado_c extends CI_Controller {
 			$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
 			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
 			
-			
 			// Tenho de colocar a consulta de equipamentos para mostra na list drop dentro do modal
 			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
 			
@@ -813,22 +806,15 @@ class Privado_c extends CI_Controller {
 	{
 		$nome_Equipamento = $this->input->post("procuraEquipamento");
 		$quantidade_Equipamento = $this->input->post("quantidade");
-		
-
-		var_dump($nome_Equipamento);
-		var_dump($quantidade_Equipamento);
-
 
 		// Ir à base de dados buscae a quantidade do equipamento inserido
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
 
-		var_dump($array_Equipamento);
-
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
-		var_dump($quantidade_Atual);
+
 
 		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 
@@ -836,8 +822,6 @@ class Privado_c extends CI_Controller {
 
 		if($quantidade_Equipamento<= $quantidade_Atual){
 				$quantidade_Final = $quantidade_Atual - $quantidade_Equipamento;
-				var_dump($quantidade_Final);
-
 
 				$data = array(
 				'id' => $id_Equipamento,
@@ -867,10 +851,6 @@ class Privado_c extends CI_Controller {
 
 		}
 
-
-		
-
-
 	}
 
 	// Elimina requisição
@@ -881,12 +861,74 @@ class Privado_c extends CI_Controller {
 		$id_requisição = $this->input->post('id_requisicao');
 		$this->Privado_m->elimina_requisicao($id_requisição);
 
-			// Carrego as views
+		// Carrego as views
 		$this->load->view('templates/Header');
 		// $this->load->view('publico/Home');
 		$this->load->view('templates/Footer');
 		redirect('Sala_admin', 'refresh');
 	}
+
+	// Editar requisição
+
+	public function edita_Requisicoa()
+	{
+		// Post dos valores
+		$id_requisicao = $this->input->post('id_requisicao');
+		$data_inicio = $this->input->post('data_inicio');
+		$data_fim = $this->input->post('data_fim');
+		$hora_inicio = $this->input->post('hora_inicio');
+		$hora_fim = $this->input->post('hora_fim');
+
+		// Fazer validações
+		$data = array(
+			'data_inicio' => $data_inicio,
+			'data_fim' => $data_fim,
+			'hora_inicio' => $hora_inicio,
+			'hora_fim' => $hora_fim
+		);
+
+
+
+		$this->Privado_m->edita_Requisicao($id_requisicao,$data);
+
+
+
+	}
+
+	// Mostrar todas as requisições para o admin
+
+
+	public function mostra_Requisicoes_admin()
+	{
+		
+		{
+			$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
+			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
+
+			
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicoes_admin',$data);
+			$this->load->view('templates/Footer');
+			
+		}
+		
+	}
+	
+	
+
+	public function apaga_Requisicao_admin()
+	{
+
+		$id_requisição = $this->input->post('id_requisicao');
+		$this->Privado_m->elimina_requisicao($id_requisição);
+
+		// Carrego as views
+		$this->load->view('templates/Header');
+		$this->load->view('publico/Home');
+		$this->load->view('templates/Footer');
+		redirect('Requisicoes_admin', 'refresh');
+	}
+
 
 
 
