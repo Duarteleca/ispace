@@ -138,9 +138,12 @@ class Privado_m extends CI_Model
     public function selecionar_salas_requisitadas($user_id_salas)
     {
        
-         $this->db->where('utilizador_id',$user_id_salas);
-         $inforeq = $this->db->get('requisicao');
-         return $inforeq->result_array();
+
+        $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,requisicao.utilizador_id,requisicao.tipologia_id,tipologia.id,tipologia.nome');
+        $this->db->from('requisicao');
+        $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+        $query = $this->db->get();
+        return $query->result_array();
      }
 
      
@@ -181,4 +184,21 @@ class Privado_m extends CI_Model
         $this->db->where('id',$id_requisição);
         $this->db->delete('requisicao');
     }
+
+
+    // Update a requisição
+    public function edita_Requisicoa($id_requisicao)
+    {
+    $this->db->where('id', $id_requisicao);
+    $this->db->update('requisicao', $data);
+    }
+
+    // Mostra todas requisicoes para o admin
+
+    public function busca_todas_requisicoes()
+    { 
+        $query=$this->db->get('requisicao');
+        return $query->result_array();         
+    }
+
 }
