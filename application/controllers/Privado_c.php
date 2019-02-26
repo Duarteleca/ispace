@@ -167,7 +167,7 @@ class Privado_c extends CI_Controller {
 				$nome_sala = $this->input->post("nome_sala");
 				$disponibilidade = $this->input->post("disponibilidade");
 				
-					var_dump($id_tiposala);
+
 
 				
 
@@ -198,9 +198,6 @@ class Privado_c extends CI_Controller {
 			$capacidade = $this->input->post("capacidade");
 			$nome_sala = $this->input->post("nome_sala");
 			$disponibilidade = $this->input->post("disponibilidade");
-			
-				var_dump($id_tiposala);
-
 			
 
 				$inputs = array(
@@ -720,7 +717,7 @@ class Privado_c extends CI_Controller {
 		// Mostra requisição
 		public function fazer_requisicao()
 		{
-			
+			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
 			// $data['salas']=$this->Privado_m->busca_salas();
 			$this->load->view('templates/header');
 			$this->load->view('publico/Fazer_requisicao');
@@ -735,13 +732,12 @@ class Privado_c extends CI_Controller {
 			
 			// Guarda os valores inseridos 
 			$id_user = $this->input->post("id_user");
-			// $nome_user = $this->input->post("id_equipamento");
 			$id_sala= $this->input->post("id_sala");
 			$data_inicio = $this->input->post("data_inicio");
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
-
+		
 
 			$data = array(
 				'data_inicio' => $data_inicio,
@@ -749,7 +745,7 @@ class Privado_c extends CI_Controller {
 				'hora_inicio' => $hora_inicio,
 				'hora_fim' => $hora_fim,
 				'utilizador_id' => $id_user,
-				'sala_id' => $id_sala
+				'tipologia_id' => $id_sala
 				);
 						
 						
@@ -768,8 +764,6 @@ class Privado_c extends CI_Controller {
 		}
 
 
-
-
 		// Mostrar Salas requisitadas pelo utilizador
 		public function mostra_salas_requisicao()
 		{
@@ -777,14 +771,15 @@ class Privado_c extends CI_Controller {
 			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
 			
 			
+			// Tenho de colocar a consulta de equipamentos para mostra na list drop dentro do modal
+			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicao',$data);
 			$this->load->view('templates/Footer');
 			
 		}
 
-
-		
 
 		// Mostrar equipamentos
 	public function mostra_equipamento_requisitar()
@@ -810,76 +805,87 @@ class Privado_c extends CI_Controller {
 	}
 
 
-	
-	// Fazer requisição
 
-	public function adicionar_Equipamento_Requisito222()
-	{
-		$id_equipamento = $this->input->post("checkname");
-		$numero = $this->input->post("numero");
-
-		
-		$numero = $this->input->post("aaa");
-
-		// if($this->input->post("sub")){
-		// 	$quantidade = $this->input->post("aa");
-		// 	var_dump($quantidade);
-		// }else{
-		// 	echo "sadas";
-		// }
-
-		// $id_fabricante = $array_fabricante[0]['id'];
-		// Guarda os valores inseridos 
-		
-		// var_dump($id_equipamento);
-		var_dump($numero);
-		
-
-		// $data = array(
-		// 	'equipamento_id' => $id_equipamento,
-		// 	'quantidade' => $quantidade
-		// 	);
-					
-					
-
-		// $this->Privado_m->adiciona_Equipamento_Requisicao($data);
-		
-		
-
-		// $this->load->view('templates/header');
-		// $this->load->view('publico/home');
-		// $this->load->view('templates/footer');
-		
-	}
-
-
-		// Fazer requisição
+		// adicionar_Equipamento_Requisito
 
 	public function adicionar_Equipamento_Requisito()
 
 	{
-		if(isset($_POST["item_name"]))
-			{
-				// Id da reserva
-			$order_id = uniqid();
-			for($count = 0; $count < count($_POST["item_unit"]); $count++)
-			{  
-			
-			$data = array(
-				'requisicao_id'   => $order_id,
-				'quantidade' => $_POST["item_quantity"][$count], 
-				'equipamento_id'  => $_POST["item_unit"][$count]
-			
-			);
+		$nome_Equipamento = $this->input->post("procuraEquipamento");
+		$quantidade_Equipamento = $this->input->post("quantidade");
+		
 
-			$this->Privado_m->adiciona_Equipamento_Requisicao($data);
+		var_dump($nome_Equipamento);
+		var_dump($quantidade_Equipamento);
+
+
+		// Ir à base de dados buscae a quantidade do equipamento inserido
+		
+
+		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
+
+		var_dump($array_Equipamento);
+
+		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
+		$id_Equipamento = $array_Equipamento[0]['id'];
+		var_dump($quantidade_Atual);
+
+		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+
+
+
+		if($quantidade_Equipamento<= $quantidade_Atual){
+				$quantidade_Final = $quantidade_Atual - $quantidade_Equipamento;
+				var_dump($quantidade_Final);
+
+
+				$data = array(
+				'id' => $id_Equipamento,
+				'quantidade' => $quantidade_Final
+				);
+			
+				// faz update na quantidade do equipamento requisitado.
+				$this->Privado_m->update_Equipamento($data,$id_Equipamento);
+
+
+				// Faz update na tabela requisicao_has_requipamento
+				$id_requisicao = $this->input->post("id_requisicao");
+
+				$informacao = array(
+					'equipamento_id' => $id_Equipamento,
+					'requisicao_id' => $id_requisicao,
+					'quantidade' => $quantidade_Equipamento
+					);
+
+				$this->Privado_m->requisicao_has_equipamento($informacao);
+
+
+			
+
+		}else{
+			echo 'erro';
+
 		}
-		$result = $statement->fetchAll();
-			if(isset($result))
-			{
-			echo 'ok';
-			}
-		}
+
+
+		
+
+
+	}
+
+	// Elimina requisição
+
+	public function apaga_Requisicao()
+	{
+
+		$id_requisição = $this->input->post('id_requisicao');
+		$this->Privado_m->elimina_requisicao($id_requisição);
+
+			// Carrego as views
+		$this->load->view('templates/Header');
+		// $this->load->view('publico/Home');
+		$this->load->view('templates/Footer');
+		redirect('Sala_admin', 'refresh');
 	}
 
 

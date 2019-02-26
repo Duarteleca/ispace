@@ -58,7 +58,7 @@
         <tbody>
             <?php foreach ($sala as $row){?>
                 <?php $id_sala= $row['tipoid'] ?>
-                <?php $id_sala= $row['disponibilidade'] ?>
+                
                
                                
                 <tr>
@@ -88,7 +88,7 @@
 
                 <div class="modal-body">
                         <div class="form-group">
-                                <input class="form-control " type="hidden" name="id_sala" id="id_sala" value ="<?php echo $id_sala ?>">
+                                <input class="form-control " type="text" name="id_sala" id="id_sala" value ="<?php echo $id_sala ?>">
                         </div>
 
                                 <div class="form-group">

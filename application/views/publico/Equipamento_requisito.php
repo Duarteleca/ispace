@@ -70,6 +70,15 @@ $(document).ready(function(){
  $('#insert_form').on('submit', function(event){
   event.preventDefault();
   var error = '';
+  $('.item_name').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Enter Item Name at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
   
   
   $('.item_quantity').each(function(){
@@ -91,11 +100,13 @@ $(document).ready(function(){
    }
    count = count + 1;
   });
+
+  
   var form_data = $(this).serialize();
   if(error == '')
   {
    $.ajax({
-   
+   url: "Privado_c.php"
     method:"POST",
     data:form_data,
     success:function(data)

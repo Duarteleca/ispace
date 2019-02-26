@@ -11,10 +11,10 @@ class Privado_m extends CI_Model
     public function busca_salas($slug = false)
     {
         if ($slug === false) {
-            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem",requisicao.data_inico,requisicao.data_fim,requisicao.hora_inico,requisicao.hora_fim,requisicao.utilizador_id,requisicao.sala_id');
+            $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             $this->db->from('sala');
             $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
-            $this->db->join('requisicao', 'requisicao.id = sala.id');
+            
             $query = $this->db->get();
             return $query->result_array();
         }
@@ -152,4 +152,33 @@ class Privado_m extends CI_Model
     }
 
 
+     // Mostra dados do equipamento que foi inserido / (Inserir equipamento requisicao)
+     function busca_Equipamento($nome_Equipamento)
+     {
+         $this->db->where('nome',$nome_Equipamento);
+         $dadosequipamento = $this->db->get("equipamento");
+         return $dadosequipamento->result_array();
+     }
+
+
+     // Update Equipamento (adicionar equipamento à requisição)
+    public function update_Equipamento($data,$id_Equipamento)
+    {
+    $this->db->where('id', $id_Equipamento);
+    $this->db->update('equipamento', $data);
     }
+
+
+    // Insere na requisicao has equipamento
+    public function requisicao_has_equipamento($informacao)
+    {
+        $this->db->insert('requisicao_has_equipamento', $informacao);
+    }
+
+    // Eliminar requisição selecionada
+    public function elimina_requisicao($id_requisição)
+    {
+        $this->db->where('id',$id_requisição);
+        $this->db->delete('requisicao');
+    }
+}
