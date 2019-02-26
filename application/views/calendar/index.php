@@ -138,6 +138,8 @@ $('.date-picker').datepicker();
 
  var date_last_clicked = null;
 
+//  var id_user= this->session->userdata("usuario_logado")[0]['id'];
+
 $('#calendar').fullCalendar({
 
     editable:true,
@@ -152,13 +154,13 @@ $('#calendar').fullCalendar({
     selectHelper:true,
     eventSources: [
     {
-        events: function(start, end, timezone, callback) {
+        events: function(data_inicio, data_fim, timezone, callback) {
             $.ajax({
                 url: '<?php echo base_url() ?>calendar/get_events',
                 dataType: 'json',
                 data: {                
-                    start: start.unix(),
-                    end: end.unix()
+                    data_inicio: data_inicio.unix(),
+                    data_fim: data_fim.unix()
                 },
                 success: function(msg) {
                     var events = msg.events;
@@ -175,13 +177,16 @@ $('#calendar').fullCalendar({
         $('#addModal input[name=start_date]').val(moment(date).format('YYYY-MM-DD'));
         $('#addModal').modal();
     },
+    
     eventClick: function(event, jsEvent, view) {
-        if(event.id==2) {
+       
+        
+        if(event.title== 12) {
 
         }else{
 
           $('#name').val(event.title);
-          $('#description').val(event.description);
+        //   $('#description').val(event.description);
           $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
           if(event.end) {
             $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
@@ -199,7 +204,7 @@ $('#calendar').fullCalendar({
 
 }else{
         $('#name').val(event.title);
-          $('#description').val(event.description);
+        //   $('#description').val(event.description);
           $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
           if(event.end) {
             $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
@@ -213,7 +218,7 @@ $('#calendar').fullCalendar({
      eventResize:function(event)
     {
         $('#name').val(event.title);
-          $('#description').val(event.description);
+        //   $('#description').val(event.description);
           $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
           if(event.end) {
             $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
@@ -230,7 +235,7 @@ $('#calendar').fullCalendar({
             if(event.id==2) {
 
                 }else{
-        var tooltip = '<div class="event-tooltip">' + calEvent.description +'<br>'+ 'data de inicio: '+ calEvent.start.format('YYYY-MM-DD') + '</div>';
+        var tooltip = '<div class="event-tooltip">' + calEvent.title +'<br>'+ 'data de inicio: '+ calEvent.start.format('YYYY-MM-DD') + '</div>';
         $("body").append(tooltip);
 
         $(this).mouseover(function(e) {

@@ -31,15 +31,15 @@ class Calendar extends CI_Controller
      public function get_events()
      {
          // Our Start and End Dates
-         $start = $this->input->get("start");
-         $end = $this->input->get("end");
+         $start = $this->input->get("data_inicio");
+         $data_fim = $this->input->get("data_fim");
     
          $startdt = new DateTime('now'); // setup a local datetime
          $startdt->setTimestamp($start); // Set the date based on timestamp
          $start_format = $startdt->format('Y-m-d');
     
          $enddt = new DateTime('now'); // setup a local datetime
-         $enddt->setTimestamp($end); // Set the date based on timestamp
+         $enddt->setTimestamp($data_fim); // Set the date based on timestamp
          $end_format = $enddt->format('Y-m-d');
     
          $events = $this->calendar_model->get_events($start_format, $end_format);
@@ -50,10 +50,10 @@ class Calendar extends CI_Controller
     
              $data_events[] = array(
                  "id" => $r->id,
-                 "title" => $r->title,
-                 "description" => $r->description,
-                 "end" => $r->end,
-                 "start" => $r->start
+                 "title" => $r->utilizador_id,
+                 "description" => $r->tipologia_id,
+                 "end" => $r->data_fim,
+                 "start" => $r->data_inicio
              );
          }
     
@@ -93,7 +93,7 @@ class Calendar extends CI_Controller
        "title" => $name,
        "description" => $desc,
        "start" => $start_date,
-       "end" => $end_date
+       "data_fim" => $end_date
        )
     );
     
@@ -142,7 +142,7 @@ public function edit_event()
                     "title" => $name,
                     "description" => $desc,
                     "start" => $start_date,
-                    "end" => $end_date,
+                    "data_fim" => $end_date,
                     )
                );
                echo "<script>alert('This card was not approved, Thanks.');</script>";
@@ -157,60 +157,6 @@ public function edit_event()
      }
 
 
-     
-
-     public function dragedit_event()
-     {
-          $eventid = intval($this->input->post("eventid"));
-          $event = $this->calendar_model->get_event($eventid);
-          if($event->num_rows() == 0) {
-               echo"Invalid Event";
-               exit();
-          }
-
-          $event->row();
-
-          /* Our calendar data */
-          $name = $this->input->post("name");
-          $desc = $this->input->post("description");
-          $start_date = $this->input->post("start_date");
-          $end_date =$this->input->post("end_date");
-          $delete = intval($this->input->post("delete"));
-
-          if(!$delete) {
-
-               if(!empty($start_date)) {
-                    $sd = DateTime::createFromFormat("Y/m/d", $start_date);
-                    $start_date = $sd->format('Y-m-d');
-                    $start_date_timestamp = $sd->getTimestamp();
-               } else {
-                    $start_date = date("Y-m-d", time());
-                    $start_date_timestamp = time();
-               }
-
-               if(!empty($end_date)) {
-                    $ed = DateTime::createFromFormat("Y/m/d", $end_date);
-                    $end_date = $ed->format('Y-m-d');
-                    $end_date_timestamp = $ed->getTimestamp();
-               } else {
-                    $end_date = date("Y-m-d", time());
-                    $end_date_timestamp = time();
-               }
-
-               $this->calendar_model->update_event($eventid, array(
-                    "title" => $name,
-                    "description" => $desc,
-                    "start" => $start_date,
-                    "end" => $end_date,
-                    )
-               );
-
-          } else {
-               $this->calendar_model->delete_event($eventid);
-          }
-
-          redirect(site_url("calendar"));
-     }
 
 
 
