@@ -16,142 +16,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-      
-       
-
-
-
          <link rel="stylesheet" type="text/css" media="screen" href="/ispace/assets/css/style.css" />
- 
-
-
-
-<script type="text/javascript">
-$('.date-picker').datepicker();
-
- var date_last_clicked = null;
-
-$('#calendar').fullCalendar({
-
-    editable:true,
-    eventOverlap:false,
-    header:{
-     left:'prev,next today',
-     center:'title',
-     right:'month,agendaWeek,agendaDay'
-    },
-   
-    selectable:true,
-    selectHelper:true,
-    eventSources: [
-    {
-        events: function(start, end, timezone, callback) {
-            $.ajax({
-                url: '<?php echo base_url() ?>Date_c/get_events',
-                dataType: 'json',
-                data: {                
-                    start: start.unix(),
-                    end: end.unix()
-                },
-                success: function(msg) {
-                    var events = msg.events;
-                    callback(events);
-                    
-                }
-            });
-       }
-    },
-    ],
-    dayClick: function(date, jsEvent, view) {
-        date_last_clicked = $(this);
-        // $(this).css('background-color', '#bed7f3');
-        $('#addModal input[name=start_date]').val(moment(date).format('YYYY-MM-DD'));
-        $('#addModal').modal();
-    },
-    eventClick: function(event, jsEvent, view) {
-        if(event.id==2) {
-
-        }else{
-
-          $('#name').val(event.title);
-          $('#description').val(event.description);
-          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
-          if(event.end) {
-            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
-          } else {
-            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
-          }
-          $('#event_id').val(event.id);
-          $('#editModal').modal();
-}},
- 
-        eventDrop:function(event)
-    {
-        
-        if(event.id==2) {
-
-}else{
-        $('#name').val(event.title);
-          $('#description').val(event.description);
-          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
-          if(event.end) {
-            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
-          } else {
-            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
-          }
-          $('#event_id').val(event.id);
-          $('#editModal').modal();
-    }},
-
-     eventResize:function(event)
-    {
-        $('#name').val(event.title);
-          $('#description').val(event.description);
-          $('#start_date').val(moment(event.start).format('YYYY-MM-DD'));
-          if(event.end) {
-            $('#end_date').val(moment(event.end).format('YYYY-MM-DD'));
-          } else {
-            $('#end_date').val(moment(event.start).format('YYYY-MM-DD'));
-          }
-          $('#event_id').val(event.id);
-          $('#editModal').modal();
-    },
-
-
-
-        eventMouseover: function(calEvent, jsEvent, view){
-            if(event.id==2) {
-
-                }else{
-        var tooltip = '<div class="event-tooltip">' + calEvent.description +'<br>'+ 'data de inicio: '+ calEvent.start.format('YYYY-MM-DD') + '</div>';
-        $("body").append(tooltip);
-
-        $(this).mouseover(function(e) {
-            $(this).css('z-index', 10000);
-            $('.event-tooltip').fadeIn('500');
-            $('.event-tooltip').fadeTo('10', 1.9);
-        }).mousemove(function(e) {
-            $('.event-tooltip').css('top', e.pageY + 10);
-            $('.event-tooltip').css('left', e.pageX + 20);
-        });
-    }},
-
- eventMouseout: function(calEvent, jsEvent) {
-    if(event.id==2) {
-
-}else{
-        $(this).css('z-index', 8);
-        $('.event-tooltip').remove();
-    }},
-
-});
-
-
-</script>
-
-
+         
 
 
 </head>
@@ -226,9 +92,6 @@ $('#calendar').fullCalendar({
                       <?php }else  {  ?>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Salasre')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas_re</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>

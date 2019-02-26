@@ -61,7 +61,7 @@ $route['Users']= 'Privado_c/users';
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
 $route['Inserir_equipamento']= 'Privado_c/inserir_equipamento';
 
-$route['Salasre']= 'Date_c/salar';
+
 $route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
 
 
