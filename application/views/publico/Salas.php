@@ -112,42 +112,34 @@
 
                                                             }
                                                         ?>">
-                                            </div>
+                                        </div>
 
-                                                        <div class="form-group">
+                                                       
+                                                       <div class="form-group">
                                                             <label for="from">De: </label>
-                                                            <input type="text" id="from" name="from">
+                                                            <input type="text" id="from" name="data_inicio">
                                                             <label for="to"> até </label>
-                                                            <input type="text" id="to" name="to">
+                                                            <input type="text" id="to" name="data_fim">
                                                             
                                                         </div>
 
-                                                        <div class="form-group">
-                                                        <span>
-                                                        <label for="from">Hora de inicio: <input type="text" id="timepicker"  width="100"/> Hora de Fim: <input type="text" id="timepicker1"  width="100" /></label>
+                                                        <!-- <div class="form-group">
+                                                       
+                                                        <label>Hora de inicio: <input type="text" id="timepicker" name="hora_inicio"  > Hora de Fim: <input type="text" id="timepicker1" name="hora_fim" ></label>
                                                         
-                                                            <label for="to">  </label>
-                                                            
-                                                            </span>
-
-                                                        </div>
-
-
-                                                        
-
-
-                                                        <div id="calendariomain" class="form-group">
+                                        
+                                                        </div> -->
+                                                        <!-- <div id="calendariomain" class="form-group">
                                                             <label for="exampleInputEmail1">Dia Incio</label>
                                                             <input id="calendario" type= "date" name="data_inicio" value="<?php echo date('Y-m-d'); ?>"  max="">
                                                             <label for="exampleInputEmail1">Dia Fim</label>
                                                             <input id="calendario" type= "date" name="data_fim" value="<?php echo date('Y-m-d'); ?>" min="2019-01-01" max="">
-                                                        </div> 
+                                                        </div>  -->
 
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Hora Incio</label>
-                                                            <input class="form-control " type="text" placeholder="00:00 PM" name="hora_inicio" id="capacidade" value ="">
-                                                            <label for="exampleInputEmail1">Hora Fim</label>
-                                                            <input class="form-control " type="text" placeholder="00:00 AM" name="hora_fim" id="capacidade" value ="">
+                                                        <label>Hora de inicio: <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value ="18:00"></label>
+                                                      
+                                                         
                                                         </div> 
 
 
@@ -172,15 +164,7 @@
     <?php }  ?>
 </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-
-    
-    <script>
-        $('#timepicker').timepicker();
-        $('#timepicker1').timepicker();
-    </script>
+  
 
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -205,4 +189,3 @@ var dates = $("#from, #to").datepicker({
 });
   });
 </script>
-
