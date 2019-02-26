@@ -1,38 +1,138 @@
-<div class="container mostrasalas">
-<br><br><br>
-
+<div class="container mostrarequisicoes">
+    <br>
+    <br>
+    <br>
     
-    
-              <div class="col-xs-6 col-md-6">
-                 <a  href="<?php echo base_url('Fazer_requisicao')?>" data-placement="top" data-toggle="tooltip" title="Insert"><button id="butaorequisitar" class="btn btn-info" data-title="Insert" data-toggle="modal" data-target="#insert" >Requisitar Sala</span></button></a>
-
-                </div>
-     
-   
-
-<!-- <h2 >Salas que podem ser requisitadas no nosso estabelecimento </h2> -->
-
-<!-- <div class="form-group col-md-12"> -->
+    <!-- <div class="form-group col-md-12"> -->
 
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Foto</th>
-                <th>Tipo de sala</th>
-                <th>Nome da sala</th>
-                <th>Capacidade</th>
+                <th>Data inicio/fim</th>
+                <th>Hora inicio/fim</th>
+                <th>ID requisicao</th> 
+               
+
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sala as $row){?>
-                <tr>
-                    <td><img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
-                    <td class="texto ">   <?php echo $row['tipo_sala'] ?></td>
-                    <td class="texto ">   <?php echo $row['nome_sala'] ?></td>
-                    <td class="texto ">    <?php echo $row['capacidade'] ?></td>   
-                </tr>
+            <?php foreach ($salas_requisitas as $row){?>
+
+            <?php $id_user = $row['utilizador_id'];  ?>
+            <?php $id_requisicao = $row['id'];  ?>
+
+
+
+            <tr>
+                <td class="texto ">
+                    <?php echo $row['data_inicio'] ?><br>
+                    <?php echo $row['data_fim'] ?>
+                </td>
+                
+                <td class="texto ">
+                    <?php echo $row['hora_inicio'] ?><br>
+                    <?php echo $row['hora_fim'] ?>
+                </td>
+               
+                <td class="texto ">
+                    <?php echo $row['id'] ?><br>
+                </td>
+                <td>                 
+                <!-- Butões para abrir o modal -->  
+                <button class="btn btn-success btn" data-toggle="modal" href="#myModalAdicionarEquip<?php echo $id_requisicao  ?>">Adicionar Equipamento</button>
+                <button class="btn btn-warning" data-title="Edit" data-toggle="modal" href="#myModaleditar" >Editar</button>
+                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar</button>
+                
+                </td> 
+
+                
+        <!-- Modal Adicionar equipamento -->
+                <div class="modal fade" id="myModalAdicionarEquip<?php echo $id_requisicao  ?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <?php echo form_open_multipart('Privado_c/adicionar_Equipamento_Requisito') ?>
+                            <div class="modal-header">
+                                <h4 class="modal-title custom_align" id="Heading">Adicionar Equipamento</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <label for="exampleInputEmail1">Id Requisição</label>
+                                <div class="form-group">
+                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Insira o Nome do equipamento</label>
+
+
+                                    <select style="color:black" name="procuraEquipamento" class="form-control">
+                                        <option value="" selected>Equipamento</option>
+                                        <?php foreach($equipamentos as $row){
+                                            echo "<option value=".$row['nome'].">".$row['nome'] ."</option>";
+                                            } ?>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Insira a quantidade</label>
+                                    <input class="form-control " type="text" name="quantidade" id="quantidade" value="">
+                                </div>
+
+                                <div class="modal-footer ">
+                                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
+                                        <span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                </div>
+                            </div>
+                            <?php echo form_close() ?>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        <!-- Modal Eliminar -->
+        <div id="myModaleliminar<?php echo $id_requisicao  ?>" class="modal fade">
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+
+                            <?php echo form_open('Privado_c/apaga_Requisicao') ?>
+
+                                <div class="modal-header">
+                                    <div class="icon-box">
+                                        <i class="material-icons">&#xE5CD;</i>
+                                    </div>				
+                                        <h4 class="modal-title">Tem a certeza?</h4>	
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                        <div class="form-group">
+                                            <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
+                                        </div>
+                                            <div class="modal-body">
+                                                <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>
+                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                            <?php echo form_close() ?>
+                        </div>
+                    </div>
+                </div> 
+
+
+               
+                              
+                
+
+            </tr>
+
+
             <?php } ?>
         </tbody>
     </table>
 </div>
-

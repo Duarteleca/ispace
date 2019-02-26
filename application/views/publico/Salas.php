@@ -58,7 +58,7 @@
         <tbody>
             <?php foreach ($sala as $row){?>
                 <?php $id_sala= $row['tipoid'] ?>
-                <?php $id_sala= $row['disponibilidade'] ?>
+                
                
                                
                 <tr>
