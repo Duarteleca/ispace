@@ -31,7 +31,6 @@
             <?php $nome_sala = $row['nome'];  ?>
             <?php $quantidade = $row['quantidade'];  ?>
             <?php $nome_User = $row['nomeuser'];  ?>
-            <?php $equipamento_id = $row['equipamento_id']; ?>
             
 
 
@@ -60,20 +59,20 @@
                 </td>
                 <td>                 
                 <!-- Butões para abrir o modal -->  
-                <button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
+                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
                 
-               
+                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar requisição</button>
                 
                 </td> 
 
 
 
-                <!-- Modal Cancelar equipamento da requisição  -->
-                 <div id="myModalcancelar<?php echo $id_requisicao  ?>" class="modal fade">
+                <!-- Modal eliminar requisicao  -->
+                 <div id="myModaleliminar<?php echo $id_requisicao  ?>" class="modal fade">
                     <div class="modal-dialog modal-confirm">
                         <div class="modal-content">
 
-                            <?php echo form_open('Privado_c/cancelar_equipamento_requisicao_admin') ?>
+                            <?php echo form_open('Privado_c/apaga_Requisicao_admin') ?>
 
                                 <div class="modal-header">
                                     <div class="icon-box">
@@ -83,26 +82,22 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
+                                            <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control " type="hidden" name="quantidade" id="quantidade" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                             <div class="modal-body">
-                                                <p>Quer mesmo cancelar este equipamento dessa requisição ?</p>
+                                                <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>
                                             </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Voltar</button>
-                                                    <button type="submit" class="btn btn-danger">Cancelar</button>
+                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
                                                 </div>
                             <?php echo form_close() ?>
                         </div>
                     </div>
                 </div> 
-                
 
 
             

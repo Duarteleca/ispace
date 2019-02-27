@@ -74,9 +74,6 @@ $route['adicionar_Equipamento_Requisito']= 'Privado_c/adicionar_Equipamento_Requ
 $route['Requisicoes_equipamentos_admin']= 'Privado_c/mostra_Requisicoes_Equipamentos_admin';
 $route['Requisicoes_salas_admin']= 'Privado_c/mostra_Requisicoes_Salas_admin';
 
-$route['Requisicoes_equipamentos_user']= 'Privado_c/mostra_Requisicoes_Equipamentos_user';
-
-
 
 
 $route['Registo']= 'Publico_c/registar_user';

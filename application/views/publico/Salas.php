@@ -82,13 +82,13 @@
                           
                           <div class="modal-body">
                         <div class="form-group">
-                                <input class="form-control " type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata("usuario_logado")[0]['id'] ?>">
+                                <input class="form-control " type="text" name="id_user" id="id_user" value="<?php echo $this->session->userdata("usuario_logado")[0]['id'] ?>">
                         </div>
 
 
                 <div class="modal-body">
                         <div class="form-group">
-                                <input class="form-control " type="hidden" name="id_sala" id="id_sala" value ="<?php echo $id_sala ?>">
+                                <input class="form-control " type="text" name="id_sala" id="id_sala" value ="<?php echo $id_sala ?>">
                         </div>
 
                                 <div class="form-group">
@@ -137,11 +137,7 @@
                                                         </div>  -->
 
                                                         <div class="form-group">
-                                                        <label for="from">Hora de inicio: </label>
-                                                        
-                                                        <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> 
-                                                        <label for="from">Hora de fim: </label> 
-                                                        <input class="form-control" type="time" name="hora_fim" value ="18:00">
+                                                        <label>Hora de inicio: <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value ="18:00"></label>
                                                       
                                                          
                                                         </div> 

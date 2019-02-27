@@ -103,7 +103,7 @@
                             <a class="nav-link" href="<?php echo base_url('Requisicao')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_user')?>"><i class="fa fa-users fa-lg"></i> Equipamentos Requisitados</a>
+                            <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Perfil')?>"> <i class="fa fa-user fa-lg"></i>Perfil</a>

@@ -4,10 +4,7 @@
     <br>
     
     <!-- <div class="form-group col-md-12"> -->
-     <!-- Mensagem de err quando não consegue dar login -->
-     <?php if($this->session->flashdata("erro_quantidade")) :?>
-                                        <p class ="alert alert-danger"><?= $this->session->flashdata("erro_quantidade")   ?></p>
-                                        <?php endif ?>
+
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -70,7 +67,7 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
 
                                 <div class="form-group">
@@ -92,7 +89,6 @@
                                 </div>
 
                                 <div class="modal-footer ">
-                               
                                     <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
                                         <span class="glyphicon glyphicon-ok-sign"></span> Adicionar </button>
                                 </div>
@@ -176,7 +172,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
+                                            <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>
