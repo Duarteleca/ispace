@@ -332,7 +332,7 @@ class Publico_c extends CI_Controller {
 		  
 		  
 		//  Se o array chegar vario, ou sej anão encontrou nada, dá erro
-		  if(empty($array_user)){
+		  if((empty($array_user)) || (empty($password))){
 			$this->session->set_flashdata("erro", "User ou senha inválida!");
 			redirect(base_url("/home"));
 		  }
@@ -347,6 +347,9 @@ class Publico_c extends CI_Controller {
 		   
 			  $this->session->set_flashdata("sucesso", "Login com sucesso!");
 			  redirect(base_url("/home"));
+		  }
+		  else {
+			$this->session->set_flashdata("erro", "User ou senha inválida!");
 		  }
 		  redirect('home', 'refresh');
 	  }

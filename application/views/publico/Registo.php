@@ -11,7 +11,7 @@
                         <legend class="text-center header">Registe-se!</legend>
 
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-user bigicon"></i></span>
                             <div class="col-md-8">
                                 <input id="name" name="name" type="text" placeholder="Primeiro Nome" class="form-control">
                             </div>

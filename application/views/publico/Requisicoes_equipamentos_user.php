@@ -14,6 +14,7 @@
                 <th>Requisitado por:</th>
                 <th>Quantidade</th>
                 <th>Nome Equip</th>
+                <th>id user</th>
                
 
                 <th>Ação</th>
@@ -58,6 +59,9 @@
                 <td class="texto ">
                     <?php echo $row['equipnome'] ?><br>
                 </td>
+                <td class="texto ">
+                    <?php echo $row['utilizador_id'] ?><br>
+                </td>
                 <td>                 
                 <!-- Butões para abrir o modal -->  
                 <button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
@@ -73,7 +77,7 @@
                     <div class="modal-dialog modal-confirm">
                         <div class="modal-content">
 
-                            <?php echo form_open('Privado_c/cancelar_equipamento_requisicao_admin') ?>
+                            <?php echo form_open('Privado_c/cancelar_equipamento_requisicao_user') ?>
 
                                 <div class="modal-header">
                                     <div class="icon-box">
@@ -86,11 +90,12 @@
                                             <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
+                                            <input class="form-control " type="text" name="quantidade" id="quantidade" value ="<?php echo $quantidade ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="hidden" name="quantidade" id="quantidade" value ="<?php echo $id_requisicao ?>">
+                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
                                         </div>
+                                        
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar este equipamento dessa requisição ?</p>
                                             </div>
