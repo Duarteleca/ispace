@@ -20,7 +20,7 @@
             <?php foreach ($salas_requisitas as $row){?>
 
             <?php $id_user = $row['utilizador_id'];  ?>
-            <?php $id_requisicao = $row['id'];  ?>
+            <?php $id_requisicao = $row['idreq'];  ?>
             <?php $data_inicio = $row['data_inicio'];  ?>
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
@@ -114,25 +114,38 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nome Sala</label>
                                     <input disabled class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $nome_sala  ?>">
                                 </div>           
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="exampleInputEmail1">Data início</label>
                                     <input id="calendario" type= "date" name="data_inicio" value="<?php echo $data_inicio  ?>">
                                     <label for="exampleInputEmail1">Data fim</label>
                                     <input id="calendario" type= "date" name="data_fim" value="<?php echo $data_fim  ?>">
-                                </div>
+                                </div> -->
+
                                 <div class="form-group">
+                                    <label for="from">De: </label>
+                                    <input type="text" id="from" name="data_inicio" value="<?php echo $data_inicio ?>">
+                                    <label for="to"> até </label>
+                                    <input type="text" id="to" name="data_fim" value="<?php echo $data_fim ?>">
+                                                            
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Hora de inicio: <input type="time" class="form-control" name="hora_inicio" value="<?php echo $hora_inicio ?>"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value= "<?php echo $hora_fim ?>"></label>                  
+                                </div> 
+
+                                <!-- <div class="form-group">
                                     <label for="exampleInputEmail1">Hora início</label>
                                     <input type="time" name="hora_inicio" value="<?php echo $hora_inicio ?>">
                                     <label for="exampleInputEmail1">Hora fim</label>
                                     <input type="time" name="hora_fim" value= "<?php echo $hora_fim ?>">
-                                </div>
+                                </div> -->
                                 
                                 
 
@@ -189,3 +202,30 @@
         </tbody>
     </table>
 </div>
+
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    var dateToday = new Date();
+var dates = $("#from, #to").datepicker({
+    dateFormat: 'yy-mm-dd',
+    defaultDate: "today",
+    changeMonth: true,
+    numberOfMonths: 2,
+    minDate: dateToday,
+    onSelect: function(selectedDate) {
+        var option = this.id == "from" ? "minDate" : "maxDate",
+            instance = $(this).data("datepicker"),
+            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+        dates.not(this).datepicker("option", option, date);
+    }
+});
+  });
+
+</script>

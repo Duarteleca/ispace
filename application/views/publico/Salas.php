@@ -117,9 +117,9 @@
                                                        
                                                        <div class="form-group">
                                                             <label for="from">De: </label>
-                                                            <input type="text" id="from" name="data_inicio">
+                                                            <input type="text" id="from" name="data_inicio" value="<?php echo date('Y-m-d'); ?>">
                                                             <label for="to"> até </label>
-                                                            <input type="text" id="to" name="data_fim">
+                                                            <input type="text" id="to" name="data_fim" value="<?php echo date('Y-m-d'); ?>">
                                                             
                                                         </div>
 
@@ -176,6 +176,7 @@
   $(function() {
     var dateToday = new Date();
 var dates = $("#from, #to").datepicker({
+   dateFormat: 'yy-mm-dd',
     defaultDate: "today",
     changeMonth: true,
     numberOfMonths: 2,
@@ -188,4 +189,16 @@ var dates = $("#from, #to").datepicker({
     }
 });
   });
+
+
+
+//    $(function(){
+//         $("#to").datepicker({ dateFormat: 'yy-mm-dd' });
+//         $("#from").datepicker({ dateFormat: 'yy-mm-dd' }).bind("change",function(){
+//             var minValue = $(this).val();
+//             minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
+//             minValue.setDate(minValue.getDate()+1);
+//             $("#to").datepicker( "option", "minDate", minValue );
+//         })
+//     });
 </script>
