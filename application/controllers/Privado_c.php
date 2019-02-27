@@ -811,7 +811,7 @@ class Privado_c extends CI_Controller {
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-	
+		var_dump($array_Equipamento );
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
 
@@ -854,6 +854,11 @@ class Privado_c extends CI_Controller {
 
 		}
 
+<<<<<<< HEAD
+=======
+		// redirect('Requisicao', 'refresh');
+
+>>>>>>> marco
 	}
 
 	// Elimina requisição
@@ -953,5 +958,79 @@ class Privado_c extends CI_Controller {
 
 
 
+<<<<<<< HEAD
+=======
+	// Cancela equipamentos das requisições
+	public function cancelar_equipamento_requisicao_admin()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$this->Privado_m->cancelar_equipamento_requisicao_admin_m($id_requisição,$id_equipamento);
+			
+		
+			$this->load->view('templates/header');
+			// $this->load->view('publico/Requisicoes_equipamentos_admin',$data);
+			$this->load->view('templates/Footer');
+
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_admin', 'refresh');
+		
+		
+	}
+
+
+	// Cancela o equipamento requesitado e faz update à quantidade dos equipamentos
+	public function cancelar_equipamento_requisicao_user()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
+		
+	
+
+
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento($id_equipamento);
+
+		$quantidade = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd = $array_Equipamento_requesito[0]['id'];
+
+
+		// post da quantidade que foi requisitada para depois somar e voltar a fazer update
+		$quantidade_requisitada = $this->input->post('quantidade');	
+		
+		// Soma a quantidade atual dos equipamentos à quantidade que foi requisitada
+		$quantidade_final = $quantidade + $quantidade_requisitada; 
+		
+
+		$data = array(
+					
+					'quantidade' => $quantidade_final
+					);
+
+		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+		$this->Privado_m->atualiza_Equipamento_depois_cancelar($data,$id_equipamento_bd);
+
+
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$this->Privado_m->cancelar_equipamento_requisicao_user_m($id_requisicao_equipamento);
+			
+			$this->load->view('templates/header');
+			// $this->load->view('publico/Requisicoes_equipamentos_admin',$data);
+			$this->load->view('templates/Footer');
+
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_user', 'refresh');
+		
+		
+	}
+	
+
+	
+>>>>>>> marco
 
 }
