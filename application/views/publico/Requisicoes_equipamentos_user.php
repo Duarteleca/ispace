@@ -36,7 +36,6 @@
             
 
 
-
             <tr>
                 <td class="texto ">
                     <?php echo $row['data_inicio'] ?><br>
