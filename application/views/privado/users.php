@@ -52,20 +52,20 @@
                             <?php
                                 if($row['tipo']==1){
                                   echo "Admin";
-                                }
-                                else{
+                                }else if($row['tipo']==2){
+                                    echo "Admin temporario";
+                                  }else{
                                   echo "Utilizador";
-
                                 }
                             ?>
                         </td>
                         <td>   
                         <?php
-                                if($row['id']==3){ }else{?>           
+                                if($row['tipo']==1){ }else{?>           
                             <!-- Butões para abrir o modal -->  
                             <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" href="#myModaleditar<?php echo $id_utilizador;?>" ><span class="fas fa-edit"></span></button>
                             
-                            <?php if($row['tipo']==1){ }else{?>  
+                            <?php if($row['tipo']==2){ }else{?>  
                             <button class="btn btn-danger btn-xs"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_utilizador;?>" ><span class="fas fa-trash-alt"></span></button>
                            <?php }}?>
                             </td>        
@@ -109,12 +109,12 @@
                                     <select style="color:black" name="tipo_user" required class="form-control" > 
                                         <option value="<?php echo $row['tipo'] ; ?>" selected ><?php if( $row['tipo'] == 0){echo "Utilizador";}else{echo "Adminstrador";}?></option> 
                                         <option value="0">Utilizador</option> 
-                                        <option value="1">Administrador</option>     
+                                        <option value="2">Administrador</option>     
                                     </select>
 
                                 </div>
                                 <div class="modal-footer ">
-                                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                                 </div>
                                 
                 </div>
@@ -132,10 +132,10 @@
 
                                 <div class="modal-header">
                                     <div class="icon-box">
-                                        <i class="material-icons">&#xE5CD;</i>
+                                        <i class="material-icons"></i>
                                     </div>				
                                         <h4 class="modal-title">Tem a certeza?</h4>	
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                         <div class="form-group">
                                             <input class="form-control " type="text" name="id_user" id="username_modal" value =" <?php echo $id_utilizador ?>">

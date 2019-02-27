@@ -512,8 +512,6 @@ class Privado_c extends CI_Controller {
 			);
 
 
-
-
 			$this->Privado_m->atualiza_utilizador($data,$email);
 			$data['error'] = 'Alteração do nome e foto com pass'; 
 			$this->load->view('templates/header');
@@ -719,7 +717,7 @@ class Privado_c extends CI_Controller {
 			
 		}
 
-		// Fazer requisição
+		// Fazer requisição de sala
 
 		public function requisitar_Sala()
 		{
@@ -731,6 +729,9 @@ class Privado_c extends CI_Controller {
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
+sss
+
+			if()
 		
 
 			$data = array(

@@ -117,9 +117,9 @@
                                                        
                                                        <div class="form-group">
                                                             <label for="from">De: </label>
-                                                            <input type="text" id="from" name="data_inicio">
+                                                            <input type="text" id="from" name="data_inicio" value="<?php echo date('Y-m-d'); ?>">
                                                             <label for="to"> até </label>
-                                                            <input type="text" id="to" name="data_fim">
+                                                            <input type="text" id="to" name="data_fim" value="<?php echo date('Y-m-d'); ?>">
                                                             
                                                         </div>
 
@@ -137,14 +137,10 @@
                                                         </div>  -->
 
                                                         <div class="form-group">
-                                                        <label for="from">Hora de inicio: </label>
-                                                        
-                                                        <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> 
-                                                        <label for="from">Hora de fim: </label> 
-                                                        <input class="form-control" type="time" name="hora_fim" value ="18:00">
+                                                        <label>Hora de inicio: <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value ="18:00"></label>
                                                       
                                                          
-                                                        </div> 
+                                                        </div>  
 
 
       
