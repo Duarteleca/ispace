@@ -4,7 +4,10 @@
     <br>
     
     <!-- <div class="form-group col-md-12"> -->
-
+     <!-- Mensagem de err quando não consegue dar login -->
+     <?php if($this->session->flashdata("erro_quantidade")) :?>
+                                        <p class ="alert alert-danger"><?= $this->session->flashdata("erro_quantidade")   ?></p>
+                                        <?php endif ?>
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -67,7 +70,7 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
 
                                 <div class="form-group">
@@ -89,6 +92,7 @@
                                 </div>
 
                                 <div class="modal-footer ">
+                               
                                     <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
                                         <span class="glyphicon glyphicon-ok-sign"></span> Adicionar </button>
                                 </div>
@@ -113,29 +117,16 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
                                       
 
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Data início</label>
                                     <input id="calendario" type= "date" name="data_inicio" value="<?php echo $data_inicio  ?>">
                                     <label for="exampleInputEmail1">Data fim</label>
                                     <input id="calendario" type= "date" name="data_fim" value="<?php echo $data_fim  ?>">
-                                </div> -->
-
-                                <div class="form-group">
-                                    <label for="from">De: </label>
-                                    <input type="text" id="from" name="data_inicio" value="<?php echo $data_inicio ?>">
-                                    <label for="to"> até </label>
-                                    <input type="text" id="to" name="data_fim" value="<?php echo $data_fim ?>">
-                                                            
                                 </div>
-
-                                <!-- <div class="form-group">
-                                    <label>Hora de inicio: <input type="time" class="form-control" name="hora_inicio" value="<?php echo $hora_inicio ?>"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value= "<?php echo $hora_fim ?>"></label>                  
-                                </div>  -->
-
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Hora início</label>
                                     <input type="time" name="hora_inicio" value="<?php echo $hora_inicio ?>">
@@ -172,7 +163,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
+                                            <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>
@@ -198,30 +189,3 @@
         </tbody>
     </table>
 </div>
-
-
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<link href="style.css" rel="stylesheet" type="text/css"/>
-<script src="jquery-1.11.3.min.js"></script>
-
-<script type="text/javascript">
-  $(function() {
-    var dateToday = new Date();
-var dates = $("#from, #to").datepicker({
-    dateFormat: 'yy-mm-dd',
-    defaultDate: "today",
-    changeMonth: true,
-    numberOfMonths: 2,
-    minDate: dateToday,
-    onSelect: function(selectedDate) {
-        var option = this.id == "from" ? "minDate" : "maxDate",
-            instance = $(this).data("datepicker"),
-            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-        dates.not(this).datepicker("option", option, date);
-    }
-});
-  });
-
-</script>

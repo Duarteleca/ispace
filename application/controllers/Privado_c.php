@@ -799,8 +799,7 @@ class Privado_c extends CI_Controller {
 
 
 
-		// adicionar_Equipamento_Requisito
-
+	// Adiciona equipamentos à requesição
 	public function adicionar_Equipamento_Requisito()
 
 	{
@@ -811,7 +810,6 @@ class Privado_c extends CI_Controller {
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-		var_dump($array_Equipamento );
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
 
@@ -846,19 +844,16 @@ class Privado_c extends CI_Controller {
 
 				$this->Privado_m->requisicao_has_equipamento($informacao);
 
-
+				
 			
 
 		}else{
-			echo 'erro';
+			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
 
 		}
 
-<<<<<<< HEAD
-=======
-		// redirect('Requisicao', 'refresh');
+		redirect('Requisicao', 'refresh');
 
->>>>>>> marco
 	}
 
 	// Elimina requisição
@@ -900,7 +895,6 @@ class Privado_c extends CI_Controller {
 		$this->Privado_m->edita_Requisicao($id_requisicao,$data);
 
 
-
 	}
 
 	// Mostrar todas as requisições para o admin
@@ -908,31 +902,37 @@ class Privado_c extends CI_Controller {
 
 	public function mostra_Requisicoes_Equipamentos_admin()
 	{
-		
-		{
-			
+
 			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
-		
+			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
 			$this->load->view('templates/Footer');
-			
-		}
-		
+
 	}
 
+	// Mostrar os equipamentos requisitados pelo user 
+	public function mostra_Requisicoes_Equipamentos_user()
+	{
+			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
+			
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($user_id);
+			
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicoes_equipamentos_user',$data);
+			$this->load->view('templates/Footer');
+
+	}
+
+	// Pesquisa salas requisitadas
 	public function mostra_Requisicoes_Salas_admin()
 	{
-		
-		{
-			
+
 			$data['salas_requisitass']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);
 			$this->load->view('templates/Footer');
-			
-		}
-		
+
 	}
 	
 	
@@ -958,8 +958,6 @@ class Privado_c extends CI_Controller {
 
 
 
-<<<<<<< HEAD
-=======
 	// Cancela equipamentos das requisições
 	public function cancelar_equipamento_requisicao_admin()
 	{
@@ -1031,6 +1029,5 @@ class Privado_c extends CI_Controller {
 	
 
 	
->>>>>>> marco
 
 }

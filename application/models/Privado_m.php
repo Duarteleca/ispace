@@ -215,17 +215,12 @@ class Privado_m extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
 
-
-
-
         //  $this->db->where('utilizador_id',$user_id_salas);
         // $mostrar_dados = $this->db->get("requisicao");
 
         // return $mostrar_dados->result_array();
      }
 
-<<<<<<< HEAD
-=======
 
      
 
@@ -297,5 +292,4 @@ class Privado_m extends CI_Model
          $dadosequipamentoreq = $this->db->get("equipamento");
          return $dadosequipamentoreq->result_array();
      }
->>>>>>> marco
 }
