@@ -26,7 +26,7 @@
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-            <?php $hora_fim = $row['nome'];  ?>
+            <?php $nome = $row['nome'];  ?>
 
             
 

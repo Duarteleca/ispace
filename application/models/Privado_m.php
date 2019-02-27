@@ -236,10 +236,10 @@ class Privado_m extends CI_Model
     }
 
       // Cancela equipamento da requisiçao (user)
-      public function cancelar_equipamento_requisicao_user_m($id_requisição,$id_equipamento)
+      public function cancelar_equipamento_requisicao_user_m($id_requisicao_equipamento)
       {
-          $this->db->where('equipamento_id',$id_equipamento);
-          $this->db->where('requisicao_id',$id_requisição);
+          $this->db->where('id',$id_requisicao_equipamento);
+          
           $this->db->delete('requisicao_has_equipamento');
       }
 
@@ -251,7 +251,7 @@ class Privado_m extends CI_Model
 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome,requisicao_has_equipamento.quantidade,
-        requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome"');
+        requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome",requisicao_has_equipamento.id "idreqequip"');
         $this->db->from('requisicao');
         $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
         $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
@@ -286,5 +286,13 @@ class Privado_m extends CI_Model
 
     }
 
-
+    
+    
+     // Mostra dados do equipamento que foi pedido na requesição
+     function busca_id_requisicao_equipamento($id_requisição,$id_equipamento)
+     {
+         $this->db->where('id',$id_equipamento);
+         $dadosequipamentoreq = $this->db->get("equipamento");
+         return $dadosequipamentoreq->result_array();
+     }
 }

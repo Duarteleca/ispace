@@ -810,7 +810,7 @@ class Privado_c extends CI_Controller {
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-	
+		var_dump($array_Equipamento );
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
 
@@ -853,7 +853,7 @@ class Privado_c extends CI_Controller {
 
 		}
 
-		redirect('Requisicao', 'refresh');
+		// redirect('Requisicao', 'refresh');
 
 	}
 
@@ -985,7 +985,12 @@ class Privado_c extends CI_Controller {
 		
 		$id_requisição = $this->input->post('id_requisicao');
 		$id_equipamento = $this->input->post('id_equipamento');
-			
+		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
+		
+	
+
+
+
 		// Vai à base de dados buscar a quantidade atual dos equipamentos
 		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento($id_equipamento);
 
@@ -1011,7 +1016,7 @@ class Privado_c extends CI_Controller {
 
 		$id_requisição = $this->input->post('id_requisicao');
 		$id_equipamento = $this->input->post('id_equipamento');
-		$this->Privado_m->cancelar_equipamento_requisicao_user_m($id_requisição,$id_equipamento);
+		$this->Privado_m->cancelar_equipamento_requisicao_user_m($id_requisicao_equipamento);
 			
 			$this->load->view('templates/header');
 			// $this->load->view('publico/Requisicoes_equipamentos_admin',$data);
