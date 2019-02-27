@@ -23,7 +23,7 @@
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-            <?php $hora_fim = $row['nome'];  ?>
+            <?php $nome = $row['nome'];  ?>
 
             
 
@@ -132,16 +132,16 @@
                                                             
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Hora de inicio: <input type="time" class="form-control" name="hora_inicio" value="<?php echo $hora_inicio ?>"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value= "<?php echo $hora_fim ?>"></label>                  
-                                </div> 
-
                                 <!-- <div class="form-group">
+                                    <label>Hora de inicio: <input type="time" class="form-control" name="hora_inicio" value="<?php echo $hora_inicio ?>"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value= "<?php echo $hora_fim ?>"></label>                  
+                                </div>  -->
+
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Hora início</label>
                                     <input type="time" name="hora_inicio" value="<?php echo $hora_inicio ?>">
                                     <label for="exampleInputEmail1">Hora fim</label>
                                     <input type="time" name="hora_fim" value= "<?php echo $hora_fim ?>">
-                                </div> -->
+                                </div>
                                 
                                 
 
