@@ -11,14 +11,16 @@
                 <th>Data inicio/fim</th>
                 <th>Hora inicio/fim</th>   
                 <th>Nome Sala</th>
-                <th>Utilizador id</th>
+                <th>Requisitado por:</th>
+                <th>Quantidade</th>
+                <th>Nome Equip</th>
                
 
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($salas_requisitas as $row){?>
+            <?php foreach ($salas_requisitass as $row){?>
 
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_requisicao = $row['idreq'];  ?>
@@ -27,8 +29,9 @@
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
             <?php $nome_sala = $row['nome'];  ?>
+            <?php $quantidade = $row['quantidade'];  ?>
+            <?php $nome_User = $row['nomeuser'];  ?>
             
-
 
 
 
@@ -46,12 +49,19 @@
                     <?php echo $row['nome'] ?><br>
                 </td>
                 <td class="texto ">
-                    <?php echo $row['utilizador_id'] ?><br>
+                    <?php echo $row['nomeuser'] ?><br>
+                </td>
+                <td class="texto ">
+                    <?php echo $row['quantidade'] ?><br>
+                </td>
+                <td class="texto ">
+                    <?php echo $row['equipnome'] ?><br>
                 </td>
                 <td>                 
                 <!-- Butões para abrir o modal -->  
-                <button class="btn btn-warning" data-title="Edit" data-toggle="modal" href="#myModalEditarEquip<?php echo $id_requisicao  ?>" >Editar</button>
-                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar</button>
+                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
+                
+                <button class="btn btn-danger"  data-toggle="modal"  href="#myModaleliminar<?php echo $id_requisicao  ?>">Cancelar requisição</button>
                 
                 </td> 
 
@@ -73,6 +83,9 @@
                                 </div>
                                         <div class="form-group">
                                             <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control " type="hidden" name="quantidade" id="quantidade" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>

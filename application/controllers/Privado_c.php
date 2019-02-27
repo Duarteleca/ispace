@@ -764,8 +764,8 @@ class Privado_c extends CI_Controller {
 			$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
 			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
 			
-			// Tenho de colocar a consulta de equipamentos para mostra na list drop dentro do modal
-			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+			// // Tenho de colocar a consulta de equipamentos para mostra na list drop dentro do modal
+			 $data['equipamentos']=$this->Privado_m->selecionarEquipamento();
 			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicao',$data);
@@ -806,15 +806,14 @@ class Privado_c extends CI_Controller {
 	{
 		$nome_Equipamento = $this->input->post("procuraEquipamento");
 		$quantidade_Equipamento = $this->input->post("quantidade");
-
-		// Ir à base de dados buscae a quantidade do equipamento inserido
+		
+		// Ir à base de dados busca a quantidade do equipamento inserido
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-
+	
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
-
 
 		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 
@@ -840,6 +839,10 @@ class Privado_c extends CI_Controller {
 					'requisicao_id' => $id_requisicao,
 					'quantidade' => $quantidade_Equipamento
 					);
+
+		
+
+				
 
 				$this->Privado_m->requisicao_has_equipamento($informacao);
 
@@ -898,16 +901,29 @@ class Privado_c extends CI_Controller {
 	// Mostrar todas as requisições para o admin
 
 
-	public function mostra_Requisicoes_admin()
+	public function mostra_Requisicoes_Equipamentos_admin()
 	{
 		
 		{
-			$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
-			$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
-
 			
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
+		
 			$this->load->view('templates/header');
-			$this->load->view('publico/Requisicoes_admin',$data);
+			$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
+			$this->load->view('templates/Footer');
+			
+		}
+		
+	}
+
+	public function mostra_Requisicoes_Salas_admin()
+	{
+		
+		{
+			
+			$data['salas_requisitass']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicoes_salas_admin',$data);
 			$this->load->view('templates/Footer');
 			
 		}
@@ -915,18 +931,24 @@ class Privado_c extends CI_Controller {
 	}
 	
 	
-
+	// O admin apaga requisição
 	public function apaga_Requisicao_admin()
 	{
 
 		$id_requisição = $this->input->post('id_requisicao');
 		$this->Privado_m->elimina_requisicao($id_requisição);
 
+
+		// Quando uma requisicao é cancelada, pega na quantidade dos equipamentos
+		// que foram requisitados e volta a adicionar na tabela equipamentos.
+		$quantidade_Equipamento = $this->input->post();
+
+
 		// Carrego as views
-		$this->load->view('templates/Header');
-		$this->load->view('publico/Home');
-		$this->load->view('templates/Footer');
-		redirect('Requisicoes_admin', 'refresh');
+		// $this->load->view('templates/Header');
+		// // $this->load->view('publico/Requisicoes_salas_admin');
+		// $this->load->view('templates/Footer');
+		redirect('Requisicoes_salas_admin', 'refresh');
 	}
 
 

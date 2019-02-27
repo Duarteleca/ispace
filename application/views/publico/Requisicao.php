@@ -10,9 +10,7 @@
             <tr>
                 <th>Data inicio/fim</th>
                 <th>Hora inicio/fim</th>
-                <th>Nome Sala</th> 
-               
-
+                <th>Nome Sala</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -25,7 +23,8 @@
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-            <?php $nome_sala = $row['nome'];  ?>
+            <?php $hora_fim = $row['nome'];  ?>
+
             
 
 
@@ -39,11 +38,12 @@
                 
                 <td class="texto ">
                     <?php echo $row['hora_inicio'] ?><br>
-                    <?php echo $row['hora_fim'] ?>
+                    <?php echo $row['hora_fim'] ?>              
                 </td>
-                <td class="texto ">
-                    <?php echo $row['nome'] ?><br>
+                <td>
+                    <?php echo $row['nome'] ?>
                 </td>
+               
                 <td>                 
                 <!-- Butões para abrir o modal -->  
                 <button class="btn btn-success btn" data-toggle="modal" href="#myModalAdicionarEquip<?php echo $id_requisicao  ?>">Adicionar Equipamento</button>
@@ -66,7 +66,6 @@
                             </div>
 
                             <div class="modal-body">
-                                <label for="exampleInputEmail1">Id Requisição</label>
                                 <div class="form-group">
                                     <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
@@ -116,10 +115,7 @@
                                 <div class="form-group">
                                     <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nome Sala</label>
-                                    <input disabled class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $nome_sala  ?>">
-                                </div>           
+                                      
 
                                 <!-- <div class="form-group">
                                     <label for="exampleInputEmail1">Data início</label>

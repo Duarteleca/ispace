@@ -84,7 +84,10 @@
                             <a class="nav-link" href="<?php echo base_url('Equipamento_admin')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Requisicoes_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições</a>
+                            <a class="nav-link" href="<?php echo base_url('Requisicoes_salas_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições Salas</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Equipamentos Requisitados</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
