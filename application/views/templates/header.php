@@ -75,7 +75,7 @@
                            
                           </li>
                         
-                      <?php }else if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
+                          <?php }else if(($this->session->userdata("usuario_logado")[0]['tipo'] == 1) || ($this->session->userdata("usuario_logado")[0]['tipo'] == 2) )  {  ?>
 
                       <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
@@ -89,9 +89,12 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Equipamentos Requisitados</a>
                           </li>
+                          <?php  if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('Privado_c/users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
+                          <?php } ?> 
+                          
                       <?php }else  {  ?>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
@@ -103,7 +106,7 @@
                             <a class="nav-link" href="<?php echo base_url('Requisicao')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Contacto')?>"><i class="fa fa-users fa-lg"></i> Contacto</a>
+                            <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_user')?>"><i class="fa fa-users fa-lg"></i> Equipamentos Requisitados</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Perfil')?>"> <i class="fa fa-user fa-lg"></i>Perfil</a>

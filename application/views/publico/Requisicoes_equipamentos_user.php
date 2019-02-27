@@ -33,6 +33,8 @@
             <?php $quantidade = $row['quantidade'];  ?>
             <?php $nome_User = $row['nomeuser'];  ?>
             <?php $equipamento_id = $row['equipamento_id']; ?>
+            <?php $id_requisicao_equipamento = $row['idreqequip']; ?>
+            
             
 
 
@@ -94,13 +96,16 @@
                                         <div class="form-group">
                                             <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
                                         </div>
+                                        <div class="form-group">
+                                            <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value ="<?php echo $id_requisicao_equipamento ?>">
+                                        </div>
                                         
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar este equipamento dessa requisição ?</p>
                                             </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-info" data-dismiss="modal">Voltar</button>
-                                                    <button type="submit" class="btn btn-danger">Cancelar</button>
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
                                                 </div>
                             <?php echo form_close() ?>
                         </div>

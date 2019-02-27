@@ -512,8 +512,6 @@ class Privado_c extends CI_Controller {
 			);
 
 
-
-
 			$this->Privado_m->atualiza_utilizador($data,$email);
 			$data['error'] = 'Alteração do nome e foto com pass'; 
 			$this->load->view('templates/header');
@@ -719,7 +717,7 @@ class Privado_c extends CI_Controller {
 			
 		}
 
-		// Fazer requisição
+		// Fazer requisição de sala
 
 		public function requisitar_Sala()
 		{
@@ -731,6 +729,9 @@ class Privado_c extends CI_Controller {
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
+sss
+
+			if()
 		
 
 			$data = array(
@@ -799,8 +800,7 @@ class Privado_c extends CI_Controller {
 
 
 
-		// adicionar_Equipamento_Requisito
-
+	// Adiciona equipamentos à requesição
 	public function adicionar_Equipamento_Requisito()
 
 	{
@@ -811,7 +811,6 @@ class Privado_c extends CI_Controller {
 		
 
 		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-	
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
 
@@ -846,13 +845,15 @@ class Privado_c extends CI_Controller {
 
 				$this->Privado_m->requisicao_has_equipamento($informacao);
 
-
+				
 			
 
 		}else{
-			echo 'erro';
+			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
 
 		}
+
+		redirect('Requisicao', 'refresh');
 
 	}
 
@@ -895,7 +896,6 @@ class Privado_c extends CI_Controller {
 		$this->Privado_m->edita_Requisicao($id_requisicao,$data);
 
 
-
 	}
 
 	// Mostrar todas as requisições para o admin
@@ -903,31 +903,37 @@ class Privado_c extends CI_Controller {
 
 	public function mostra_Requisicoes_Equipamentos_admin()
 	{
-		
-		{
-			
+
 			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
-		
+			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
 			$this->load->view('templates/Footer');
-			
-		}
-		
+
 	}
 
+	// Mostrar os equipamentos requisitados pelo user 
+	public function mostra_Requisicoes_Equipamentos_user()
+	{
+			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
+			
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($user_id);
+			
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicoes_equipamentos_user',$data);
+			$this->load->view('templates/Footer');
+
+	}
+
+	// Pesquisa salas requisitadas
 	public function mostra_Requisicoes_Salas_admin()
 	{
-		
-		{
-			
+
 			$data['salas_requisitass']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);
 			$this->load->view('templates/Footer');
-			
-		}
-		
+
 	}
 	
 	
@@ -953,5 +959,76 @@ class Privado_c extends CI_Controller {
 
 
 
+	// Cancela equipamentos das requisições
+	public function cancelar_equipamento_requisicao_admin()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$this->Privado_m->cancelar_equipamento_requisicao_admin_m($id_requisição,$id_equipamento);
+			
+		
+			$this->load->view('templates/header');
+			// $this->load->view('publico/Requisicoes_equipamentos_admin',$data);
+			$this->load->view('templates/Footer');
+
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_admin', 'refresh');
+		
+		
+	}
+
+
+	// Cancela o equipamento requesitado e faz update à quantidade dos equipamentos
+	public function cancelar_equipamento_requisicao_user()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
+		
+	
+
+
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento($id_equipamento);
+
+		$quantidade = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd = $array_Equipamento_requesito[0]['id'];
+
+
+		// post da quantidade que foi requisitada para depois somar e voltar a fazer update
+		$quantidade_requisitada = $this->input->post('quantidade');	
+		
+		// Soma a quantidade atual dos equipamentos à quantidade que foi requisitada
+		$quantidade_final = $quantidade + $quantidade_requisitada; 
+		
+
+		$data = array(
+					
+					'quantidade' => $quantidade_final
+					);
+
+		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+		$this->Privado_m->atualiza_Equipamento_depois_cancelar($data,$id_equipamento_bd);
+
+
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$this->Privado_m->cancelar_equipamento_requisicao_user_m($id_requisicao_equipamento);
+			
+			$this->load->view('templates/header');
+			// $this->load->view('publico/Requisicoes_equipamentos_admin',$data);
+			$this->load->view('templates/Footer');
+
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_user', 'refresh');
+		
+		
+	}
+	
+
+	
 
 }

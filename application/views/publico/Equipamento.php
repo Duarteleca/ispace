@@ -3,7 +3,7 @@
 <br><br><br>
     <div class="form-group col-md-12">
         <?php echo form_open('Publico_c/mostra_equipamento') ?>
-            <select style="color:black" name="search_equipamento" class="form-control">
+            <select style="color:black" name="procura_equipamento" class="form-control">
                 <option value="" selected>Tipo de Equipamento</option>
                     <?php foreach($equipamento as $rows){
                     echo "<option value=".$rows['nome'].">".$rows['nome'] ."</option>";
