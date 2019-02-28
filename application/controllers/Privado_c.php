@@ -901,9 +901,22 @@ class Privado_c extends CI_Controller {
 
 		//Se os valores inseridos fizerem match, quer dizer que não pode alterar para tal dia e hora, se nao, altera. 
 		$teste1 = $this->Privado_m->verifica_requisicao_disponibilidade2($data_inicio,$hora_inicio,$id_sala);
+		var_dump($teste1);
 		
-		if($teste1 == null ){
+		
+			var_dump($data_inicio);
+			var_dump($hora_inicio);
+		// $id_sala = $array_sala[0]['id'];
+		if($teste1[0]['data_fim'] == $data_inicio){
+
 			
+
+			if($teste1[0]['hora_fim'] == $hora_inicio){
+
+				// Erro
+			$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+			}else{
+
 			// Dados referentes à edição da requisição
 			$data = array(
 				'data_inicio' => $data_inicio,
@@ -915,18 +928,31 @@ class Privado_c extends CI_Controller {
 			// Atualiza a tabela das requisições
 			$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
 			$this->session->set_flashdata("requisicao_sucesso", "Requisição feita com sucesso!");
-			
+
+			}
 
 		}else{
-			// Erro
-			$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
-			}
+			// Dados referentes à edição da requisição
+			$data = array(
+				'data_inicio' => $data_inicio,
+				'data_fim' => $data_fim ,
+				'hora_inicio' => $hora_inicio,
+				'hora_fim' => $hora_fim,
+				);
+							
+			// Atualiza a tabela das requisições
+			$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
+			$this->session->set_flashdata("requisicao_sucesso", "Requisição feita com sucesso!");
+		
+			
+			
 
 		}
 			// Refresh à página
-			redirect('Requisicao', 'refresh');
-
+			// redirect('Requisicao', 'refresh');
 	}
+	}
+	
 
 	// Mostrar todas as requisições para o admin
 	public function mostra_Requisicoes_Equipamentos_admin()
@@ -944,10 +970,11 @@ class Privado_c extends CI_Controller {
 	// Mostrar os equipamentos requisitados pelo user 
 	public function mostra_Requisicoes_Equipamentos_user()
 	{
+			$slug = $this->input->post('pesquisar');
 			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
 			
 			// Trás no array todos os equipamentos requisitados pelo user (id)
-			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($user_id);
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($user_id,$slug);
 			
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_equipamentos_user',$data);
@@ -1046,7 +1073,6 @@ class Privado_c extends CI_Controller {
 			redirect('Requisicoes_equipamentos_user', 'refresh');	
 		
 	}
-
 	
 	
 

@@ -2,7 +2,14 @@
     <br>
     <br>
     <br>
-    
+
+                <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
+                    <div class="form-group col-xs-3 col-md-3" ></div>
+                    <div class="form-group col-xs-6 col-md-6" >
+                        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
+                    </div>
+                        <button type="submit" id="search" class="btn btn-success" name="submit" >Search</button>
+                <?php echo form_close() ?>
 
     <!-- <div class="form-group col-md-12"> -->
 
@@ -15,7 +22,6 @@
                 <th>Requisitado por:</th>
                 <th>Quantidade</th>
                 <th>Nome Equip</th>
-                <th>id user</th>
                
 
                 <th>Ação</th>
@@ -62,12 +68,12 @@
                 <td class="texto ">
                     <?php echo $row['equipnome'] ?><br>
                 </td>
-                <td class="texto ">
-                    <?php echo $row['utilizador_id'] ?><br>
-                </td>
                 <td>                 
-                <!-- Butões para abrir o modal -->  
-                <button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
+                <!-- Butões para abrir o modal --> 
+                <div><button class="btn btn-warning"  data-toggle="modal"  href="#myModaleditar<?php echo $id_requisicao  ?>">Editar Equipamento</button></div>
+                
+                <div><button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button></div>
+                
                 
                
                 
@@ -90,16 +96,16 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
+                                            <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="quantidade" id="quantidade" value ="<?php echo $quantidade ?>">
+                                            <input class="form-control " type="hidden" name="quantidade" id="quantidade" value ="<?php echo $quantidade ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
+                                            <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value ="<?php echo $id_requisicao_equipamento ?>">
+                                            <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value ="<?php echo $id_requisicao_equipamento ?>">
                                         </div>
                                         
                                             <div class="modal-body">

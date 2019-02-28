@@ -19,17 +19,16 @@ class Privado_m extends CI_Model
             return $query->result_array();
         }
         else{
-            echo 'erro';
-            // $this->db->select('automovel.id "id",automovel.disponibilidade,automovel.matricula,cor.nome "cor",modelo.nome "modelo",fabricante.nome "fabricante"');
-            // $this->db->from('automovel');
-            // $this->db->join('modelo', 'modelo.id = automovel.modelo_id');
-            // $this->db->join('cor', 'cor.id = automovel.cor_id');
-            // $this->db->join('fabricante', 'fabricante.id = modelo.fabricante_id');
-            // $this->db->like('fabricante.nome',$slug);
+            'erro' ;
+            // $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
+            // $this->db->from('sala');
+            // $this->db->join('tipologia', 'tipologia.sala_id = sala.id');
+            // $this->db->join('requisicao', 'requisicao.tipologia_id = tipologia.id');
+            // $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.id = requisicao.id');
+            // $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
+            // $this->db->like('equipamento.nome',$slug);
             // // se quisermos multiplas procuras colocamos or_like.
-            // $this->db->or_like('modelo.nome',$slug);
-            // $this->db->or_like('cor.nome',$slug);
-            // $this->db->or_like('automovel.matricula',$slug);
+
             // $query = $this->db->get();
             // return $query->result_array();
        
@@ -227,9 +226,6 @@ class Privado_m extends CI_Model
         return $mostrar_dados->result_array();
      }
 
-
-     
-
       // Cancela equipamento da requisiçao (admin)
     public function cancelar_equipamento_requisicao_admin_m($id_requisição,$id_equipamento)
     {
@@ -248,9 +244,8 @@ class Privado_m extends CI_Model
 
 
     // Pesquisa as salas requisitadas por id do user
-    public function mostrar_Requisicoes_Equipamentos_user($user_id)
+    public function mostrar_Requisicoes_Equipamentos_user($user_id,$slug)
     {
-       
 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome,requisicao_has_equipamento.quantidade,
@@ -263,8 +258,13 @@ class Privado_m extends CI_Model
 
         $this->db->where('utilizador_id',$user_id);
         
+        $this->db->like('utilizador.nome',$slug);
+        // se quisermos multiplas procuras colocamos or_like.
+        $this->db->or_like('requisicao_has_equipamento.quantidade',$slug);
+        $this->db->or_like('tipologia.nome',$slug);
+        $this->db->or_like('requisicao.data_inicio',$slug);
+        $this->db->or_like('equipamento.nome',$slug);
 
-        
         $query = $this->db->get();
         return $query->result_array();
      }
@@ -322,16 +322,28 @@ class Privado_m extends CI_Model
           return $dadosrequisicao->result_array();
       }
      
-
-     // Mostra lista todas as salas que existem   
-    public function selecionarSala()
+          // Pesquisa as salas requisitadas por id do user
+    public function mostrar_Requisicoes_Equipamentos2($slug)
     {
-           
-        $query=$this->db->get('sala');
+       
 
-        return $query->result_array();
+        $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
+        requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome,requisicao_has_equipamento.quantidade,
+        requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome"');
+        $this->db->from('requisicao');
+        $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
+        $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+        $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
+        $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
+        $this->db->like('utilizador.nome',$slug);
+        // se quisermos multiplas procuras colocamos or_like.
+        $this->db->or_like('requisicao_has_equipamento.quantidade',$slug);
+        $this->db->or_like('tipologia.nome',$slug);
+        $this->db->or_like('requisicao.data_inicio',$slug);
         
-    }
+        $query = $this->db->get();
+        return $query->result_array();
+     }
 
     
 }
