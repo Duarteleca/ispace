@@ -22,12 +22,12 @@
             <?php foreach ($salas_requisitass as $row){?>
             <?php $id_requisicao = $row['id'];  ?>        
             <?php $id_user = $row['utilizador_id'];  ?>
-            <?php $id_user = $row['tipologia_id'];  ?>    
+            <?php $id_tipologia = $row['tipologia_id'];  ?>    
             <?php $data_inicio = $row['data_inicio'];  ?>
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-      
+                
 
 
 

@@ -233,6 +233,15 @@ class Publico_c extends CI_Controller {
 			
 				$post_image = $_FILES['postimage']['name'];
 				
+
+				if($post_image == null){
+
+					$post_image = 'semimagem.png';
+		
+				}else{
+					$post_image = $_FILES['postimage2']['name'];
+		
+				}
 				$endereco ='assets/img/utilizadores/';
 				
 				$imagem = $endereco.$post_image;

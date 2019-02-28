@@ -50,35 +50,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Pages_c/view';
-$route['Salas']= 'Publico_c/mostra_salas';
+
 
 $route['Sala_admin']= 'Privado_c/mostra_salas';
 $route['Inserir_sala']= 'Privado_c/inserir_sala';
 $route['Perfil']= 'Privado_c/atualizar_perfil';
 $route['Users']= 'Privado_c/users';
-
-
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
 $route['Inserir_equipamento']= 'Privado_c/inserir_equipamento';
-
-
 $route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
-
-
-
-
 $route['Requisicao']= 'Privado_c/mostra_salas_requisicao';
 $route['Equipamento_requisito']= 'Privado_c/mostra_equipamento_requisitar/$1';
-
 $route['adicionar_Equipamento_Requisito']= 'Privado_c/adicionar_Equipamento_Requisito';
 $route['Requisicoes_equipamentos_admin']= 'Privado_c/mostra_Requisicoes_Equipamentos_admin';
 $route['Requisicoes_salas_admin']= 'Privado_c/mostra_Requisicoes_Salas_admin';
-
 $route['Requisicoes_equipamentos_user']= 'Privado_c/mostra_Requisicoes_Equipamentos_user';
+$route['users']= 'Privado_c/users';
 
-
-
-
+$route['Salas']= 'Publico_c/mostra_salas';
 $route['Registo']= 'Publico_c/registar_user';
 $route['Contacto']= 'Publico_c/Contacto';
 $route['Recuperar']= 'Publico_c/Recuperar_pass';
