@@ -196,8 +196,16 @@ class Privado_m extends CI_Model
 
     public function mostra_Salas_Requesitadas_admin()
     { 
-        $query=$this->db->get('requisicao');
-        return $query->result_array();         
+        $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
+        requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome "tiponome",requisicao_has_equipamento.quantidade,
+        requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome"');
+        $this->db->from('requisicao');
+        $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
+        $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+        $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
+        $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
+        $query = $this->db->get();
+        return $query->result_array();        
     }
 
     

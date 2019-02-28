@@ -729,9 +729,7 @@ class Privado_c extends CI_Controller {
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
-sss
 
-			if()
 		
 
 			$data = array(
@@ -853,7 +851,7 @@ sss
 
 		}
 
-		redirect('Requisicao', 'refresh');
+		// redirect('Requisicao', 'refresh');
 
 	}
 
