@@ -2,6 +2,21 @@
 <div class="container mostrasalas">
 <br><br><br>
 
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if($this->session->flashdata("erro_hora_requisicao")) :?>
+                                        <p class ="alert alert-danger"><?= $this->session->flashdata("erro_hora_requisicao")   ?></p>
+                                        <?php endif ?>
+                                        <!-- Mensagem de err quando não consegue dar login -->
+     <?php if($this->session->flashdata("requisicao_sucesso")) :?>
+                                        <p class ="alert alert-success"><?= $this->session->flashdata("requisicao_sucesso")   ?></p>
+                                        <?php endif ?>
+                                        <!-- Mensagem de err quando não consegue dar login -->
+     <?php if($this->session->flashdata("erro_requisicao")) :?>
+                                        <p class ="alert alert-danger"><?= $this->session->flashdata("erro_requisicao")   ?></p>
+                                        <?php endif ?>
+
+
+
     <div class="form-group col-md-12">
         <?php echo form_open('Publico_c/mostra_salas') ?>
         <select style="color:black" name="search_sala" class="form-control">
@@ -117,9 +132,9 @@
                                                        
                                                        <div class="form-group">
                                                             <label for="from">De: </label>
-                                                            <input type="text" id="from" name="data_inicio" value="<?php echo date('Y-m-d'); ?>">
+                                                            <input type="text" id="from" name="data_inicio" value="">
                                                             <label for="to"> até </label>
-                                                            <input type="text" id="to" name="data_fim" value="<?php echo date('Y-m-d'); ?>">
+                                                            <input type="text" id="to" name="data_fim" value="">
                                                             
                                                         </div>
 
@@ -176,6 +191,7 @@
   $(function() {
     var dateToday = new Date();
 var dates = $("#from, #to").datepicker({
+    dateFormat: 'yy-mm-dd',
     defaultDate: "today",
     changeMonth: true,
     numberOfMonths: 2,

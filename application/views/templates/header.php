@@ -77,9 +77,10 @@
                         
                           <?php }else if(($this->session->userdata("usuario_logado")[0]['tipo'] == 1) || ($this->session->userdata("usuario_logado")[0]['tipo'] == 2) )  {  ?>
 
-                      <li class="nav-item">
+                          <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
+                          
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Equipamento_admin')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
@@ -91,7 +92,7 @@
                           </li>
                           <?php  if($this->session->userdata("usuario_logado")[0]['tipo'] == 1)  {  ?>
                           <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Privado_c/users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
+                            <a class="nav-link" href="<?php echo base_url('users')?>"><i class="fa fa-users fa-lg"></i> Users</a>
                           </li>
                           <?php } ?> 
                           

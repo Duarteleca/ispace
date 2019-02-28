@@ -7,6 +7,7 @@
 
     <br><br><br>
 
+    
           <div class="row">
               <div class="col-xs-6 col-md-6">
                  <a href="<?php echo base_url('Inserir_sala')?>" data-placement="top" data-toggle="tooltip" title="Insert"><button class="btn btn-info" data-title="Insert" data-toggle="modal" data-target="#insert" >Inserir nova sala</span></button></a>
