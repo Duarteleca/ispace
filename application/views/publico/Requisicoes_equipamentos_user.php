@@ -3,7 +3,6 @@
     <br>
     <br>
     
-<<<<<<< HEAD
      
                 <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
                     <div class="form-group col-xs-3 col-md-3" ></div>
@@ -20,11 +19,9 @@
     <?php endif ?>
 
     
-=======
     <?php if($this->session->flashdata("erro_quantidade")) :?>
                                         <p class ="alert alert-danger"><?= $this->session->flashdata("erro_quantidade")   ?></p>
                                         <?php endif ?>
->>>>>>> duarte
     <!-- <div class="form-group col-md-12"> -->
 
     <table id="example" class="display" style="width:100%">
@@ -82,17 +79,9 @@
                     <?php echo $row['equipnome'] ?><br>
                 </td>
                 <td>                 
-<<<<<<< HEAD
-                <!-- Butões para abrir o modal --> 
-                <div><button class="btn btn-warning"  data-toggle="modal"  href="#myModaleditar<?php echo $id_requisicao  ?>">Editar Equipamento</button></div>
-                
-                <div><button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button></div>
-                
-=======
                 <!-- Butões para abrir o modal -->  
                 <button class="btn btn-danger"  data-toggle="modal"  href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
                 <button class="btn btn-warning" data-title="Edit" data-toggle="modal" href="#myModalEditarEquip<?php echo $id_requisicao  ?>">Editar</button>
->>>>>>> duarte
                 
                
                 
