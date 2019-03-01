@@ -12,6 +12,7 @@
                 <th>Data inicio/fim</th>
                 <th>Hora inicio/fim</th>   
                 <th>Nome Sala</th>
+                <th>Requisitado por:</th>
             
                
 
@@ -43,7 +44,10 @@
                     <?php echo $row['hora_fim'] ?>
                 </td>
                 <td>
-                <?php echo $row['utilizador_id'] ?><br>
+                <?php echo $row['tiponome'] ?><br>
+                </td>
+                <td>
+                <?php echo $row['nomeuser'] ?><br>
                 </td>
                
       

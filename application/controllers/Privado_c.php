@@ -1039,6 +1039,9 @@ class Privado_c extends CI_Controller {
 	public function mostra_Requisicoes_Equipamentos_admin()
 	{
 
+
+
+
 			// Trás no array todos os dados das das requisições juntamente com os equipamentos
 			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
 			
@@ -1156,6 +1159,120 @@ class Privado_c extends CI_Controller {
 			redirect('Requisicoes_equipamentos_user', 'refresh');	
 		
 	}
+<<<<<<< HEAD
+=======
+
+
+	public function editar_equipamento_requisicao_user()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$quantidade_modal = $this->input->post('quantidade');	
+		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos nas requisiçoes
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento_requisito($id_equipamento);
+
+		$quantidade_bd_requisita = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd = $array_Equipamento_requesito[0]['equipamento_id'];
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos 
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento($id_equipamento);
+
+		$quantidade_equipamento = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd_equipamento = $array_Equipamento_requesito[0]['id'];
+
+// se for menor que a base de dados 
+$diferenca=0;
+
+$diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
+
+$quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
+
+	if($quantidade_final_equipamento > $diferenca){
+	// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+	$data_requisita = array(
+		
+				'quantidade' => $quantidade_modal
+				);
+
+		
+			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+			$data_equipamento = array(
+		
+						'quantidade' => $quantidade_final_equipamento
+						);
+
+			// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+			$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
+			$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
+
+
+		}else{
+			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
+		}
+			
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_user', 'refresh');	
+		
+	}
+
+
+	public function editar_equipamento_requisicao_admin()
+	{
+		
+		$id_requisição = $this->input->post('id_requisicao');
+		$id_equipamento = $this->input->post('id_equipamento');
+		$quantidade_modal = $this->input->post('quantidade');	
+		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos nas requisiçoes
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento_requisito($id_equipamento);
+
+		$quantidade_bd_requisita = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd = $array_Equipamento_requesito[0]['equipamento_id'];
+
+		// Vai à base de dados buscar a quantidade atual dos equipamentos 
+		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento($id_equipamento);
+
+		$quantidade_equipamento = $array_Equipamento_requesito[0]['quantidade'];
+		$id_equipamento_bd_equipamento = $array_Equipamento_requesito[0]['id'];
+
+// se for menor que a base de dados 
+			 $diferenca=0;
+			$quantidade_final=$quantidade_modal;
+			$diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
+			$quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
+
+			if($quantidade_final_equipamento > $diferenca){
+			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+		$data_requisita = array(
+	
+			'quantidade' => $quantidade_final
+			);
+
+	
+		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+		$data_equipamento = array(
+	
+					'quantidade' => $quantidade_final_equipamento
+					);
+
+		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+		$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
+		$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
+
+
+		}else{
+			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
+		}
+			
+			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
+			redirect('Requisicoes_equipamentos_admin', 'refresh');	
+		
+	}
+>>>>>>> duarte
 	
 	
 
