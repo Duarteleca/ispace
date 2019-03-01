@@ -739,7 +739,7 @@ class Privado_c extends CI_Controller {
 			}else{
 			
 			// Verifica se existe datas e horas iguais ou interalos.
-			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$hora_inicio,$id_sala);
+			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
 			
 			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
@@ -1073,27 +1073,28 @@ class Privado_c extends CI_Controller {
 
 // se for menor que a base de dados 
 $diferenca=0;
-$quantidade_final=$quantidade_modal;
+
 $diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
+
 $quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
 
-if($diferenca_quantidade > $diferenca){
-// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
-$data_requisita = array(
-	
-			'quantidade' => $quantidade_final
-			);
+	if($quantidade_final_equipamento > $diferenca){
+	// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+	$data_requisita = array(
+		
+				'quantidade' => $quantidade_modal
+				);
 
-	
-		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
-		$data_equipamento = array(
-	
-					'quantidade' => $quantidade_final_equipamento
-					);
+		
+			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+			$data_equipamento = array(
+		
+						'quantidade' => $quantidade_final_equipamento
+						);
 
-		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
-		$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
-		$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
+			// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
+			$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
+			$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
 
 
 		}else{
@@ -1127,12 +1128,12 @@ $data_requisita = array(
 		$id_equipamento_bd_equipamento = $array_Equipamento_requesito[0]['id'];
 
 // se for menor que a base de dados 
-			$diferenca=0;
+			 $diferenca=0;
 			$quantidade_final=$quantidade_modal;
 			$diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
 			$quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
 
-			if($diferenca_quantidade > $diferenca){
+			if($quantidade_final_equipamento > $diferenca){
 			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
 		$data_requisita = array(
 	

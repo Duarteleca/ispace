@@ -233,7 +233,7 @@
             defaultDate: "today",
             changeMonth: true,
             numberOfMonths: 2,
-            minDate: dateToday,
+            // minDate: dateToday,
             onSelect: function (selectedDate) {
                 var option = this.id == "from" ? "minDate" : "maxDate",
                     instance = $(this).data("datepicker"),
