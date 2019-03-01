@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-user bigicon"></i></span>
                             <div class="col-md-8">
                                 <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" readonly placeholder="username" class="form-control">
                             </div>
@@ -32,6 +32,13 @@
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
                             <div class="col-md-8">
                                 <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>" readonly placeholder="Endereço de Email" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <div class="col-md-8">
+                            <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmar atual Password" class="form-control">
                             </div>
                         </div>
                    
@@ -56,12 +63,7 @@
                                     <input type="file" name="postimage" id="fileToUpload">
                                 </div>
                         </div>
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-                            <div class="col-md-8">
-                            <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmação de Password" class="form-control">
-                            </div>
-                        </div>
+                        
 
         
                         <div class="form-group">

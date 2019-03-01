@@ -134,7 +134,7 @@ class Privado_m extends CI_Model
     }
 
     // Pesquisa as salas requisitadas por id do user
-    public function mostrar_Requisicoes_Equipamentos()
+    public function mostrar_Requisicoes_Equipamentos($id_requisição)
     {
        
 
@@ -166,6 +166,7 @@ class Privado_m extends CI_Model
          $dadosequipamento = $this->db->get("equipamento");
          return $dadosequipamento->result_array();
      }
+
 
 
      // Update Equipamento (adicionar equipamento à requisição)
@@ -292,7 +293,7 @@ class Privado_m extends CI_Model
     
     
      // Mostra dados do equipamento que foi pedido na requesição
-     function busca_id_requisicao_equipamento($id_requisição,$id_equipamento)
+     function busca_id_requisicao_equipamento()
      {
          $this->db->where('id',$id_equipamento);
          $dadosequipamentoreq = $this->db->get("equipamento");
@@ -301,26 +302,35 @@ class Privado_m extends CI_Model
 
 
      // Verifica se a sala está diponivel para tal dia e hora
-     function verifica_requisicao_disponibilidade($data_inicio,$hora_inicio,$id_sala)
+ 
+        
+       // Verifica se a sala está diponivel para tal dia e hora
+     function verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala)
      {
 
-         $this->db->where('data_fim <',$data_inicio);
-         $this->db->where('hora_fim <',$hora_inicio);
+         $this->db->where('data_inicio >=',$data_inicio);
+         $this->db->where('hora_fim >=',$hora_inicio);
+         $this->db->where('data_fim <=',$data_fim);
+         $this->db->where('hora_inicio <=',$hora_fim);
          $this->db->where('tipologia_id',$id_sala);
          $dadosrequisicao = $this->db->get("requisicao");
          return $dadosrequisicao->result_array();
      }
+     
 
-      // Verifica se a sala está diponivel para tal dia e hora (EDITAR)
-      function verifica_requisicao_disponibilidade2($data_inicio,$hora_inicio,$id_sala)
-      {
+    //   // Verifica se a sala está diponivel para tal dia e hora (EDITAR)
+    //   function verifica_editar_requisicao_disponibilidade($data_inicio,$hora_inicio,$id_sala)
+    //   {
  
-          $this->db->where('data_fim >=',$data_inicio);
-          $this->db->where('hora_fim >=',$hora_inicio);
-          $this->db->where('tipologia_id',$id_sala);
-          $dadosrequisicao = $this->db->get("requisicao");
-          return $dadosrequisicao->result_array();
-      }
+
+    //     $query=$this->db->get('requisicao');
+    //         return $query->result_array(); 
+    //     //   $this->db->where('data_fim ',$data_inicio);
+    //     //   $this->db->where('hora_fim ',$hora_inicio);
+    //     //   $this->db->where('tipologia_id',$id_sala);
+    //     //   $dadosrequisicao = $this->db->get("requisicao");
+    //     //   return $dadosrequisicao->result_array();
+    //   }
      
           // Pesquisa as salas requisitadas por id do user
     public function mostrar_Requisicoes_Equipamentos2($slug)
