@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             <?php foreach ($salas_requisitass as $row){?>
-            <?php $id_requisicao = $row['id'];  ?>        
+            <?php $id_requisicao = $row['idreq'];  ?>        
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_tipologia = $row['tipologia_id'];  ?>    
             <?php $data_inicio = $row['data_inicio'];  ?>
@@ -115,13 +115,24 @@
                                 </div>
 
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="from">De: </label>
                                     <input type="text" id="from" name="data_inicio" value="<?php echo $data_fim ?>">
                                     <label for="to"> até </label>
                                     <input type="text" id="to" name="data_fim" value="<?php echo $data_fim ?>">
 
-                                </div>
+                                </div> -->
+
+                                <div class="form-group col-md-6">
+            <label for="">Data inicio</label>
+            <input type="date" id="bida" name="data_inicio" style="color:black;" required value="<?php echo $data_inicio ?>"
+             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+        </div>
+        <div class="form-group col-md-6">
+            <label for="">Data Fim</label>
+            <input type="date" id="biday" name="data_fim" style="color:black;"  onchange='compareDates()' value="<?php echo $data_fim ?>"
+             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+        </div>
 
                                 <div class="form-group">
                                     <label for="from">Hora de inicio: </label>
@@ -154,7 +165,7 @@
 </table>
 </div>
 
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"
+<!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"
 />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -178,4 +189,17 @@
             }
         });
     });
+</script> -->
+
+<script>
+
+function compareDates() {
+  var startDate = Date.parse(document.getElementById('biday').value);
+  var today = Date.parse(document.getElementById('bida').value);
+  if (!isNaN(startDate) && startDate < today) {
+    alert("Data inicial maior que a final");
+  }
+}
+
+
 </script>

@@ -130,18 +130,6 @@
                                         </div>
 
                                                        
-<<<<<<< HEAD
-                                                       <div class="form-group col-md-6">
-                                        <label for="">Data de inicio</label>
-                                        <input type="date" id="start" name="data_inicio" style="color:black;" required
-                                        min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="">Data de entrega</label>
-                                        <input type="date" id="start" name="data_fim" style="color:black;" required
-                                        min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-                                    </div>
-=======
                                                        <!-- <div class="form-group">
                                                             <label for="from">De: </label>
                                                             <input type="text" id="from" name="data_inicio" value="<?php echo date('Y-m-d'); ?>">
@@ -154,14 +142,13 @@
                                                         <div class="form-group col-md-6">
             <label for="">Data de inicio</label>
             <input type="date" id="bida" name="data_inicio" style="color:black;" required
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+31 days')); ?>" >
+             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
         </div>
         <div class="form-group col-md-6">
             <label for="">Data de entrega</label>
             <input type="date" id="biday" name="data_fim" style="color:black;"  onchange='compareDates()'
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+31 days')); ?>" >
+             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
         </div>
->>>>>>> duarte
 
                                                         <!-- <div class="form-group">
                                                        
@@ -204,9 +191,6 @@
     <?php }  ?>
 </div>
 
-<<<<<<< HEAD
-  
-=======
   
 
 <!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -247,4 +231,3 @@ function compareDates() {
 
 
 </script>
->>>>>>> duarte

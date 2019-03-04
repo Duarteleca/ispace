@@ -947,7 +947,7 @@ class Privado_c extends CI_Controller {
 		$id_requisição = $this->input->post('id_requisicao');
 		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
 
-		$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos($id_requisição);
+		$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
 		// var_dump($informaçao);
 
 
@@ -970,8 +970,8 @@ class Privado_c extends CI_Controller {
 			// var_dump($quantidade_equipamento_origem);
 			
 			for($c=0; $c<count($quantidade_equipamento_origem);$c++){
-				echo $quantidade_equipamento_origem[$c]['quantidade'];
-				echo $quantidade_equipamento_origem[$c]['id'];
+				// echo $quantidade_equipamento_origem[$c]['quantidade'];
+				// echo $quantidade_equipamento_origem[$c]['id'];
 				$quantidade_restante_origem = $quantidade_equipamento_origem[$c]['quantidade'];
 				$id_quantidade_restante_origem = $quantidade_equipamento_origem[$c]['id'];
 				// echo $quantidade_equipamento_origem[$i]['id'];
@@ -994,41 +994,6 @@ class Privado_c extends CI_Controller {
 		}
 		
 		}
-		
-	
-
-		
-		// $array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
-		// $quantidade_Atual = $array_Equipamento[0]['quantidade'];
-		// $id_Equipamento = $array_Equipamento[0]['id'];
-
-
-		// // Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
-
-		// if($quantidade_Equipamento<= $quantidade_Atual){
-		// 		$quantidade_Final = $quantidade_Atual - $quantidade_Equipamento;
-
-		// 		// Data referente ao equipamento
-		// 		$data = array(
-		// 		'id' => $id_Equipamento,
-		// 		'quantidade' => $quantidade_Final
-		// 		);
-			
-		// 		// faz update na quantidade do equipamento requisitado.
-		// 		$this->Privado_m->update_Equipamento($data,$id_Equipamento);
-
-
-
-		// $id_requisição = $this->input->post('id_requisicao');
-		// $this->Privado_m->elimina_requisicao($id_requisição);
-
-		// // Carrego as views
-		// $this->load->view('templates/Header');
-		// // $this->load->view('publico/Home');
-		// $this->load->view('templates/Footer');
-		// $this->session->set_flashdata("requisicao_cancelada_sucesso", "Requisição cancelada com sucesso");
-		// redirect('Requisicao', 'refresh');
-	
 }
 
 
@@ -1081,12 +1046,66 @@ class Privado_c extends CI_Controller {
 	public function apaga_Requisicao_admin()
 	{
 
-		$id_requisição = $this->input->post('id_requisicao');
-		$this->Privado_m->elimina_requisicao($id_requisição);
+// Se a requisição tiver equipamento reservado, guardo a quantidade do equipamento e o id do mesmo
+$id_requisição = $this->input->post('id_requisicao');
+// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
+
+$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
+// var_dump($informaçao);
+
+
+
+for($i=0; $i<count($informaçao);$i++){
+	// echo $informaçao[$i]['quantidade'];
+	// echo $informaçao[$i]['equipamento_id'];
+	//funçao para fazer update de quantidade
+	$id_equip = $informaçao[$i]['equipamento_id'];
+	// var_dump($id_equip); // 2 e 3
+
+	$nome_Equipamento = $informaçao[$i]['equipnome'];
+	// var_dump($nome_Equipamento);
+
+	$quantidade_passado = $informaçao[$i]['quantidade'];
+
+	
+	$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamento($nome_Equipamento);
+
+	// var_dump($quantidade_equipamento_origem);
+	
+	for($c=0; $c<count($quantidade_equipamento_origem);$c++){
+		// echo $quantidade_equipamento_origem[$c]['quantidade'];
+		// echo $quantidade_equipamento_origem[$c]['id'];
+		$quantidade_restante_origem = $quantidade_equipamento_origem[$c]['quantidade'];
+		$id_quantidade_restante_origem = $quantidade_equipamento_origem[$c]['id'];
+		// echo $quantidade_equipamento_origem[$i]['id'];
+		// $quantidade = $quantidade_equipamento_origem[$i]['quantidade'];
+		// $idorigem = $informaçao[$i]['id'];
+		// var_dump($quantidade);
+		// var_dump($quantidade_restante_origem);
+		// var_dump($id_quantidade_restante_origem);
+	
+	$quantidade_fazer_update = $quantidade_restante_origem + $quantidade_passado;
+	$id_Equipamento = $id_quantidade_restante_origem;
+
+	// var_dump($quantidade_fazer_update);
+	// var_dump($id_Equipamento);
+	$data = array(
+		'quantidade' => $quantidade_fazer_update,
+	);
+	$this->Privado_m->update_Equipamento($data,$id_Equipamento);
+
+}
+
+}
+
+
+
+		// $id_requisição = $this->input->post('id_requisicao');
+		// $this->Privado_m->elimina_requisicao($id_requisição);
 
 		// Quando uma requisicao é cancelada, pega na quantidade dos equipamentos
 		// que foram requisitados e volta a adicionar na tabela equipamentos.
-		$quantidade_Equipamento = $this->input->post();
+		// $quantidade_Equipamento = $this->input->post();
 
 		// Refresh da página
 		redirect('Requisicoes_salas_admin', 'refresh');
@@ -1159,8 +1178,6 @@ class Privado_c extends CI_Controller {
 			redirect('Requisicoes_equipamentos_user', 'refresh');	
 		
 	}
-<<<<<<< HEAD
-=======
 
 
 	public function editar_equipamento_requisicao_user()
@@ -1272,7 +1289,6 @@ $quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
 			redirect('Requisicoes_equipamentos_admin', 'refresh');	
 		
 	}
->>>>>>> duarte
 	
 	
 
