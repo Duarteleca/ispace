@@ -721,19 +721,6 @@ class Privado_c extends CI_Controller {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 		// Fazer requisição de sala
 		public function requisitar_Sala()
 		{
@@ -789,7 +776,7 @@ class Privado_c extends CI_Controller {
 
 
 
-		// Editar requisição
+		// Editar requisição user
 	public function edita_Requisicao()
 	{
 
@@ -813,10 +800,14 @@ class Privado_c extends CI_Controller {
 		
 		// Verifica se existe datas e horas iguais ou interalos.
 		$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-		
+		// var_dump($dados_Disponibilidade);
+		$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+
+		$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
+
 		// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 		// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
-		if($dados_Disponibilidade == null ){
+		if(($dados_Disponibilidade == null ) ||  ($id_user1 == $id_user2)) {
 			
 			// Busca o id do user
 			$id_user = $this->session->userdata("usuario_logado")[0]['id'];
@@ -842,7 +833,7 @@ class Privado_c extends CI_Controller {
 
 		}
 		// Refresh da página
-		redirect('Requisicao', 'refresh');
+		// redirect('Requisicao', 'refresh');
 		
 	}
 
@@ -860,6 +851,7 @@ class Privado_c extends CI_Controller {
 			$hora_inicio = $this->input->post('hora_inicio');
 			$hora_fim = $this->input->post('hora_fim');
 			$id_sala = $this->input->post('id_tipologia');
+			$id_user = $this->input->post('id_user');
 			
 			// Não pode inserir uma fora inicio maior que a hora final
 			if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
@@ -870,10 +862,11 @@ class Privado_c extends CI_Controller {
 			
 			// Verifica se existe datas e horas iguais ou interalos.
 			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-			// var_dump($dados_Disponibilidade);
+			var_dump($dados_Disponibilidade);
+			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
 			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
-			if($dados_Disponibilidade == null ){
+			if(($dados_Disponibilidade == null ) ||  ($id_user1 == $id_user)) {
 				
 				// Busca o id do user
 				// $id_user = $this->session->userdata("usuario_logado")[0]['id'];
@@ -899,7 +892,7 @@ class Privado_c extends CI_Controller {
 			
 			}
 			// Refresh da página
-			redirect('Requisicoes_salas_admin', 'refresh');
+			// redirect('Requisicoes_salas_admin', 'refresh');
 			
 		}
 

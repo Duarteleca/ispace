@@ -36,6 +36,10 @@
     <?php if($this->session->flashdata("erro")) :?>
     <p class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>
     <?php endif ?>
+     <!-- Mensagem de err quando não consegue dar login -->
+    <?php if($this->session->flashdata("Registo_sucess")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
+    <?php endif ?>
   
 
   <div class="container">
@@ -81,11 +85,12 @@
                             <a class="nav-link" href="<?php echo base_url('Sala_admin')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
                           
-                          <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Equipamento_admin')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
-                          </li>
+                          
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicoes_salas_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Requisições Salas</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Equipamento_admin')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_admin')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Equipamentos Requisitados</a>
@@ -100,11 +105,12 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Salas')?>"> <i class="fas fa-door-open fa-lg"></i>  Salas</a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
-                          </li>
+                          
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicao')?>"> <i class="fas fa-clipboard-check fa-lg"></i> Suas Requisições</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('Equipamento')?>"> <i class="fas fa-boxes fa-lg"></i> Equipamentos</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_user')?>"><i class="fa fa-users fa-lg"></i> Equipamentos Requisitados</a>
