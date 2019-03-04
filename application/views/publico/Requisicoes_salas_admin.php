@@ -1,8 +1,6 @@
 <div class="container mostrarequisicoes">
-    <br>
-    <br>
-    <br>
     
+
     <!-- Mensagem requisicao editada com sucesso-->
     <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
     <p class ="alert alert-success"><?= $this->session->flashdata("requisicao_editada_sucesso")   ?></p>
@@ -56,10 +54,7 @@
                 <td>
                 <?php echo $row['nomeuser'] ?><br>
                 </td>
-                <td>
-                <?php echo $row['utilizador_id'] ?><br>
-                </td>
-               
+                             
       
                 <td>                 
                 <!-- Butões para abrir o modal -->  
@@ -94,8 +89,8 @@
                                                 <p>Quer mesmo cancelar esta requisição ?Este processo não pode ser revertido.</p>
                                             </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-info" data-dismiss="modal">Voltar</button>
+                                                    <button type="submit" class="btn btn-danger">Cancelar</button>
                                                 </div>
                             <?php echo form_close() ?>
                         </div>
@@ -118,12 +113,15 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control " type="text" name="id_tipologia" id="id_tipologia" value="<?php echo $id_tipologia  ?>">
+                                    <input class="form-control " type="hidden" name="id_tipologia" id="id_tipologia" value="<?php echo $id_tipologia  ?>">
                                 </div>
-
+                                <div class="form-group">
+                                    <input class="form-control " type="hidden" name="id_user" id="id_user" value="<?php echo $id_user  ?>">
+                                </div>
+                                
                                 <div class="form-group col-md-6">
                                             <label for="">Data de inicio</label>
                                             <input type="date" id="bida" name="data_inicio" style="color:black;" value="<?php echo $data_inicio ?>" required
@@ -141,14 +139,11 @@
                                     <label for="from">Hora de Fim: </label>
                                     <input type="time" name="hora_fim" value="<?php echo $hora_fim ?>">
 
-
                                 </div>
-
-
 
                                 <div class="modal-footer ">
                                     <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
-                                        <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
+                                        <span class="glyphicon glyphicon-ok-sign"></span>Atualizar</button>
                                 </div>
                                
                             </div>

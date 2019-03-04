@@ -49,7 +49,7 @@
         <tbody>
             <?php foreach ($sala as $row){?>
                 <tr>
-                    <td><img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
+                    <td><img height="30%" width="30%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
                     <td class="texto ">   <?php echo $row['tipo_sala'] ?></td>
                     <td class="texto ">   <?php echo $row['nome_sala'] ?></td>
                     <td class="texto ">    <?php echo $row['capacidade'] ?></td>  

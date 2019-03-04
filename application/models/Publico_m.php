@@ -15,7 +15,6 @@ class Publico_m extends CI_Model
         $this->db->where('username',$username);
         $dadosuser = $this->db->get("utilizador");
         return $dadosuser->result_array();
-        var_dump($dadosuser);
     }
 
     // Mostra lista todas as salas que existem   
@@ -74,7 +73,6 @@ class Publico_m extends CI_Model
             // Insere o registo na tabela utilizador
             public function inserir_Registo($data)
             {
-                var_dump($data);
                 $this->db->insert('utilizador', $data);
         
             }

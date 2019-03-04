@@ -22,13 +22,13 @@
             <tr>
                 <th>Foto</th>
                 <th>Nome</th>
-                <th>Quantidade</th>  
+                <th>Quantidade Disponível</th>  
             </tr>
         </thead>
         <tbody>
             <?php foreach ($sala as $row){?>
                 <tr> 
-                    <td><img height="100%" width="70%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
+                    <td><img height="50%" width="35%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>"></td>
                     <td class="texto "><?php echo $row['nome'] ?></td>
                     <td class="texto "><?php echo $row['quantidade'] ?></td>   
                 </tr>

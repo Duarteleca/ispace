@@ -260,7 +260,7 @@ class Publico_c extends CI_Controller {
 				);
 				
 
-				var_dump($data);
+				// var_dump($data);
 				$this->Publico_m->inserir_Registo($data);
 				$this->session->set_flashdata("Registo_sucess", "Registado/a com sucesso!");
 				$this->load->view('templates/Header');
@@ -268,6 +268,7 @@ class Publico_c extends CI_Controller {
 				$this->load->view('templates/Footer');
 
 				redirect('home', 'refresh');
+			
 
 				
 				
@@ -278,6 +279,7 @@ class Publico_c extends CI_Controller {
 				$this->load->view('templates/Header');
 				$this->load->view('publico/Registo', $data);
 				$this->load->view('templates/Footer');
+				$this->session->set_flashdata("erro", "User ou senha inválida!");
 				
 				
 
@@ -382,7 +384,7 @@ class Publico_c extends CI_Controller {
 	{
 
 		$data['equipamentos']=$this->Publico_m->selecionarEquipamento();
-		print_r($data);
+		// print_r($data);
 		$this->load->view('templates/header');
 		$this->load->view('publico/Salas',$data);
 		$this->load->view('templates/Footer');

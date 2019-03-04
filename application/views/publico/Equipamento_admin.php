@@ -156,8 +156,8 @@
                                 <p>Quer mesmo apagar este equipamento? Este processo não pode ser revertido.</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-info" data-dismiss="modal">Voltar</button>
+                                <button type="submit" class="btn btn-danger">Cancelar</button>
                             </div>
                             <?php echo form_close() ?>
                         </div>
