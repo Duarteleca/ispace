@@ -325,11 +325,8 @@ class Privado_m extends CI_Model
          return $dadosequipamentoreq->result_array();
      }
 
-<<<<<<< HEAD
      
-=======
         
->>>>>>> 45162fa696d907775e70313f0090790723d7264e
        // Verifica se a sala está diponivel para tal dia e hora
      function verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala)
      {
@@ -403,11 +400,11 @@ class Privado_m extends CI_Model
         }
 
 
-    //  Seleciona salas
-    public function selecionarSala()
-    { 
-        $query=$this->db->get('sala');
-        return $query->result_array();         
-    }
+    // //  Seleciona salas
+    // public function selecionarSala()
+    // { 
+    //     $query=$this->db->get('sala');
+    //     return $query->result_array();         
+    // }
     
 }
