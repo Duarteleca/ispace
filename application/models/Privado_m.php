@@ -4,12 +4,11 @@ class Privado_m extends CI_Model
 {
 
     
-    public function __construct() {
+    public function __construct(){
         parent::__construct();
     }
 
-    public function busca_salas($slug = false)
-    {
+    public function busca_salas($slug = false){
         if ($slug === false) {
             $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             $this->db->from('sala');
@@ -17,8 +16,7 @@ class Privado_m extends CI_Model
             
             $query = $this->db->get();
             return $query->result_array();
-        }
-        else{
+        }else{
             'erro' ;
             // $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
             // $this->db->from('sala');
@@ -150,7 +148,8 @@ class Privado_m extends CI_Model
         return $query->result_array();
      }
 
-     public function mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição)
+      // Pesquisa as salas requisitadas por id do user (apagar equipamento)
+    public function mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição)
     {
        
 
@@ -165,6 +164,7 @@ class Privado_m extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
      }
+
 
      
  
@@ -214,6 +214,8 @@ class Privado_m extends CI_Model
     $this->db->update('requisicao', $data);
     }
 
+    
+
     // Mostra todas requisicoes para o admin
 
     public function mostra_Salas_Requesitadas_admin()
@@ -251,10 +253,10 @@ class Privado_m extends CI_Model
      }
 
       // Cancela equipamento da requisiçao (admin)
-    public function cancelar_equipamento_requisicao_admin_m($id_requisição,$id_equipamento)
+    public function cancelar_equipamento_requisicao_admin_m($id_requisicao_equipamento)
     {
-        $this->db->where('equipamento_id',$id_equipamento);
-        $this->db->where('requisicao_id',$id_requisição);
+        $this->db->where('id',$id_requisicao_equipamento);
+          
         $this->db->delete('requisicao_has_equipamento');
     }
 
@@ -323,7 +325,11 @@ class Privado_m extends CI_Model
          return $dadosequipamentoreq->result_array();
      }
 
+<<<<<<< HEAD
      
+=======
+        
+>>>>>>> 45162fa696d907775e70313f0090790723d7264e
        // Verifica se a sala está diponivel para tal dia e hora
      function verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala)
      {
@@ -396,5 +402,12 @@ class Privado_m extends CI_Model
             return $query->result_array();         
         }
 
+
+    //  Seleciona salas
+    public function selecionarSala()
+    { 
+        $query=$this->db->get('sala');
+        return $query->result_array();         
+    }
     
 }

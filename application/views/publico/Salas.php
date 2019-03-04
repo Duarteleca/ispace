@@ -129,39 +129,19 @@
                                                         ?>">
                                         </div>
 
-                                                       
-                                                       <!-- <div class="form-group">
-                                                            <label for="from">De: </label>
-                                                            <input type="text" id="from" name="data_inicio" value="<?php echo date('Y-m-d'); ?>">
-                                                            <label for="to"> até </label>
-                                                            <input type="text" id="to" name="data_fim" value="">
-                                                            
-                                                        </div> -->
 
 
-                                                        <div class="form-group col-md-6">
-            <label for="">Data de inicio</label>
-            <input type="date" id="bida" name="data_inicio" style="color:black;" required
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="">Data de entrega</label>
-            <input type="date" id="biday" name="data_fim" style="color:black;"  onchange='compareDates()'
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-        </div>
+                                           <div class="form-group col-md-6">
+                                            <label for="">Data de inicio</label>
+                                            <input type="date" id="bida" name="data_inicio" style="color:black;" required
+                                            min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Data de entrega</label>
+                                            <input type="date" id="biday" name="data_fim" style="color:black;"  onchange='compareDates()'
+                                            min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+                                        </div>
 
-                                                        <!-- <div class="form-group">
-                                                       
-                                                        <label>Hora de inicio: <input type="text" id="timepicker" name="hora_inicio"  > Hora de Fim: <input type="text" id="timepicker1" name="hora_fim" ></label>
-                                                        
-                                        
-                                                        </div> -->
-                                                        <!-- <div id="calendariomain" class="form-group">
-                                                            <label for="exampleInputEmail1">Dia Incio</label>
-                                                            <input id="calendario" type= "date" name="data_inicio" value="<?php echo date('Y-m-d'); ?>"  max="">
-                                                            <label for="exampleInputEmail1">Dia Fim</label>
-                                                            <input id="calendario" type= "date" name="data_fim" value="<?php echo date('Y-m-d'); ?>" min="2019-01-01" max="">
-                                                        </div>  -->
 
                                                         <div class="form-group">
                                                         <label>Hora de inicio: <input type="time" class="form-control"   name="hora_inicio"   value ="08:00"> Hora de Fim: <input class="form-control" type="time" name="hora_fim" value ="18:00"></label>
@@ -192,32 +172,6 @@
 </div>
 
   
-
-<!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<link href="style.css" rel="stylesheet" type="text/css"/>
-<script src="jquery-1.11.3.min.js"></script>
-
-<script type="text/javascript">
-  $(function() {
-    var dateToday = new Date();
-var dates = $("#from, #to").datepicker({
-    dateFormat: 'yy-mm-dd',
-    defaultDate: "today",
-    changeMonth: true,
-    numberOfMonths: 2,
-    minDate: dateToday,
-    onSelect: function(selectedDate) {
-        var option = this.id == "from" ? "minDate" : "maxDate",
-            instance = $(this).data("datepicker"),
-            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-        dates.not(this).datepicker("option", option, date);
-    }
-});
-  });
-</script> -->
-
 
 <script>
 

@@ -103,10 +103,14 @@
                                             <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value ="<?php echo $id_requisicao ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
+                                            <input class="form-control " type="text" name="quantidade" id="quantidade" value ="<?php echo $quantidade ?>">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control " type="hidden" name="quantidade" id="quantidade" value ="<?php echo $id_requisicao ?>">
+                                            <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value ="<?php echo $equipamento_id ?>">
+                                        </div>
+                                        <div>
+                                      
+                                            <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value ="<?php echo $id_requisicao_equipamento ?>">
                                         </div>
                                             <div class="modal-body">
                                                 <p>Quer mesmo cancelar este equipamento dessa requisição ?</p>

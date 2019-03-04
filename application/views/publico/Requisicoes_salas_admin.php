@@ -3,7 +3,14 @@
     <br>
     <br>
     
-    
+    <!-- Mensagem requisicao editada com sucesso-->
+    <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("requisicao_editada_sucesso")   ?></p>
+    <?php endif ?>
+    <!-- Mensagem requisicao erro de editar requisicao-->
+    <?php if($this->session->flashdata("erro_requisicao")) :?>
+    <p class ="alert alert-danger"><?= $this->session->flashdata("erro_requisicao")   ?></p>
+    <?php endif ?>
     <!-- <div class="form-group col-md-12"> -->
 
     <table id="example" class="display" style="width:100%">
@@ -20,7 +27,11 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             <?php foreach ($salas_requisitass as $row){?>
+=======
+            <?php foreach ($salas_requisitas_admin as $row){?>
+>>>>>>> 45162fa696d907775e70313f0090790723d7264e
             <?php $id_requisicao = $row['idreq'];  ?>        
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_tipologia = $row['tipologia_id'];  ?>    
@@ -28,7 +39,7 @@
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-            <?php $id_tipologia = $row['tipologia_id'];  ?>
+
                 
 
 
@@ -48,6 +59,9 @@
                 </td>
                 <td>
                 <?php echo $row['nomeuser'] ?><br>
+                </td>
+                <td>
+                <?php echo $row['utilizador_id'] ?><br>
                 </td>
                
       
@@ -98,7 +112,7 @@
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <?php echo form_open_multipart('Privado_c/edita_Requisicao') ?>
+                            <?php echo form_open_multipart('Privado_c/edita_Requisicao_admin') ?>
                             <div class="modal-header">
                                 <h4 class="modal-title custom_align" id="Heading">Editar Requisição</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -108,31 +122,22 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
+                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao  ?>">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control " type="hidden" name="id_tipologia" id="id_tipologia" value="<?php echo $id_tipologia  ?>">
+                                    <input class="form-control " type="text" name="id_tipologia" id="id_tipologia" value="<?php echo $id_tipologia  ?>">
                                 </div>
 
-
-                                <!-- <div class="form-group">
-                                    <label for="from">De: </label>
-                                    <input type="text" id="from" name="data_inicio" value="<?php echo $data_fim ?>">
-                                    <label for="to"> até </label>
-                                    <input type="text" id="to" name="data_fim" value="<?php echo $data_fim ?>">
-
-                                </div> -->
-
                                 <div class="form-group col-md-6">
-            <label for="">Data inicio</label>
-            <input type="date" id="bida" name="data_inicio" style="color:black;" required value="<?php echo $data_inicio ?>"
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-        </div>
-        <div class="form-group col-md-6">
-            <label for="">Data Fim</label>
-            <input type="date" id="biday" name="data_fim" style="color:black;"  onchange='compareDates()' value="<?php echo $data_fim ?>"
-             min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-        </div>
+                                            <label for="">Data de inicio</label>
+                                            <input type="date" id="bida" name="data_inicio" style="color:black;" value="<?php echo $data_inicio ?>" required
+                                            min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Data de entrega</label>
+                                            <input type="date" id="biday" name="data_fim" style="color:black;" value="<?php echo $data_fim ?>"  onchange='compareDates()'
+                                            min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
+                                        </div>
 
                                 <div class="form-group">
                                     <label for="from">Hora de inicio: </label>
@@ -164,32 +169,6 @@
 </tbody>
 </table>
 </div>
-
-<!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"
-/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<link href="style.css" rel="stylesheet" type="text/css" />
-<script src="jquery-1.11.3.min.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        var dateToday = new Date();
-        var dates = $("#from, #to").datepicker({
-            dateFormat: 'yy-mm-dd',
-            defaultDate: "today",
-            changeMonth: true,
-            numberOfMonths: 2,
-            minDate: dateToday,
-            onSelect: function (selectedDate) {
-                var option = this.id == "from" ? "minDate" : "maxDate",
-                    instance = $(this).data("datepicker"),
-                    date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-                dates.not(this).datepicker("option", option, date);
-            }
-        });
-    });
-</script> -->
 
 <script>
 
