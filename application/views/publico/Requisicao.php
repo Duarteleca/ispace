@@ -1,7 +1,4 @@
 <div class="container mostrarequisicoes">
-    <br>
-    <br>
-    <br>
 
     <!-- Mensagem de erro quando pretende requisitar um equipamento que nao exista tanta quantidade -->
     <?php if($this->session->flashdata("erro_quantidade")) :?>
@@ -10,15 +7,15 @@
     </p>
     <?php endif ?>
 
-     <!-- Mensagem de sucesso de requisição -->
-     <?php if($this->session->flashdata("requisicao_sucesso")) :?>
+    <!-- Mensagem de sucesso de requisição -->
+    <?php if($this->session->flashdata("requisicao_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_sucesso")   ?>
     </p>
     <?php endif ?>
 
-     <!-- Mensagem de erro quando der erro de requisitar  -->
-     <?php if($this->session->flashdata("erro_requisicao")) :?>
+    <!-- Mensagem de erro quando der erro de requisitar  -->
+    <?php if($this->session->flashdata("erro_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_requisicao")   ?>
     </p>
@@ -26,22 +23,30 @@
 
     <!-- Mensagem de sucesso ao editar requisição-->
     <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("requisicao_editada_sucesso")   ?></p>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("requisicao_editada_sucesso")   ?>
+    </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso ao cancelar requisição-->
     <?php if($this->session->flashdata("requisicao_cancelada_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("requisicao_cancelada_sucesso")   ?></p>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("requisicao_cancelada_sucesso")   ?>
+    </p>
     <?php endif ?>
-    
+
     <!-- Mensagem de sucesso ao cancelar requisição-->
     <?php if($this->session->flashdata("equipamento_adicionado_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_adicionado_sucesso")   ?></p>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("equipamento_adicionado_sucesso")   ?>
+    </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando tentar meter a data iniicon menos que a fim-->
     <?php if($this->session->flashdata("erro_hora_requisicao")) :?>
-    <p class ="alert alert-danger"><?= $this->session->flashdata("erro_hora_requisicao")   ?></p>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_hora_requisicao")   ?>
+    </p>
     <?php endif ?>
 
 
@@ -69,6 +74,7 @@
             <?php $hora_fim = $row['hora_fim'];  ?>
             <?php $nome = $row['nome'];  ?>
             <?php $id_tipologia = $row['tipologia_id'];  ?>
+            <?php $quantidade = $row['quantidade']; ?>
 
 
             <tr>
@@ -102,6 +108,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <?php echo form_open_multipart('Privado_c/adicionar_Equipamento_Requisito') ?>
+                            <input class="form-control " type="hidden" name="url" id="url" value="<?php base_url(); ?>">
                             <div class="modal-header">
                                 <h4 class="modal-title custom_align" id="Heading">Adicionar Equipamento</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -118,15 +125,18 @@
                                     <label for="exampleInputEmail1">Insira o Nome do equipamento</label>
 
 
-                                    <select style="color:black" name="procuraEquipamento" class="form-control">
+                                    <select id="selecionarequipamento" style="color:black" name="procuraEquipamento" class="form-control">
                                         <option value="" selected>Equipamento</option>
                                         <?php foreach($equipamentos as $row){
-                                            echo "<option value=".$row['nome'].">".$row['nome'] ."</option>";
+                                            echo "<option value=".$row['id'].">".$row['nome'] ."</option>";
                                             } ?>
                                     </select>
 
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Quantidade disponivel</label>
+                                    <input disabled class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
+                                </div>                    
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Insira a quantidade</label>
                                     <input class="form-control " type="text" name="quantidade" id="quantidade" value="">
@@ -166,16 +176,16 @@
                                 </div>
 
 
-                                    <div class="form-group col-md-6">
-                                        <label for="">Data de inicio</label>
-                                        <input type="date" id="start" name="data_inicio" style="color:black;" value="<?php echo $data_inicio  ?>" required
-                                        min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="">Data de entrega</label>
-                                        <input type="date" id="start" name="data_fim" style="color:black;" value="<?php echo $data_fim  ?>" required
-                                        min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>" >
-                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Data de inicio</label>
+                                    <input type="date" id="start" name="data_inicio" style="color:black;" value="<?php echo $data_inicio  ?>" required min="<?php echo date('Y-m-d'); ?>"
+                                        max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Data de entrega</label>
+                                    <input type="date" id="start" name="data_fim" style="color:black;" value="<?php echo $data_fim  ?>" required min="<?php echo date('Y-m-d'); ?>"
+                                        max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>">
+                                </div>
 
                                 <div class="form-group">
                                     <label for="from">Hora de inicio: </label>
@@ -192,7 +202,7 @@
                                     <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
                                         <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
                                 </div>
-                               
+
                             </div>
                             <?php echo form_close() ?>
                         </div>
@@ -243,4 +253,28 @@
     </table>
 </div>
 
+<script>
 
+$("#selecionarequipamento").change(function(){
+        console.log($("#selecionarequipamento").val());
+        var equipamento = $("#selecionarequipamento").val();
+        var url = $("#url").val();
+        $.ajax(
+            {
+                url: url+'Privado_c/Ajax',
+                type:"post",
+                // dataType: "json",
+                data:{
+                    "equipamento" : equipamento,
+                    },
+                success: function(data,status){
+
+                    console.log(data);
+                      
+            }
+        });
+    });
+
+
+
+</script>

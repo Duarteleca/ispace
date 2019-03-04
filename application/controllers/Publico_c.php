@@ -104,7 +104,7 @@ class Publico_c extends CI_Controller {
 		
 	}
 
-
+	// Concato Mensagem
 	public function Contacto()
 	{
 
@@ -164,7 +164,7 @@ class Publico_c extends CI_Controller {
 		}
 	}
 
-	// Regita um usuário
+	// Regista um usuário
 	public function registar_user()
 	{
 
@@ -263,15 +263,9 @@ class Publico_c extends CI_Controller {
 				// var_dump($data);
 				$this->Publico_m->inserir_Registo($data);
 				$this->session->set_flashdata("Registo_sucess", "Registado/a com sucesso!");
-				$this->load->view('templates/Header');
-				$this->load->view('publico/Registo', $data);
-				$this->load->view('templates/Footer');
 
-				redirect('home', 'refresh');
-			
+				redirect(base_url("/home"));
 
-				
-				
 
 			} else {
 				$data['erros'] = array('mensagens' => validation_errors());
@@ -362,7 +356,7 @@ class Publico_c extends CI_Controller {
 		  else {
 			$this->session->set_flashdata("erro", "User ou senha inválida!");
 		  }
-		  redirect('home', 'refresh');
+		  redirect(base_url("/home"));
 	  }
 
 	  // Funão de logout, faz uset do user, e manda mensagem, que é mostrada no header
@@ -370,7 +364,8 @@ class Publico_c extends CI_Controller {
 	  {
 		  $this->session->unset_userdata("usuario_logado");
 		  $this->session->set_flashdata("sucesso","Logout com sucesso!");
-		  redirect('home', 'refresh');
+		  
+		  redirect(base_url("/home"));
 	  }
 
 	  public function requisitar_Equipamento(){

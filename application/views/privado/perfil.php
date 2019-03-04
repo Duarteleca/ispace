@@ -5,12 +5,17 @@
 
 
 
-                <!-- Mensagem de err quando não consegue dar login -->
+                <!-- Mensagens -->
                 <?php if(isset($erros['mensagens'])) :?>
-                
-            <?php echo $erros['mensagens'];  ?>
-            
-            <?php endif;?>
+                <?php echo $erros['mensagens'];  ?>    
+                <?php endif;?>
+
+                <?php if($this->session->flashdata("Registo_sucess")) :?>
+                <p class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
+                <?php endif ?>
+
+                <!-- Alterar Perfil -->
+
                 <?php echo form_open_multipart('Privado_c/atualizar_perfil') ?>
                     <fieldset>
                         <legend class="text-center header">Alterar Perfil</legend>
@@ -73,9 +78,8 @@
                         </div>
                     </fieldset>
                     <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
-                    <?php if($this->session->flashdata("Registo_sucess")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
-    <?php endif ?>
+
+                            
       
                 <?php echo form_close() ?>
             </div>

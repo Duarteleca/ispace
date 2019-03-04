@@ -1,9 +1,15 @@
 <div class="container">
 
-    <br>
-    <br>
-    <br>
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if($this->session->flashdata("equipamento_inserido_sucesso")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_inserido_sucesso")   ?></p>
+    <?php endif ?>
 
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if($this->session->flashdata("equipamento_eliminado_sucesso")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_eliminado_sucesso")   ?></p>
+    <?php endif ?>
+    
     <div class="row">
         <div class="col-xs-6 col-md-6">
             <a href="<?php echo base_url('Inserir_equipamento')?>" data-placement="top" data-toggle="tooltip" title="Insert">
@@ -15,6 +21,8 @@
     </div>
     <br>
 
+    
+    
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if(isset($erros['mensagens'])) :?>
     <div class="alert alert-danger alert-dismissible classeerrologin" role="alert" id="">
@@ -150,14 +158,14 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value=" <?php echo $id_equipamento; ?>">
+                                <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value=" <?php echo $id_equipamento; ?>">
                             </div>
                             <div class="modal-body">
                                 <p>Quer mesmo apagar este equipamento? Este processo não pode ser revertido.</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-info" data-dismiss="modal">Voltar</button>
-                                <button type="submit" class="btn btn-danger">Cancelar</button>
+                                <button type="submit" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </div>
                             <?php echo form_close() ?>
                         </div>

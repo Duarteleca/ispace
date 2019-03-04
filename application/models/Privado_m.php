@@ -45,6 +45,13 @@ class Privado_m extends CI_Model
         return $inserir_sala->result_array();
      }
 
+     function mostra_equipamento($equipamento)
+     {
+        $this->db->where('nome',$equipamento);
+        $getequip = $this->db->get("equipamento");
+        return $getequip->result_array();
+     }
+
 
     // Insere o registo na tabela utilizador
     public function inserir_Sala($data)
@@ -237,7 +244,7 @@ class Privado_m extends CI_Model
 
      public function selecionar_salas_requisitadas($user_id_salas)
      { 
-        $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
+        $this->db->select('tipologia.capacidade "quantidade",requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,tipologia.id,tipologia.nome');
         
         
@@ -269,8 +276,8 @@ class Privado_m extends CI_Model
       }
 
 
-    // Pesquisa as salas requisitadas por id do user
-    public function mostrar_Requisicoes_Equipamentos_user($user_id,$slug)
+    // Campo de pesquisa das requisições de equipamentos
+    public function mostrar_Requisicoes_Equipamentos_user($slug)
     {
 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
@@ -282,14 +289,35 @@ class Privado_m extends CI_Model
         $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
         $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
 
-        $this->db->where('utilizador_id',$user_id);
+       
         
-        $this->db->like('utilizador.nome',$slug);
+        $this->db->or_like('utilizador.nome',$slug);
         // se quisermos multiplas procuras colocamos or_like.
         $this->db->or_like('requisicao_has_equipamento.quantidade',$slug);
         $this->db->or_like('tipologia.nome',$slug);
         $this->db->or_like('requisicao.data_inicio',$slug);
         $this->db->or_like('equipamento.nome',$slug);
+
+        $query = $this->db->get();
+        return $query->result_array();
+     }
+
+
+     // Mostra so as requisições do id do user
+    public function mostrar_Requisicoes_Equipamentos_user2($user_id,$slug)
+    {
+
+        $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
+        requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome,requisicao_has_equipamento.quantidade,
+        requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome",requisicao_has_equipamento.id "idreqequip"');
+        $this->db->from('requisicao');
+        $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
+        $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+        $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
+        $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
+
+
+         $this->db->where('utilizador_id',$user_id);
 
         $query = $this->db->get();
         return $query->result_array();

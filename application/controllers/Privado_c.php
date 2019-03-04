@@ -26,6 +26,7 @@ class Privado_c extends CI_Controller {
 	{
 		// Array com todas as salas
 		$data['salas']=$this->Privado_m->busca_salas();
+		
 		// Carregamento das views
 		$this->load->view('templates/header');
 		$this->load->view('publico/Sala_admin',$data);
@@ -114,11 +115,14 @@ class Privado_c extends CI_Controller {
 			// Passa dos dados por parametro e insere
 			$this->Privado_m->inserir_Sala($data);
 
+			// Mensagem de sucesso
+			$this->session->set_flashdata("inseriu_sala_sucesso", "Sala inserida com sucesso!");
 
 			// Refresh à página
-			redirect('Inserir_sala', 'refresh');
-			// Mensagem de sucesso
-			$this->session->set_flashdata("iseriu_sala_sucesso", "Sala inserida com sucesso!");
+			// redirect('Sala_admin', 'refresh');
+			redirect(base_url("/Sala_admin"));
+			
+			
 
 			// Mostra os erros
 		}else{ 
@@ -198,7 +202,8 @@ class Privado_c extends CI_Controller {
 				$this->session->set_flashdata("Sala_sucesso", "Sala editada com sucesso!");
 				
 				// Refresh da página
-				redirect('Sala_admin', 'refresh');
+				// redirect('Sala_admin', 'refresh');
+				redirect(base_url("/Sala_admin"));
 
 			}else{
 
@@ -226,7 +231,8 @@ class Privado_c extends CI_Controller {
 			$this->session->set_flashdata("Sala_sucesso", "Sala editada com sucesso!");
 			
 			// Refresh à página
-			redirect('Sala_admin', 'refresh');
+			// redirect('Sala_admin', 'refresh');
+			redirect(base_url("/Sala_admin"));
 							
 			}
 			
@@ -254,11 +260,33 @@ class Privado_c extends CI_Controller {
 		$id_sala = $this->input->post('id_tiposala');
 		$this->Privado_m->eliminar_Sala($id_sala);
 
-		// Carrego as views
-		$this->load->view('templates/Header');
-		// $this->load->view('publico/Home');
-		$this->load->view('templates/Footer');
-		redirect('Sala_admin', 'refresh');
+
+		// Mensagem de sucesso
+		$this->session->set_flashdata("sala_eliminada_sucesso", "Sala eliminada com sucesso!");
+
+		redirect(base_url("/Sala_admin"));
+		// redirect('Sala_admin', 'refresh');
+
+		
+	}
+
+
+	public function Ajax(){
+
+		
+		$nome_Equipamento = $this->input->post('procuraEquipamento');
+		var_dump($nome_Equipamento); 
+		// Array com a todos os equipamentos
+		// $data['equipamento']=$this->Privado_m->busca_Equipamento($nome_Equipamento);
+		// var_dump($data['equipamento']);
+		// $quantidade = $data[0]['quantidade'];
+		
+		// $this->load->view('templates/header');
+		// $this->load->view('publico/Equipamento_requisito',$data);
+		// $this->load->view('templates/Footer');
+		// echo '1';
+		// json_encode
+		// echo $quantidade;
 	}
 
 // ------------------------------------------------Equipamentos------------------------------------
@@ -352,12 +380,9 @@ class Privado_c extends CI_Controller {
 			// Passa dos valores como parâmetro e insere
 			$this->Privado_m->inserir_equipamento($data);
 
-			// Carrega as views
-			$this->load->view('templates/Header');
-			$this->load->view('publico/Inserir_equipamento', $data);
-			$this->load->view('templates/Footer');
-
 			$this->session->set_flashdata("equipamento_inserido_sucesso", "Equipamento inserido com sucesso");
+
+			redirect(base_url("/Equipamento_admin"));
 
 			// Mostra os erros
 		}else{
@@ -380,9 +405,12 @@ class Privado_c extends CI_Controller {
 		$id_tiposala = $this->input->post('id_tiposala');
 		// Passa como parâmetro do id para depois eliminar
 		$this->Privado_m->eliminar_Sala($id_tiposala);
-
+		
+		// Mensagem de sucesso
+		$this->session->set_flashdata("equipamento_eliminado_sucesso", "Equipamento eliminado com sucesso!");
 		// Refresh da página
-		redirect('Sala_admin', 'refresh');
+
+		redirect(base_url("/Equipamento_admin"));
 	}
 
 
@@ -441,7 +469,7 @@ class Privado_c extends CI_Controller {
 					);
 		
 					$this->Privado_m->atualiza_utilizador($data,$email);
-					$data['error'] = 'Alteração do nome'; 
+					$data['error'] = 'Nome alterado com sucesso'; 
 					$this->load->view('templates/header');
 					$this->load->view('privado/perfil',$data);
 					$this->load->view('templates/footer');
@@ -652,10 +680,9 @@ class Privado_c extends CI_Controller {
 				// Atualiza o equipamento selecionado
 				$this->Privado_m->atualiza_Equipamento($inputs,$id_equipamento);
 				// Mensagem de sucesso
-				$this->session->set_flashdata("Sala_sucesso", "Sala editada com sucesso!");
+				$this->session->set_flashdata("Equipamento_sucesso", "Equipamento editado com sucesso!");
 				
-				// Refresh à página
-				redirect('Equipamento_admin', 'refresh');
+				redirect(base_url("/Equipamento_admin"));
 
 			}else{
 
@@ -683,7 +710,7 @@ class Privado_c extends CI_Controller {
 			$this->session->set_flashdata("Equipamento_sucesso", "Equipamento editado com sucesso!");
 			
 			// Refresh à página
-			redirect('Equipamento_admin', 'refresh');
+			redirect(base_url("/Equipamento_admin"));
 							
 			}
 			
@@ -768,8 +795,8 @@ class Privado_c extends CI_Controller {
 			}
 
 			}
-			// Refresh da página
-			redirect('Salas', 'refresh');
+			
+			redirect(base_url("/Salas"));
 			
 		}
 
@@ -834,6 +861,8 @@ class Privado_c extends CI_Controller {
 		}
 		// Refresh da página
 		// redirect('Requisicao', 'refresh');
+		// redirect(base_url("/Requisicao"));
+		
 		
 	}
 
@@ -893,6 +922,7 @@ class Privado_c extends CI_Controller {
 			}
 			// Refresh da página
 			// redirect('Requisicoes_salas_admin', 'refresh');
+			// redirect(base_url("/Requisicao"));
 			
 		}
 
@@ -986,8 +1016,7 @@ class Privado_c extends CI_Controller {
 
 		}
 
-		// Refresh à página
-		redirect('Requisicao', 'refresh');
+		redirect(base_url("/Requisicao"));
 
 	}
 
@@ -1049,7 +1078,7 @@ class Privado_c extends CI_Controller {
 		
 		}
 		// Refresh à página
-		redirect('Requisicao', 'refresh');
+		redirect(base_url("/Requisicao"));
 		
 }
 	
@@ -1072,11 +1101,27 @@ class Privado_c extends CI_Controller {
 	public function mostra_Requisicoes_Equipamentos_user()
 	{
 			$slug = $this->input->post('pesquisar');
+			
+			// Trás no array todos os equipamentos requisitados pelo user (id)
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($slug);
+			// var_dump($data['salas_requisitass']);
+			// var_dump($user_id);
+			$this->load->view('templates/header');
+			$this->load->view('publico/Requisicoes_equipamentos_user',$data);
+			$this->load->view('templates/Footer');
+
+	}
+
+	// Mostrar os equipamentos requisitados pelo user 
+	public function mostra_Requisicoes_Equipamentos_user2()
+	{
+			$slug = $this->input->post('pesquisar');
 			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
 			
 			// Trás no array todos os equipamentos requisitados pelo user (id)
-			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($user_id,$slug);
-			
+			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user2($user_id,$slug);
+			// var_dump($data['salas_requisitass']);
+			// var_dump($user_id);
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_equipamentos_user',$data);
 			$this->load->view('templates/Footer');
@@ -1151,7 +1196,7 @@ class Privado_c extends CI_Controller {
 		
 		}
 		// Refresh à página
-		redirect('Requisicoes_salas_admin', 'refresh');
+		redirect(base_url("/Requisicoes_salas_admin"));
 
 	}
 
@@ -1197,7 +1242,8 @@ class Privado_c extends CI_Controller {
 		$this->session->set_flashdata("equipamento_cancelado_sucesso", "Equipamento cancelado com sucesso");
 
 		// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
-		redirect('Requisicoes_equipamentos_admin', 'refresh');
+		// redirect('Requisicoes_equipamentos_admin', 'refresh');
+		redirect(base_url("/Requisicoes_equipamentos_admin"));
 		
 	}
 
@@ -1245,7 +1291,8 @@ class Privado_c extends CI_Controller {
 			$this->load->view('templates/Footer');
 
 			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
-			redirect('Requisicoes_equipamentos_user', 'refresh');	
+			// redirect('Requisicoes_equipamentos_user', 'refresh');	
+			redirect(base_url("/Requisicoes_equipamentos_user"));
 		
 	}
 
@@ -1302,7 +1349,9 @@ class Privado_c extends CI_Controller {
 		}
 			
 			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
-			redirect('Requisicoes_equipamentos_user', 'refresh');	
+			// redirect('Requisicoes_equipamentos_user', 'refresh');	
+			redirect(base_url("/Requisicoes_equipamentos_user"));
+			
 		
 	}
 
@@ -1359,7 +1408,8 @@ class Privado_c extends CI_Controller {
 		}
 			
 			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
-			redirect('Requisicoes_equipamentos_admin', 'refresh');	
+			// redirect('Requisicoes_equipamentos_admin', 'refresh');	
+			redirect(base_url("/Requisicoes_equipamentos_admin"));
 		
 	}
 	

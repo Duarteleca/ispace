@@ -2,6 +2,9 @@ body {
     font-family: 'Varela Round', sans-serif;
 }
 
+.container{
+    margin-top: 30px;
+}
 
 .modal-confirm {		
     color: #636363;
