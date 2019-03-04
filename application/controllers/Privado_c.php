@@ -397,15 +397,20 @@ class Privado_c extends CI_Controller {
 					'required'      => 'Não preencheu %s.',
 			)
 		);
+		$this->form_validation->set_rules('confirm_altera', 'Confirmar atual Password', 'required',
+		array(
+					'required'      => 'Não preencheu %s.',
+			)
+		);
 		
 		// Guarda os valores inseridos na pagina
 		$nome = $this->input->post("nome");
 		// $username = $this->input->post("username");
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
-		// $confirm = $this->input->post("confirm");
+		$confirm_altera = $this->input->post("confirm_altera");
 
-
+		$user_pass = $this->session->userdata("usuario_logado")[0]['password'];
 			// Se o form validation nao tiver erros.
 			if ($this->form_validation->run() == TRUE) {
 
@@ -423,7 +428,7 @@ class Privado_c extends CI_Controller {
 
 
 			// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
-
+			if(password_verify($confirm_altera,$user_pass)){
 			if(empty($password)){
 
 				// Se não inserir imagem
@@ -518,6 +523,14 @@ class Privado_c extends CI_Controller {
 			}
 
 			}
+		}else{
+			$data['error'] = 'pass de confirmação errada'; 
+			$this->load->view('templates/header');
+			$this->load->view('privado/perfil',$data);
+			$this->load->view('templates/footer');
+
+
+		}
 				
 			} else {
 				
@@ -1057,10 +1070,10 @@ class Privado_c extends CI_Controller {
 	// Mostrar todas as requisições para o admin
 	public function mostra_Requisicoes_Equipamentos_admin()
 	{
-
+		$slug = $this->input->post('pesquisar');
 
 		// Trás no array todos os dados das das requisições juntamente com os equipamentos
-		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
+		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos($slug);
 			
 		$this->load->view('templates/header');
 		$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
@@ -1086,8 +1099,8 @@ class Privado_c extends CI_Controller {
 	// Pesquisa salas requisitadas admin
 	public function mostra_Requisicoes_Salas_admin()
 	{
-
-			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
+			$slug = $this->input->post('pesquisar');
+			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin($slug);
 			// var_dump($data['salas_requisitass']);
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);

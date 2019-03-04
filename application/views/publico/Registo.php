@@ -13,20 +13,20 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="name" name="name" type="text" placeholder="Primeiro Nome" class="form-control">
+                                <input id="name" name="name" type="text" value="<?php echo set_value('name'); ?>" placeholder="Primeiro Nome" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                             <div class="col-md-8">
-                                <input id="Username" name="username" type="text" placeholder="Username" class="form-control">
+                                <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="email" name="email" type="text" placeholder="Endereço de Email" class="form-control">
+                                <input id="email" name="email" type="text" value="<?php echo set_value('email'); ?>" placeholder="Endereço de Email" class="form-control">
                             </div>
                         </div>
                    
@@ -59,3 +59,22 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("Confirm");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Password diferente");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+</script>

@@ -132,7 +132,7 @@ class Privado_m extends CI_Model
     }
 
     // Pesquisa as salas requisitadas por id do user
-    public function mostrar_Requisicoes_Equipamentos()
+    public function mostrar_Requisicoes_Equipamentos($slug)
     {
        
 
@@ -144,6 +144,12 @@ class Privado_m extends CI_Model
         $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
         $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
         $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
+        $this->db->like('utilizador.nome',$slug);
+        $this->db->or_like('requisicao_has_equipamento.quantidade',$slug);
+        $this->db->or_like('tipologia.nome',$slug);
+        $this->db->or_like('requisicao.data_inicio',$slug);
+        $this->db->or_like('requisicao.data_fim',$slug);
+        $this->db->or_like('equipamento.nome',$slug);
         $query = $this->db->get();
         return $query->result_array();
      }
@@ -218,13 +224,20 @@ class Privado_m extends CI_Model
 
     // Mostra todas requisicoes para o admin
 
-    public function mostra_Salas_Requesitadas_admin()
+    public function mostra_Salas_Requesitadas_admin($slug)
     { 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome "tiponome"');
         $this->db->from('requisicao');
         $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
         $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+
+
+        $this->db->like('utilizador.nome',$slug);
+        $this->db->or_like('tipologia.nome',$slug);
+        $this->db->or_like('requisicao.data_inicio',$slug);
+        $this->db->or_like('requisicao.data_fim',$slug);
+       
         // $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
         // $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
         $query = $this->db->get();

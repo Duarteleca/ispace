@@ -11,6 +11,7 @@
                     </div>
                         <button type="submit" id="search" class="btn btn-success" name="submit" >Search</button>
                 <?php echo form_close() ?>
+                
 
 
 <!-- Mensagem de sucesso ao cancelar requisição-->

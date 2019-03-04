@@ -129,7 +129,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Insira a quantidade</label>
-                                    <input class="form-control " type="text" name="quantidade" id="quantidade" value="">
+                                    <input class="form-control " type="number" max="30" name="quantidade" id="quantidade" value="">
                                 </div>
 
                                 <div class="modal-footer ">
