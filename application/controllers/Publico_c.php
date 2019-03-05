@@ -20,16 +20,14 @@ class Publico_c extends CI_Controller {
 	 */
 
 
-	public function __construct()
-    {
+	public function __construct(){
 			parent::__construct();
 			$this->load->model('Publico_m');
 			$this->load->helper('url_helper');
 			$this->load->library("pagination");
 	}
 	
-	public function index()
-	{
+	public function index(){
 		$this->load->view('templates/header');
 		$this->load->view('publico/home');
 		$this->load->view('templates/footer');
@@ -37,8 +35,7 @@ class Publico_c extends CI_Controller {
 
 
 
-	public function Recuperar_pass()
-	{
+	public function Recuperar_pass(){
 		
 		if($this->input->post('submit')){
 			$email=$this->input->post("email");
@@ -105,8 +102,7 @@ class Publico_c extends CI_Controller {
 	}
 
 	// Concato Mensagem
-	public function Contacto()
-	{
+	public function Contacto(){
 
 	
 		$name=$this->input->post("name");
@@ -165,8 +161,7 @@ class Publico_c extends CI_Controller {
 	}
 
 	// Regista um usuário
-	public function registar_user()
-	{
+	public function registar_user(){
 
 
 		// Valido os campos com o from validation
@@ -208,8 +203,6 @@ class Publico_c extends CI_Controller {
 				)
 		);
 
-		
-
 		// Guarda os valores inseridos no registo
 		$nome = $this->input->post("name");
 		$username = $this->input->post("username");
@@ -219,7 +212,20 @@ class Publico_c extends CI_Controller {
 
 
 			// Se o form validation nao tiver erros.
-			if ($this->form_validation->run() == TRUE) {
+			if ($this->form_validation->run() == False) {
+				
+
+				$data['erros'] = array('mensagens' => validation_errors());
+
+				// $_SESSION['teste'] = form_error('Nome');
+
+				// redirect(base_url("publico/Registo"));
+				$this->load->view('templates/Header');
+				$this->load->view('publico/Registo', $data);
+				$this->load->view('templates/Footer');
+
+
+			} else {
 
 				$config['upload_path']          = './assets/img/utilizadores';
 				$config['allowed_types']        = 'jpg|png';
@@ -265,27 +271,16 @@ class Publico_c extends CI_Controller {
 				$this->session->set_flashdata("Registo_sucess", "Registado/a com sucesso!");
 
 				redirect(base_url("/home"));
-
-
-			} else {
-				$data['erros'] = array('mensagens' => validation_errors());
-				
-				$this->load->view('templates/Header');
-				$this->load->view('publico/Registo', $data);
-				$this->load->view('templates/Footer');
-				$this->session->set_flashdata("erro", "User ou senha inválida!");
-				
+						
 				
 
 					}
-				}
+					
+			}
 		 
 				
-
-	
 	// Mostra salas
-	public function mostra_salas()
-	{
+	public function mostra_salas(){
 		$salas=$this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
 		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
@@ -298,8 +293,7 @@ class Publico_c extends CI_Controller {
 	}
 
 	// Mostrar Salas requisiçoes
-	public function mostra_salas_requisicao()
-	{
+	public function mostra_salas_requisicao(){
 		$salas=$this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
 		$data["sala"] = $this->Publico_m->busca_salas($salas);
@@ -311,8 +305,7 @@ class Publico_c extends CI_Controller {
 	}
 
 	// Mostrar equipamentos
-	public function mostra_equipamento()
-	{
+	public function mostra_equipamento(){
 
 
 		$equipamento=$this->input->post('procura_equipamento');
@@ -327,8 +320,7 @@ class Publico_c extends CI_Controller {
 
 
 	  // Validação de login
-	  public function validacao_login()
-	  { 
+	  public function validacao_login(){ 
 		  $this->load->model("Publico_m");
 		  $username = $this->input->post("username");
 		  $password = $this->input->post("password");
@@ -360,8 +352,7 @@ class Publico_c extends CI_Controller {
 	  }
 
 	  // Funão de logout, faz uset do user, e manda mensagem, que é mostrada no header
-	  public function logout()
-	  {
+	  public function logout(){
 		  $this->session->unset_userdata("usuario_logado");
 		  $this->session->set_flashdata("sucesso","Logout com sucesso!");
 		  
@@ -375,8 +366,7 @@ class Publico_c extends CI_Controller {
 	  }
 	
 
-	  public function mostras_equipamentos()
-	{
+	  public function mostras_equipamentos(){
 
 		$data['equipamentos']=$this->Publico_m->selecionarEquipamento();
 		// print_r($data);

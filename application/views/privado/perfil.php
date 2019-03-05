@@ -20,8 +20,10 @@
                     <fieldset>
                         <legend class="text-center header">Alterar Perfil</legend>
                         <div class="form-group">
+                            
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-comment bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>Nome</label>
                                 <input  name="nome" type="text"  placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
                             </div>
                         </div>
@@ -29,6 +31,7 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-user bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>User</label>
                                 <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" readonly placeholder="username" class="form-control">
                             </div>
                         </div>
@@ -36,13 +39,15 @@
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-envelope-square bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>Email</label>
                                 <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>" readonly placeholder="Endereço de Email" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>Confirmar Password</label>
                             <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmar atual Password" class="form-control">
                             </div>
                         </div>
@@ -52,12 +57,14 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>Password</label>
                                 <input id="password" name="password" type="password" placeholder="Nova Password" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
+                            <label>Repetir nova Password</label>
                                 <input id="confirm" name="confirm" type="password" placeholder="Repetir Nova Password" class="form-control">
                             </div>
                         </div>

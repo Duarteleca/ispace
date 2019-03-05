@@ -89,10 +89,7 @@
                     <button class="btn btn-danger" data-toggle="modal" href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
                     <button class="btn btn-warning" data-title="Edit" data-toggle="modal" href="#myModalEditarEquip<?php echo $id_requisicao  ?>">Editar</button>
 
-
-
                 </td>
-
 
 
                 <!-- Modal Cancelar equipamento da requisição  -->
@@ -110,7 +107,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
+                                <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>" disabled>
                             </div>
                             <div class="form-group">
                                 <input class="form-control " type="hidden" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
@@ -149,30 +146,34 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="from">Id da requisição </label>
-                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
+                                   
+                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
                                 </div>
+                                <div class="form-group">
+                                    <label for="from">Nome do Equipamento </label>
+                                    <input class="form-control " type="text" value="<?php echo $row['equipnome'] ?>">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="from">Quantidade </label>
                                     <input class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="from">id do equipamento </label>
-                                    <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
+                                    
+                                    <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="from">Id do equipamento na requisição </label>
-                                    <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
+                                
+                                    <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
                                 </div>
-                                <label for="from">Nome do Equipamento </label>
-                                <input class="form-control " type="text" value="<?php echo $row['equipnome'] ?>">
+                                
                             </div>
 
 
 
                             <div class="modal-footer ">
                                 <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
-                                    <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
+                                    <span class="glyphicon glyphicon-ok-sign"></span>Confirmar Edição</button>
                             </div>
 
                         </div>

@@ -8,8 +8,8 @@
 
                 <?php echo $erros['mensagens'];  ?>
 
-                <?php endif; ?>                
-    
+                <?php endif; ?>
+
 
                 <?php echo form_open('Publico_c/Contacto') ?>
                 <fieldset>
@@ -19,15 +19,17 @@
                             <i class="far fa-comment bigicon"></i>
                         </span>
                         <div class="col-md-8">
+                            <label>Assunto</label>
                             <input name="assunto" type="text" placeholder="Assunto" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <span class="col-md-1 col-md-offset-2 text-center">
-                            <i class="fa fa-user bigicon"></i>
+                            <i class="fas fa-user bigicon"></i>
                         </span>
                         <div class="col-md-8">
+                            <label>Nome</label>
                             <input id="name" name="name" type="text" value="<?php echo $this->session->userdata(" usuario_logado ")[0]['nome'] ?>" placeholder="Nome"
                                 class="form-control">
                         </div>
@@ -39,6 +41,7 @@
                                 <i class="fas fa-envelope-square bigicon"></i>
                             </span>
                             <div class="col-md-8">
+                                <label>Email</label>
                                 <input id="email" name="email" type="text" value="<?php echo $this->session->userdata(" usuario_logado ")[0]['email'] ?>"
                                     placeholder="Endereço de Email" class="form-control">
                             </div>
@@ -57,6 +60,7 @@
 
 
                     <div class="form-group">
+
                         <div class="col-md-12 text-center">
                             <input type="submit" class="btn btn-primary" name="submit" value="Enviar">
                         </div>

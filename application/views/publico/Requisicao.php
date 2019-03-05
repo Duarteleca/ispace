@@ -49,6 +49,19 @@
     </p>
     <?php endif ?>
 
+    <!-- Mensagem de erro quando tentar inserir sem colocar equipamento-->
+    <?php if($this->session->flashdata("erro_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
+
+    <!-- Mensagem de erro quando tentar inserir uma quantidade inválida-->
+    <?php if($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
 
 
 
@@ -135,7 +148,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Quantidade disponivel</label>
-                                    <input disabled class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
+                                    <input disabled class="form-control " type="text" name="quantidade" id="quantidade" value="">
                                 </div>                    
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Insira a quantidade</label>
@@ -192,11 +205,7 @@
                                     <input type="time" name="hora_inicio" value="<?php echo $hora_inicio ?>">
                                     <label for="from">Hora de Fim: </label>
                                     <input type="time" name="hora_fim" value="<?php echo $hora_fim ?>">
-
-
                                 </div>
-
-
 
                                 <div class="modal-footer ">
                                     <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
@@ -208,7 +217,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 <!-- Modal Eliminar -->
@@ -239,12 +247,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
             </tr>
 
 
@@ -270,6 +272,7 @@ $("#selecionarequipamento").change(function(){
                 success: function(data,status){
 
                     console.log(data);
+                    $("#quantidade").val(data);
                       
             }
         });

@@ -21,3 +21,9 @@
 #conta{
     margin-top: -20px;
 }
+
+.dropdown-menu{
+    height: 250px;
+    width: 250px;
+    background-color: #3a5775;
+}

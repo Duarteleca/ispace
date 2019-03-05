@@ -83,8 +83,13 @@
     } );
   </script>
 
-  <script src="<?php echo base_url('assets/js/header2.js')?>"></script>
-
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Script para desaparecer as mensagens -->
+  <script> 
+        setTimeout(function() {
+            $('#mydivs').hide('fast');
+        }, 2000);
+    </script>

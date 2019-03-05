@@ -27,24 +27,24 @@
 <!-- menu de inicio-->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
 
-
+    <!-- Mensagem de sucesso quando dá login -->
     <?php if($this->session->flashdata("sucesso")) :?>
-    <!-- Mensagem de Sucesso quando dá login -->
-    <p class ="alert alert-success"> <?= $this->session->flashdata("sucesso")   ?>  </p>
+    <p id="mydivs" class ="alert alert-success"> <?= $this->session->flashdata("sucesso")   ?>  </p>
     <?php endif ?>
+
+
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if($this->session->flashdata("erro")) :?>
-    <p class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>
+    <p id="mydivs" class ="alert alert-danger"><?= $this->session->flashdata("erro")   ?></p>
     <?php endif ?>
      <!-- Mensagem de err quando não consegue dar login -->
     <?php if($this->session->flashdata("Registo_sucess")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
+    <p id="mydivs" class ="alert alert-success"><?= $this->session->flashdata("Registo_sucess")   ?></p>
     <?php endif ?>
   
 
   <div class="container">
 
-    
 
     <!-- log do site -->
     <div class="navbar-header">
@@ -117,6 +117,8 @@
                           </li>
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Perfil')?>"> <i class="fa fa-user fa-lg"></i>Perfil</a>
+
+
                           </li>
                       <?php } ?>
                           <!-- Se o utilizador for de tipo 1, ou seja admin, motra o menu seguinte -->
@@ -125,8 +127,8 @@
 
 
 
-                <!-- Colocar o log in à direita -->
-                  <ul class="navbar-nav mr-auto navbar-right" >
+                 <!-- Colocar o log in à direita -->
+                 <ul class="navbar-nav mr-auto navbar-right" >
                         <li class=""><a>
 
                           <!-- Se o utilizador tiver com a conta iniciada, mostra o username ao lado direito -->
@@ -165,7 +167,7 @@
                                           </form>
                                       </div>     
                                   </li>
-                              </li>
+                              
                   </ul> 
                   
                   <!-- fecho o php do esconder login -->
@@ -180,9 +182,7 @@
                           
                 </div>  
   </div>
-  
+  </li>
  
 </nav>
 <!-- fim do Navigation -->
-
-    

@@ -75,5 +75,5 @@ $route['Equipamento']= 'Publico_c/mostra_equipamento';
 $route['home']= 'Publico_c/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-// $route['(:any)'] = 'Pages/view/$1';
+// $route['(:any)'] = 'Pages_c/view/$1';
 

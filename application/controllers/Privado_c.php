@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Privado_c extends CI_Controller {
 
 	
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->helper('url_helper');
 		$this->load->model("Privado_m");
@@ -13,8 +12,7 @@ class Privado_c extends CI_Controller {
 			
 	}
 
-	public function index()
-	{
+	public function index(){
 		$this->load->view('templates/header');
 		$this->load->view('templates/footer');
 	}
@@ -22,8 +20,7 @@ class Privado_c extends CI_Controller {
 //  --------------------------------------Salas----------------------------------------------
 
 	// Mostra todas as salas
-	  public function mostra_salas()
-	{
+	  public function mostra_salas(){
 		// Array com todas as salas
 		$data['salas']=$this->Privado_m->busca_salas();
 		
@@ -35,8 +32,7 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Insere salas
-	public function inserir_sala()
-	{
+	public function inserir_sala(){
 		// Array com todas as salas (preciso disto, pois quando inserir , ao recarregar a pagina, preciso das informações das salas)
 		$data['salas']=$this->Privado_m->selecionarSala();
 
@@ -138,8 +134,7 @@ class Privado_c extends CI_Controller {
 	}
 		
 	// Editar Sala
-	public function editar_Sala()
-		{
+	public function editar_Sala(){
 
 			// Validações com o forma validation
 			$this->form_validation->set_rules('capacidade', 'Capacidade','required',
@@ -254,8 +249,7 @@ class Privado_c extends CI_Controller {
 		}
 
 	// Eliminar Sala
-	public function Apaga_Sala()
-	{
+	public function Apaga_Sala(){
 		// Faz o post do id da sala
 		$id_sala = $this->input->post('id_tiposala');
 		$this->Privado_m->eliminar_Sala($id_sala);
@@ -271,30 +265,28 @@ class Privado_c extends CI_Controller {
 	}
 
 
+	// Função para mostrar dinamicamente a quantidade disponivel depois de selecionar cada equipamento
 	public function Ajax(){
 
-		
-		$nome_Equipamento = $this->input->post('procuraEquipamento');
-		var_dump($nome_Equipamento); 
-		// Array com a todos os equipamentos
-		// $data['equipamento']=$this->Privado_m->busca_Equipamento($nome_Equipamento);
-		// var_dump($data['equipamento']);
-		// $quantidade = $data[0]['quantidade'];
-		
-		// $this->load->view('templates/header');
-		// $this->load->view('publico/Equipamento_requisito',$data);
-		// $this->load->view('templates/Footer');
-		// echo '1';
-		// json_encode
-		// echo $quantidade;
+
+		$equipamento = $this->input->post('equipamento');
+		// echo $equipamento;
+
+		// Como recebo uma row array, para selecionar diretamento o id que tenho , basta
+		// fazer ['quantidade'], caso fosse com array de arrays, tinha de fazer o encode, 
+		// descomentar o dataType: "json" no scprit para ele fazer isso automatico e fazer um ciclo for.
+		$array = $this->Privado_m->mostra_equipamento($equipamento);
+		$quantidade = $array['quantidade'];
+
+		// Para apresentar os valores em ajax, tem de ser com echos'.
+		echo $quantidade;
 	}
 
 // ------------------------------------------------Equipamentos------------------------------------
 
 	// Mostrar equipamentos
 
-		public function mostra_equipamento()
-		{
+		public function mostra_equipamento(){
 			// Array dos equipamentos para depois listar
 			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
 			// Load das views
@@ -305,8 +297,7 @@ class Privado_c extends CI_Controller {
 		}
 
 	// Inserir Equipamentos
-	public function inserir_equipamento()
-	{
+	public function inserir_equipamento(){
 
 		// Validações de todos os campos
 		$this->form_validation->set_rules('nome_Equipamento', 'Tipo de Sala','required|is_unique[equipamento.nome]',
@@ -398,8 +389,7 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Eliminar Equipamento
-	public function Apaga_Equipamento()
-	{
+	public function Apaga_Equipamento(){
 
 		// Faz o post do do id tipo sala para depois eliminar
 		$id_tiposala = $this->input->post('id_tiposala');
@@ -559,8 +549,7 @@ class Privado_c extends CI_Controller {
 		}
 	
 	// Lista todos os users
-	public function users()
-		{
+	public function users(){
 			// dentro da listagem o admin pode adicionar um user
 
 			// Form validation
@@ -603,8 +592,7 @@ class Privado_c extends CI_Controller {
 		}
 
 	// Apaga utilizador
-	public function apaga_utilizador()
-		{
+	public function apaga_utilizador(){
 			// Post do id do user para depois eliminar
 			$id_user= $this->input->post('id_user');
 			// Elimina o user selecionado
@@ -622,8 +610,7 @@ class Privado_c extends CI_Controller {
 
 
 	// Editar Equipamento
-	public function editar_Equipamento()
-		{
+	public function editar_Equipamento(){
 
 			// Validações dos campos com o form validation
 			$this->form_validation->set_rules('nome', 'Nome','required',
@@ -734,8 +721,7 @@ class Privado_c extends CI_Controller {
 // -----------------------------Requisição---------------------------------
 
 		// Mostra requisição
-		public function fazer_requisicao()
-		{
+		public function fazer_requisicao(){
 			// Guarda no array todas as informações das requisições
 			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
 
@@ -804,8 +790,7 @@ class Privado_c extends CI_Controller {
 
 
 		// Editar requisição user
-	public function edita_Requisicao()
-	{
+	public function edita_Requisicao(){
 
 		
 
@@ -868,8 +853,7 @@ class Privado_c extends CI_Controller {
 
 
 		// Editar requisição admin
-		public function edita_Requisicao_admin()
-		{
+		public function edita_Requisicao_admin(){
 	
 			
 	
@@ -929,8 +913,7 @@ class Privado_c extends CI_Controller {
 
 
 	// Mostrar Salas requisitadas pelo user
-	public function mostra_salas_requisicao()
-	{
+	public function mostra_salas_requisicao(){
 		// Busca o id do user
 		$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
 		
@@ -948,8 +931,7 @@ class Privado_c extends CI_Controller {
 
 
 	// Mostrar equipamentos
-	public function mostra_equipamento_requisitar()
-	{
+	public function mostra_equipamento_requisitar(){
 
 		$id = $this->uri->segment(2);
             
@@ -970,18 +952,45 @@ class Privado_c extends CI_Controller {
 
 
 	// Adiciona equipamentos à requesição
-	public function adicionar_Equipamento_Requisito()
+	public function adicionar_Equipamento_Requisito(){
+		
 
-	{
-		$nome_Equipamento = $this->input->post("procuraEquipamento");
+		// Valida a quantidade, não pode ser negativa
+
+		$this->form_validation->set_rules('quantidade', 'Quantidade', 'integer');
+		array('integer' => 'O campo quantidade tem de ser inteiro.'
+			);
+
+		
+		$id_Equipamento = $this->input->post("procuraEquipamento");
 		$quantidade_Equipamento = $this->input->post("quantidade");
+
+		if($quantidade_Equipamento <= 0){
+			$this->session->set_flashdata("erro_quantidade_requisicao_equipamento", "Não pode escolher uma quantidade inválida");
+
+			redirect(base_url("/Requisicao"));
+
+		}
+
+		if(($id_Equipamento == null) || ($quantidade_Equipamento == null)){
+
+
+			$this->session->set_flashdata("erro_requisicao_equipamento", "Tem de escolher um equipamento e quantidade");
+
+			redirect(base_url("/Requisicao"));
+
+
+		}
+
 		
 		// Ir à base de dados busca a quantidade do equipamento inserido
 
-		$array_Equipamento = $this->Privado_m->busca_Equipamento($nome_Equipamento);
+		$array_Equipamento = $this->Privado_m->busca_Equipamento($id_Equipamento);
 		$quantidade_Atual = $array_Equipamento[0]['quantidade'];
 		$id_Equipamento = $array_Equipamento[0]['id'];
 
+		
+		// var_dump($array_Equipamento);
 
 		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 
@@ -1001,11 +1010,15 @@ class Privado_c extends CI_Controller {
 				// Faz update na tabela requisicao_has_requipamento
 				$id_requisicao = $this->input->post("id_requisicao");
 
+				// Busca o id do user que está logado.
+				$user_id = $this->session->userdata("usuario_logado")[0]['id'];
+
 				// Informação referente ao equipamento e requisição
 				$informacao = array(
 					'equipamento_id' => $id_Equipamento,
 					'requisicao_id' => $id_requisicao,
-					'quantidade' => $quantidade_Equipamento
+					'quantidade' => $quantidade_Equipamento,
+					'id_utilizador_requisicao' => $user_id
 					);
 
 				$this->Privado_m->requisicao_has_equipamento($informacao);
@@ -1022,8 +1035,7 @@ class Privado_c extends CI_Controller {
 
 	
 	// 	Cancela requisição
-	public function apaga_Requisicao()
-	{
+	public function apaga_Requisicao(){
 
 		// Se a requisição tiver equipamento reservado, guardo a quantidade do equipamento e o id do mesmo
 		$id_requisição = $this->input->post('id_requisicao');
@@ -1080,12 +1092,11 @@ class Privado_c extends CI_Controller {
 		// Refresh à página
 		redirect(base_url("/Requisicao"));
 		
-}
+	}
 	
 
 	// Mostrar todas as requisições para o admin
-	public function mostra_Requisicoes_Equipamentos_admin()
-	{
+	public function mostra_Requisicoes_Equipamentos_admin(){
 
 
 		// Trás no array todos os dados das das requisições juntamente com os equipamentos
@@ -1098,8 +1109,7 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Mostrar os equipamentos requisitados pelo user 
-	public function mostra_Requisicoes_Equipamentos_user()
-	{
+	public function mostra_Requisicoes_Equipamentos_user(){
 			$slug = $this->input->post('pesquisar');
 			
 			// Trás no array todos os equipamentos requisitados pelo user (id)
@@ -1113,8 +1123,7 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Mostrar os equipamentos requisitados pelo user 
-	public function mostra_Requisicoes_Equipamentos_user2()
-	{
+	public function mostra_Requisicoes_Equipamentos_user2(){
 			$slug = $this->input->post('pesquisar');
 			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
 			
@@ -1129,8 +1138,7 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Pesquisa salas requisitadas admin
-	public function mostra_Requisicoes_Salas_admin()
-	{
+	public function mostra_Requisicoes_Salas_admin(){
 
 			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
 			// var_dump($data['salas_requisitass']);
@@ -1141,8 +1149,7 @@ class Privado_c extends CI_Controller {
 	}
 	
 	// O admin apaga requisição
-	public function apaga_Requisicao_admin()
-	{
+	public function apaga_Requisicao_admin(){
 		// Se a requisição tiver equipamento reservado, guardo a quantidade do equipamento e o id do mesmo
 		$id_requisição = $this->input->post('id_requisicao');
 		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
@@ -1203,8 +1210,7 @@ class Privado_c extends CI_Controller {
 
 
 	// Cancela equipamentos das requisições
-	public function cancelar_equipamento_requisicao_admin()
-	{
+	public function cancelar_equipamento_requisicao_admin(){
 
 
 		$id_requisição = $this->input->post('id_requisicao');
@@ -1248,9 +1254,8 @@ class Privado_c extends CI_Controller {
 	}
 
 
-	// Cancela o equipamento requesitado e faz update à quantidade dos equipamentos
-	public function cancelar_equipamento_requisicao_user()
-	{
+	// Cancela o equipamento requesitado e faz update à quantidade dos equipamentos user
+	public function cancelar_equipamento_requisicao_user(){
 		
 		$id_requisição = $this->input->post('id_requisicao');
 		$id_equipamento = $this->input->post('id_equipamento');
@@ -1297,8 +1302,7 @@ class Privado_c extends CI_Controller {
 	}
 
 
-	public function editar_equipamento_requisicao_user()
-	{
+	public function editar_equipamento_requisicao_user(){
 		
 		
 		$id_requisição = $this->input->post('id_requisicao');
@@ -1356,8 +1360,7 @@ class Privado_c extends CI_Controller {
 	}
 
 
-	public function editar_equipamento_requisicao_admin()
-	{
+	public function editar_equipamento_requisicao_admin(){
 		
 
 
@@ -1378,7 +1381,7 @@ class Privado_c extends CI_Controller {
 		$quantidade_equipamento = $array_Equipamento_requesito[0]['quantidade'];
 		$id_equipamento_bd_equipamento = $array_Equipamento_requesito[0]['id'];
 
-// se for menor que a base de dados 
+		// se for menor que a base de dados 
 			 $diferenca=0;
 			$quantidade_final=$quantidade_modal;
 			$diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
