@@ -1109,14 +1109,9 @@ class Privado_c extends CI_Controller {
 	
 
 	// Mostrar todas as requisições para o admin
-<<<<<<< HEAD
-	public function mostra_Requisicoes_Equipamentos_admin(){
-
-=======
 	public function mostra_Requisicoes_Equipamentos_admin()
 	{
 		$slug = $this->input->post('pesquisar');
->>>>>>> duarte
 
 		// Trás no array todos os dados das das requisições juntamente com os equipamentos
 		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos($slug);
@@ -1157,16 +1152,10 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Pesquisa salas requisitadas admin
-<<<<<<< HEAD
-	public function mostra_Requisicoes_Salas_admin(){
-
-			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
-=======
 	public function mostra_Requisicoes_Salas_admin()
 	{
 			$slug = $this->input->post('pesquisar');
 			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin($slug);
->>>>>>> duarte
 			// var_dump($data['salas_requisitass']);
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);

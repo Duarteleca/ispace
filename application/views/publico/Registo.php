@@ -7,7 +7,6 @@
                 <?php echo $erros['mensagens'];  ?>
                 <?php endif;  ?>
                 <?php echo form_open_multipart('Publico_c/registar_user') ?>
-<<<<<<< HEAD
                 <fieldset>
                     <legend class="text-center header">Registe-se!</legend>
                     <div class="form-group">
@@ -16,7 +15,7 @@
                         </span>
                         <div class="col-md-8">
                             <label>Primeiro Nome</label>
-                            <input id="name" name="name" type="text" placeholder="Primeiro Nome" class="form-control">
+                            <input id="name" name="name" type="text" value="<?php echo set_value('name'); ?>" placeholder="Primeiro Nome" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -25,23 +24,7 @@
                         </span>
                         <div class="col-md-8">
                         <label>Nome Usuário</label>
-                            <input id="Username" name="username" type="text" placeholder="Username" class="form-control">
-=======
-                    <fieldset>
-                        <legend class="text-center header">Registe-se!</legend>
-
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-user bigicon"></i></span>
-                            <div class="col-md-8">
-                                <input id="name" name="name" type="text" value="<?php echo set_value('name'); ?>" placeholder="Primeiro Nome" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-                            <div class="col-md-8">
-                                <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
-                            </div>
->>>>>>> duarte
+                            <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
                         </div>
                     </div>
 
@@ -51,12 +34,7 @@
                                 <i class="fas fa-envelope-square bigicon"></i>
                             </span>
                             <div class="col-md-8">
-<<<<<<< HEAD
-                                <label>Email</label>
-                                <input id="email" name="email" type="text" placeholder="Endereço de Email" class="form-control">
-=======
                                 <input id="email" name="email" type="text" value="<?php echo set_value('email'); ?>" placeholder="Endereço de Email" class="form-control">
->>>>>>> duarte
                             </div>
                     </div>
 

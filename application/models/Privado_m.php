@@ -125,12 +125,8 @@ class Privado_m extends CI_Model
     }
 
     // Pesquisa as salas requisitadas por id do user
-<<<<<<< HEAD
-    public function mostrar_Requisicoes_Equipamentos(){
-=======
     public function mostrar_Requisicoes_Equipamentos($slug)
     {
->>>>>>> duarte
        
 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
@@ -212,13 +208,9 @@ class Privado_m extends CI_Model
     
 
     // Mostra todas requisicoes para o admin
-<<<<<<< HEAD
-    public function mostra_Salas_Requesitadas_admin(){ 
-=======
 
     public function mostra_Salas_Requesitadas_admin($slug)
     { 
->>>>>>> duarte
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome "tiponome"');
         $this->db->from('requisicao');
@@ -415,19 +407,10 @@ class Privado_m extends CI_Model
         }
 
 
-<<<<<<< HEAD
     //  Seleciona salas
     public function selecionarSala(){ 
         $query=$this->db->get('sala');
         return $query->result_array();         
     }
-=======
-    // //  Seleciona salas
-    // public function selecionarSala()
-    // { 
-    //     $query=$this->db->get('sala');
-    //     return $query->result_array();         
-    // }
->>>>>>> duarte
     
 }
