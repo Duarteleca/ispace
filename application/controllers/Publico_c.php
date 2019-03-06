@@ -211,7 +211,7 @@ class Publico_c extends CI_Controller {
 	  	);
 
 		// Valida a Password
-		$this->form_validation->set_rules('password', 'Password','required',
+		$this->form_validation->set_rules('password', 'Password','required|min_length[7]','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
 

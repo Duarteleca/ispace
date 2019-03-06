@@ -828,7 +828,7 @@ class Privado_c extends CI_Controller {
 
 		if($dados_Disponibilidade != null){
 
-			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+		$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
 		var_dump($id_user1);
 		$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
 		var_dump($id_user2);
@@ -851,7 +851,6 @@ class Privado_c extends CI_Controller {
 				);
 						
 						
-
 			$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
 			$this->session->set_flashdata("requisicao_editada_sucesso", "Requisição editada com sucesso!");
 
@@ -863,7 +862,6 @@ class Privado_c extends CI_Controller {
 		}
 		// Refresh da página
 		redirect(base_url("/Requisicao"));
-		
 		
 	}
 

@@ -35,6 +35,7 @@
                                 <i class="fas fa-envelope-square bigicon"></i>
                             </span>
                             <div class="col-md-8">
+                                <label>Email</label>
                                 <input id="email" name="email" type="text" value="<?php echo set_value('email'); ?>" placeholder="Endereço de Email" class="form-control">
                             </div>
                     </div>
@@ -64,6 +65,7 @@
                             </span>
                             <div class="col-md-8">
                                 <input type="file" name="postimage" id="fileToUpload">
+                                <br>
                                 <div name="g-recaptcha" class="g-recaptcha" data-sitekey="6LdKr5AUAAAAABlVEsRPoI9TBtGkGnk2kHmX0kSv"></div>
                             </div>
                     </div>
