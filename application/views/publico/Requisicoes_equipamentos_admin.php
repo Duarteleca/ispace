@@ -6,7 +6,7 @@
     </p>
     <?php endif ?>
 
-    <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
+    <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_admin') ?>
     <div class="form-group col-xs-3 col-md-3"></div>
     <div class="form-group col-xs-6 col-md-6">
         <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">

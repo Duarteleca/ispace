@@ -1097,10 +1097,10 @@ class Privado_c extends CI_Controller {
 
 	// Mostrar todas as requisições para o admin
 	public function mostra_Requisicoes_Equipamentos_admin(){
-
+		$slug = $this->input->post('pesquisar');
 
 		// Trás no array todos os dados das das requisições juntamente com os equipamentos
-		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos();
+		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos($slug);
 			
 		$this->load->view('templates/header');
 		$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
