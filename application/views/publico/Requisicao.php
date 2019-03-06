@@ -1,3 +1,10 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if($this->session->userdata("usuario_logado")[0]['tipo'] != 3){ 
+    redirect(base_url('home'));
+}
+?>
+
+
 <div class="container mostrarequisicoes">
 
     <!-- Mensagem de erro quando pretende requisitar um equipamento que nao exista tanta quantidade -->
