@@ -1,4 +1,5 @@
 <div class="container mostrarequisicoes">
+<<<<<<< HEAD
  
     <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
     <div class="form-group col-xs-3 col-md-3"></div>
@@ -14,6 +15,26 @@
     <p class="alert alert-success">
         <?= $this->session->flashdata("equipamento_cancelado_sucesso")   ?>
     </p>
+=======
+    <br>
+    <br>
+    <br>
+    
+     
+                <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
+                    <div class="form-group col-xs-3 col-md-3" ></div>
+                    <div class="form-group col-xs-6 col-md-6" >
+                        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
+                    </div>
+                        <button type="submit" id="search" class="btn btn-success" name="submit" >Search</button>
+                <?php echo form_close() ?>
+                
+
+
+<!-- Mensagem de sucesso ao cancelar requisição-->
+<?php if($this->session->flashdata("equipamento_cancelado_sucesso")) :?>
+    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_cancelado_sucesso")   ?></p>
+>>>>>>> duarte
     <?php endif ?>
 
 

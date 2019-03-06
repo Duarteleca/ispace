@@ -1,6 +1,7 @@
 <div class="container mostrarequisicoes">
 
     <?php if($this->session->flashdata("erro_quantidade")) :?>
+<<<<<<< HEAD
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade")   ?>
     </p>
@@ -13,6 +14,18 @@
     </div>
     <button type="submit" id="search" class="btn btn-info" name="submit">Search</button>
     <?php echo form_close() ?>
+=======
+                                        <p class ="alert alert-danger"><?= $this->session->flashdata("erro_quantidade")   ?></p>
+                                        <?php endif ?>
+    
+    <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_admin') ?>
+                    <div class="form-group col-xs-3 col-md-3" ></div>
+                    <div class="form-group col-xs-6 col-md-6" >
+                        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
+                    </div>
+                        <button type="submit" id="search" class="btn btn-info" name="submit" >Search</button>
+                <?php echo form_close() ?>
+>>>>>>> duarte
     <!-- <div class="form-group col-md-12"> -->
 
     <table id="example" class="display" style="width:100%">
