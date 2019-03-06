@@ -1,5 +1,19 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrarequisicoes">
 
+
+ <?php echo form_open('Privado_c/mostra_Requisicoes_Salas_admin') ?>
+                    <div class="form-group col-xs-3 col-md-3" ></div>
+                    <div class="form-group col-xs-6 col-md-6" >
+                        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
+                    </div>
+                        <button type="submit" id="search" class="btn btn-info" name="submit" >Search</button>
+                <?php echo form_close() ?>
 
     <!-- Mensagem requisicao editada com sucesso-->
     <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
@@ -29,6 +43,7 @@
             </tr>
         </thead>
         <tbody>
+        
             <?php foreach ($salas_requisitas_admin as $row){?>
             <?php $id_requisicao = $row['idreq'];  ?>
             <?php $id_user = $row['utilizador_id'];  ?>

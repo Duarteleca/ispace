@@ -415,15 +415,20 @@ class Privado_c extends CI_Controller {
 					'required'      => 'Não preencheu %s.',
 			)
 		);
+		$this->form_validation->set_rules('confirm_altera', 'Confirmar atual Password', 'required',
+		array(
+					'required'      => 'Não preencheu %s.',
+			)
+		);
 		
 		// Guarda os valores inseridos na pagina
 		$nome = $this->input->post("nome");
 		// $username = $this->input->post("username");
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
-		// $confirm = $this->input->post("confirm");
+		$confirm_altera = $this->input->post("confirm_altera");
 
-
+		$user_pass = $this->session->userdata("usuario_logado")[0]['password'];
 			// Se o form validation nao tiver erros.
 			if ($this->form_validation->run() == TRUE) {
 
@@ -441,7 +446,7 @@ class Privado_c extends CI_Controller {
 
 
 			// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
-
+			if(password_verify($confirm_altera,$user_pass)){
 			if(empty($password)){
 
 				// Se não inserir imagem
@@ -536,6 +541,14 @@ class Privado_c extends CI_Controller {
 			}
 
 			}
+		}else{
+			$data['error'] = 'pass de confirmação errada'; 
+			$this->load->view('templates/header');
+			$this->load->view('privado/perfil',$data);
+			$this->load->view('templates/footer');
+
+
+		}
 				
 			} else {
 				
@@ -792,8 +805,6 @@ class Privado_c extends CI_Controller {
 		// Editar requisição user
 	public function edita_Requisicao(){
 
-		
-
 		// Post dos valores
 		$id_requisicao = $this->input->post('id_requisicao');
 		$data_inicio = $this->input->post('data_inicio');
@@ -812,14 +823,20 @@ class Privado_c extends CI_Controller {
 		
 		// Verifica se existe datas e horas iguais ou interalos.
 		$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-		// var_dump($dados_Disponibilidade);
-		$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+		var_dump($dados_Disponibilidade);
+		
 
+		if($dados_Disponibilidade != null){
+
+			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+		var_dump($id_user1);
 		$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
-
+		var_dump($id_user2);
+		}
+		
 		// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 		// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
-		if(($dados_Disponibilidade == null ) ||  ($id_user1 == $id_user2)) {
+		elseif(($dados_Disponibilidade == null)  ||  ($id_user1 == $id_user2)) {
 			
 			// Busca o id do user
 			$id_user = $this->session->userdata("usuario_logado")[0]['id'];
@@ -845,8 +862,7 @@ class Privado_c extends CI_Controller {
 
 		}
 		// Refresh da página
-		// redirect('Requisicao', 'refresh');
-		// redirect(base_url("/Requisicao"));
+		redirect(base_url("/Requisicao"));
 		
 		
 	}
@@ -1017,8 +1033,7 @@ class Privado_c extends CI_Controller {
 				$informacao = array(
 					'equipamento_id' => $id_Equipamento,
 					'requisicao_id' => $id_requisicao,
-					'quantidade' => $quantidade_Equipamento,
-					'id_utilizador_requisicao' => $user_id
+					'quantidade' => $quantidade_Equipamento
 					);
 
 				$this->Privado_m->requisicao_has_equipamento($informacao);
@@ -1034,13 +1049,13 @@ class Privado_c extends CI_Controller {
 	}
 
 	
-	// 	Cancela requisição
-	public function apaga_Requisicao(){
-
+	public function apaga_Requisicao()
+	{
 		// Se a requisição tiver equipamento reservado, guardo a quantidade do equipamento e o id do mesmo
 		$id_requisição = $this->input->post('id_requisicao');
-		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
+		// var_dump($id_requisição);
 
+		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
 		$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
 		// var_dump($informaçao);
 
@@ -1050,15 +1065,12 @@ class Privado_c extends CI_Controller {
 			//funçao para fazer update de quantidade
 			$id_equip = $informaçao[$i]['equipamento_id'];
 			// var_dump($id_equip); // 2 e 3
-
 			$nome_Equipamento = $informaçao[$i]['equipnome'];
 			// var_dump($nome_Equipamento);
-
 			$quantidade_passado = $informaçao[$i]['quantidade'];
-
+			// var_dump($quantidade_passado);
 			
-			$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamento($nome_Equipamento);
-
+			$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamentos($nome_Equipamento);
 			// var_dump($quantidade_equipamento_origem);
 			
 			for($c=0; $c<count($quantidade_equipamento_origem);$c++){
@@ -1075,24 +1087,25 @@ class Privado_c extends CI_Controller {
 			
 			$quantidade_fazer_update = $quantidade_restante_origem + $quantidade_passado;
 			$id_Equipamento = $id_quantidade_restante_origem;
-
 			// var_dump($quantidade_fazer_update);
 			// var_dump($id_Equipamento);
 			$data = array(
 				'quantidade' => $quantidade_fazer_update,
 			);
 			$this->Privado_m->update_Equipamento($data,$id_Equipamento);
-
-
+		}
+		
+		
+		
 		}
 		$this->Privado_m->elimina_requisicao($id_requisição);
-		
-		
-		}
+		$this->session->set_flashdata("elimina_requisicao", "Requisição eliminada com sucesso");
 		// Refresh à página
 		redirect(base_url("/Requisicao"));
 		
-	}
+}
+
+
 	
 
 	// Mostrar todas as requisições para o admin
@@ -1138,9 +1151,10 @@ class Privado_c extends CI_Controller {
 	}
 
 	// Pesquisa salas requisitadas admin
-	public function mostra_Requisicoes_Salas_admin(){
-
-			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin();
+	public function mostra_Requisicoes_Salas_admin()
+	{
+			$slug = $this->input->post('pesquisar');
+			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin($slug);
 			// var_dump($data['salas_requisitass']);
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);
@@ -1170,7 +1184,7 @@ class Privado_c extends CI_Controller {
 			$quantidade_passado = $informaçao[$i]['quantidade'];
 
 			
-			$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamento($nome_Equipamento);
+			$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamentos($nome_Equipamento);
 
 			// var_dump($quantidade_equipamento_origem);
 			

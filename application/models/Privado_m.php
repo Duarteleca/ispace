@@ -127,7 +127,6 @@ class Privado_m extends CI_Model
     // Pesquisa as salas requisitadas por id do user
     public function mostrar_Requisicoes_Equipamentos($slug){
        
-
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome,requisicao_has_equipamento.quantidade,
         requisicao_has_equipamento.equipamento_id,equipamento.nome "equipnome",requisicao_has_equipamento.id "idreqequip"');
@@ -177,6 +176,13 @@ class Privado_m extends CI_Model
          return $dadosequipamento->result_array();
      }
 
+      // Função para buscar o nome para quando eliminar a requisicao voltar a dar update a quantidade do equipamento
+      function busca_Equipamentos($nome_Equipamento){
+        $this->db->where('nome',$nome_Equipamento);
+        $dadosequipamento = $this->db->get("equipamento");
+        return $dadosequipamento->result_array();
+    }
+
 
 
      // Update Equipamento (adicionar equipamento à requisição)
@@ -192,8 +198,8 @@ class Privado_m extends CI_Model
     }
 
     // Eliminar requisição selecionada
-    public function elimina_requisicao($id_requisição){
-        $this->db->where('id',$id_requisição);
+    public function elimina_requisicao($id_requisicao){
+        $this->db->where('id',$id_requisicao);
         $this->db->delete('requisicao');
     }
 
@@ -207,12 +213,21 @@ class Privado_m extends CI_Model
     
 
     // Mostra todas requisicoes para o admin
-    public function mostra_Salas_Requesitadas_admin(){ 
+
+    public function mostra_Salas_Requesitadas_admin($slug)
+    { 
         $this->db->select('requisicao.id "idreq",requisicao.data_inicio,requisicao.data_fim,requisicao.hora_inicio,requisicao.hora_fim,
         requisicao.utilizador_id,requisicao.tipologia_id,utilizador.nome "nomeuser",tipologia.id,tipologia.nome "tiponome"');
         $this->db->from('requisicao');
         $this->db->join('utilizador', 'utilizador.id = requisicao.utilizador_id');
         $this->db->join('tipologia', 'tipologia.id = requisicao.tipologia_id');
+
+
+        $this->db->like('utilizador.nome',$slug);
+        $this->db->or_like('tipologia.nome',$slug);
+        $this->db->or_like('requisicao.data_inicio',$slug);
+        $this->db->or_like('requisicao.data_fim',$slug);
+       
         // $this->db->join('requisicao_has_equipamento', 'requisicao_has_equipamento.requisicao_id = requisicao.id' );
         // $this->db->join('equipamento', 'equipamento.id = requisicao_has_equipamento.equipamento_id');
         $query = $this->db->get();
@@ -326,6 +341,7 @@ class Privado_m extends CI_Model
          return $dadosequipamentoreq->result_array();
      }
 
+     
         
        // Verifica se a sala está diponivel para tal dia e hora
      function verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala){
@@ -389,7 +405,6 @@ class Privado_m extends CI_Model
     $this->db->update('requisicao_has_equipamento', $data_requisita);
 
     }
-
 
     //  Seleciona salas
     public function selecionarSala(){ 

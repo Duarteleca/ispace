@@ -1,3 +1,9 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 3){ 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrarequisicoes">
 
     <!-- Mensagem de erro quando pretende requisitar um equipamento que nao exista tanta quantidade -->
@@ -60,6 +66,12 @@
     <?php if($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
+    <!-- Mensagem de erro quando eliminar a requisição com sucesso-->
+    <?php if($this->session->flashdata("elimina_requisicao")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("elimina_requisicao")   ?>
     </p>
     <?php endif ?>
 
@@ -152,7 +164,7 @@
                                 </div>                    
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Insira a quantidade</label>
-                                    <input class="form-control " type="text" name="quantidade" id="quantidade" value="">
+                                    <input class="form-control " type="number" max="30" name="quantidade" id="quantidade" value="">
                                 </div>
 
                                 <div class="modal-footer ">

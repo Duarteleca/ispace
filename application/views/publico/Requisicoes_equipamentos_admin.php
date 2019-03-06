@@ -1,3 +1,9 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrarequisicoes">
 
     <?php if($this->session->flashdata("erro_quantidade")) :?>

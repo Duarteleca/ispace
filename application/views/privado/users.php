@@ -126,9 +126,9 @@
 
                                     <select style="color:black" name="tipo_user" required class="form-control">
                                         <option value="<?php echo $row['tipo'] ; ?>" selected>
-                                            <?php if( $row['tipo'] == 0){echo "Utilizador";}else{echo "Adminstrador";}?>
+                                            <?php if( $row['tipo'] == 3){echo "Utilizador";}else{echo "Adminstrador";}?>
                                         </option>
-                                        <option value="0">Utilizador</option>
+                                        <option value="3">Utilizador</option>
                                         <option value="2">Administrador</option>
                                     </select>
 

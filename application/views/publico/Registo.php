@@ -1,3 +1,4 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -15,7 +16,7 @@
                         </span>
                         <div class="col-md-8">
                             <label>Primeiro Nome</label>
-                            <input id="name" name="name" type="text" placeholder="Primeiro Nome" class="form-control">
+                            <input id="name" name="name" type="text" value="<?php echo set_value('name'); ?>" placeholder="Primeiro Nome" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -24,7 +25,7 @@
                         </span>
                         <div class="col-md-8">
                         <label>Nome Usuário</label>
-                            <input id="Username" name="username" type="text" placeholder="Username" class="form-control">
+                            <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
                         </div>
                     </div>
 
@@ -34,8 +35,7 @@
                                 <i class="fas fa-envelope-square bigicon"></i>
                             </span>
                             <div class="col-md-8">
-                                <label>Email</label>
-                                <input id="email" name="email" type="text" placeholder="Endereço de Email" class="form-control">
+                                <input id="email" name="email" type="text" value="<?php echo set_value('email'); ?>" placeholder="Endereço de Email" class="form-control">
                             </div>
                     </div>
 
@@ -64,6 +64,7 @@
                             </span>
                             <div class="col-md-8">
                                 <input type="file" name="postimage" id="fileToUpload">
+                                <div name="g-recaptcha" class="g-recaptcha" data-sitekey="6LdKr5AUAAAAABlVEsRPoI9TBtGkGnk2kHmX0kSv"></div>
                             </div>
                     </div>
                     <div class="form-group">
@@ -77,3 +78,22 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("Confirm");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Password diferente");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+</script>
