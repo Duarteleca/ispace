@@ -44,7 +44,6 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-key bigicon"></i></span>
                             <div class="col-md-8">
@@ -52,9 +51,6 @@
                             <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmar atual Password" class="form-control">
                             </div>
                         </div>
-=======
-                       
->>>>>>> duarte
                    
                         <!-- Message body -->
                 
@@ -72,12 +68,7 @@
                                 <input id="confirm" name="confirm" type="password" placeholder="Repetir Nova Password" class="form-control">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-                            <div class="col-md-8">
-                                <input id="Confirm" name="confirm_altera" type="password" placeholder="Confirmar atual Password" class="form-control">
-                            </div>
-                        </div>
+                        
                         <div class="form-group"><i class="">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
                                 <div class="col-md-8">

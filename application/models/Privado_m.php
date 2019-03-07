@@ -400,11 +400,7 @@ class Privado_m extends CI_Model
     $this->db->update('requisicao_has_equipamento', $data_requisita);
 
     }
-    public function selecionarSala()
-        { 
-            $query=$this->db->get('sala');
-            return $query->result_array();         
-        }
+    
 
 
     //  Seleciona salas
