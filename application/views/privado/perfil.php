@@ -97,13 +97,10 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata(" usuario_logado
-                                    ")[0]['imagem'])?>">
+                                <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
                                 <input type="file" name="postimage" id="fileToUpload">
                             </div>
                     </div>
-
-
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
@@ -112,8 +109,6 @@
                     </div>
                 </fieldset>
                 <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
-
-
 
                 <?php echo form_close() ?>
             </div>

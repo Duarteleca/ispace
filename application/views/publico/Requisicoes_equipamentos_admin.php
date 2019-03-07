@@ -1,5 +1,5 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+<?php if ($this->session->userdata("usuario_logado")[0]['tipo'] != 1){ 
     redirect(base_url('home'));
 }
 ?>
@@ -31,8 +31,6 @@
                 <th>Quantidade</th>
                 <th>Nome Equip</th>
                 <th>id Equip</th>
-
-
                 <th>Ação</th>
             </tr>
         </thead>

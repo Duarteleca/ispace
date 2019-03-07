@@ -41,7 +41,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <input id="capaciadade" name="capaciadade" type="Number" placeholder="capaciadade" class="form-control">
+                                <input id="capacidade" name="capacidade" type="Number" placeholder="Capacidade" class="form-control">
                             </div>
                         </div>
 

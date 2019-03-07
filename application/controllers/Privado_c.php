@@ -40,7 +40,7 @@ class Privado_c extends CI_Controller {
 		$this->form_validation->set_rules('tiposala', 'Tipo de Sala','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
-		$this->form_validation->set_rules('capaciadade', 'Capaciadade','required',
+		$this->form_validation->set_rules('capacidade', 'Capacidade','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
 		$this->form_validation->set_rules('disponibilidade', 'Disponibilidade','required',
@@ -55,7 +55,7 @@ class Privado_c extends CI_Controller {
 
 		// Guarda os valores inseridos no registo
 		$tiposala = $this->input->post("tiposala");
-		$capaciadade = $this->input->post("capaciadade");
+		$capacidade = $this->input->post("capacidade");
 		$disponibilidade = $this->input->post("disponibilidade");
 		$nomesala = $this->input->post("nomesala");
 
@@ -100,7 +100,7 @@ class Privado_c extends CI_Controller {
 
 			// Data referente ao dados da sala que for inserida
 			$data = array (
-					'capacidade' => $capaciadade,
+					'capacidade' => $capacidade,
 					'disponibilidade' => $disponibilidade,
 					'nome' => $nomesala,
 					'sala_id' => $id_sala,
@@ -745,7 +745,6 @@ class Privado_c extends CI_Controller {
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
 			$hora_fim = $this->input->post("hora_fim");
-
 			// Não pode inserir uma fora inicio maior que a hora final
 			if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
 
@@ -794,6 +793,7 @@ class Privado_c extends CI_Controller {
 
 		// Post dos valores
 		$id_requisicao = $this->input->post('id_requisicao');
+		var_dump($id_requisicao);
 		$data_inicio = $this->input->post('data_inicio');
 		$data_fim = $this->input->post('data_fim');
 		$hora_inicio = $this->input->post('hora_inicio');
@@ -819,14 +819,25 @@ class Privado_c extends CI_Controller {
 		// var_dump($id_user1);
 		$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
 		// var_dump($id_user2);
-		}
-		
+		$id_req = $dados_Disponibilidade[0]['id'];
+		// var_dump($id_req);
+	
+
+				if(($dados_Disponibilidade != null) || ($id_req != $id_requisicao)){
+					// echo 'Não dá otário-';
+					$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+					redirect(base_url("/Requisicao"));	
+					
+				}
+
+
 		// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 		// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
-		elseif(($dados_Disponibilidade == null)  ||  ($id_user1 == $id_user2)) {
+		}if(($dados_Disponibilidade == null)  || ($id_user1 == $id_user2)) {
 			
 			// Busca o id do user
 			$id_user = $this->session->userdata("usuario_logado")[0]['id'];
+			// var_dump($id_user);
 			// Data referente à informação requirida durante a requisição de uma sala
 			$data = array(
 				'data_inicio' => $data_inicio,
@@ -837,7 +848,7 @@ class Privado_c extends CI_Controller {
 				'tipologia_id' => $id_sala
 				);
 						
-						
+				// var_dump($data);			
 			$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
 			$this->session->set_flashdata("requisicao_editada_sucesso", "Requisição editada com sucesso!");
 

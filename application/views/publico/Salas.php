@@ -121,8 +121,7 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <input class="form-control " type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata(" usuario_logado
-                                        ")[0]['id'] ?>">
+                                    <input class="form-control " type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata("usuario_logado")[0]['id'] ?>">
 
                                 </div>
 
