@@ -3,11 +3,9 @@
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">
 
-                <!-- Mensagem de erros -->
-                <?php if(isset($erros['mensagens'])) :?>
-
+                <!-- Mensagem de erro -->
+                <?php if (isset($erros['mensagens'])) :?>
                 <?php echo $erros['mensagens'];  ?>
-
                 <?php endif; ?>
 
 

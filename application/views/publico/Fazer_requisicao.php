@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">
                 <!-- Mensagem de err quando não consegue dar login -->
-                <?php if(isset($erros['mensagens'])) :?>
+                <?php if (isset($erros['mensagens'])) :?>
                 <?php echo $erros['mensagens'];  ?>
                 <?php endif;  ?>
                 <?php echo form_open_multipart('Publico_c/registar_user') ?>

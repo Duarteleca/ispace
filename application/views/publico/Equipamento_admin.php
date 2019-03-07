@@ -1,15 +1,40 @@
+
+
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if ($this->session->userdata("usuario_logado")[0]['tipo'] != 1) { 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container">
 
-    <!-- Mensagem de err quando não consegue dar login -->
-    <?php if($this->session->flashdata("equipamento_inserido_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_inserido_sucesso")   ?></p>
+<!-- Mensagem de erro ao inserir uma quantidade de equipamento negativa -->
+<?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
     <?php endif ?>
 
     <!-- Mensagem de err quando não consegue dar login -->
-    <?php if($this->session->flashdata("equipamento_eliminado_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("equipamento_eliminado_sucesso")   ?></p>
+    <?php if ($this->session->flashdata("equipamento_inserido_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
+    </p>
     <?php endif ?>
-    
+    <!-- Mensagem de sucesso equipamento editado -->
+    <?php if ($this->session->flashdata("Equipamento_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("Equipamento_sucesso")   ?>
+    </p>
+    <?php endif ?>
+
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if ($this->session->flashdata("equipamento_eliminado_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("equipamento_eliminado_sucesso")   ?>
+    </p>
+    <?php endif ?>
+
     <div class="row">
         <div class="col-xs-6 col-md-6">
             <a href="<?php echo base_url('Inserir_equipamento')?>" data-placement="top" data-toggle="tooltip" title="Insert">
@@ -21,22 +46,18 @@
     </div>
     <br>
 
-    
-    
-    <!-- Mensagem de err quando não consegue dar login -->
-    <?php if(isset($erros['mensagens'])) :?>
+    <!-- Mensagem de erro -->
+    <?php if (isset($erros['mensagens'])) :?>
     <div class="alert alert-danger alert-dismissible classeerrologin" role="alert" id="">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
         <?php echo $erros['mensagens']; ?>
     </div>
-
-    <?php endif;                
-        ?>
+    <?php endif; ?>
 
 
-
+    <!-- Tabela -->
 
     <table name="tabelaequipamentos" id="example" class="table table-bordered table-condensed">
         <thead>
@@ -51,7 +72,7 @@
 
         <tbody>
             <?php 
-                    foreach ($equipamentos as $row){?>
+                    foreach ($equipamentos as $row) { ?>
             <?php $id_equipamento= $row['id'] ?>
 
             <tr>
@@ -67,12 +88,10 @@
                 <td>
                     <!-- Se a disponibilidade for 1, ira aparecer disponivel, caso contrario, indisponivel. -->
                     <?php
-                                if($row['disponibilidade']==1){
+                                if ($row['disponibilidade']==1) {
                                   echo "Disponível";
-                                }
-                                else{
-                                  echo "Indisponível";
-
+                                } else {
+                                    echo "Indisponível";
                                 }
                             ?>
                 </td>
@@ -181,7 +200,7 @@
 </div>
 
 <!-- Mensagem de err quando não consegue dar login -->
-<?php if($this->session->flashdata("Sala_sucesso")) :?>
+<?php if ($this->session->flashdata("Sala_sucesso")) :?>
 <p class="alert alert-success">
     <?= $this->session->flashdata("Sala_sucesso")   ?>
 </p>

@@ -1,21 +1,21 @@
 <div class="container mostrasalas">
 
     <!-- Mensagem de erro ao mudar a hora de requisição-->
-    <?php if($this->session->flashdata("erro_hora_requisicao")) :?>
+    <?php if ($this->session->flashdata("erro_hora_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_hora_requisicao")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso ao fazer requisição -->
-    <?php if($this->session->flashdata("requisicao_sucesso")) :?>
+    <?php if ($this->session->flashdata("requisicao_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_sucesso")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando não consegue fazer requisição -->
-    <?php if($this->session->flashdata("erro_requisicao")) :?>
+    <?php if ($this->session->flashdata("erro_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_requisicao")   ?>
     </p>
@@ -27,7 +27,7 @@
         <?php echo form_open('Publico_c/mostra_salas') ?>
         <select style="color:black" name="search_sala" class="form-control">
             <option value="" selected>Tipo de sala</option>
-            <?php foreach($salas as $rows){
+            <?php foreach ($salas as $rows) {
                 echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
                 } ?>
         </select>
@@ -41,7 +41,7 @@
 
     <!-- <div class="form-group col-md-12"> -->
     <?php 
-        if(!$this->session->userdata("usuario_logado")) { ?>
+        if (!$this->session->userdata("usuario_logado")) { ?>
 
     <table id="example" class="display" style="width:100%">
         <thead>
@@ -53,10 +53,10 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sala as $row){?>
+            <?php foreach ($sala as $row) { ?>
             <tr>
                 <td>
-                    <img height="30%" width="30%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
+                    <img height:="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
                 </td>
                 <td class="texto ">
                     <?php echo $row['tipo_sala'] ?>
@@ -72,7 +72,7 @@
             <?php } ?>
         </tbody>
     </table>
-    <?php }else  {  ?>
+    <?php } else  {  ?>
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -85,12 +85,12 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sala as $row){?>
+            <?php foreach ($sala as $row) { ?>
             <?php $id_sala= $row['tipoid'] ?>
 
             <tr>
                 <td>
-                    <img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
+                    <img height:="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
                 </td>
                 <td class="texto ">
                     <?php echo $row['tipo_sala'] ?>
@@ -122,7 +122,7 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <input class="form-control " type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata("usuario_logado")[0]['id'] ?>">
-                                        
+
                                 </div>
 
 
@@ -143,13 +143,13 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Disponibilidade</label>
                                         <input disabled class="form-control " type="text" name="disponibilidade" id="disponibilidade" value="<?php
-                                                            if($row['disponibilidade']==1){
+                                                            if ($row['disponibilidade']==1) {
                                                             echo " Disponível ";
-                                                            }
-                                                            else{
-                                                            echo "Indisponível ";
-
-                                                            }
+                                                            }else{
+                                                                echo "Indisponível ";
+    
+                                                                }
+                                                            
                                                         ?>">
                                     </div>
 
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="">Data de entrega</label>
-                                        <input type="date" id="biday" name="data_fim" style="color:black;" onchange='compareDates()' min="<?php echo date('Y-m-d'); ?>"
+                                        <input type="date" id="biday" name="data_fim" style="color:black;"  min="<?php echo date('Y-m-d'); ?>"  onchange='compareDates()'
                                             max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>">
                                     </div>
 
@@ -170,13 +170,10 @@
                                             <input class="form-control" type="time" name="hora_fim" value="18:00">
                                         </label>
 
-
                                     </div>
 
-
-
                                     <div class="modal-footer ">
-                                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;" onclick='compareDates()'>
+                                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
                                             <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
                                     </div>
 
@@ -187,8 +184,6 @@
                         </div>
                     </div>
 
-
-
             </tr>
             <?php } ?>
         </tbody>
@@ -196,9 +191,7 @@
     <?php }  ?>
     </div>
 
-
-
-    
+    <!-- Scipt para fazer um alerta -->
     <script>
 
         function compareDates() {
@@ -208,6 +201,5 @@
                 alert("Data inicial maior que a final");
             }
         }
-
 
     </script>

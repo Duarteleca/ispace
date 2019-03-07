@@ -115,11 +115,6 @@
                           <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('Requisicoes_equipamentos_user')?>"><i class="fa fa-users fa-lg"></i> Equipamentos Requisitados</a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('Perfil')?>"> <i class="fa fa-user fa-lg"></i>Perfil</a>
-
-
-                          </li>
                       <?php } ?>
                           <!-- Se o utilizador for de tipo 1, ou seja admin, motra o menu seguinte -->
                          
@@ -133,11 +128,11 @@
 
                           <!-- Se o utilizador tiver com a conta iniciada, mostra o username ao lado direito -->
                           <!-- usando o session->userdata -->
-                            <a class="nav-link">
+                            <a class="nav-link" href="<?php echo base_url('Perfil')?>">
                                 <?php
                                         if($this->session->userdata("usuario_logado")){                                     
                                             echo '  
-                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username']?> <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>"> <?php '</a></li>';
+                                            <li id="conta" class="userlogin">Conta : '.$this->session->userdata("usuario_logado")[0]['username']?> <img  height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>"> <?php '</a></li>';
                                         }
                                 ?>
                             </a>

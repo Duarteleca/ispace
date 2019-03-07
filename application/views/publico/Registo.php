@@ -1,9 +1,12 @@
+<!-- Script do recaptcha -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">
                 <!-- Mensagem de err quando não consegue dar login -->
-                <?php if(isset($erros['mensagens'])) :?>
+                <?php if (isset($erros['mensagens'])) :?>
                 <?php echo $erros['mensagens'];  ?>
                 <?php endif;  ?>
                 <?php echo form_open_multipart('Publico_c/registar_user') ?>
@@ -23,7 +26,7 @@
                             <i class="fas fa-user bigicon"></i>
                         </span>
                         <div class="col-md-8">
-                        <label>Nome Usuário</label>
+                            <label>Nome Usuário</label>
                             <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
                         </div>
                     </div>
@@ -34,6 +37,7 @@
                                 <i class="fas fa-envelope-square bigicon"></i>
                             </span>
                             <div class="col-md-8">
+                                <label>Email</label>
                                 <input id="email" name="email" type="text" value="<?php echo set_value('email'); ?>" placeholder="Endereço de Email" class="form-control">
                             </div>
                     </div>
@@ -63,6 +67,8 @@
                             </span>
                             <div class="col-md-8">
                                 <input type="file" name="postimage" id="fileToUpload">
+                                <br>
+                                <div name="g-recaptcha" class="g-recaptcha" data-sitekey="6LdKr5AUAAAAABlVEsRPoI9TBtGkGnk2kHmX0kSv"></div>
                             </div>
                     </div>
                     <div class="form-group">
@@ -78,20 +84,21 @@
 </div>
 
 
+
 <script>
 
-var password = document.getElementById("password")
-  , confirm_password = document.getElementById("Confirm");
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("Confirm");
 
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Password diferente");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Password diferente");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
 
 </script>
