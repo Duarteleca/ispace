@@ -7,6 +7,13 @@
     </p>
     <?php endif ?>
 
+    <!-- Mensagem de erro ao inserir uma capacidade negativa -->
+    <?php if ($this->session->flashdata("inseriu_capacidade_negativa")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("inseriu_capacidade_negativa")   ?>
+    </p>
+    <?php endif ?>
+
     <div class="row">
         <div class="col-md-12">
 
@@ -41,7 +48,11 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
+<<<<<<< HEAD
                                 <input id="capacidade" name="capacidade" type="Number" placeholder="Capacidade" class="form-control">
+=======
+                                <input id="capacidade" name="capacidade" type="Number" placeholder="capacidade" class="form-control">
+>>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
                             </div>
                         </div>
 

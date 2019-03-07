@@ -40,7 +40,11 @@ class Privado_c extends CI_Controller {
 		$this->form_validation->set_rules('tiposala', 'Tipo de Sala','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
+<<<<<<< HEAD
 		$this->form_validation->set_rules('capacidade', 'Capacidade','required',
+=======
+		$this->form_validation->set_rules('capacidade', 'capacidade','required',
+>>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
 			array('required' => 'Você tem de preencher campo %s.')
 			);
 		$this->form_validation->set_rules('disponibilidade', 'Disponibilidade','required',
@@ -58,6 +62,8 @@ class Privado_c extends CI_Controller {
 		$capacidade = $this->input->post("capacidade");
 		$disponibilidade = $this->input->post("disponibilidade");
 		$nomesala = $this->input->post("nomesala");
+
+		
 
 		
 		// Se o form validation nao tiver erros.
@@ -94,6 +100,13 @@ class Privado_c extends CI_Controller {
 			
 			// Busca o id do tipo de sala que foi inserido
 			$array_sala = $this->Privado_m->mostrar_Sala($tiposala);
+
+			if ($capacidade <= 0) {
+				$this->session->set_flashdata("inseriu_capacidade_negativa", "Não pode escolher uma capacidade inválida");
+	
+				redirect(base_url("/Inserir_sala"));
+	
+			}
 			
 			$id_sala = $array_sala[0]['id'];
 
@@ -179,6 +192,12 @@ class Privado_c extends CI_Controller {
 				$capacidade = $this->input->post("capacidade");
 				$nome_sala = $this->input->post("nome_sala");
 				$disponibilidade = $this->input->post("disponibilidade");
+				if ($capacidade <= 0) {
+					$this->session->set_flashdata("erro_capacidade_requisicao_equipamento", "Não pode escolher uma capacidade inválida");
+		
+					redirect(base_url("/Sala_admin"));
+		
+				}
 				
 					// array referente aos dados alterados da sala
 					$inputs = array(
@@ -351,7 +370,12 @@ class Privado_c extends CI_Controller {
 		// Concateno o edereço com a imagem para depois guardar na base de dados
 		$imagem = $endereco.$post_image;
 			
-			
+		if ($quantidade <= 0) {
+			$this->session->set_flashdata("erro_quantidade_requisicao_equipamento", "Não pode escolher uma quantidade inválida");
+
+			redirect(base_url("/Inserir_equipamento"));
+
+		}
 
 			// Guarda no array os valores do equipamento
 			$data = array (
@@ -386,9 +410,9 @@ class Privado_c extends CI_Controller {
 	public function Apaga_Equipamento(){
 
 		// Faz o post do do id tipo sala para depois eliminar
-		$id_tiposala = $this->input->post('id_tiposala');
+		$id_equipamento = $this->input->post('id_equipamento');
 		// Passa como parâmetro do id para depois eliminar
-		$this->Privado_m->eliminar_Sala($id_tiposala);
+		$this->Privado_m->eliminar_equipamento($id_equipamento);
 		
 		// Mensagem de sucesso
 		$this->session->set_flashdata("equipamento_eliminado_sucesso", "Equipamento eliminado com sucesso!");
@@ -656,6 +680,13 @@ class Privado_c extends CI_Controller {
 				$quantidade = $this->input->post("quantidade");
 				$disponibilidade = $this->input->post("disponibilidade");
 				$id_equipamento = $this->input->post("id_equipamento");
+
+				if ($quantidade <= 0) {
+					$this->session->set_flashdata("erro_quantidade_requisicao_equipamento", "Não pode escolher uma quantidade inválida");
+		
+					redirect(base_url("/Equipamento_admin"));
+		
+				}
 								
 				// Inputs com a informação do equipamento que foi editado
 				$inputs = array(
@@ -789,8 +820,9 @@ class Privado_c extends CI_Controller {
 
 
 		// Editar requisição user
-	public function edita_Requisicao(){
+		public function edita_Requisicao(){
 
+<<<<<<< HEAD
 		// Post dos valores
 		$id_requisicao = $this->input->post('id_requisicao');
 		var_dump($id_requisicao);
@@ -857,11 +889,79 @@ class Privado_c extends CI_Controller {
 			$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
 		}
 
-		}
-		// Refresh da página
-		redirect(base_url("/Requisicao"));
+=======
+			// Post dos valores
+			$id_requisicao = $this->input->post('id_requisicao');
+			var_dump($id_requisicao);
+			$data_inicio = $this->input->post('data_inicio');
+			$data_fim = $this->input->post('data_fim');
+			$hora_inicio = $this->input->post('hora_inicio');
+			$hora_fim = $this->input->post('hora_fim');
+			$id_Requisicao = $this->input->post('id_requisicao');
+			$id_sala = $this->input->post("id_tipologia");
+	
+			// Não pode inserir uma fora inicio maior que a hora final
+			if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
+	
+				$this->session->set_flashdata("erro_hora_requisicao", "Hora/data de inicio não pode ser maior que a final");
+	
+			}else{
+			
+			// Verifica se existe datas e horas iguais ou interalos.
+			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
+			// var_dump($dados_Disponibilidade);
+			
+	
+			if($dados_Disponibilidade != null){
+	
+			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+			// var_dump($id_user1);
+			$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
+			// var_dump($id_user2);
+			$id_req = $dados_Disponibilidade[0]['id'];
+			// var_dump($id_req);
 		
-	}
+	
+					if(($dados_Disponibilidade != null) || ($id_req != $id_requisicao)){
+						// echo 'Não dá otário-';
+						$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+						redirect(base_url("/Requisicao"));	
+						
+					}
+	
+	
+			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
+			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
+			}if(($dados_Disponibilidade == null)  || ($id_user1 == $id_user2)) {
+				
+				// Busca o id do user
+				$id_user = $this->session->userdata("usuario_logado")[0]['id'];
+				// var_dump($id_user);
+				// Data referente à informação requirida durante a requisição de uma sala
+				$data = array(
+					'data_inicio' => $data_inicio,
+					'data_fim' => $data_fim ,
+					'hora_inicio' => $hora_inicio,
+					'hora_fim' => $hora_fim,
+					'utilizador_id' => $id_user,
+					'tipologia_id' => $id_sala
+					);
+							
+					// var_dump($data);			
+				$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
+				$this->session->set_flashdata("requisicao_editada_sucesso", "Requisição editada com sucesso!");
+	
+			}else{
+	
+				$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+			}
+	
+			}
+			// Refresh da página
+			redirect(base_url("/Requisicao"));
+			
+>>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
+		}
 
 
 		// Editar requisição admin
@@ -917,7 +1017,7 @@ class Privado_c extends CI_Controller {
 			}
 			// Refresh da página
 			// redirect('Requisicoes_salas_admin', 'refresh');
-			redirect(base_url("/Requisicao"));
+			redirect(base_url("/Requisicoes_salas_admin"));
 			
 		}
 
@@ -1304,6 +1404,13 @@ class Privado_c extends CI_Controller {
 		$quantidade_modal = $this->input->post('quantidade');	
 		$id_requisicao_equipamento = $this->input->post('id_requisicao_equipamento');
 
+		if ($quantidade_modal <= 0) {
+			$this->session->set_flashdata("erro_quantidade_requisicao_equipamento", "Não pode escolher uma quantidade inválida");
+
+			redirect(base_url("/Requisicoes_equipamentos_user"));
+
+		}
+
 		// Vai à base de dados buscar a quantidade atual dos equipamentos nas requisiçoes
 		$array_Equipamento_requesito = $this->Privado_m->busca_quantidade_equipamento_requisito($id_equipamento);
 
@@ -1337,7 +1444,7 @@ class Privado_c extends CI_Controller {
 
 			// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 			$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
-			$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
+			$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_requisicao_equipamento);
 
 
 		}else{

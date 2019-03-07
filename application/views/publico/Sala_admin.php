@@ -12,6 +12,12 @@
         <?= $this->session->flashdata("sala_eliminada_sucesso")   ?>
     </p>
     <?php endif ?>
+    <!-- Mensagem de erro apos editar capacidade invalida -->
+    <?php if ($this->session->flashdata("erro_capacidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_capacidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
 
     <!-- Mensagem de erro-->
     <?php if (isset($erros['mensagens'])) :?>
@@ -171,7 +177,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="hidden" name="id_tiposala" id="id_tiposala" value=" <?php echo $id_tiposala; ?>">
+                                <input class="form-control " type="text" name="id_tiposala" id="id_tiposala" value="<?php echo $id_tiposala; ?>">
                             </div>
                             <div class="modal-body">
                                 <p>Quer mesmo apagar este registo? Este processo não pode ser revertido.</p>

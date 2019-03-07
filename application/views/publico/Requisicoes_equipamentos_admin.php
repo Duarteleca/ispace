@@ -30,7 +30,9 @@
                 <th>Requisitado por:</th>
                 <th>Quantidade</th>
                 <th>Nome Equip</th>
-                <th>id Equip</th>
+                <th>id Req_Equip</th>
+
+
                 <th>Ação</th>
             </tr>
         </thead>

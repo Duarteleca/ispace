@@ -1,3 +1,5 @@
+
+
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
 <?php if ($this->session->userdata("usuario_logado")[0]['tipo'] != 1) { 
     redirect(base_url('home'));
@@ -6,10 +8,23 @@
 
 <div class="container">
 
+<!-- Mensagem de erro ao inserir uma quantidade de equipamento negativa -->
+<?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
+
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if ($this->session->flashdata("equipamento_inserido_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
+    </p>
+    <?php endif ?>
+    <!-- Mensagem de sucesso equipamento editado -->
+    <?php if ($this->session->flashdata("Equipamento_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("Equipamento_sucesso")   ?>
     </p>
     <?php endif ?>
 

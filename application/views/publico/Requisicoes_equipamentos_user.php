@@ -21,6 +21,11 @@
         <?= $this->session->flashdata("equipamento_cancelado_sucesso")   ?>
     </p>
     <?php endif ?>
+    <?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
 
 
     <?php if ($this->session->flashdata("erro_quantidade")) :?>
@@ -172,6 +177,7 @@
 
                                     <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
                                 </div>
+                                
 
                             </div>
 

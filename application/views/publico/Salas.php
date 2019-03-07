@@ -56,7 +56,7 @@
             <?php foreach ($sala as $row) { ?>
             <tr>
                 <td>
-                    <img height="30%" width="30%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
+                    <img height:="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
                 </td>
                 <td class="texto ">
                     <?php echo $row['tipo_sala'] ?>
@@ -90,7 +90,7 @@
 
             <tr>
                 <td>
-                    <img height="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
+                    <img height:="50%" width="50%" class="imagem_salas" src="<?php echo base_url($row['imagem'])?>">
                 </td>
                 <td class="texto ">
                     <?php echo $row['tipo_sala'] ?>
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="">Data de entrega</label>
-                                        <input type="date" id="biday" name="data_fim" style="color:black;" onchange='compareDates()' min="<?php echo date('Y-m-d'); ?>"
+                                        <input type="date" id="biday" name="data_fim" style="color:black;"  min="<?php echo date('Y-m-d'); ?>"  onchange='compareDates()'
                                             max="<?php echo date('Y-m-d',strtotime('+12 months')); ?>">
                                     </div>
 
@@ -173,7 +173,7 @@
                                     </div>
 
                                     <div class="modal-footer ">
-                                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;" onclick='compareDates()'>
+                                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
                                             <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
                                     </div>
 

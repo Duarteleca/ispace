@@ -368,8 +368,8 @@ class Privado_m extends CI_Model
         return $dadosequipamentoreq->result_array();
     }
 
-    public function atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd){
-        $this->db->where('equipamento_id', $id_equipamento_bd);
+    public function atualiza_Equipamento_depois_update($data_requisita,$id_requisicao_equipamento){
+        $this->db->where('id', $id_requisicao_equipamento);
         $this->db->update('requisicao_has_equipamento', $data_requisita);
     }
 
@@ -377,6 +377,11 @@ class Privado_m extends CI_Model
     public function selecionarSala(){ 
         $query=$this->db->get('sala');
         return $query->result_array();         
+    }
+     // Elimina a sala selecionada
+     public function eliminar_equipamento($id_equipamento){
+        $this->db->where('id',$id_equipamento);
+        $this->db->delete('equipamento');
     }
     
 }

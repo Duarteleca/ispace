@@ -97,7 +97,11 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
+<<<<<<< HEAD
                                 <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
+=======
+                                <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata(" usuario_logado")[0]['imagem'])?>">
+>>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
                                 <input type="file" name="postimage" id="fileToUpload">
                             </div>
                     </div>
