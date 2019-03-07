@@ -1,5 +1,11 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 3){ 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrarequisicoes">
- 
+
     <?php echo form_open('Privado_c/mostra_Requisicoes_Equipamentos_user') ?>
     <div class="form-group col-xs-3 col-md-3"></div>
     <div class="form-group col-xs-6 col-md-6">
@@ -10,14 +16,19 @@
 
 
     <!-- Mensagem de sucesso ao cancelar requisição-->
-    <?php if($this->session->flashdata("equipamento_cancelado_sucesso")) :?>
+    <?php if ($this->session->flashdata("equipamento_cancelado_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("equipamento_cancelado_sucesso")   ?>
     </p>
     <?php endif ?>
+    <?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
 
 
-    <?php if($this->session->flashdata("erro_quantidade")) :?>
+    <?php if ($this->session->flashdata("erro_quantidade")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade")   ?>
     </p>
@@ -39,7 +50,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($salas_requisitass as $row){?>
+            <?php foreach ($salas_requisitass as $row) { ?>
 
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_requisicao = $row['idreq'];  ?>
@@ -146,7 +157,7 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                   
+
                                     <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
                                 </div>
                                 <div class="form-group">
@@ -159,14 +170,15 @@
                                     <input class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
                                 </div>
                                 <div class="form-group">
-                                    
+
                                     <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
                                 </div>
                                 <div class="form-group">
-                                
+
                                     <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
                                 </div>
                                 
+
                             </div>
 
 
@@ -181,14 +193,10 @@
                     </div>
                 </div>
 </div>
-
-
-
-
 </tr>
 
-
 <?php } ?>
+
 </tbody>
 </table>
 </div>

@@ -1,8 +1,17 @@
 <div class="container">
 
-     <!-- Mensagem de err quando não consegue dar login -->
-     <?php if($this->session->flashdata("inseriu_sala_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("inseriu_sala_sucesso")   ?></p>
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if ($this->session->flashdata("inseriu_sala_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("inseriu_sala_sucesso")   ?>
+    </p>
+    <?php endif ?>
+
+    <!-- Mensagem de erro ao inserir uma capacidade negativa -->
+    <?php if ($this->session->flashdata("inseriu_capacidade_negativa")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("inseriu_capacidade_negativa")   ?>
+    </p>
     <?php endif ?>
 
     <div class="row">
@@ -28,9 +37,9 @@
                             <div class="col-md-8">
                                 <select style="color:black" name="tiposala" class="form-control">
                                     <option value="" selected>Tipo de sala</option>
-                                    <?php foreach($salas as $rows){
-                                                       echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
-                                                       } ?>
+                                    <?php foreach ($salas as $rows) {
+                                            echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
+                                            } ?>
                                 </select>
                             </div>
                         </div>
@@ -39,7 +48,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <input id="capaciadade" name="capaciadade" type="Number" placeholder="capaciadade" class="form-control">
+                                <input id="capacidade" name="capacidade" type="Number" placeholder="capacidade" class="form-control">
                             </div>
                         </div>
 
@@ -80,11 +89,14 @@
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>
-                            <?php if($this->session->flashdata("iseriu_sala_sucesso")) :?>
+
+                            <!-- Mensagem de sucesso -->
+                            <?php if ($this->session->flashdata("iseriu_sala_sucesso")) :?>
                             <p class="alert alert-danger">
                                 <?= $this->session->flashdata("iseriu_sala_sucesso")   ?>
                             </p>
                             <?php endif ?>
+
                         </div>
                     </div>
                 </fieldset>

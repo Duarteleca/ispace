@@ -38,15 +38,15 @@ class Publico_c extends CI_Controller {
 	public function Recuperar_pass(){
 		
 		if($this->input->post('submit')){
-			$email=$this->input->post("email");
+			$email = $this->input->post("email");
 			$this->load->model("Publico_m");
-			$verifica=$this->Publico_m->Verificar($email);
+			$verifica = $this->Publico_m->Verificar($email);
 
 			if($verifica){
-				$password=$this->Publico_m->randomPassword();
+				$password = $this->Publico_m->randomPassword();
 				$password_hash = password_hash($password, PASSWORD_DEFAULT);
 				$this->Publico_m->recupera_pass($email,$password_hash);
-		
+		 
 				$data['error'] = 'Enviado com Sucesso';
 				//Load email library
 				$this->load->library('email');
@@ -105,16 +105,14 @@ class Publico_c extends CI_Controller {
 	public function Contacto(){
 
 	
-		$name=$this->input->post("name");
-		$email=$this->input->post("email");
-		$mensagem=$this->input->post("message");
-		$assunto=$this->input->post("assunto");
+		$name = $this->input->post("name");
+		$email = $this->input->post("email");
+		$mensagem = $this->input->post("message");
+		$assunto = $this->input->post("assunto");
 			
 	if($this->input->post('submit')){
 		$data['error'] = 'Enviado com Sucesso'; 
-		// $this->load->model("Publico_m");
-		// $this->Publico_m->GuardarContato($contato);
-		
+
 
 
 			//Load email library
@@ -148,8 +146,6 @@ class Publico_c extends CI_Controller {
 	//Send email
 	$this->email->send();
 
-
-
 			$this->load->view('templates/header');
 			$this->load->view('publico/Contacto',$data);
 			$this->load->view('templates/footer');
@@ -163,7 +159,27 @@ class Publico_c extends CI_Controller {
 	// Regista um usuário
 	public function registar_user(){
 
+		 // Capter
+		 $url = "https://www.google.com/recaptcha/api/siteverify";
 
+		 $respon = $this->input->post('g-recaptcha-response');
+ 
+		 $data = array('secret' => "6LdKr5AUAAAAAHtJQnel89B9yiWdltP0JlqcelJP", 'response' => $respon);
+ 
+		 $options = array(
+				 'http' => array(
+					 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					 'method'  => 'POST',
+					 'content' => http_build_query($data)
+ 
+				 )
+		 );
+		 $context = stream_context_create($options);
+ 
+		 $result = file_get_contents($url, false, $context);
+		 $resultadorec = json_decode($result);
+
+		 
 		// Valido os campos com o from validation
 
 
@@ -191,7 +207,7 @@ class Publico_c extends CI_Controller {
 	  	);
 
 		// Valida a Password
-		$this->form_validation->set_rules('password', 'Password','required',
+		$this->form_validation->set_rules('password', 'Password','required|min_length[7]','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
 
@@ -212,24 +228,11 @@ class Publico_c extends CI_Controller {
 
 
 			// Se o form validation nao tiver erros.
-			if ($this->form_validation->run() == False) {
+			if (($this->form_validation->run() == TRUE) && ($resultadorec->success))  {
 				
-
-				$data['erros'] = array('mensagens' => validation_errors());
-
-				// $_SESSION['teste'] = form_error('Nome');
-
-				// redirect(base_url("publico/Registo"));
-				$this->load->view('templates/Header');
-				$this->load->view('publico/Registo', $data);
-				$this->load->view('templates/Footer');
-
-
-			} else {
-
 				$config['upload_path']          = './assets/img/utilizadores';
 				$config['allowed_types']        = 'jpg|png';
-				$config['max_size']             = 100;
+				$config['max_size']             = 1000;
 				$config['max_width']            = 1024;
 				$config['max_height']           = 768;
 		
@@ -245,7 +248,7 @@ class Publico_c extends CI_Controller {
 					$post_image = 'semimagem.png';
 		
 				}else{
-					$post_image = $_FILES['postimage2']['name'];
+					$post_image = $_FILES['postimage']['name'];
 		
 				}
 				$endereco ='assets/img/utilizadores/';
@@ -255,33 +258,43 @@ class Publico_c extends CI_Controller {
 				
 				$password = password_hash($password,PASSWORD_DEFAULT);
 
+				$tipo = 3;
 
 				$data = array (
 						'nome' => $nome,
 						'username' => $username,
 						'email' => $email,
 						'password' => $password,
-						'imagem' => $imagem
+						'imagem' => $imagem,
+						'tipo' => $tipo,
+
 						
 				);
 				
-
 				// var_dump($data);
 				$this->Publico_m->inserir_Registo($data);
 				$this->session->set_flashdata("Registo_sucess", "Registado/a com sucesso!");
 
 				redirect(base_url("/home"));
-						
-				
+
+			} else {
+
+				$data['erros'] = array('mensagens' => validation_errors());
+
+				// $_SESSION['teste'] = form_error('Nome');
+
+				// redirect(base_url("publico/Registo"));
+				$this->load->view('templates/Header');
+				$this->load->view('publico/Registo', $data);
+				$this->load->view('templates/Footer');
 
 					}
 					
 			}
-		 
-				
+		 		
 	// Mostra salas
 	public function mostra_salas(){
-		$salas=$this->input->post('search_sala');
+		$salas = $this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
 		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
 		$data["sala"] = $this->Publico_m->busca_salas($salas);
@@ -294,7 +307,7 @@ class Publico_c extends CI_Controller {
 
 	// Mostrar Salas requisiçoes
 	public function mostra_salas_requisicao(){
-		$salas=$this->input->post('search_sala');
+		$salas = $this->input->post('search_sala');
 		$data['salas']=$this->Publico_m->selecionarSala();
 		$data["sala"] = $this->Publico_m->busca_salas($salas);
 		
@@ -308,8 +321,8 @@ class Publico_c extends CI_Controller {
 	public function mostra_equipamento(){
 
 
-		$equipamento=$this->input->post('procura_equipamento');
-		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
+		$equipamento = $this->input->post('procura_equipamento');
+		$data['equipamento'] = $this->Publico_m->selecionarEquipamento();
 		$data["sala"] = $this->Publico_m->busca_equipamento($equipamento);
 	
 		$this->load->view('templates/header');
@@ -361,14 +374,14 @@ class Publico_c extends CI_Controller {
 
 	  public function requisitar_Equipamento(){
 
-		$data['equipamento']=$this->Publico_m->selecionarEquipamento();
+		$data['equipamento'] = $this->Publico_m->selecionarEquipamento();
 
 	  }
 	
 
 	  public function mostras_equipamentos(){
 
-		$data['equipamentos']=$this->Publico_m->selecionarEquipamento();
+		$data['equipamentos'] = $this->Publico_m->selecionarEquipamento();
 		// print_r($data);
 		$this->load->view('templates/header');
 		$this->load->view('publico/Salas',$data);

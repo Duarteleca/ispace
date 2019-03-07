@@ -1,22 +1,28 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if ($this->session->userdata("usuario_logado")[0]['tipo'] != 1){ 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrarequisicoes">
 
 
- <?php echo form_open('Privado_c/mostra_Requisicoes_Salas_admin') ?>
-                    <div class="form-group col-xs-3 col-md-3" ></div>
-                    <div class="form-group col-xs-6 col-md-6" >
-                        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
-                    </div>
-                        <button type="submit" id="search" class="btn btn-info" name="submit" >Search</button>
-                <?php echo form_close() ?>
+    <?php echo form_open('Privado_c/mostra_Requisicoes_Salas_admin') ?>
+    <div class="form-group col-xs-3 col-md-3"></div>
+    <div class="form-group col-xs-6 col-md-6">
+        <input type="text" class="form-control" name="pesquisar" placeholder="Pesquisar">
+    </div>
+    <button type="submit" id="search" class="btn btn-info" name="submit">Search</button>
+    <?php echo form_close() ?>
 
     <!-- Mensagem requisicao editada com sucesso-->
-    <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
+    <?php if ($this->session->flashdata("requisicao_editada_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_editada_sucesso")   ?>
     </p>
     <?php endif ?>
     <!-- Mensagem requisicao erro de editar requisicao-->
-    <?php if($this->session->flashdata("erro_requisicao")) :?>
+    <?php if ($this->session->flashdata("erro_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_requisicao")   ?>
     </p>
@@ -37,8 +43,8 @@
             </tr>
         </thead>
         <tbody>
-        
-            <?php foreach ($salas_requisitas_admin as $row){?>
+
+            <?php foreach ($salas_requisitas_admin as $row) { ?>
             <?php $id_requisicao = $row['idreq'];  ?>
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_tipologia = $row['tipologia_id'];  ?>
@@ -46,10 +52,6 @@
             <?php $data_fim = $row['data_fim'];  ?>
             <?php $hora_inicio = $row['hora_inicio'];  ?>
             <?php $hora_fim = $row['hora_fim'];  ?>
-
-
-
-
 
             <tr>
                 <td class="texto ">

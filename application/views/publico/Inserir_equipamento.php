@@ -1,3 +1,10 @@
+<!-- Mensagem de erro ao inserir uma quantidade de equipamento negativa -->
+<?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <p class="alert alert-danger">
+        <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -70,8 +77,8 @@
 
 
 <!-- Mensagem de sucesso de quando insere um equipamento novo -->
-<?php if($this->session->flashdata("equipamento_inserido_sucesso")) :?>
+<?php if ($this->session->flashdata("equipamento_inserido_sucesso")) :?>
 <p class="alert alert-success">
-    <?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
+<?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
 </p>
 <?php endif ?>

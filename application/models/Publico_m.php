@@ -11,6 +11,7 @@ class Publico_m extends CI_Model
 
     // Mostrar Utilizadores
     function mostrar_Utilizadores($username){
+
         $this->db->where('username',$username);
         $dadosuser = $this->db->get("utilizador");
         return $dadosuser->result_array();
@@ -18,15 +19,12 @@ class Publico_m extends CI_Model
 
     // Mostra lista todas as salas que existem   
     public function selecionarSala(){
-               
+
             $query=$this->db->get('sala');
-
-            return $query->result_array();
-            
+            return $query->result_array();  
         }
-    
-    
 
+    // Busca toda a informação das salas
     public function busca_salas($salas){
        
             $this->db->select('sala.id "id",sala.tipo_sala,tipologia.nome "nome_sala",tipologia.id "tipoid",tipologia.capacidade "capacidade",tipologia.disponibilidade "disponibilidade",tipologia.imagem "imagem"');
@@ -37,19 +35,16 @@ class Publico_m extends CI_Model
             }
             $query = $this->db->get();
             return $query->result_array();
-       
     }
 
     // Seleciona todos os equipamentos que existem
     public function selecionarEquipamento(){
                
             $query=$this->db->get('Equipamento');
-
             return $query->result_array();
-            
         }
 
-
+    // Busca toda os equipamentos
     public function busca_equipamento($equipamento){
       
             $this->db->select('imagem,nome,quantidade');
@@ -59,10 +54,7 @@ class Publico_m extends CI_Model
             }
             $query = $this->db->get();
             return $query->result_array();
-       
     }
-
-    
 
     // Insere o registo na tabela utilizador
     public function inserir_Registo($data){
@@ -70,13 +62,7 @@ class Publico_m extends CI_Model
 
     }
 
-
-    public function GuardarContato($contato){
-
-        return $this->db->insert("contato", $contato);
-    
-    }
-
+    // Gera um random password para quando for para recuperar a password
     function randomPassword() {
         $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
         $pass = array(); //remember to declare $pass as an array
@@ -88,7 +74,7 @@ class Publico_m extends CI_Model
         return implode($pass); //turn the array into a string
     }
 
-
+    // Verifica email na base de dados ,quando recupera a password, 
     public function Verificar($email){
         
         $this->db->where('email', $email);
@@ -97,20 +83,15 @@ class Publico_m extends CI_Model
 
     }
 
-
+    // Recuperar password (Alterando a password)
     public function recupera_pass($email,$password_hash){
 
     $data = array(
-    
-        'password' => $password_hash
-        
+        'password' => $password_hash  
     );
 
     $this->db->where('email', $email);
-    return $this->db->update('utilizador', $data);
-
-    // fazer update da pass
-                
+    return $this->db->update('utilizador', $data);               
     }
 
            
