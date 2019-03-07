@@ -22,7 +22,7 @@ class Privado_c extends CI_Controller {
 	// Mostra todas as salas
 	  public function mostra_salas(){
 		// Array com todas as salas
-		$data['salas']=$this->Privado_m->busca_salas();
+		$data['salas'] = $this->Privado_m->busca_salas();
 		
 		// Carregamento das views
 		$this->load->view('templates/header');
@@ -34,7 +34,7 @@ class Privado_c extends CI_Controller {
 	// Insere salas
 	public function inserir_sala(){
 		// Array com todas as salas (preciso disto, pois quando inserir , ao recarregar a pagina, preciso das informações das salas)
-		$data['salas']=$this->Privado_m->selecionarSala();
+		$data['salas'] = $this->Privado_m->selecionarSala();
 
 		// Validações de todos os campos
 		$this->form_validation->set_rules('tiposala', 'Tipo de Sala','required',
@@ -49,7 +49,7 @@ class Privado_c extends CI_Controller {
 
 		$this->form_validation->set_rules('nomesala', 'Nome da Sala','required',
 			array(
-				'required'      => 'Não preencheu %s.',
+				'required' => 'Não preencheu %s.',
 				)
 		);
 
@@ -117,12 +117,9 @@ class Privado_c extends CI_Controller {
 			// Refresh à página
 			// redirect('Sala_admin', 'refresh');
 			redirect(base_url("/Sala_admin"));
-			
-			
 
 			// Mostra os erros
 		}else{ 
-		 
 		
 			$data['erros'] = array('mensagens' => validation_errors());
 			
@@ -140,7 +137,7 @@ class Privado_c extends CI_Controller {
 			$this->form_validation->set_rules('capacidade', 'Capacidade','required',
 			array(
 				'required'      => 'Não preencheu %s.')
-				
+
 			);
 
 			$this->form_validation->set_rules('nome_sala', 'Nome Sala','required|is_unique[tipologia.nome]',
@@ -156,8 +153,6 @@ class Privado_c extends CI_Controller {
 				'is_unique'     => 'Este %s já existe.'
 				)
 			);
-
-
 
 			// Se o form validation nao tiver erros.
 			if ($this->form_validation->run() == TRUE) {
@@ -180,7 +175,7 @@ class Privado_c extends CI_Controller {
 			if($post_image == null)
 			{
 				// Guarda os valores inseridos no registo através do post
-				$id_tiposala= $this->input->post("id_tiposala");
+				$id_tiposala = $this->input->post("id_tiposala");
 				$capacidade = $this->input->post("capacidade");
 				$nome_sala = $this->input->post("nome_sala");
 				$disponibilidade = $this->input->post("disponibilidade");
@@ -202,11 +197,11 @@ class Privado_c extends CI_Controller {
 
 			}else{
 
-			$endereco ='assets/img/salas/';
+			$endereco = 'assets/img/salas/';
 			$imagem = $endereco.$post_image;
 				
 			// Guarda os valores inseridos no registo
-			$id_tiposala= $this->input->post("id_tiposala");
+			$id_tiposala = $this->input->post("id_tiposala");
 			$capacidade = $this->input->post("capacidade");
 			$nome_sala = $this->input->post("nome_sala");
 			$disponibilidade = $this->input->post("disponibilidade");
@@ -218,8 +213,7 @@ class Privado_c extends CI_Controller {
 								'nome' => $nome_sala,
 								'imagem' => $imagem
 								);
-								
-								
+									
 			// Passa os valores como parametro e atualiza a sala
 			$this->Privado_m->atualiza_Sala($inputs,$id_tiposala);
 			// Mensagem de sucesso
@@ -234,7 +228,7 @@ class Privado_c extends CI_Controller {
 			}else{
 			
 				// Como é uma tabela, tenho de chamar esta funão, para mostrar a tabela
-				$data['salas']=$this->Privado_m->busca_salas();
+				$data['salas'] = $this->Privado_m->busca_salas();
 
 				// Array com os erros
 				$data['erros'] = array('mensagens' => validation_errors());
@@ -250,10 +244,10 @@ class Privado_c extends CI_Controller {
 
 	// Eliminar Sala
 	public function Apaga_Sala(){
+
 		// Faz o post do id da sala
 		$id_sala = $this->input->post('id_tiposala');
 		$this->Privado_m->eliminar_Sala($id_sala);
-
 
 		// Mensagem de sucesso
 		$this->session->set_flashdata("sala_eliminada_sucesso", "Sala eliminada com sucesso!");
@@ -288,7 +282,7 @@ class Privado_c extends CI_Controller {
 
 		public function mostra_equipamento(){
 			// Array dos equipamentos para depois listar
-			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+			$data['equipamentos'] = $this->Privado_m->selecionarEquipamento();
 			// Load das views
 			$this->load->view('templates/header');
 			$this->load->view('publico/Equipamento_admin',$data);
@@ -438,7 +432,6 @@ class Privado_c extends CI_Controller {
 				$config['max_width']            = 1024;
 				$config['max_height']           = 768;
 		
-				
 				$this->load->library('upload', $config);
 				$this->upload->do_upload('postimage');		
 			
@@ -447,13 +440,13 @@ class Privado_c extends CI_Controller {
 
 			// Verifica  se a pass esta vazia, se estiver, verifica a imagem se está vazia.
 			if(password_verify($confirm_altera,$user_pass)){
-			if(empty($password)){
+
+				if(empty($password)){
 
 				// Se não inserir imagem
 				if($post_image == null)
 				{
 					
-	
 					$data = array (
 							'nome' => $nome,
 							// 'username' => $username,
@@ -469,13 +462,10 @@ class Privado_c extends CI_Controller {
 					$this->load->view('privado/perfil',$data);
 					$this->load->view('templates/footer');
 	
-	
- 
 				}else{
 					$endereco ='assets/img/utilizadores/';
 					$imagem = $endereco.$post_image;
 		
-	
 					$data = array (
 						'nome' => $nome,
 						// 'username' => $username,
@@ -490,9 +480,7 @@ class Privado_c extends CI_Controller {
 				$this->load->view('privado/perfil',$data);
 				$this->load->view('templates/footer');
 	
-	
 				}
-
 
 			}else{
 
@@ -512,7 +500,7 @@ class Privado_c extends CI_Controller {
 				$data['error'] = 'Alteração de nome com pass'; 
 				$this->load->view('templates/header');
 				$this->load->view('privado/perfil',$data);
-					$this->load->view('templates/footer');
+				$this->load->view('templates/footer');
 
 
 
@@ -529,7 +517,6 @@ class Privado_c extends CI_Controller {
 					'imagem' => $imagem
 					
 			);
-
 
 			$this->Privado_m->atualiza_utilizador($data,$email);
 			$data['error'] = 'Alteração do nome e foto com pass'; 
@@ -586,9 +573,9 @@ class Privado_c extends CI_Controller {
 					// atualizad o tipo de utilizador
 					$this->Privado_m->atualiza_tipo($id_user,$data);
 					// array com os utilizadores
-					$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+					$data['utilizadores'] = $this->Privado_m->Selecionar_Utilizadores();
 					// Array com mensagens
-					$data['error']="editado como sucesso";
+					$data['error'] = "editado como sucesso";
 
 					// Carrega as views
 					$this->load->view('templates/header');
@@ -597,7 +584,7 @@ class Privado_c extends CI_Controller {
 
 				}else{
 					// Array com os dados dos utilizadores
-					$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+					$data['utilizadores'] = $this->Privado_m->Selecionar_Utilizadores();
 					$this->load->view('templates/header');
 					$this->load->view('privado/users',$data);
 					$this->load->view('templates/footer');
@@ -607,14 +594,14 @@ class Privado_c extends CI_Controller {
 	// Apaga utilizador
 	public function apaga_utilizador(){
 			// Post do id do user para depois eliminar
-			$id_user= $this->input->post('id_user');
+			$id_user = $this->input->post('id_user');
 			// Elimina o user selecionado
 			$this->Privado_m->Eliminar_User($id_user);
 
 				// Array de mensagens
-				$data['error']="eliminado como sucesso";
+				$data['error'] = "eliminado como sucesso";
 				// Array com os dados dos utilizadores
-				$data['utilizadores']=$this->Privado_m->Selecionar_Utilizadores();
+				$data['utilizadores'] = $this->Privado_m->Selecionar_Utilizadores();
 				// Carregamento das views
 				$this->load->view('templates/header');
 				$this->load->view('privado/users',$data);
@@ -665,7 +652,7 @@ class Privado_c extends CI_Controller {
 			if($post_image == null){
 		
 				// Guarda os valores inseridos no registo
-				$nome= $this->input->post("nome");
+				$nome = $this->input->post("nome");
 				$quantidade = $this->input->post("quantidade");
 				$disponibilidade = $this->input->post("disponibilidade");
 				$id_equipamento = $this->input->post("id_equipamento");
@@ -686,12 +673,12 @@ class Privado_c extends CI_Controller {
 
 			}else{
 
-			$endereco ='assets/img/equipamento/';
+			$endereco = 'assets/img/equipamento/';
 			$imagem = $endereco.$post_image;
 			
 
 			// Guarda os valores inseridos no registo
-			$nome= $this->input->post("nome");
+			$nome = $this->input->post("nome");
 			$quantidade = $this->input->post("quantidade");
 			$disponibilidade = $this->input->post("disponibilidade");
 			$id_equipamento = $this->input->post("id_equipamento");
@@ -719,7 +706,7 @@ class Privado_c extends CI_Controller {
 				// Como é uma tabela, tenho de chamar esta função, para mostrar a tabela
 				
 				// Array referente aos equipamentos
-				$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+				$data['equipamentos'] = $this->Privado_m->selecionarEquipamento();
 				// Array referente às mesnagens do form validation.
 				$data['erros'] = array('mensagens' => validation_errors());
 		
@@ -736,7 +723,7 @@ class Privado_c extends CI_Controller {
 		// Mostra requisição
 		public function fazer_requisicao(){
 			// Guarda no array todas as informações das requisições
-			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+			$data['equipamentos'] = $this->Privado_m->selecionarEquipamento();
 
 			// Carrega as views
 			$this->load->view('templates/header');
@@ -753,7 +740,7 @@ class Privado_c extends CI_Controller {
 			
 			// Guarda os valores inseridos 
 			$id_user = $this->input->post("id_user");
-			$id_sala= $this->input->post("id_sala");
+			$id_sala = $this->input->post("id_sala");
 			$data_inicio = $this->input->post("data_inicio");
 			$data_fim = $this->input->post("data_fim");
 			$hora_inicio = $this->input->post("hora_inicio");
@@ -812,7 +799,7 @@ class Privado_c extends CI_Controller {
 		$hora_inicio = $this->input->post('hora_inicio');
 		$hora_fim = $this->input->post('hora_fim');
 		$id_Requisicao = $this->input->post('id_requisicao');
-		$id_sala= $this->input->post("id_tipologia");
+		$id_sala = $this->input->post("id_tipologia");
 
 		// Não pode inserir uma fora inicio maior que a hora final
 		if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
@@ -823,15 +810,15 @@ class Privado_c extends CI_Controller {
 		
 		// Verifica se existe datas e horas iguais ou interalos.
 		$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-		var_dump($dados_Disponibilidade);
+		// var_dump($dados_Disponibilidade);
 		
 
 		if($dados_Disponibilidade != null){
 
 		$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
-		var_dump($id_user1);
+		// var_dump($id_user1);
 		$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
-		var_dump($id_user2);
+		// var_dump($id_user2);
 		}
 		
 		// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
@@ -870,7 +857,6 @@ class Privado_c extends CI_Controller {
 		public function edita_Requisicao_admin(){
 	
 			
-	
 			// Post dos valores
 			$id_requisicao = $this->input->post('id_requisicao');
 			$data_inicio = $this->input->post('data_inicio');
@@ -882,14 +868,14 @@ class Privado_c extends CI_Controller {
 			
 			// Não pode inserir uma fora inicio maior que a hora final
 			if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
-				echo 'erro';
-				// $this->session->set_flashdata("erro_hora_requisicao", "Hora/data de inicio não pode ser maior que a final");
+				// echo 'erro';
+				$this->session->set_flashdata("erro_hora_requisicao", "Hora/data de inicio não pode ser maior que a final");
 	
 			}else{
 			
 			// Verifica se existe datas e horas iguais ou interalos.
 			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-			var_dump($dados_Disponibilidade);
+			// var_dump($dados_Disponibilidade);
 			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
 			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
@@ -920,7 +906,7 @@ class Privado_c extends CI_Controller {
 			}
 			// Refresh da página
 			// redirect('Requisicoes_salas_admin', 'refresh');
-			// redirect(base_url("/Requisicao"));
+			redirect(base_url("/Requisicao"));
 			
 		}
 
@@ -932,10 +918,10 @@ class Privado_c extends CI_Controller {
 		$user_id_salas = $this->session->userdata("usuario_logado")[0]['id'];
 		
 		// Array com as salas requisitadas pelo user
-		$data['salas_requisitas']=$this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
+		$data['salas_requisitas'] = $this->Privado_m->selecionar_salas_requisitadas($user_id_salas);
 
 		// Tenho de colocar a consulta de equipamentos para mostra na list drop dentro do modal
-			$data['equipamentos']=$this->Privado_m->selecionarEquipamento();
+			$data['equipamentos'] = $this->Privado_m->selecionarEquipamento();
 		
 		$this->load->view('templates/header');
 		$this->load->view('publico/Requisicao',$data);
@@ -955,7 +941,7 @@ class Privado_c extends CI_Controller {
 		}
 		
 		// Array com a todos os equipamentos
-		$data['equipamento']=$this->Privado_m->selecionarEquipamento();
+		$data['equipamento'] = $this->Privado_m->selecionarEquipamento();
 	
 		$this->load->view('templates/header');
 		$this->load->view('publico/Equipamento_requisito',$data);
@@ -979,14 +965,14 @@ class Privado_c extends CI_Controller {
 		$id_Equipamento = $this->input->post("procuraEquipamento");
 		$quantidade_Equipamento = $this->input->post("quantidade");
 
-		if($quantidade_Equipamento <= 0){
+		if ($quantidade_Equipamento <= 0) {
 			$this->session->set_flashdata("erro_quantidade_requisicao_equipamento", "Não pode escolher uma quantidade inválida");
 
 			redirect(base_url("/Requisicao"));
 
 		}
 
-		if(($id_Equipamento == null) || ($quantidade_Equipamento == null)){
+		if (($id_Equipamento == null) || ($quantidade_Equipamento == null)) {
 
 
 			$this->session->set_flashdata("erro_requisicao_equipamento", "Tem de escolher um equipamento e quantidade");
@@ -1008,7 +994,7 @@ class Privado_c extends CI_Controller {
 
 		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 
-		if($quantidade_Equipamento<= $quantidade_Atual){
+		if ($quantidade_Equipamento<= $quantidade_Atual) {
 				$quantidade_Final = $quantidade_Atual - $quantidade_Equipamento;
 
 				// Data referente ao equipamento
@@ -1037,7 +1023,7 @@ class Privado_c extends CI_Controller {
 				$this->Privado_m->requisicao_has_equipamento($informacao);
 				$this->session->set_flashdata("equipamento_adicionado_sucesso", "Equipamento adicionado com sucesso");
 
-		}else{
+		} else {
 			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
 
 		}
@@ -1054,12 +1040,12 @@ class Privado_c extends CI_Controller {
 		// var_dump($id_requisição);
 
 		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
-		$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
+		$informaçao = $this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
 		// var_dump($informaçao);
 
-		for($i=0; $i<count($informaçao);$i++){
-			// echo $informaçao[$i]['quantidade'];
-			// echo $informaçao[$i]['equipamento_id'];
+		for ($i = 0; $i < count($informaçao); $i++) {
+			
+
 			//funçao para fazer update de quantidade
 			$id_equip = $informaçao[$i]['equipamento_id'];
 			// var_dump($id_equip); // 2 e 3
@@ -1068,20 +1054,14 @@ class Privado_c extends CI_Controller {
 			$quantidade_passado = $informaçao[$i]['quantidade'];
 			// var_dump($quantidade_passado);
 			
-			$quantidade_equipamento_origem=$this->Privado_m->busca_Equipamentos($nome_Equipamento);
+			$quantidade_equipamento_origem = $this->Privado_m->busca_Equipamentos($nome_Equipamento);
 			// var_dump($quantidade_equipamento_origem);
 			
-			for($c=0; $c<count($quantidade_equipamento_origem);$c++){
-				// echo $quantidade_equipamento_origem[$c]['quantidade'];
-				// echo $quantidade_equipamento_origem[$c]['id'];
+			for ($c = 0; $c < count($quantidade_equipamento_origem); $c++) {
+				
 				$quantidade_restante_origem = $quantidade_equipamento_origem[$c]['quantidade'];
 				$id_quantidade_restante_origem = $quantidade_equipamento_origem[$c]['id'];
-				// echo $quantidade_equipamento_origem[$i]['id'];
-				// $quantidade = $quantidade_equipamento_origem[$i]['quantidade'];
-				// $idorigem = $informaçao[$i]['id'];
-				// var_dump($quantidade);
-				// var_dump($quantidade_restante_origem);
-				// var_dump($id_quantidade_restante_origem);
+	
 			
 			$quantidade_fazer_update = $quantidade_restante_origem + $quantidade_passado;
 			$id_Equipamento = $id_quantidade_restante_origem;
@@ -1092,8 +1072,6 @@ class Privado_c extends CI_Controller {
 			);
 			$this->Privado_m->update_Equipamento($data,$id_Equipamento);
 		}
-		
-		
 		
 		}
 		$this->Privado_m->elimina_requisicao($id_requisição);
@@ -1111,7 +1089,7 @@ class Privado_c extends CI_Controller {
 		$slug = $this->input->post('pesquisar');
 
 		// Trás no array todos os dados das das requisições juntamente com os equipamentos
-		$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos($slug);
+		$data['salas_requisitass'] = $this->Privado_m->mostrar_Requisicoes_Equipamentos($slug);
 			
 		$this->load->view('templates/header');
 		$this->load->view('publico/Requisicoes_equipamentos_admin',$data);
@@ -1124,7 +1102,7 @@ class Privado_c extends CI_Controller {
 			$slug = $this->input->post('pesquisar');
 			
 			// Trás no array todos os equipamentos requisitados pelo user (id)
-			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user($slug);
+			$data['salas_requisitass'] = $this->Privado_m->mostrar_Requisicoes_Equipamentos_user($slug);
 			// var_dump($data['salas_requisitass']);
 			// var_dump($user_id);
 			$this->load->view('templates/header');
@@ -1139,7 +1117,7 @@ class Privado_c extends CI_Controller {
 			$user_id = $this->session->userdata("usuario_logado")[0]['id'];
 			
 			// Trás no array todos os equipamentos requisitados pelo user (id)
-			$data['salas_requisitass']=$this->Privado_m->mostrar_Requisicoes_Equipamentos_user2($user_id,$slug);
+			$data['salas_requisitass'] = $this->Privado_m->mostrar_Requisicoes_Equipamentos_user2($user_id,$slug);
 			// var_dump($data['salas_requisitass']);
 			// var_dump($user_id);
 			$this->load->view('templates/header');
@@ -1152,7 +1130,7 @@ class Privado_c extends CI_Controller {
 	public function mostra_Requisicoes_Salas_admin()
 	{
 			$slug = $this->input->post('pesquisar');
-			$data['salas_requisitas_admin']=$this->Privado_m->mostra_Salas_Requesitadas_admin($slug);
+			$data['salas_requisitas_admin'] = $this->Privado_m->mostra_Salas_Requesitadas_admin($slug);
 			// var_dump($data['salas_requisitass']);
 			$this->load->view('templates/header');
 			$this->load->view('publico/Requisicoes_salas_admin',$data);
@@ -1166,13 +1144,12 @@ class Privado_c extends CI_Controller {
 		$id_requisição = $this->input->post('id_requisicao');
 		// Pesquisa se existe na requiscao_has_equipamentos um equpipamento/equipamentos com esse id
 
-		$informaçao=$this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
+		$informaçao = $this->Privado_m->mostrar_Requisicoes_Equipamentos_Apagar_Requisicao($id_requisição);
 		// var_dump($informaçao);
 
-		for($i=0; $i<count($informaçao);$i++){
+		for ($i = 0; $i < count($informaçao); $i++) {
 			// echo $informaçao[$i]['quantidade'];
-			// echo $informaçao[$i]['equipamento_id'];
-			//funçao para fazer update de quantidade
+
 			$id_equip = $informaçao[$i]['equipamento_id'];
 			// var_dump($id_equip); // 2 e 3
 
@@ -1186,17 +1163,13 @@ class Privado_c extends CI_Controller {
 
 			// var_dump($quantidade_equipamento_origem);
 			
-			for($c=0; $c<count($quantidade_equipamento_origem);$c++){
+			for ($c = 0; $c < count($quantidade_equipamento_origem); $c++) {
 				// echo $quantidade_equipamento_origem[$c]['quantidade'];
 				// echo $quantidade_equipamento_origem[$c]['id'];
 				$quantidade_restante_origem = $quantidade_equipamento_origem[$c]['quantidade'];
 				$id_quantidade_restante_origem = $quantidade_equipamento_origem[$c]['id'];
 				// echo $quantidade_equipamento_origem[$i]['id'];
-				// $quantidade = $quantidade_equipamento_origem[$i]['quantidade'];
-				// $idorigem = $informaçao[$i]['id'];
-				// var_dump($quantidade);
-				// var_dump($quantidade_restante_origem);
-				// var_dump($id_quantidade_restante_origem);
+
 			
 			$quantidade_fazer_update = $quantidade_restante_origem + $quantidade_passado;
 			$id_Equipamento = $id_quantidade_restante_origem;
@@ -1243,7 +1216,6 @@ class Privado_c extends CI_Controller {
 		
 		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
 		$data = array(
-	
 					'quantidade' => $quantidade_final
 					);
 
@@ -1287,7 +1259,6 @@ class Privado_c extends CI_Controller {
 		
 		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
 		$data = array(
-	
 					'quantidade' => $quantidade_final
 					);
 
@@ -1341,17 +1312,15 @@ class Privado_c extends CI_Controller {
 
 		$quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
 
-	if($quantidade_final_equipamento > $diferenca){
-	// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
-	$data_requisita = array(
-		
-				'quantidade' => $quantidade_modal
-				);
+	if ($quantidade_final_equipamento > $diferenca) {
+		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
+		$data_requisita = array( 
+					'quantidade' => $quantidade_modal
+					);
 
 		
 			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
 			$data_equipamento = array(
-		
 						'quantidade' => $quantidade_final_equipamento
 						);
 
@@ -1395,11 +1364,11 @@ class Privado_c extends CI_Controller {
 
 		// se for menor que a base de dados 
 			 $diferenca=0;
-			$quantidade_final=$quantidade_modal;
+			$quantidade_final = $quantidade_modal;
 			$diferenca_quantidade = $quantidade_bd_requisita - $quantidade_modal;
 			$quantidade_final_equipamento = $quantidade_equipamento + $diferenca_quantidade;
 
-			if($quantidade_final_equipamento > $diferenca){
+			if ($quantidade_final_equipamento > $diferenca) {
 			// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
 		$data_requisita = array(
 	
@@ -1418,7 +1387,7 @@ class Privado_c extends CI_Controller {
 		$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
 
 
-		}else{
+		} else {
 			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
 		}
 			
@@ -1427,9 +1396,6 @@ class Privado_c extends CI_Controller {
 			redirect(base_url("/Requisicoes_equipamentos_admin"));
 		
 	}
-	
-	
 
-	
 
 }

@@ -1,5 +1,5 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 3){ 
+<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 3) { 
     redirect(base_url('home'));
 }
 ?>
@@ -7,77 +7,76 @@
 <div class="container mostrarequisicoes">
 
     <!-- Mensagem de erro quando pretende requisitar um equipamento que nao exista tanta quantidade -->
-    <?php if($this->session->flashdata("erro_quantidade")) :?>
+    <?php if ($this->session->flashdata("erro_quantidade")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso de requisição -->
-    <?php if($this->session->flashdata("requisicao_sucesso")) :?>
+    <?php if ($this->session->flashdata("requisicao_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_sucesso")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando der erro de requisitar  -->
-    <?php if($this->session->flashdata("erro_requisicao")) :?>
+    <?php if ($this->session->flashdata("erro_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_requisicao")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso ao editar requisição-->
-    <?php if($this->session->flashdata("requisicao_editada_sucesso")) :?>
+    <?php if ($this->session->flashdata("requisicao_editada_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_editada_sucesso")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso ao cancelar requisição-->
-    <?php if($this->session->flashdata("requisicao_cancelada_sucesso")) :?>
+    <?php if ($this->session->flashdata("requisicao_cancelada_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("requisicao_cancelada_sucesso")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de sucesso ao cancelar requisição-->
-    <?php if($this->session->flashdata("equipamento_adicionado_sucesso")) :?>
+    <?php if ($this->session->flashdata("equipamento_adicionado_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("equipamento_adicionado_sucesso")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando tentar meter a data iniicon menos que a fim-->
-    <?php if($this->session->flashdata("erro_hora_requisicao")) :?>
+    <?php if ($this->session->flashdata("erro_hora_requisicao")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_hora_requisicao")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando tentar inserir sem colocar equipamento-->
-    <?php if($this->session->flashdata("erro_requisicao_equipamento")) :?>
+    <?php if ($this->session->flashdata("erro_requisicao_equipamento")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_requisicao_equipamento")   ?>
     </p>
     <?php endif ?>
 
     <!-- Mensagem de erro quando tentar inserir uma quantidade inválida-->
-    <?php if($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
+    <?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade_requisicao_equipamento")   ?>
     </p>
     <?php endif ?>
     <!-- Mensagem de erro quando eliminar a requisição com sucesso-->
-    <?php if($this->session->flashdata("elimina_requisicao")) :?>
+    <?php if ($this->session->flashdata("elimina_requisicao")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("elimina_requisicao")   ?>
     </p>
     <?php endif ?>
 
 
-
-
+    <!-- Tabela -->
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -89,7 +88,7 @@
         </thead>
         <tbody>
 
-            <?php foreach ($salas_requisitas as $row){?>
+            <?php foreach ($salas_requisitas as $row) { ?>
 
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_requisicao = $row['idreq'];  ?>
@@ -152,7 +151,7 @@
 
                                     <select id="selecionarequipamento" style="color:black" name="procuraEquipamento" class="form-control">
                                         <option value="" selected>Equipamento</option>
-                                        <?php foreach($equipamentos as $row){
+                                        <?php foreach ($equipamentos as $row) {
                                             echo "<option value=".$row['id'].">".$row['nome'] ."</option>";
                                             } ?>
                                     </select>
@@ -161,7 +160,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Quantidade disponivel</label>
                                     <input disabled class="form-control " type="text" name="quantidade" id="quantidade" value="">
-                                </div>                    
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Insira a quantidade</label>
                                     <input class="form-control " type="number" max="30" name="quantidade" id="quantidade" value="">
@@ -267,27 +266,29 @@
     </table>
 </div>
 
+
+<!-- Script para mostrar a quantidade dos equipamentos conforme selecione -->
 <script>
 
-$("#selecionarequipamento").change(function(){
+    $("#selecionarequipamento").change(function () {
         console.log($("#selecionarequipamento").val());
         var equipamento = $("#selecionarequipamento").val();
         var url = $("#url").val();
         $.ajax(
             {
-                url: url+'Privado_c/Ajax',
-                type:"post",
+                url: url + 'Privado_c/Ajax',
+                type: "post",
                 // dataType: "json",
-                data:{
-                    "equipamento" : equipamento,
-                    },
-                success: function(data,status){
+                data: {
+                    "equipamento": equipamento,
+                },
+                success: function (data, status) {
 
                     console.log(data);
                     $("#quantidade").val(data);
-                      
-            }
-        });
+
+                }
+            });
     });
 
 

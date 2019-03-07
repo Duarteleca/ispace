@@ -1,12 +1,12 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
     redirect(base_url('home'));
 }
 ?>
 
 <div class="container mostrarequisicoes">
 
-    <?php if($this->session->flashdata("erro_quantidade")) :?>
+    <?php if ($this->session->flashdata("erro_quantidade")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_quantidade")   ?>
     </p>
@@ -37,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($salas_requisitass as $row){?>
+            <?php foreach ($salas_requisitass as $row) { ?>
 
             <?php $id_user = $row['utilizador_id'];  ?>
             <?php $id_requisicao = $row['idreq'];  ?>
@@ -50,10 +50,6 @@
             <?php $nome_User = $row['nomeuser'];  ?>
             <?php $equipamento_id = $row['equipamento_id']; ?>
             <?php $id_requisicao_equipamento = $row['idreqequip']; ?>
-
-
-
-
 
             <tr>
                 <td class="texto ">
@@ -92,11 +88,7 @@
                     <button class="btn btn-danger" data-toggle="modal" href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
                     <button class="btn btn-warning" data-title="Edit" data-toggle="modal" href="#myModalEditarEquip<?php echo $id_requisicao  ?>">Editar</button>
 
-
-
                 </td>
-
-
 
                 <!-- Modal Cancelar equipamento da requisição  -->
                 <div id="myModalcancelar<?php echo $id_requisicao  ?>" class="modal fade">
@@ -185,13 +177,10 @@
                 </div>
 </div>
 
-
-
-
 </tr>
 
-
 <?php } ?>
+
 </tbody>
 </table>
 </div>

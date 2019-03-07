@@ -1,10 +1,12 @@
+<!-- Script do recaptcha -->
 <script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">
                 <!-- Mensagem de err quando não consegue dar login -->
-                <?php if(isset($erros['mensagens'])) :?>
+                <?php if (isset($erros['mensagens'])) :?>
                 <?php echo $erros['mensagens'];  ?>
                 <?php endif;  ?>
                 <?php echo form_open_multipart('Publico_c/registar_user') ?>
@@ -24,7 +26,7 @@
                             <i class="fas fa-user bigicon"></i>
                         </span>
                         <div class="col-md-8">
-                        <label>Nome Usuário</label>
+                            <label>Nome Usuário</label>
                             <input id="Username" name="username" type="text" value="<?php echo set_value('username'); ?>" placeholder="Username" class="form-control">
                         </div>
                     </div>
@@ -82,20 +84,21 @@
 </div>
 
 
+
 <script>
 
-var password = document.getElementById("password")
-  , confirm_password = document.getElementById("Confirm");
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("Confirm");
 
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Password diferente");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Password diferente");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
 
 </script>

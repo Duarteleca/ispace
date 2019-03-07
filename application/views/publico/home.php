@@ -1,8 +1,6 @@
 <div id="carousel-example-generic" class="carousel slide " data-ride="carousel" role="carousel" style="width:100%;">
     <!-- Indicators -->
 
-
-
     <!-- Wrapper for slides -->
     <div class="carousel-inner  " role="listbox">
         <div class="item active ">

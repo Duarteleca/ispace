@@ -1,12 +1,10 @@
-
 <div class="container mostrasalas">
-<!-- Mensagem de err quando não consegue dar login -->
-<?php if($this->session->flashdata("Equipamento_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("Equipamento_sucesso")   ?></p>
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if ($this->session->flashdata("Equipamento_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("Equipamento_sucesso")   ?>
+    </p>
     <?php endif ?>
-
-
-
 
 
     <div class="form-group col-md-12">

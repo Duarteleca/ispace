@@ -1,8 +1,10 @@
 <div class="container">
 
-     <!-- Mensagem de err quando não consegue dar login -->
-     <?php if($this->session->flashdata("inseriu_sala_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("inseriu_sala_sucesso")   ?></p>
+    <!-- Mensagem de err quando não consegue dar login -->
+    <?php if ($this->session->flashdata("inseriu_sala_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("inseriu_sala_sucesso")   ?>
+    </p>
     <?php endif ?>
 
     <div class="row">
@@ -28,9 +30,9 @@
                             <div class="col-md-8">
                                 <select style="color:black" name="tiposala" class="form-control">
                                     <option value="" selected>Tipo de sala</option>
-                                    <?php foreach($salas as $rows){
-                                                       echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
-                                                       } ?>
+                                    <?php foreach ($salas as $rows) {
+                                            echo "<option value=".$rows['tipo_sala'].">".$rows['tipo_sala'] ."</option>";
+                                            } ?>
                                 </select>
                             </div>
                         </div>
@@ -80,11 +82,14 @@
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>
-                            <?php if($this->session->flashdata("iseriu_sala_sucesso")) :?>
+
+                            <!-- Mensagem de sucesso -->
+                            <?php if ($this->session->flashdata("iseriu_sala_sucesso")) :?>
                             <p class="alert alert-danger">
                                 <?= $this->session->flashdata("iseriu_sala_sucesso")   ?>
                             </p>
                             <?php endif ?>
+
                         </div>
                     </div>
                 </fieldset>

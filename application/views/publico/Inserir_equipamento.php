@@ -70,8 +70,8 @@
 
 
 <!-- Mensagem de sucesso de quando insere um equipamento novo -->
-<?php if($this->session->flashdata("equipamento_inserido_sucesso")) :?>
+<?php if ($this->session->flashdata("equipamento_inserido_sucesso")) :?>
 <p class="alert alert-success">
-    <?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
+<?= $this->session->flashdata("equipamento_inserido_sucesso")   ?>
 </p>
 <?php endif ?>

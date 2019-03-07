@@ -1,8 +1,7 @@
-<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
     redirect(base_url('home'));
 }
 ?>
-
 
 <div class="container">
 
@@ -18,7 +17,7 @@
     <br>
 
     <!-- Mensagem de err quando não consegue dar login -->
-    <?php if(isset($erros['mensagens'])) :?>
+    <?php if (isset($erros['mensagens'])) :?>
     <div class="alert alert-danger alert-dismissible classeerrologin" role="alert" id="">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
@@ -43,7 +42,7 @@
 
         <tbody>
             <?php 
-                    foreach ($utilizadores as $row){?>
+                    foreach ($utilizadores as $row) { ?>
             <?php $id_utilizador= $row['id'] ?>
 
             <tr>
@@ -61,24 +60,24 @@
                 <td>
                     <!-- Se a disponibilidade for 1, ira aparecer disponivel, caso contrario, indisponivel. -->
                     <?php
-                                if($row['tipo']==1){
+                                if ($row['tipo']==1){
                                   echo "Admin";
-                                }else if($row['tipo']==2){
+                                } else if ($row['tipo']==2){
                                     echo "Admin temporario";
-                                  }else{
+                                  } else {
                                   echo "Utilizador";
                                 }
                             ?>
                 </td>
                 <td>
                     <?php
-                                if($row['tipo']==1){ }else{?>
+                                if ($row['tipo']==1){ }else{?>
                     <!-- Butões para abrir o modal -->
                     <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" href="#myModaleditar<?php echo $id_utilizador;?>">
                         <span class="fas fa-edit"></span>
                     </button>
 
-                    <?php if($row['tipo']==2){ }else{?>
+                    <?php if ($row['tipo']==2){ }else{?>
                     <button class="btn btn-danger btn-xs" data-toggle="modal" href="#myModaleliminar<?php echo $id_utilizador;?>">
                         <span class="fas fa-trash-alt"></span>
                     </button>
@@ -126,7 +125,7 @@
 
                                     <select style="color:black" name="tipo_user" required class="form-control">
                                         <option value="<?php echo $row['tipo'] ; ?>" selected>
-                                            <?php if( $row['tipo'] == 3){echo "Utilizador";}else{echo "Adminstrador";}?>
+                                            <?php if ($row['tipo'] == 3){echo "Utilizador";}else{echo "Adminstrador";}?>
                                         </option>
                                         <option value="3">Utilizador</option>
                                         <option value="2">Administrador</option>
@@ -159,7 +158,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" name="id_user" id="username_modal" value=" <?php echo $id_utilizador ?>">
+                                <input class="form-control " type="hidden" name="id_user" id="username_modal" value=" <?php echo $id_utilizador ?>">
                             </div>
                             <div class="modal-body">
                                 <p>Quer mesmo apagar este Utilizador? Este processo não pode ser revertido.</p>
@@ -182,8 +181,8 @@
     <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
 </div>
 
-<!-- Mensagem de err quando não consegue dar login -->
-<?php if($this->session->flashdata("Sala_sucesso")) :?>
+<!-- Mensagem de sucesso -->
+<?php if ($this->session->flashdata("Sala_sucesso")) :?>
 <p class="alert alert-success">
     <?= $this->session->flashdata("Sala_sucesso")   ?>
 </p>

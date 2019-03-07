@@ -1,5 +1,5 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if(!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
+<?php if (!$this->session->userdata("usuario_logado")[0]['tipo'] == 1){ 
     redirect(base_url('home'));
 }
 ?>
@@ -7,12 +7,14 @@
 <div class="container">
 
     <!-- Mensagem de sucesso apos eliminar uma sala -->
-    <?php if($this->session->flashdata("sala_eliminada_sucesso")) :?>
-    <p class ="alert alert-success"><?= $this->session->flashdata("sala_eliminada_sucesso")   ?></p>
+    <?php if ($this->session->flashdata("sala_eliminada_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("sala_eliminada_sucesso")   ?>
+    </p>
     <?php endif ?>
 
     <!-- Mensagem de erro-->
-    <?php if(isset($erros['mensagens'])) :?>
+    <?php if (isset($erros['mensagens'])) :?>
     <div class="alert alert-danger alert-dismissible classeerrologin" role="alert" id="">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
@@ -23,7 +25,7 @@
     <?php endif;                
         ?>
     <!-- Mensagem de erro -->
-    <?php if($this->session->flashdata("Sala_sucesso")) :?>
+    <?php if ($this->session->flashdata("Sala_sucesso")) :?>
     <p class="alert alert-success">
         <?= $this->session->flashdata("Sala_sucesso")   ?>
     </p>
@@ -56,7 +58,7 @@
 
         <tbody>
             <?php 
-                    foreach ($salas as $row){?>
+                    foreach ($salas as $row) { ?>
             <?php $id_tiposala = $row['tipoid'] ?>
 
             <tr>
@@ -77,11 +79,11 @@
                     <?php
                                 if($row['disponibilidade']==1){
                                   echo "Disponível";
-                                }
-                                else{
-                                  echo "Indisponível";
-
-                                }
+                                }else{
+                                    echo "Indisponível";
+  
+                                  }
+                                
                             ?>
                 </td>
 
@@ -126,7 +128,11 @@
                                     <label for="exampleInputEmail1">Disponibilidade</label>
                                     <select style="color:black" name="disponibilidade" placeholder="disponibilidade" class="form-control">
                                         <option value="<?php echo $row['disponibilidade'] ?>" selected>
-                                            <?php if( $row['disponibilidade'] == 0){echo "Indisponivel";}else{echo "Disponivel";}?>
+                                            <?php if ($row['disponibilidade'] == 0){
+                                                echo "Indisponivel";
+                                                }else{
+                                                    echo "Disponivel";
+                                                    }?>
                                         </option>
 
                                         <option value="0">Indisponivel</option>
