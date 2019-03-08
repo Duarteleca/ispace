@@ -219,8 +219,8 @@
                                 </div>
 
                                 <div class="modal-footer ">
-                                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
-                                        <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
+                                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+                                        <span class="glyphicon glyphicon-ok-sign"></span>Editar</button>
                                 </div>
 
                             </div>

@@ -1,3 +1,9 @@
+
+<?php if ($this->session->userdata("usuario_logado"))  { 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">

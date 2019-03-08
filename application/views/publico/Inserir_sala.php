@@ -1,4 +1,15 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if (($this->session->userdata("usuario_logado")[0]['tipo'] != 2) && ($this->session->userdata("usuario_logado")[0]['tipo'] != 1)) { 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container">
+
+ <!-- Mensagem de erro -->
+ <?php if (isset($erros['mensagens'])) :?>
+                <?php echo $erros['mensagens'];  ?>
+                <?php endif; ?>
 
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if ($this->session->flashdata("inseriu_sala_sucesso")) :?>
@@ -48,7 +59,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <input id="capacidade" name="capacidade" type="Number" placeholder="capacidade" class="form-control">
+                                <input id="capacidade" name="capacidade" type="Number" value="<?php echo set_value('capacidade'); ?>" placeholder="capacidade" class="form-control">
                             </div>
                         </div>
 
@@ -58,7 +69,7 @@
                                     <i class=""></i>
                                 </span>
                                 <div class="col-md-8">
-                                    <select style="color:black" name="disponibilidade" placeholder="disponibilidade" class="form-control">
+                                    <select style="color:black" name="disponibilidade" placeholder="disponibilidade"   class="form-control">
                                         <option disabled value="">Disponibilidade:</option>
                                         <option value="0">Indisponivel</option>
                                         <option value="1">Disponivel</option>
@@ -71,7 +82,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <input id="nomesala" name="nomesala" type="text" placeholder="Nome da Sala" class="form-control">
+                                <input id="nomesala" name="nomesala" type="text" placeholder="Nome da Sala" value="<?php echo set_value('nomesala'); ?>" class="form-control">
                             </div>
                         </div>
 

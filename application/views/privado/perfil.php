@@ -1,5 +1,5 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if ($this->session->userdata("usuario_logado")[0]['tipo'] == 0)
+<?php if (!$this->session->userdata("usuario_logado"))
 { 
     redirect(base_url('home'));
 }
@@ -33,8 +33,7 @@
                         </span>
                         <div class="col-md-8">
                             <label>Nome</label>
-                            <input name="nome" type="text" placeholder="Assunto" value="<?php echo $this->session->userdata(" usuario_logado
-                                ")[0]['nome'] ?>" class="form-control">
+                            <input name="nome" type="text" placeholder="Assunto" value="<?php echo $this->session->userdata("usuario_logado")[0]['nome'] ?>" class="form-control">
                         </div>
                     </div>
 
@@ -44,8 +43,7 @@
                         </span>
                         <div class="col-md-8">
                             <label>User</label>
-                            <input id="name" name="username" type="text" value="<?php echo $this->session->userdata(" usuario_logado
-                                ")[0]['username'] ?>" readonly placeholder="username" class="form-control">
+                            <input id="name" name="username" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['username'] ?>" readonly placeholder="username" class="form-control">
                         </div>
                     </div>
 
@@ -56,7 +54,7 @@
                             </span>
                             <div class="col-md-8">
                                 <label>Email</label>
-                                <input id="email" name="email" type="text" value="<?php echo $this->session->userdata(" usuario_logado ")[0]['email'] ?>"
+                                <input id="email" name="email" type="text" value="<?php echo $this->session->userdata("usuario_logado")[0]['email'] ?>"
                                     readonly placeholder="Endereço de Email" class="form-control">
                             </div>
                     </div>
@@ -97,7 +95,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-                                <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata(" usuario_logado")[0]['imagem'])?>">
+                                <img height="60px" width="60px" class="imagem_logo" src="<?php echo base_url($this->session->userdata("usuario_logado")[0]['imagem'])?>">
                                 <input type="file" name="postimage" id="fileToUpload">
                             </div>
                     </div>

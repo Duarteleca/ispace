@@ -1,3 +1,11 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if (($this->session->userdata("usuario_logado")[0]['tipo'] != 2) && ($this->session->userdata("usuario_logado")[0]['tipo'] != 1)) { 
+    redirect(base_url('home'));
+}
+?>
+
+
+
 <!-- Mensagem de erro ao inserir uma quantidade de equipamento negativa -->
 <?php if ($this->session->flashdata("erro_quantidade_requisicao_equipamento")) :?>
     <p class="alert alert-danger">
@@ -6,6 +14,10 @@
     <?php endif ?>
 
 <div class="container">
+ <!-- Mensagem de erro -->
+ <?php if (isset($erros['mensagens'])) :?>
+                <?php echo $erros['mensagens'];  ?>
+                <?php endif; ?>
     <div class="row">
         <div class="col-md-12">
             <div id="registo" class="well well-sm form-horizontal">

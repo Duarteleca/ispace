@@ -1,3 +1,10 @@
+<!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
+<?php if ($this->session->userdata("usuario_logado"))  { 
+    redirect(base_url('home'));
+}
+?>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -24,7 +31,7 @@
                             </div>
                         </div>
                     </fieldset>
-                <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
+                <?php echo isset($error) ?  "<div class='alert alert-danger' role='alert'>". $error ."</div>" : ''; ?>
 
                 <?php echo form_close() ?>
             </div>

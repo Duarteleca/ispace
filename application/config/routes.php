@@ -58,7 +58,6 @@ $route['Perfil']= 'Privado_c/atualizar_perfil';
 $route['Users']= 'Privado_c/users';
 $route['Equipamento_admin']= 'Privado_c/mostra_equipamento';
 $route['Inserir_equipamento']= 'Privado_c/inserir_equipamento';
-$route['Fazer_requisicao']= 'Privado_c/fazer_requisicao';
 $route['Requisicao']= 'Privado_c/mostra_salas_requisicao';
 $route['adicionar_Equipamento_Requisito']= 'Privado_c/adicionar_Equipamento_Requisito';
 $route['Requisicoes_equipamentos_admin']= 'Privado_c/mostra_Requisicoes_Equipamentos_admin';

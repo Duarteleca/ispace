@@ -1,3 +1,9 @@
+
+<?php if (($this->session->userdata("usuario_logado")[0]['tipo'] == 2) || ($this->session->userdata("usuario_logado")[0]['tipo'] == 1)) { 
+    redirect(base_url('home'));
+}
+?>
+
 <div class="container mostrasalas">
     <!-- Mensagem de err quando não consegue dar login -->
     <?php if ($this->session->flashdata("Equipamento_sucesso")) :?>

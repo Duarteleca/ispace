@@ -1,5 +1,5 @@
 <!-- Para que um utilizador nao vá diretamento para pagina que colocar no link -->
-<?php if ($this->session->userdata("usuario_logado")[0]['tipo'] != 1){ 
+<?php if (($this->session->userdata("usuario_logado")[0]['tipo'] != 2) && ($this->session->userdata("usuario_logado")[0]['tipo'] != 1)) { 
     redirect(base_url('home'));
 }
 ?>
@@ -16,6 +16,12 @@
     <?php if ($this->session->flashdata("erro_capacidade_requisicao_equipamento")) :?>
     <p class="alert alert-danger">
         <?= $this->session->flashdata("erro_capacidade_requisicao_equipamento")   ?>
+    </p>
+    <?php endif ?>
+    <!-- Mensagem de sucesso apos inserir uma sala -->
+    <?php if ($this->session->flashdata("inseriu_sala_sucesso")) :?>
+    <p class="alert alert-success">
+        <?= $this->session->flashdata("inseriu_sala_sucesso")   ?>
     </p>
     <?php endif ?>
 
