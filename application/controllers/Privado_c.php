@@ -821,7 +821,7 @@ class Privado_c extends CI_Controller {
 
 			// Post dos valores
 			$id_requisicao = $this->input->post('id_requisicao');
-			var_dump($id_requisicao);
+			// var_dump($id_requisicao);
 			$data_inicio = $this->input->post('data_inicio');
 			$data_fim = $this->input->post('data_fim');
 			$hora_inicio = $this->input->post('hora_inicio');
