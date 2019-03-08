@@ -48,11 +48,7 @@
                                 <i class=""></i>
                             </span>
                             <div class="col-md-8">
-<<<<<<< HEAD
-                                <input id="capacidade" name="capacidade" type="Number" placeholder="Capacidade" class="form-control">
-=======
                                 <input id="capacidade" name="capacidade" type="Number" placeholder="capacidade" class="form-control">
->>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
                             </div>
                         </div>
 

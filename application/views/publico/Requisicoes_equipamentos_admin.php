@@ -30,7 +30,6 @@
                 <th>Requisitado por:</th>
                 <th>Quantidade</th>
                 <th>Nome Equip</th>
-                <th>id Req_Equip</th>
 
 
                 <th>Ação</th>
@@ -79,10 +78,6 @@
                     <?php echo $row['equipnome'] ?>
                     <br>
                 </td>
-                <td class="texto ">
-                    <?php echo $row['idreqequip'] ?>
-                    <br>
-                </td>
                 <td>
                     <!-- Butões para abrir o modal -->
                     <button class="btn btn-danger" data-toggle="modal" href="#myModalcancelar<?php echo $id_requisicao  ?>">Cancelar Equipamento</button>
@@ -105,17 +100,17 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
+                                <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
+                                <input class="form-control " type="hidden" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
+                                <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
                             </div>
                             <div>
 
-                                <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
+                                <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
                             </div>
                             <div class="modal-body">
                                 <p>Quer mesmo cancelar este equipamento dessa requisição ?</p>
@@ -145,30 +140,30 @@
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="from">Id da requisição </label>
-                                    <input class="form-control " type="text" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
+                                   
+                                    <input class="form-control " type="hidden" name="id_requisicao" id="id_requisicao" value="<?php echo $id_requisicao ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="from">Quantidade </label>
                                     <input class="form-control " type="text" name="quantidade" id="quantidade" value="<?php echo $quantidade ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="from">id do equipamento </label>
-                                    <input class="form-control " type="text" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
+                                   
+                                    <input class="form-control " type="hidden" name="id_equipamento" id="id_equipamento" value="<?php echo $equipamento_id ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="from">Id do equipamento na requisição </label>
-                                    <input class="form-control " type="text" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
+                                   
+                                    <input class="form-control " type="hidden" name="id_requisicao_equipamento" id="id_requisicao_equipamento" value="<?php echo $id_requisicao_equipamento ?>">
                                 </div>
                                 <label for="from">Nome do Equipamento </label>
-                                <input class="form-control " type="text" value="<?php echo $row['equipnome'] ?>">
+                                <input class="form-control " disabled type="text" value="<?php echo $row['equipnome'] ?>">
                             </div>
 
 
 
                             <div class="modal-footer ">
-                                <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">
-                                    <span class="glyphicon glyphicon-ok-sign"></span>Requisitar</button>
+                                <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+                                    <span class="glyphicon glyphicon-ok-sign"></span>Editar</button>
                             </div>
 
                         </div>

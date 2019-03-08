@@ -40,11 +40,7 @@ class Privado_c extends CI_Controller {
 		$this->form_validation->set_rules('tiposala', 'Tipo de Sala','required',
 			array('required' => 'Você tem de preencher campo %s.')
 			);
-<<<<<<< HEAD
-		$this->form_validation->set_rules('capacidade', 'Capacidade','required',
-=======
 		$this->form_validation->set_rules('capacidade', 'capacidade','required',
->>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
 			array('required' => 'Você tem de preencher campo %s.')
 			);
 		$this->form_validation->set_rules('disponibilidade', 'Disponibilidade','required',
@@ -822,7 +818,6 @@ class Privado_c extends CI_Controller {
 		// Editar requisição user
 		public function edita_Requisicao(){
 
-<<<<<<< HEAD
 		// Post dos valores
 		$id_requisicao = $this->input->post('id_requisicao');
 		var_dump($id_requisicao);
@@ -889,80 +884,11 @@ class Privado_c extends CI_Controller {
 			$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
 		}
 
-=======
-			// Post dos valores
-			$id_requisicao = $this->input->post('id_requisicao');
-			var_dump($id_requisicao);
-			$data_inicio = $this->input->post('data_inicio');
-			$data_fim = $this->input->post('data_fim');
-			$hora_inicio = $this->input->post('hora_inicio');
-			$hora_fim = $this->input->post('hora_fim');
-			$id_Requisicao = $this->input->post('id_requisicao');
-			$id_sala = $this->input->post("id_tipologia");
-	
-			// Não pode inserir uma fora inicio maior que a hora final
-			if(($hora_inicio > $hora_fim) ||  ($data_inicio > $data_fim)) {
-	
-				$this->session->set_flashdata("erro_hora_requisicao", "Hora/data de inicio não pode ser maior que a final");
-	
-			}else{
-			
-			// Verifica se existe datas e horas iguais ou interalos.
-			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
-			// var_dump($dados_Disponibilidade);
-			
-	
-			if($dados_Disponibilidade != null){
-	
-			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
-			// var_dump($id_user1);
-			$id_user2 = $this->session->userdata("usuario_logado")[0]['id'];
-			// var_dump($id_user2);
-			$id_req = $dados_Disponibilidade[0]['id'];
-			// var_dump($id_req);
-		
-	
-					if(($dados_Disponibilidade != null) || ($id_req != $id_requisicao)){
-						// echo 'Não dá otário-';
-						$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
-						redirect(base_url("/Requisicao"));	
-						
-					}
-	
-	
-			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
-			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
-			}if(($dados_Disponibilidade == null)  || ($id_user1 == $id_user2)) {
-				
-				// Busca o id do user
-				$id_user = $this->session->userdata("usuario_logado")[0]['id'];
-				// var_dump($id_user);
-				// Data referente à informação requirida durante a requisição de uma sala
-				$data = array(
-					'data_inicio' => $data_inicio,
-					'data_fim' => $data_fim ,
-					'hora_inicio' => $hora_inicio,
-					'hora_fim' => $hora_fim,
-					'utilizador_id' => $id_user,
-					'tipologia_id' => $id_sala
-					);
-							
-					// var_dump($data);			
-				$this->Privado_m->atualiza_Requisicao($id_Requisicao,$data);
-				$this->session->set_flashdata("requisicao_editada_sucesso", "Requisição editada com sucesso!");
-	
-			}else{
-	
-				$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
-			}
-	
-			}
-			// Refresh da página
-			redirect(base_url("/Requisicao"));
-			
->>>>>>> db3a39b626bfc9ee49ade1319101ae09618ffc97
 		}
-
+		// Refresh da página
+		redirect(base_url("/Requisicao"));
+		
+	}
 
 		// Editar requisição admin
 		public function edita_Requisicao_admin(){
@@ -982,15 +908,48 @@ class Privado_c extends CI_Controller {
 				// echo 'erro';
 				$this->session->set_flashdata("erro_hora_requisicao", "Hora/data de inicio não pode ser maior que a final");
 	
+
+				
+
 			}else{
 			
 			// Verifica se existe datas e horas iguais ou interalos.
 			$dados_Disponibilidade = $this->Privado_m->verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala);
 			// var_dump($dados_Disponibilidade);
 			$id_user1 = $dados_Disponibilidade[0]['utilizador_id'];
+
+			$id_req = $dados_Disponibilidade[0]['id'];
+			// var_dump($id_req);
+			// var_dump($id_requisicao);
+
+			if(($dados_Disponibilidade != null) || ($id_req == $id_requisicao)){
+				// echo 'Não dá otário-';
+				$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+				redirect(base_url("/Requisicoes_salas_admin"));	
+				
+			}else{
+
+				$data = array(
+					'data_inicio' => $data_inicio,
+					'data_fim' => $data_fim ,
+					'hora_inicio' => $hora_inicio,
+					'hora_fim' => $hora_fim
+					);
+							
+							
+	
+				$this->Privado_m->atualiza_Requisicao($id_requisicao,$data);
+				$this->session->set_flashdata("requisicao_editada_sucesso", "Requisição editada com sucesso!");
+
+			}
+
 			// Se não retornar nada, quer dizer que está disponivel ao x dia e x hora, se não, quer dizer que encontrou 
 			// requisições a tal dia e hora, que não estara disponivel para requisição, ou seja, erro.
 			if(($dados_Disponibilidade == null ) ||  ($id_user1 == $id_user)) {
+
+
+
+				
 				
 				// Busca o id do user
 				// $id_user = $this->session->userdata("usuario_logado")[0]['id'];
@@ -1492,6 +1451,7 @@ class Privado_c extends CI_Controller {
 	
 			'quantidade' => $quantidade_final
 			);
+			var_dump($data_requisita);
 
 	
 		// Referente à quantidade para depois voltar a somar na quantidade original dos equipamentos
@@ -1499,11 +1459,14 @@ class Privado_c extends CI_Controller {
 	
 					'quantidade' => $quantidade_final_equipamento
 					);
-
+					var_dump($data_equipamento);
 		// Fazer update da quantidade, ou seja quando requisitar tem de diminuir a quantidade
 		$this->Privado_m->atualiza_Equipamento_depois_cancelar($data_equipamento,$id_equipamento_bd_equipamento);
-		$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_equipamento_bd);
 
+		var_dump($data_requisita);
+		var_dump($id_equipamento_bd);
+		$this->Privado_m->atualiza_Equipamento_depois_update($data_requisita,$id_requisicao_equipamento);
+					
 
 		} else {
 			$this->session->set_flashdata("erro_quantidade", "Não existe tanta quantidade");
@@ -1511,7 +1474,7 @@ class Privado_c extends CI_Controller {
 			
 			// Temos de fazer redirect, porque se mandarmos carregar a pagina da erro porque nao encontra nada
 			// redirect('Requisicoes_equipamentos_admin', 'refresh');	
-			redirect(base_url("/Requisicoes_equipamentos_admin"));
+			// redirect(base_url("/Requisicoes_equipamentos_admin"));
 		
 	}
 
