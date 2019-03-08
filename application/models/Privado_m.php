@@ -329,10 +329,12 @@ class Privado_m extends CI_Model
  
     // Verifica se a sala está diponivel para tal dia e hora
     function verifica_requisicao_disponibilidade($data_inicio,$data_fim,$hora_inicio,$hora_fim,$id_sala){
-         $this->db->where('data_inicio >=',$data_inicio);
-         $this->db->where('hora_fim >=',$hora_inicio);
-         $this->db->where('data_fim <=',$data_fim);
-         $this->db->where('hora_inicio <=',$hora_fim);
+        $this->db->where('data_inicio <=',$data_inicio);
+        $this->db->where('data_fim >=',$data_fim);
+        $this->db->where('hora_fim >=',$hora_inicio);
+        $this->db->where('hora_inicio <=',$hora_fim); 
+        $this->db->or_where('hora_fim <=',$hora_inicio);
+      
          $this->db->where('tipologia_id',$id_sala);
          $dadosrequisicao = $this->db->get("requisicao");
          return $dadosrequisicao->result_array();

@@ -850,9 +850,9 @@ class Privado_c extends CI_Controller {
 		// var_dump($id_req);
 	
 
-				if(($dados_Disponibilidade != null) || ($id_req != $id_requisicao)){
+				if(($dados_Disponibilidade != null) && ($id_req != $id_requisicao)){
 					// echo 'Não dá otário-';
-					$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+					$this->session->set_flashdata("erro_requisicao", "aJá existe uma requisicao para esse dia/hora");
 					redirect(base_url("/Requisicao"));	
 					
 				}
@@ -881,7 +881,7 @@ class Privado_c extends CI_Controller {
 
 		}else{
 
-			$this->session->set_flashdata("erro_requisicao", "Já existe uma requisicao para esse dia/hora");
+			$this->session->set_flashdata("erro_requisicao", "asJá existe uma requisicao para esse dia/hora");
 		}
 
 		}
