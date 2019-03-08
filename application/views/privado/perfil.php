@@ -102,8 +102,6 @@
                             </div>
                     </div>
 
-
-
                     <div class="form-group">
                         <div class="col-md-12 text-center">
                             <input type="submit" class="btn btn-primary" name="submit" value="Alterar">
@@ -111,8 +109,6 @@
                     </div>
                 </fieldset>
                 <?php echo isset($error) ?  "<div class='alert alert-success' role='alert'>". $error ."</div>" : ''; ?>
-
-
 
                 <?php echo form_close() ?>
             </div>

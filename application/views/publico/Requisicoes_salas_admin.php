@@ -21,6 +21,7 @@
         <?= $this->session->flashdata("requisicao_editada_sucesso")   ?>
     </p>
     <?php endif ?>
+
     <!-- Mensagem requisicao erro de editar requisicao-->
     <?php if ($this->session->flashdata("erro_requisicao")) :?>
     <p class="alert alert-danger">

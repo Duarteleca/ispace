@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="from">Nome do Equipamento </label>
-                                    <input class="form-control " type="text" value="<?php echo $row['equipnome'] ?>">
+                                    <input class="form-control" disabled type="text" value="<?php echo $row['equipnome'] ?>">
                                 </div>
 
                                 <div class="form-group">
